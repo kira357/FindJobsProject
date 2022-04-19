@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from 'src/app/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes: Routes = [
   {
@@ -9,9 +11,13 @@ const routes: Routes = [
     component: LoginPageComponent,
   },
 ];
-
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    MaterialModule,
+    RouterModule.forChild(routes),
+  ],
   declarations: [LoginPageComponent],
 })
 export class LoginPageModule {}

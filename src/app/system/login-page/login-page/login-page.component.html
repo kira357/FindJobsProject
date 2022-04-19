@@ -1,55 +1,84 @@
-<div class="main d-flex justify-content-center align-items-center">
-  <div class="main-content">
-    <div class="container h-100">
-      <div>
-        <div class="h-100 custom-card">
-          <div class="card-header text-center baslik">
-            <h2 class="text-white text-custom fw-bold loginbaslik">Login</h2>
-          </div>
-          <div class="card-body arkalogin">
-            <form
-
-              action="javascript:void(0)"
+<div class="w-full h-full page-content main" fxLayout="row">
+  <div
+    fxFlex.gt-sm="50%"
+    fxFlex="100%"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    style="background: white"
+  >
+    <div class="custom-card">
+      <div class="card-header">
+        <h2 class="">Login</h2>
+      </div>
+      <div class="card-body">
+        <form
+          [formGroup]="formGroup"
+          action="javascript:void(0)"
+          class="p-6"
+          fxLayout="column"
+          fxLayoutGap="14px"
+        >
+          <div fxLayout="column" fxFlex="auto">
+            <mat-form-field
+              appearance="outline"
+              floatLabel="always"
+              style="width: 100%"
             >
-              <div class="form-group custom-input">
-                <label for="username">Username</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  formControlName="userName"
-                  required="true"
-                />
-              </div>
-              <div class="form-group custom-input">
-                <label for="password">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  formControlName="password"
-                  name="password"
-                  required="true"
-                />
-              </div>
-              <div class="form-group footer-card">
-                <button type="submit" class="btn fs-3 text-white rounded-pill">
-                  Login
-                </button>
-              </div>
-              <hr style="border: 1px solid #ccc" />
-              <div class="text-center">
-                <a
-                  href="#"
-                  class="text-link fs-1 fst-italic m-2"
-                  [routerLink]="['/account/register']"
-                  >Create account
-                </a>
-              </div>
-            </form>
+              <mat-label for="username">Username </mat-label>
+              <input
+                id="username"
+                formControlName="userName"
+                matInput
+                required
+              />
+              <mat-error
+                *ngIf="formGroup.get('userName')?.hasError('required')"
+              >
+                >We need an User name to log you in</mat-error
+              >
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              floatLabel="always"
+              style="width: 100%"
+            >
+              <mat-label for="password">Password </mat-label>
+              <input
+                type="password"
+                id="password"
+                formControlName="password"
+                matInput
+                required
+              />
+              <mat-error *ngIf="formGroup.get('password')?.hasError('required')"
+                >We need a password to log you in
+              </mat-error>
+            </mat-form-field>
           </div>
-        </div>
+
+          <div class="form-group footer-card">
+            <button type="submit" class="btn text-white rounded-pill">
+              Login
+            </button>
+          </div>
+          <hr style="border: 1px solid #ccc" />
+          <div class="text-center">
+            <a href="#" [routerLink]="['/account/register']">Create account </a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+  <div
+    fxFlex.gt-sm="50%"
+    fxHide
+    fxShow.gt-sm
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    class="color"
+  >
+    <div class="overflow-hidden w-full max-w-xl">123</div>
+  </div>
 </div>
+
