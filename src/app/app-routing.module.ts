@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './system/login-page/login-page/login-page.component';
-
+import { featureRoutes } from './app-feature-routing.module';
 const routes: Routes = [
+  {
+    path: '',
+    children:[...featureRoutes]
+  },
   {
     path: 'account',
     children: [

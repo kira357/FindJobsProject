@@ -4,7 +4,7 @@ import { CreateJobsComponent } from './create-jobs/create-jobs.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MaterialModule } from '../../../../material.module';
-import { ApiService } from 'src/app/service/api.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @NgModule({
   imports: [

@@ -9,7 +9,7 @@ import { Company } from 'src/app/common/Company';
 import { CompanyJobs } from 'src/app/common/CompanyJobs';
 import { Jobs } from 'src/app/common/Jobs';
 import { User } from 'src/app/common/User';
-import { ApiService } from 'src/app/service/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
