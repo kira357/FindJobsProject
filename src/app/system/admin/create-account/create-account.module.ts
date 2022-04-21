@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateAccountComponent } from './create-account.component';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
@@ -9,7 +9,7 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   declarations: [CreateAccountComponent],
 })
 export class CreateAccountModule {}

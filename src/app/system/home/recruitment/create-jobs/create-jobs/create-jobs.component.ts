@@ -1,3 +1,4 @@
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -11,7 +12,6 @@ import { Jobs } from 'src/app/common/Jobs';
 import { User } from 'src/app/common/User';
 import { ApiService } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-create-jobs',

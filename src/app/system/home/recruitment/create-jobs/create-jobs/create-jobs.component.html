@@ -99,12 +99,10 @@
 
                         <div class="form-group">
                           <label for="description">Description</label>
-                          <ckeditor
-                            name="myckeditor"
-                            debounce="300"
-                            [editor]="editor"
-                            (change)="onChange($event)"
-                          ></ckeditor>
+
+                          <quill-editor
+                            [styles]="{ maxHeight: '79%' }"
+                          ></quill-editor>
                         </div>
                       </div>
 

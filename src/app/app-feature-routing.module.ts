@@ -1,13 +1,7 @@
+import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 export const featureRoutes: Routes = [
-  {
-    path: 'admin',
-    loadChildren: () =>
-      import('./system/admin/admin-page-main.module').then(
-        (m) => m.AdminPageMainModule
-      ),
-  },
   {
     path: 'login',
     loadChildren: () =>

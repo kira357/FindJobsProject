@@ -1,4 +1,3 @@
-
 <div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar class="navbar" color="primary">
     <button mat-icon-button (click)="snav.toggle()">
@@ -6,7 +5,7 @@
     </button>
 
     <a class="navbar-brand" [routerLink]="['/admin']" matTooltip="Home">
-      <h1>Admin</h1>
+      <h1>Recruitment</h1>
     </a>
 
     <span class="navbar-spacer"></span>
@@ -63,9 +62,9 @@
       <mat-nav-list>
         <h3 mat-subheader>Home</h3>
 
-        <a mat-list-item [routerLink]="['/admin/dashboard']">
-          <mat-icon mat-list-icon> dashboard </mat-icon>
-          <p mat-line>Dashboard</p>
+        <a mat-list-item [routerLink]="['/recruitment/create-jobs']">
+          <mat-icon mat-list-icon> jobs </mat-icon>
+          <p mat-line>create-jobs</p>
         </a>
 
         <a mat-list-item [routerLink]="['/admin/list-jobs']">
