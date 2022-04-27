@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminPageLoginComponent } from './admin-page-login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/material.module';
+import { AdminPageLoginComponent } from './admin-page-login/admin-page-login.component';
 
 const routes: Routes = [
   {

@@ -1,13 +1,14 @@
-import { AdminPageMainComponent } from './system/admin/admin-page-main/admin-page-main.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { featureRoutes } from './app-feature-routing.module';
+
 
 const routes: Routes = [
   {
     path: 'admin',
-    component: AdminPageMainComponent,
-    children: [...featureRoutes],
+    loadChildren: () =>
+      import('./system/admin/admin-page-main.module').then(
+        (m) => m.AdminPageMainModule
+      ),
   },
   {
     path: 'recruitment',

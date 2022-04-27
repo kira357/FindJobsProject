@@ -1,4 +1,3 @@
-
 <div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar class="navbar" color="primary">
     <button mat-icon-button (click)="snav.toggle()">
@@ -82,9 +81,9 @@
           <p mat-line>Account</p>
         </a>
 
-        <a mat-list-item [routerLink]="['/auth/login']">
-          <mat-icon mat-list-icon>exit_to_app</mat-icon>
-          <p mat-line>Log out</p>
+        <a mat-list-item [routerLink]="['/admin/create-role']">
+          <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+          <p mat-line>Create roles</p>
         </a>
 
         <mat-divider></mat-divider>

@@ -7,6 +7,7 @@ import { MaterialModule } from '../../../../material.module';
 import { ApiService } from 'src/app/services/api.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
+
 const routes: Routes = [
   {
     path: '',

@@ -1,5 +1,4 @@
-<span class="custom-title">Managment Jobs</span>
-<div
+<!-- <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 ></div>
 <div class="content-container">
@@ -308,4 +307,106 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div>
+  <div>Header</div>
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="employeeCreated"
+    action="javascript:void(0)"
+    enctype="multipart/form-data"
+  >
+    <div class="w-full h-full page-content main" fxLayout="row">
+      <div
+        fxFlex.gt-sm="20%"
+        fxFlex="100%"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        <img
+          class="custom-img"
+          id="blah"
+          [src]="imageFile ? imageFile.link : defaultImageSrc"
+          alt="your image"
+        />
+        <input
+          type="file"
+          class="my-3"
+          accept="image/*"
+          name="imageFile"
+          id="imageFile"
+          formControlName="imageFile"
+          (change)="handleChange($event)"
+        />
+      </div>
+      <div
+        fxFlex.gt-sm="80%"
+        fxHide
+        fxShow.gt-sm
+        fxLayout="column"
+        fxLayoutAlign="left left"
+      >
+        <div class="overflow-hidden w-full max-w-xl">
+          <div class="form-group">
+            <label for="nameCompany">Name company</label>
+            <input
+              matInput
+              type="text"
+              class="form-control"
+              id="nameCompany"
+              name="nameCompany"
+              formControlName="nameCompany"
+              [value]="JobsObject.nameCompany"
+              [(ngModel)]="JobsObject.nameCompany"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name Jobs</label>
+            <input
+              matInput
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              formControlName="name"
+              [value]="JobsObject.name"
+              [(ngModel)]="JobsObject.name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="dateExpire">Date expire</label>
+            <input
+              matInput
+              type="date"
+              class="form-control"
+              id="dateExpire"
+              name="dateExpire"
+              formControlName="dateExpire"
+              [min]="currentDate | date: 'yyyy-MM-dd'"
+              [(ngModel)]="dateExpire"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tag">Tag Jobs</label>
+            <ng-multiselect-dropdown
+              id="tag"
+              name="tag"
+              formControlName="tag"
+              [placeholder]="'custom placeholder'"
+              [settings]="dropdownSettings"
+              [data]="listTagJobs"
+              (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div><quill-editor></quill-editor></div>
+  </form>
 </div>

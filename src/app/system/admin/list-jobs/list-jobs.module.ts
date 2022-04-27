@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListJobsComponent } from './list-jobs.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ListJobsComponent } from './list-jobs/list-jobs.component';
 
 const routes: Routes = [
   {
@@ -10,11 +10,8 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   declarations: [ListJobsComponent],
-  exports: [ListJobsComponent]
+  exports: [ListJobsComponent],
 })
-export class ListJobsModule { }
+export class ListJobsModule {}

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RecruitmentListPostComponent } from './recruitment-list-post/recruitment-list-post.component';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateAccountComponent } from './create-account/create-account.component';
 const routes: Routes = [
   {
     path: '',
-    component: CreateAccountComponent,
+    component: RecruitmentListPostComponent,
   },
 ];
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes)],
-  declarations: [CreateAccountComponent],
+  declarations: [RecruitmentListPostComponent],
 })
-export class CreateAccountModule {}
+export class RecruitmentListPostModule {}
