@@ -1,0 +1,23 @@
+<mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+  <mat-label *ngIf="title">{{ title }} </mat-label>
+  <input
+    matInput
+    [type]="type"
+    [ngClass]="type == 'number' ? 'text-right' : type == 'center' ? 'text-center' : ''"
+    [autocomplete]="autocomplete || 'off'"
+    [(ngModel)]="value"
+    [required]="required"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [maxlength]="maxlength"
+    [pattern]="pattern"
+    [placeholder]="placeholder"
+    [name]="name"
+    [errorStateMatcher]="confirmValidParentMatcher"
+    [class]="classInput"
+    [class]="'position-relative'"
+  />
+  <span *ngIf="matSuffix != ''" matSuffix>{{ matSuffix }}</span>
+  <mat-icon *ngIf="iconName" matSuffix (click)="iconClick.emit()">{{ iconName }}</mat-icon>
+  <mat-error>{{ errorMsg || requiredMsg  }}</mat-error>
+</mat-form-field>

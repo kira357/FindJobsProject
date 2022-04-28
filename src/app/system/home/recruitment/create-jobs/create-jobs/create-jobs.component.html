@@ -348,47 +348,22 @@
         fxLayoutAlign="left left"
       >
         <div class="overflow-hidden w-full max-w-xl">
-          <div class="form-group">
-            <label for="nameCompany">Name company</label>
-            <input
-              matInput
-              type="text"
-              class="form-control"
-              id="nameCompany"
-              name="nameCompany"
-              formControlName="nameCompany"
-              [value]="JobsObject.nameCompany"
-              [(ngModel)]="JobsObject.nameCompany"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="name">Name Jobs</label>
-            <input
-              matInput
-              type="text"
-              class="form-control"
-              id="name"
-              name="name"
-              formControlName="name"
-              [value]="JobsObject.name"
-              [(ngModel)]="JobsObject.name"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="dateExpire">Date expire</label>
-            <input
-              matInput
-              type="date"
-              class="form-control"
-              id="dateExpire"
-              name="dateExpire"
-              formControlName="dateExpire"
-              [min]="currentDate | date: 'yyyy-MM-dd'"
-              [(ngModel)]="dateExpire"
-            />
-          </div>
+          <custom-input
+            [required]="true"
+            [name]="'nameCompany'"
+            [placeholder]="'Name company'"
+            [title]="'Name company'"
+            [maxlength]="250"
+            [(ngModel)]="JobsObject.nameCompany"
+          ></custom-input>
+          <custom-input
+            [required]="true"
+            [name]="'name'"
+            [placeholder]="'Name Jobs'"
+            [title]="'Name Jobs'"
+            [maxlength]="250"
+            [(ngModel)]="JobsObject.name"
+          ></custom-input>
 
           <div class="form-group">
             <label for="tag">Tag Jobs</label>
