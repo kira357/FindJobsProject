@@ -12,6 +12,13 @@ import { Jobs } from 'src/app/common/Jobs';
 import { User } from 'src/app/common/User';
 import { ApiService } from 'src/app/services/api.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import Quill from 'quill';
+import 'node_modules/quill-emoji/dist/quill-emoji.js';
+import BlotFormatter from 'quill-blot-formatter';
+Quill.register('modules/blotFormatter', BlotFormatter);
+import { MatFormFieldControl } from '@angular/material/form-field';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-create-jobs',
@@ -24,8 +31,41 @@ export class CreateJobsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private matSnackBar: MatSnackBar
-  ) {}
+  ) {
+    this.modules = {
+      'emoji-shortname': true,
+      'emoji-textarea': false,
+      'emoji-toolbar': true,
+      blotFormatter: {
+        // empty object for default behaviour.
+      },
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+          ['blockquote', 'code-block'],
 
+          [{ header: 1 }, { header: 2 }], // custom button values
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+          [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+          [{ direction: 'rtl' }], // text direction
+
+          [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+          [{ font: [] }],
+          [{ align: [] }],
+
+          ['clean'], // remove formatting button
+
+          ['link', 'image', 'video'], // link and image, video
+          ['emoji'],
+        ],
+        handlers: { emoji: function () {} },
+      },
+    };
+  }
   Company: Company[] = [
     {
       id: '',
@@ -67,27 +107,24 @@ export class CreateJobsComponent implements OnInit {
       descriptions: '',
     },
   ];
-
+  modules = {};
   defaultImageSrc = '/assets/image/default-image.png';
-  check: any;
   infoRegister: any[] = [];
-  dataAccount: any[] = [];
+  listTagJobs: any[] = ['C#', 'Java', 'PHP', 'C++'];
+  listMajorJobs: any[] = ['IT', 'Điện'];
 
-  listTagJobs: any[] = [
-    'C#',
-    'Java',
-    'PHP',
-    'C++',
-    'Python',
-    'JavaScript',
-    'Ruby',
-    'Swift',
-    'Objective-C',
-    'Go',
-    'C',
-    'R',
+  listExperienceJobs: any[] = [
+    'Không yêu cầu kinh nghiệm',
+    '1 năm kinh nghiệm',
+    '2 năm kinh nghiệm',
+    '3 năm kinh nghiệm',
+    '4 năm kinh nghiệm',
+    '5 năm kinh nghiệm',
   ];
 
+  check: any;
+  getDateExpire: any;
+  experience :any
   dropdownSettings: IDropdownSettings = {};
   imageFile: { link: any; file: any; name: string } | undefined;
 
@@ -131,6 +168,15 @@ export class CreateJobsComponent implements OnInit {
     tag: ['', Validators.required],
     imageFile: '',
     dateExpire: ['', Validators.required],
+    address: ['', Validators.required],
+    positon: ['', Validators.required],
+    check: ['', Validators.required],
+    amount: ['', Validators.required],
+    experience: ['', Validators.required],
+    workTime: ['', Validators.required],
+    salaryMin: ['', Validators.required],
+    salaryMax: ['', Validators.required],
+    descriptions: ['', Validators.required],
   });
 
   editor = ClassicEditor;
@@ -173,50 +219,55 @@ export class CreateJobsComponent implements OnInit {
   onSubmit = () => {
     this.newForm = this.employeeCreated.getRawValue();
     console.log('before', this.newForm);
-    let newDateExpire = new Date(this.dateExpire);
-    let newTag = this.newForm.tag.join(',');
-    let test = Math.floor(
-      (Date.UTC(
-        newDateExpire.getFullYear(),
-        newDateExpire.getMonth(),
-        newDateExpire.getDate()
-      ) -
-        Date.UTC(
-          this.currentDate.getFullYear(),
-          this.currentDate.getMonth(),
-          this.currentDate.getDate()
-        )) /
-        (1000 * 60 * 60 * 24)
-    );
-    console.log('test', this.currentDate.toString());
-    if (this.JobsObject.id !== '00000000-0000-0000-0000-000000000000') {
-      this.newForm = Object.assign(this.newForm, {
-        descriptions: this.descriptions,
-        daysLeft: test,
-        active: false,
-        idCompany: this.JobsObject.id,
-      });
-      this.newForm = {
-        ...this.newForm,
-        tag: newTag,
-      };
-      this.Form = JSON.stringify(this.newForm);
-      console.log('newForm', this.newForm);
-
-      this.service.RequestCreateJobs(this.newForm).subscribe((data: any) => {
-        this.infoRegister = data;
-        console.log(this.infoRegister);
-        if (data.ok === 'Success') {
-          console.log('check', this.infoRegister);
-          this.matSnackBar.open('Create Employee success', 'Okay!', {
-            duration: 5000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: ['snack-success'],
-          });
-        }
-      });
+    this.newForm = {
+      ...this.newForm,
+      dateExpire: this.datePipe.transform(this.newForm.dateExpire, 'yyyy-MM-dd'),
     }
+    console.log('after', this.newForm);
+    // let newDateExpire = new Date(this.dateExpire);
+    // let newTag = this.newForm.tag.join(',');
+    // let test = Math.floor(
+    //   (Date.UTC(
+    //     newDateExpire.getFullYear(),
+    //     newDateExpire.getMonth(),
+    //     newDateExpire.getDate()
+    //   ) -
+    //     Date.UTC(
+    //       this.currentDate.getFullYear(),
+    //       this.currentDate.getMonth(),
+    //       this.currentDate.getDate()
+    //     )) /
+    //     (1000 * 60 * 60 * 24)
+    // );
+    // console.log('test', this.currentDate.toString());
+    // if (this.JobsObject.id !== '00000000-0000-0000-0000-000000000000') {
+    //   this.newForm = Object.assign(this.newForm, {
+    //     descriptions: this.descriptions,
+    //     daysLeft: test,
+    //     active: false,
+    //     idCompany: this.JobsObject.id,
+    //   });
+    //   this.newForm = {
+    //     ...this.newForm,
+    //     tag: newTag,
+    //   };
+    //   this.Form = JSON.stringify(this.newForm);
+    //   console.log('newForm', this.newForm);
+
+    //   this.service.RequestCreateJobs(this.newForm).subscribe((data: any) => {
+    //     this.infoRegister = data;
+    //     console.log(this.infoRegister);
+    //     if (data.ok === 'Success') {
+    //       console.log('check', this.infoRegister);
+    //       this.matSnackBar.open('Create Employee success', 'Okay!', {
+    //         duration: 5000,
+    //         horizontalPosition: 'center',
+    //         verticalPosition: 'top',
+    //         panelClass: ['snack-success'],
+    //       });
+    //     }
+    //   });
+    // }
   };
 
   newRow: any = {};
@@ -264,8 +315,7 @@ export class CreateJobsComponent implements OnInit {
   };
 
   onChange = (evt: any) => {
-    this.descriptions = evt.editor.getData();
-    console.log('descriptions', evt.editor.getData());
+    console.log('descriptions', evt.html);
   };
 
   onClickDelete = (id: any) => {
@@ -284,4 +334,11 @@ export class CreateJobsComponent implements OnInit {
       }
     });
   };
+
+  select = () => {
+    console.log('123', this.check);
+  };
+  onReset() {}
+
+  onClose() {}
 }

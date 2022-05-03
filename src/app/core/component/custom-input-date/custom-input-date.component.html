@@ -1,0 +1,26 @@
+<mat-form-field [appearance]="appearance || 'outline'" floatLabel="always" style="width: 100%">
+  <mat-label *ngIf="title">{{ title }} </mat-label>
+  <input
+    #input
+    matInput
+    [matDatepicker]="picker"
+    [type]="type"
+    [autocomplete]="autocomplete || 'off'"
+    [(ngModel)]="value"
+    [min]="min"
+    [max]="max"
+    [required]="required"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [maxlength]="maxlength"
+    [pattern]="pattern"
+    [placeholder]="placeholder"
+    [name]="name"
+    [class]="classInput"
+    [errorStateMatcher]="confirmValidParentMatcher"
+
+  />
+  <mat-error *ngIf="required && (!value || value.toString().trim().length == 0)">{{ errorMsg || requiredMsg }}</mat-error>
+  <mat-datepicker-toggle *ngIf="!readonly" matSuffix [for]="picker" [disabled]="disabled"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

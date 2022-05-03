@@ -1,0 +1,68 @@
+<ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="'delete'">
+        <button class="btn-at btn-sep btn-delete" [disabled]="disabled" type="button">
+            Delete
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'reset'">
+        <button type="reset" class="btn-at btn-sep btn-reset" [disabled]="disabled" type="button">
+            Reset
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'excel'">
+        <button class="btn-at btn-sep btn-excel" [disabled]="disabled" type="button">
+            Excel
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'upload'">
+        <button class="btn-at btn-sep btn-upload" [disabled]="disabled" type="button">
+            Upload
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'search'">
+        <button class="btn-at btn-sep btn-search" [disabled]="disabled" type="button">
+            Search
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'close'">
+        <button class="btn-at btn-sep btn-close" [disabled]="disabled" type="button">
+            Close
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'create'">
+        <button class="btn-at btn-sep btn-create" [disabled]="disabled" type="button">
+            Create
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'closeAll'">
+        <button class="btn-at btn-sep btn-close-all" [disabled]="disabled" type="button">
+            CloseAll
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'print'">
+        <button class="btn-at btn-sep btn-print" [disabled]="disabled" type="button">
+            Print
+        </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'resetPassword'">
+        <button class="btn-at btn-sep btn-reset-pw" [disabled]="disabled" type="button">
+            ResetPW
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'erp'">
+        <button class="btn-at btn-sep btn-erp" [disabled]="disabled" type="button">
+            ERP
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'view'">
+        <button class="btn-at btn-sep btn-view" [disabled]="disabled" type="button">
+            View
+        </button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <button class="btn-at btn-sep btn-save" [disabled]="disabled" type="submit">
+            Save
+        </button>
+    </ng-container>
+</ng-container>

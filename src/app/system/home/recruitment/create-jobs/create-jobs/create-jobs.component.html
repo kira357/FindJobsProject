@@ -308,82 +308,232 @@
     </div>
   </div>
 </div> -->
-
 <div>
   <div>Header</div>
-  <form
-    (ngSubmit)="onSubmit()"
-    [formGroup]="employeeCreated"
-    action="javascript:void(0)"
-    enctype="multipart/form-data"
-  >
-    <div class="w-full h-full page-content main" fxLayout="row">
-      <div
-        fxFlex.gt-sm="20%"
-        fxFlex="100%"
-        fxLayout="column"
-        fxLayoutAlign="center center"
-      >
-        <img
-          class="custom-img"
-          id="blah"
-          [src]="imageFile ? imageFile.link : defaultImageSrc"
-          alt="your image"
-        />
-        <input
-          type="file"
-          class="my-3"
-          accept="image/*"
-          name="imageFile"
-          id="imageFile"
-          formControlName="imageFile"
-          (change)="handleChange($event)"
-        />
-      </div>
-      <div
-        fxFlex.gt-sm="80%"
-        fxHide
-        fxShow.gt-sm
-        fxLayout="column"
-        fxLayoutAlign="left left"
-      >
-        <div class="overflow-hidden w-full max-w-xl">
-          <custom-input
-            [required]="true"
-            [name]="'nameCompany'"
-            formControlName="nameCompany"
-            [placeholder]="'Name company'"
-            [title]="'Name company'"
-            [maxlength]="250"
-            [(ngModel)]="JobsObject.nameCompany"
-          ></custom-input>
-          <custom-input
-            [required]="true"
-            [name]="'name'"
-            formControlName="name"
-            [placeholder]="'Name Jobs'"
-            [title]="'Name Jobs'"
-            [maxlength]="250"
-            [(ngModel)]="JobsObject.name"
-          ></custom-input>
+  <div>
+    <form
+      [formGroup]="employeeCreated"
+    >
+      <div class="w-full h-full page-content main mt-2" fxLayout="row">
+        <div
+          fxFlex.gt-sm="20%"
+          fxFlex="100%"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+        >
+          <img
+            class="custom-img"
+            id="blah"
+            [src]="imageFile ? imageFile.link : defaultImageSrc"
+            alt="your image"
+          />
+          <input
+            type="file"
+            class="my-3"
+            accept="image/*"
+            name="imageFile"
+            id="imageFile"
+            formControlName="imageFile"
+            (change)="handleChange($event)"
+          />
+        </div>
+        <div
+          fxFlex.gt-sm="80%"
+          fxHide
+          fxShow.gt-sm
+          fxLayout="column"
+          fxLayoutAlign="left left"
+        >
+          <div>
+            <custom-input
+              [required]="true"
+              [name]="'nameCompany'"
+              formControlName="nameCompany"
+              [placeholder]="'Name company'"
+              [title]="'Name company'"
+              [maxlength]="250"
+              [(ngModel)]="JobsObject.nameCompany"
+            ></custom-input>
 
-          <div class="form-group">
-            <label for="tag">Tag Jobs</label>
-            <ng-multiselect-dropdown
-              id="tag"
-              name="tag"
-              formControlName="tag"
-              [placeholder]="'custom placeholder'"
-              [settings]="dropdownSettings"
-              [data]="listTagJobs"
-              (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
+            <custom-input
+              [required]="true"
+              [name]="'name'"
+              formControlName="name"
+              [placeholder]="'Name Jobs'"
+              [title]="'Name Jobs'"
+              [maxlength]="250"
+              [(ngModel)]="JobsObject.name"
+            ></custom-input>
+
+            <div fxLayoutAlign="center center">
+              <mat-form-field
+                fxFlex="50%"
+                appearance="outline"
+                floatLabel="always"
+                style="width: 100%"
+              >
+                <mat-label> Jobs </mat-label>
+                <mat-select
+                  formControlName="check"
+                  [(ngModel)]="check"
+                  (selectionChange)="select()"
+                >
+                  <mat-option>
+                    <ngx-mat-select-search name="name">
+                      <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                    </ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let item of listMajorJobs" [value]="item">
+                    {{ item }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+
+              <custom-input
+                style="margin-left: 5px"
+                fxFlex="50%"
+                [required]="true"
+                [name]="'positon'"
+                formControlName="positon"
+                [placeholder]="'positon'"
+                [title]="'positon'"
+                [maxlength]="250"
+              ></custom-input>
+            </div>
+
+            <div
+              class="form-group"
+              style="padding-bottom: 1.34375em"
+              *ngIf="check === 'IT'"
             >
-            </ng-multiselect-dropdown>
+              <label for="tag">Tag Jobs</label>
+              <ng-multiselect-dropdown
+                id="tag"
+                name="tag"
+                formControlName="tag"
+                [placeholder]="'custom placeholder'"
+                [settings]="dropdownSettings"
+                [data]="listTagJobs"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+
+            <div>
+              <custom-input
+                fxFlex="33,33%"
+                [required]="true"
+                [name]="'amount'"
+                formControlName="amount"
+                [placeholder]="'amount'"
+                [title]="'Amount'"
+                [maxlength]="250"
+              ></custom-input>
+              <mat-form-field
+                style="margin-left: 5px"
+                fxFlex="33,33%"
+                appearance="outline"
+                floatLabel="always"
+              >
+                <mat-label> Experience </mat-label>
+                <mat-select
+                  formControlName="experience"
+                  [(ngModel)]="experience"
+                  (selectionChange)="select()"
+                >
+                  <mat-option>
+                    <ngx-mat-select-search name="experience">
+                      <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                    </ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option
+                    *ngFor="let item of listExperienceJobs"
+                    [value]="item"
+                  >
+                    {{ item }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+
+              <custom-input
+                style="margin-left: 5px"
+                fxFlex="33,33%"
+                [required]="true"
+                [name]="'workTime'"
+                formControlName="workTime"
+                [placeholder]="'workTime'"
+                [title]="'WorkTime'"
+                [maxlength]="250"
+              ></custom-input>
+            </div>
+
+            <div>
+              <custom-input
+                fxFlex="50%"
+                [required]="true"
+                [name]="'salaryMin'"
+                formControlName="salaryMin"
+                [placeholder]="'salaryMin'"
+                [title]="'SalaryMin'"
+                [maxlength]="250"
+              ></custom-input>
+              <custom-input
+                style="margin-left: 5px"
+                fxFlex="50%"
+                [required]="true"
+                [name]="'salaryMax'"
+                formControlName="salaryMax"
+                [placeholder]="'salaryMax'"
+                [title]="'SalaryMax'"
+                [maxlength]="250"
+              ></custom-input>
+            </div>
+            <div>
+              <custom-input
+                style="margin-left: 5px"
+                fxFlex="50"
+                [required]="true"
+                [name]="'address'"
+                formControlName="address"
+                [placeholder]="'address'"
+                [title]="'Address'"
+                [maxlength]="250"
+              ></custom-input>
+
+              <custom-input-date
+                style="margin-left: 5px"
+                fxFlex="50"
+                fxFlex.sm="100"
+                [title]="'Date Expire'"
+                [name]="'dateExpire'"
+                [(ngModel)]="getDateExpire"
+                formControlName="dateExpire"
+              >
+              </custom-input-date>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div><quill-editor></quill-editor></div>
-  </form>
+      <div>
+        <quill-editor
+          [styles]="{ height: '300px' }"
+          [modules]="modules"
+          formControlName="descriptions"
+          (onContentChanged)="onChange($event)"
+        ></quill-editor>
+      </div>
+
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayout.lt-sm="column"
+          fxFlexFill
+          fxLayoutAlign="end center"
+        >
+          <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
+          <custom-button [type]="'reset'" (click)="onReset()"></custom-button>
+        </div>
+    </form>
+  </div>
 </div>

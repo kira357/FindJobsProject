@@ -1,0 +1,239 @@
+.btn-at {
+    border: none;
+    font-family: 'Times New Roman', serif;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    //   text-transform: uppercase;
+    //   letter-spacing: 1px;
+    //   font-weight: 600;
+    outline: none;
+    position: relative;
+    transition: all 0.3s;
+
+    //   add
+    font-family: 'Roboto', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:before {
+        font-family: 'FontAwesome';
+        speak-as: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        position: relative;
+        font-smooth: antialiased;
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        font-size: 100%;
+        width: 30px;
+        line-height: 26px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        transition: all 0.3s;
+    }
+
+    &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+}
+
+.btn-sep {
+    padding: 1px 9px 3px 38px;
+    border-radius: 4px;
+    min-width: 90px;
+    min-height: 28px;
+
+    &:before {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 4px 0 0 4px;
+    }
+}
+
+/* Button Save */
+.btn-save {
+    background: #2979ff;
+    color: #fff;
+}
+
+.btn-save:not(:disabled):hover {
+    background: #2161cc;
+}
+
+.btn-save:before {
+    content: '\f0c7';
+}
+
+/* Button Delete */
+.btn-delete {
+    background: #e5773e;
+    color: #fff;
+}
+
+.btn-delete:not(:disabled):hover {
+    background: #ca4e4a;
+}
+
+.btn-delete:before {
+    content: '\f1f8';
+}
+/* Button Reset*/
+.btn-reset {
+    background: #fdbd41;
+    color: #000000;
+}
+
+.btn-reset:not(:disabled):hover {
+    background: #ca9734;
+}
+
+.btn-reset:before {
+    content: '\f021';
+}
+/* Button Excel */
+.btn-excel {
+    background: #30c894;
+    color: #fff;
+}
+
+.btn-excel:not(:disabled):hover {
+    background: #26a076;
+}
+
+.btn-excel:before {
+    content: '\f019';
+}
+/* Button Upload */
+.btn-upload {
+    background: #30c894;
+    color: #fff;
+}
+
+.btn-upload:not(:disabled):hover {
+    background: #26a076;
+}
+
+.btn-upload:before {
+    content: '\f093';
+}
+/* Button Search*/
+.btn-search {
+    background: #7569bb;
+    color: #fff;
+}
+
+.btn-search:not(:disabled):hover {
+    background: #5e5496;
+}
+
+.btn-search:before {
+    content: '\f002';
+}
+
+/* Button Close*/
+.btn-close {
+    background: #757575;
+    color: #fff;
+}
+
+.btn-close:not(:disabled):hover {
+    background: #545454;
+}
+
+.btn-close:before {
+    content: '\f00d';
+}
+/* Button Close All */
+.btn-close-all {
+    background: #757575;
+    color: #fff;
+}
+
+.btn-close-all:not(:disabled):hover {
+    background: #545454;
+}
+
+.btn-close-all:before {
+    content: '\f00d';
+}
+/* Button Create */
+.btn-create {
+    background: #2979ff;
+    color: #fff;
+}
+
+.btn-create:not(:disabled):hover {
+    background: #2161cc;
+}
+
+.btn-create:before {
+    content: '\f055';
+}
+/* Button Print */
+.btn-print {
+    background: #30c894;
+    color: #fff;
+}
+
+.btn-print:not(:disabled):hover {
+    background: #27a378;
+}
+
+.btn-print:before {
+    content: '\f02f';
+}
+
+/*Button ERP */
+.btn-erp {
+    background: #e5773e;
+    color: #fff;
+}
+
+.btn-erp:not(:disabled):hover {
+    background: #ca4e4a;
+}
+
+.btn-erp:before {
+    content: '\f1c0';
+}
+
+/*Button Reset Password */
+.btn-reset-pw {
+    background: #035061;
+    color: #fff;
+}
+
+.btn-reset-pw:not(:disabled):hover {
+    background: #02343f;
+}
+
+.btn-reset-pw:before {
+    content: '\f1da';
+}
+/* Button Detail */
+.btn-view {
+    background: #8578cf;
+    color: #fff;
+}
+
+.btn-view:not(:disabled):hover {
+    background: #7466c4;
+}
+
+.btn-view:before {
+    content: '\f06e';
+}

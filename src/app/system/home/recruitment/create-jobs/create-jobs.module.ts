@@ -1,3 +1,4 @@
+import { CustomButtonModule } from './../../../../core/component/custom-button/custom-button.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateJobsComponent } from './create-jobs/create-jobs.component';
@@ -8,6 +9,9 @@ import { ApiService } from 'src/app/services/api.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CustomInputModule } from 'src/app/core/component/custom-input/custom-input.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { CustomInputDateModule } from 'src/app/core/component/custom-input-date/custom-input-date.module';
 
 const routes: Routes = [
   {
@@ -24,6 +28,10 @@ const routes: Routes = [
     MaterialModule,
     CustomInputModule,
     QuillModule.forRoot(),
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
+    CustomInputDateModule,
+    CustomButtonModule,
   ],
   providers: [ApiService],
   declarations: [CreateJobsComponent],

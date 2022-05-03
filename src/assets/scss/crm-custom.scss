@@ -1,0 +1,99 @@
+@import "custom-all.scss";
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.bubble.css";
+@import "~quill/dist/quill.snow.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+.text {
+  &-center {
+    text-align: center;
+  }
+  &-left {
+    text-align: left;
+  }
+  &-right {
+    text-align: right;
+  }
+}
+
+.pull {
+  &-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-left {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.pq-center-group-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mat-form-field {
+  margin-bottom: -4px;
+  padding: 0 8px;
+
+  .mat-form-field-suffix .mat-icon-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: inherit;
+    width: 2.5em;
+    height: 28px;
+    top: 1px !important;
+  }
+}
+
+.mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.75em 0;
+  border-top: 0.2em solid transparent;
+}
+
+.mat-cell,
+.mat-footer-cell {
+  font-size: 12px !important;
+}
+
+mat-label {
+  color: #9e9e9e !important;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background: #ccc;
+}
+
+.mat-paginator {
+  border-top: 1px solid var(--color-border);
+}
+.btn-inform {
+  display: flex;
+  align-items: center;
+  margin-top: -2px;
+}
+.m-l-8 {
+  margin-left: -8px;
+}
+
+.cursor {
+  cursor: pointer !important;
+}
+
+.btn-hover {
+  opacity: 0.8 !important;
+}
+
+atman-pq-grid {
+  font-size: 12px !important;
+}
+.justify-content-right {
+  justify-content: right;
+}
