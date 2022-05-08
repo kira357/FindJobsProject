@@ -1,0 +1,74 @@
+<div>
+  <div class="header-content" fxLayout="row">
+    <div class="header-title" fxFlex="80">
+      {{ headerTitle }}
+    </div>
+    <div class="close-button" fxFlex="20">
+      <button
+        style="height: 24px"
+        class="bg-white cursor-pointer text-base"
+        type="button"
+        (click)="onClose()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <hr class="header-line" />
+  </div>
+  <div class="">
+    <form [formGroup]="employeeCreated">
+      <div fxLayout="column">
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between stretch">
+          <custom-input
+            fxFlex="70"
+            [name]="'cultureName'"
+            [title]="'cultureName'"
+            [maxlength]="250"
+            formControlName="supplierName"
+            [(ngModel)]="headerData.supplierName"
+          ></custom-input>
+          <!-- <custom-checkbox
+            fxFlex="50"
+            [name]="'uiCultureName'"
+            [title]="'uiCultureName'"
+            [maxlength]="250"
+            formControlName="customerTypeName"
+            [(ngModel)]="headerData.customerTypeName"
+          ></custom-checkbox> -->
+          <custom-checkbox
+            fxFlex="30"
+            [name]="'active'"
+            [title]="'Active'"
+            formControlName="activeYn"
+            [(ngModel)]="headerData.activeYn"
+          >
+          </custom-checkbox>
+        </div>
+        <!-- <div fxLayout="row" fxFlex="100">
+          <custom-input
+            fxFlex="50"
+            [name]="'displayName'"
+            [title]="'displayName'"
+            [maxlength]="250"
+            formControlName="CountryTypeName"
+            [(ngModel)]="headerData.CountryTypeName"
+          ></custom-input>
+          <custom-input
+            fxFlex="50"
+            [name]="'flagIcon'"
+            [title]="'flagIcon'"
+            [maxlength]="250"
+            formControlName="description"
+            [(ngModel)]="headerData.description"
+          ></custom-input>
+        </div> -->
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
+          <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
+          <custom-button [type]="'closeAll'" (click)="onClose()"></custom-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

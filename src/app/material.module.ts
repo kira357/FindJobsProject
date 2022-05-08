@@ -5,6 +5,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import {
   CoreModule as FlexCoreModule,
@@ -104,6 +105,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NgbModule,
     HttpClientModule,
     MatFormFieldModule,
+    FontAwesomeModule,
     ToastrModule,
   ],
 })

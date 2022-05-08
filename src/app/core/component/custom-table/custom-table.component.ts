@@ -39,7 +39,7 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() showPaginator: boolean = true;
     @Input() heightTb: number = 0;
     @Input() title: string = '';
-
+    @Input() selectedRow = {};
     @Output() onRowClick = new EventEmitter<any>();
     @Output() onRowDbClick = new EventEmitter<any>();
     @Output() onAdd = new EventEmitter<any>();
@@ -58,7 +58,6 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     searchCtrl = new FormControl();
     dataSource: MatTableDataSource<any> | null;
     dataSource1: MatTableDataSource<any> | null;
-    selectedRow :any;
     pageSizeOptions: number[] = [5, 10, 20, 50, 100, 150, 200, 300, 500, 1000];
 
     selection = new SelectionModel<any>(true, []);
@@ -90,7 +89,6 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     loadData(loading: boolean) {
         if (!loading) return;
 
-        this.selectedRow = null;
         this.pagingParams.totalRows = this.pagingParams.totalRows;
         this.dataSource = new MatTableDataSource(this.rows as any[]);
         this.dataSource.sort = this.sort;
@@ -135,12 +133,12 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     handleRowClick(row: any) {
         this.selectedRow = row;
-        this.onRowClick.emit(row);
+        this.onRowClick.emit(JSON.parse(JSON.stringify(row)));
     }
 
     handleRowDbClick(row: any) {
         this.selectedRow = row;
-        this.onRowDbClick.emit(row);
+        this.onRowDbClick.emit(JSON.parse(JSON.stringify(row)));
     }
 
     handleAdd() {
@@ -148,13 +146,12 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     handleEdit(row: any) {
-        this.selectedRow = row;
-        this.onEdit.emit(row);
+        this.onEdit.emit(JSON.parse(JSON.stringify(row)));
     }
 
     handleDelete(row: any) {
-        this.selectedRow = row;
-        this.onDelete.emit(row);
+        this.selectedRow = {};
+        this.onDelete.emit(JSON.parse(JSON.stringify(row)));
     }
 
     pageChanged(event: PageEvent) {
@@ -197,4 +194,5 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
         this.selection.toggle(row);
         this.onCheckedRows.emit(this.selection.selected);
     }
+    
 }

@@ -75,16 +75,21 @@
           <mat-icon mat-list-icon> forum </mat-icon>
           <p mat-line>List Post</p>
         </a>
-
+        
+        <a mat-list-item [routerLink]="['/admin/create-role']">
+          <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+          <p mat-line>Create roles</p>
+        </a>
+        <a mat-list-item [routerLink]="['/admin/create-major']">
+          <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+          <p mat-line>Create majors</p>
+        </a>
+        
         <a mat-list-item [routerLink]="['/admin/create-account']">
           <mat-icon mat-list-icon>person</mat-icon>
           <p mat-line>Account</p>
         </a>
 
-        <a mat-list-item [routerLink]="['/admin/create-role']">
-          <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
-          <p mat-line>Create roles</p>
-        </a>
 
         <mat-divider></mat-divider>
 

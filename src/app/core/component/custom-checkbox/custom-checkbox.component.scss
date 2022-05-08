@@ -1,0 +1,24 @@
+:host ::ng-deep {
+    .mat-menu-panel .mat-menu-content .checkbox-item mat-checkbox .mat-checkbox-layout {
+        flex-direction: row;
+        .mat-checkbox-label {
+            margin-left: 10px;
+        }
+    }
+
+    .mat-checkbox-layout {
+        display: flex;
+        white-space: nowrap;
+        flex-direction: column-reverse;
+        font-size: 10.5px;
+        .mat-checkbox-inner-container {
+            margin-top: 5px;
+            width: 18px;
+            height: 18px;
+        }
+        .mat-checkbox-label {
+            //   margin-left: 2px;
+            margin-top: -5px;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+  <mat-label *ngIf="title">{{ title }} </mat-label>
+  <textarea
+    matInput
+    [rows]="rows"
+    [type]="type"
+    [(ngModel)]="value"
+    [required]="required"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [maxlength]="maxlength"
+    [placeholder]="placeholder"
+    [name]="name"
+    [errorStateMatcher]="confirmValidParentMatcher"
+    [class]="classInput"
+    [class]="'position-relative'"
+  ></textarea>
+  <mat-error>{{ errorMsg || requiredMsg }}</mat-error>
+</mat-form-field>

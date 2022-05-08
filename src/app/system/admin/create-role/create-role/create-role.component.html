@@ -1,0 +1,17 @@
+<div fxLayout="column" fxLayoutAlign="space-between none">
+  <div fxFlex="100" fxFlex.lt-md="100" class="gridDiv">
+    <custom-table
+      [columns]="columns"
+      [rows]="_LIST_DATA"
+      [showFilterButton]="false"
+      [showAddButton]="true"
+      [heightTb]="770"
+      (onPageChanged)="onPageChanged($event)"
+      [pagingParams]="_PagingParams"
+      (onRowClick)="onRowClick($event)"
+      (onAdd)="onAdd()"
+      (onEdit)="onEdit($event)"
+      (onDelete)="onDelete($event)"
+    ></custom-table>
+  </div>
+</div>

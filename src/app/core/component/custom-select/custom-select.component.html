@@ -1,0 +1,46 @@
+<mat-form-field appearance="outline" floatLabel="always" style="width: 100%">
+  <mat-label *ngIf="title">{{ title }} </mat-label>
+  <mat-select
+    [(ngModel)]="value"
+    (focusout)="onFocusOut($event)"
+    [required]="required"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    [errorStateMatcher]="confirmValidParentMatcher"
+  >
+    <mat-option>
+      <ngx-mat-select-search
+        [(ngModel)]="search"
+        [placeholderLabel]="'Search'"
+        [name]="name"
+        [noEntriesFoundLabel]="'NotFound'"
+      >
+        <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+      </ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option *ngIf="clear">{{ clearText || "" }}</mat-option>
+    <mat-option
+      #allSelected
+      *ngIf="allValue"
+      [value]="0"
+      (click)="checkedUncheckedSelectAll()"
+      >{{ allValueText || "" }}</mat-option
+    >
+    <!-- <mat-option
+      *ngFor="let item of DATA | filter: text:search"
+      [value]="item[config.valueField]"
+      (click)="checkedUncheckedPerItem(item)"
+    >
+      {{ item[config.textField] }}</mat-option
+    > -->
+  </mat-select>
+  <!-- <mat-error
+    *ngIf="required && (!value || value.toString().trim().length == 0)"
+    >{{ errorMsg || requiredMsg }}</mat-error
+  > -->
+
+  <mat-error
+  >{{ errorMsg || requiredMsg }}</mat-error
+>
+</mat-form-field>

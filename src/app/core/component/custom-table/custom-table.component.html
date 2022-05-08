@@ -49,12 +49,13 @@
                     </ng-container>
 
                     <!-- Image Column -->
-                    <ng-container matColumnDef="image">
+                    <!-- <ng-container matColumnDef="image">
                         <th *matHeaderCellDef mat-header-cell></th>
                         <td *matCellDef="let row" class="w-6 min-w-6 pr-0" mat-cell>
                             <img [src]="row['imageSrc']" class="avatar h-6 w-6 align-middle" />
                         </td>
-                    </ng-container>
+                    </ng-container> -->
+
                     <!-- Label Column -->
                     <ng-container matColumnDef="labels">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Labels</th>
@@ -122,8 +123,8 @@
                         <ng-container *ngIf="column.type === 'button'" [matColumnDef]="column.property">
                             <th mat-header-cell *matHeaderCellDef>{{ column.label  }}</th>
                             <td mat-cell *matCellDef="let element" [ngClass]="column.cssClasses" class="action-content">
-                                <i *ngIf="column.buttons.includes('edit') === true" (click)="handleEdit(element)" class="fa-solid fa-pencil edit-icon"></i>
-                                <i *ngIf="column.buttons.includes('delete') === true" (click)="handleDelete(element)" class="fa-solid fa-xmark delete-icon"></i>
+                                <button (click)="handleEdit(element)" ><i *ngIf="column.buttons.includes('edit') === true" class="fa-solid fa-pencil edit-icon"></i></button>
+                                <button (click)="handleDelete(element)"> <i *ngIf="column.buttons.includes('delete') === true"  class="fa-solid fa-xmark delete-icon"></i></button>
                             </td>
                         </ng-container>
                         <!-- TYPE PROGRESS_BAR -->
@@ -133,6 +134,17 @@
                                 <mat-progress-bar class="example-margin" [color]="'primary'" [mode]="'determinate'" [value]="50" [bufferValue]="75"> </mat-progress-bar>
                             </td>
                         </ng-container>
+
+                        
+                    <ng-container *ngIf="column.type === 'image'" [matColumnDef]="column.property">
+                        <th *matHeaderCellDef mat-header-cell>
+                            {{ column.label }}
+                        </th>
+                        <td *matCellDef="let row" class="w-20 min-w-20 h-20 min-h-20 pr-0" mat-cell>
+                            <img [src]="row[column.property]" class="avatar h-20 w-20 rounded-full ring-2 ring-white object-contain hover:object-scale-down" />
+                        </td>
+                    </ng-container>
+
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="visibleColumns; sticky: true"></tr>

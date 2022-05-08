@@ -5,13 +5,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/material.module';
 import { RecruitmentRoutingModule } from './recruitment-routing.module';
-
+import { IconModule } from '@visurel/iconify-angular';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
     RecruitmentRoutingModule,
+    IconModule,
+    MatIconModule,
   ],
   declarations: [RecruitmentComponent],
   exports: [RecruitmentComponent],

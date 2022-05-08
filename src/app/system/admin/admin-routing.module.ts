@@ -31,6 +31,20 @@ export const routes: Routes = [
           import('./list-post/list-post.module').then((m) => m.ListPostModule),
       },
       {
+        path: 'create-role',
+        loadChildren: () =>
+          import('./create-role/create-role.module').then(
+            (m) => m.CreateRoleModule
+          ),
+      },
+      {
+        path: 'create-major',
+        loadChildren: () =>
+          import('./create-major/create-major.module').then(
+            (m) => m.CreateMajorModule
+          ),
+      },
+      {
         path: 'create-account',
         loadChildren: () =>
           import('./create-account/create-account.module').then(

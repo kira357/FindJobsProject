@@ -1,0 +1,9 @@
+<mat-checkbox
+  [ngModel]="checked"
+  [name]="name"
+  labelPosition="after"
+  color="primary"
+  (ngModelChange)="onModelChange($event)"
+>
+  {{ title }}
+</mat-checkbox>
