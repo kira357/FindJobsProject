@@ -19,6 +19,7 @@ import BlotFormatter from 'quill-blot-formatter';
 Quill.register('modules/blotFormatter', BlotFormatter);
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { ReplaySubject } from 'rxjs';
+import { UserService } from 'src/app/core/model/user/user.service';
 
 @Component({
   selector: 'app-create-jobs',
@@ -27,7 +28,7 @@ import { ReplaySubject } from 'rxjs';
 })
 export class CreateJobsComponent implements OnInit {
   constructor(
-    private service: ApiService,
+    private service: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private matSnackBar: MatSnackBar
@@ -203,7 +204,7 @@ export class CreateJobsComponent implements OnInit {
       'active',
       'options',
     ];
-    this.service.RequestShowListCompany().subscribe((data: any) => {
+    this.service.RequestShowListEmployee().subscribe((data: any) => {
       this.Company = data.dataCompany;
       console.log('dataAccount', this.Company);
       this.dataSource = new MatTableDataSource<Company>(this.Company);
@@ -296,22 +297,22 @@ export class CreateJobsComponent implements OnInit {
       link: row.imageSrc,
       name: row.name,
     };
-    if (row.id !== '00000000-0000-0000-0000-000000000000') {
-      this.hidden = false;
-      this.display = 'block';
-      this.service
-        .RequestShowListJobsByCompany(row.id)
-        .subscribe((data: any) => {
-          this.infoJobs = data;
-          console.log('data', this.infoJobs);
-          this.JobAfterSpiltTag = this.infoJobs.map((x) => {
-            let y = x.tag.split(',').map((z) => {
-              return { name: z };
-            });
-            return { ...x, tag: y };
-          });
-        });
-    }
+    // if (row.id !== '00000000-0000-0000-0000-000000000000') {
+    //   this.hidden = false;
+    //   this.display = 'block';
+    //   this.service
+    //     .RequestShowListJobsByCompany(row.id)
+    //     .subscribe((data: any) => {
+    //       this.infoJobs = data;
+    //       console.log('data', this.infoJobs);
+    //       this.JobAfterSpiltTag = this.infoJobs.map((x) => {
+    //         let y = x.tag.split(',').map((z) => {
+    //           return { name: z };
+    //         });
+    //         return { ...x, tag: y };
+    //       });
+    //     });
+    // }
   };
 
   onChange = (evt: any) => {
@@ -319,20 +320,20 @@ export class CreateJobsComponent implements OnInit {
   };
 
   onClickDelete = (id: any) => {
-    this.service.RequestDeleteCompany(id).subscribe((data: any) => {
-      this.result = data;
-      console.log('result', this.result);
-      if (data.ok === 'Success') {
-        console.log('check', this.result);
-        this.matSnackBar.open('Delete Employee success', 'Okay!', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          panelClass: ['snack-success'],
-        });
-        this.GetListPost();
-      }
-    });
+    // this.service.RequestDeleteCompany(id).subscribe((data: any) => {
+    //   this.result = data;
+    //   console.log('result', this.result);
+    //   if (data.ok === 'Success') {
+    //     console.log('check', this.result);
+    //     this.matSnackBar.open('Delete Employee success', 'Okay!', {
+    //       duration: 5000,
+    //       horizontalPosition: 'center',
+    //       verticalPosition: 'top',
+    //       panelClass: ['snack-success'],
+    //     });
+    //     this.GetListPost();
+    //   }
+    // });
   };
 
   select = () => {

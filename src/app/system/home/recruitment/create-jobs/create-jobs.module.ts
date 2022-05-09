@@ -1,3 +1,4 @@
+import { UserService } from './../../../../core/model/user/user.service';
 import { CustomButtonModule } from './../../../../core/component/custom-button/custom-button.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -5,7 +6,6 @@ import { CreateJobsComponent } from './create-jobs/create-jobs.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MaterialModule } from '../../../../material.module';
-import { ApiService } from 'src/app/services/api.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CustomInputModule } from 'src/app/core/component/custom-input/custom-input.module';
@@ -33,7 +33,7 @@ const routes: Routes = [
     CustomInputDateModule,
     CustomButtonModule,
   ],
-  providers: [ApiService],
+  providers: [UserService],
   declarations: [CreateJobsComponent],
 })
 export class CreateJobsModule {}
