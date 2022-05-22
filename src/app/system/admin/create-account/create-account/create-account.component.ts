@@ -1,7 +1,20 @@
+import { MajorService } from 'src/app/core/model/major/major.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { PagingParams } from 'src/app/core/model/paging-params';
+
 import { ListAccountService } from '../list-account.service';
+import { VMGetUser } from 'src/app/core/model/user/model/model';
+import { UserService } from 'src/app/core/model/user/User.service';
+import { debounceTime, Subject } from 'rxjs';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { RolesService } from 'src/app/core/model/roles/Roles.service';
 
 @Component({
   selector: 'app-create-account',
@@ -11,145 +24,153 @@ import { ListAccountService } from '../list-account.service';
 export class CreateAccountComponent implements OnInit {
   constructor(
     private listAccountService: ListAccountService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private majorService: MajorService,
+    private rolesService: RolesService
+  ) {
+    this.onSearch = new Subject();
+    this.onSearch.pipe(debounceTime(100)).subscribe((str) => {
+      console.log('onSearch', str);
+      let comboxfilter = this.comboxMajor.filter(
+        (x) => x.name.indexOf(str) > -1
+      );
+      console.log('comboxfilter', comboxfilter);
+      str ? (this.comboxMajor = comboxfilter) : this.getComboxMajor();
+    });
+  }
 
   _PagingParams = new PagingParams();
-  ngOnInit() {}
+  isShowPassword: boolean;
+  ngOnInit() {
+    this.isShowPassword = false;
+    this.getListData();
+    this.getComboxMajor();
+    this.getComboxRole();
+  }
   columns = this.listAccountService.getColums();
-  _LIST_DATA = [
-    {
-      tradeTypeName: 'TradeType1',
-      customerCode: 'CustomerCode1',
-      supplierName: 'FullName1',
-      supplierShortName: 'ShortName1',
-      ifCode: 'Code1',
-      customerTypeName: 'CustomerType1',
-      CountryTypeName: 'Country1',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description1',
-    },
-    {
-      tradeTypeName: 'TradeType2',
-      customerCode: 'CustomerCode2',
-      supplierName: 'FullName2',
-      supplierShortName: 'ShortName2',
-      ifCode: 'Code2',
-      customerTypeName: 'CustomerType2',
-      CountryTypeName: 'Country2',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description2',
-    },
-    {
-      tradeTypeName: 'TradeType3',
-      customerCode: 'CustomerCode3',
-      supplierName: 'FullName3',
-      supplierShortName: 'ShortName3',
-      ifCode: 'Code3',
-      customerTypeName: 'CustomerType3',
-      CountryTypeName: 'Country3',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description3',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-  ];
-
+  _LIST_DATA: any[] = [];
+  _LIST_ITEM: any = {};
   employeeCreated = this.formBuilder.group({
-    name: ['', Validators.required],
-    nameCompany: ['', Validators.required],
-    tag: ['', Validators.required],
-    imageFile: '',
-    dateExpire: ['', Validators.required],
+    firstname: ['', Validators.required],
+    lastname: ['', Validators.required],
+    username: ['', Validators.required],
+    email: ['', Validators.required],
+    phonenumber: ['', Validators.required],
+    description: ['', Validators.required],
     address: ['', Validators.required],
-    positon: ['', Validators.required],
-    check: ['', Validators.required],
-    amount: ['', Validators.required],
-    experience: ['', Validators.required],
-    workTime: ['', Validators.required],
-    salaryMin: ['', Validators.required],
-    salaryMax: ['', Validators.required],
-    descriptions: ['', Validators.required],
+    gender: ['', Validators.required],
+    roleName: ['', Validators.required],
+    idMajor: ['', Validators.required],
+    password: ['', Validators.required],
+    search: ['', Validators.required],
+    isactive: false,
   });
 
-  listExperienceJobs: any[] = [
-    'Không yêu cầu kinh nghiệm',
-    '1 năm kinh nghiệm',
-    '2 năm kinh nghiệm',
-    '3 năm kinh nghiệm',
-    '4 năm kinh nghiệm',
-    '5 năm kinh nghiệm',
-  ];
-  experience: any;
+  comboxMajor: any[] = [];
+  comboxRole: any[] = [];
+  gender: any[] = ['Nam', 'Nữ'];
+
   check: any;
+
+  private _search: string;
+  set search(value: string) {
+    if (this._search != value) {
+      this._search = value;
+      if (this.onSearch) {
+        this.onSearch.next(value);
+      }
+    }
+  }
+  get search() {
+    return this._search;
+  }
+  onSearch: Subject<string>;
+
   onChangeUserType(evt: any) {
     console.log(evt);
   }
   onPageChanged(params: PagingParams) {
     this._PagingParams = params;
-    console.log('onPageChanged', this._PagingParams);
+    this.userService
+      .RequestGetList(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getListData after pagin', data);
+        this._LIST_DATA = data.data;
+        this._PagingParams.totalRows = data.totalCount;
+      });
+  }
+  rowid : any;
+  onRowClick(evt: any) {
+    this._LIST_ITEM = evt;
+    this.isShowPassword = true;
+    this.rowid = evt.id;
+  }
+  select = (evt: any) => {
+    console.log('123', evt);
+  };
+
+  getListData() {
+    this.userService
+      .RequestGetList(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getListData', data);
+        this._LIST_DATA = data.data;
+        this._PagingParams.totalRows = data.totalCount;
+      });
+  }
+  getComboxMajor() {
+    this.majorService
+      .RequestGetListMajor(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getlist major', data);
+        this.comboxMajor = data.data;
+      });
+  }
+  getComboxRole() {
+    this.rolesService
+      .RequestGetListRoles(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getlist role', data);
+        this.comboxRole = data.data;
+      });
   }
 
-  onRowClick(evt: any) {
-    console.log('onRowClick', evt);
+  onAdd() {
+    if ( this.rowid) {
+      this.userService
+        .RequestUpdateUser(this.employeeCreated.value, this._LIST_ITEM.id)
+        .subscribe((data: any) => {
+          if (data) {
+            this.getListData();
+          }
+        });
+    } else {
+      this.userService
+        .RequestCreateUser(this.employeeCreated.value)
+        .subscribe((data: any) => {
+          if(data){
+            this.getListData();
+          }
+        });
+    }
   }
-  select = () => {
-    console.log('123', this.check);
-  };
+  onReset() {
+    this._LIST_ITEM = {};
+    this.isShowPassword = false;
+  }
+  onDelete() {
+    if (this.rowid) {
+      this.userService
+        .RequestDeteleUser(this.employeeCreated.value, this._LIST_ITEM.id)
+        .subscribe((data: any) => {
+          if (data) {
+            this.getListData();
+          }
+        });
+    } 
+  }
+  filterMyOptions(evt: any) {
+    console.log('filterMyOptions', evt);
+  }
 }

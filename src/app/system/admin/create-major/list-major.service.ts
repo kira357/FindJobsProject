@@ -11,8 +11,15 @@ export class ListMajorService {
       { label: 'No', property: 'index', type: 'index', visible: true },
 
       {
+        label: 'ID major',
+        property: 'idMajor',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
         label: 'Name major',
-        property: 'supplierShortName',
+        property: 'name',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
@@ -23,13 +30,6 @@ export class ListMajorService {
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
-      },
-      {
-        label: 'Active',
-        property: 'activeYn',
-        type: 'checkbox',
-        visible: true,
-        cssClasses: [],
       },
       {
         label: 'Actions',

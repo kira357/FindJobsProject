@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { MatDialog } from '@angular/material/dialog';
 import { RoleCreatePopupComponent } from '../popups/role-create-popup.component';
+import { RolesService } from 'src/app/core/model/roles/Roles.service';
 
 @Component({
   selector: 'app-create-role',
@@ -14,107 +15,17 @@ export class CreateRoleComponent implements OnInit {
   constructor(
     private listRoleService: ListRoleService,
     private formBuilder: FormBuilder,
-    private __dialog: MatDialog
+    private __dialog: MatDialog,
+    private rolesService: RolesService
   ) {}
 
   _PagingParams = new PagingParams();
-  ngOnInit() {}
+  ngOnInit() {
+    this.getListData();
+  }
   columns = this.listRoleService.getColums();
-  _LIST_DATA = [
-    {
-      tradeTypeName: 'TradeType1',
-      customerCode: 'CustomerCode1',
-      supplierName: 'FullName1',
-      supplierShortName: 'ShortName1',
-      ifCode: 'Code1',
-      customerTypeName: 'CustomerType1',
-      CountryTypeName: 'Country1',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description1',
-    },
-    {
-      tradeTypeName: 'TradeType2',
-      customerCode: 'CustomerCode2',
-      supplierName: 'FullName2',
-      supplierShortName: 'ShortName2',
-      ifCode: 'Code2',
-      customerTypeName: 'CustomerType2',
-      CountryTypeName: 'Country2',
-      sysUserYn: true,
-      activeYn: false,
-      LasterETLDate: '2020-01-01',
-      description: 'Description2',
-    },
-    {
-      tradeTypeName: 'TradeType3',
-      customerCode: 'CustomerCode3',
-      supplierName: 'FullName3',
-      supplierShortName: 'ShortName3',
-      ifCode: 'Code3',
-      customerTypeName: 'CustomerType3',
-      CountryTypeName: 'Country3',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description3',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-  ];
-
- 
+  _LIST_DATA : any []= [];
+  _LIST_ITEM: any = {};
   experience: any;
   check: any;
 
@@ -128,10 +39,11 @@ export class CreateRoleComponent implements OnInit {
       .subscribe((data: any) => {
         if (data) {
           console.log('save data successfully', data);
+          this.getListData();
         }
       });
   }
-test : any
+  test: any;
   public onEdit($event: any): void {
     this.test = $event;
     console.log('onEdit', this.test);
@@ -140,10 +52,8 @@ test : any
         width: '350px',
         autoFocus: false,
         data: {
-          supplierName: $event.supplierName,
-          customerTypeName: $event.customerTypeName,
-          CountryTypeName: $event.CountryTypeName,
-          activeYn : $event.activeYn,
+          id: $event.id,
+          name: $event.name,
           description: $event.description,
         } as any,
       })
@@ -151,6 +61,7 @@ test : any
       .subscribe((data: any) => {
         if (data) {
           console.log('save data successfully', data);
+          this.getListData();
         }
       });
   }
@@ -162,13 +73,26 @@ test : any
   }
   onPageChanged(params: PagingParams) {
     this._PagingParams = params;
-    console.log('onPageChanged', this._PagingParams);
+    this.rolesService
+      .RequestGetListRoles(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getListData after pagin', data);
+        this._LIST_DATA = data.data;
+        this._PagingParams.totalRows = data.totalCount;
+      });
   }
-
   onRowClick(evt: any) {
     console.log('onRowClick', evt);
+    this._LIST_ITEM = evt;
   }
-  select = () => {
-    console.log('123', this.check);
-  };
+
+  getListData() {
+    this.rolesService
+      .RequestGetListRoles(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getListRole', data);
+        this._LIST_DATA = data.data;
+        this._PagingParams.totalRows = data.totalCount;
+      });
+  }
 }

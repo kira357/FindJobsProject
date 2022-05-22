@@ -1,3 +1,8 @@
+import {
+  Major,
+  MajorCreateDto,
+  UpdateMajorDto,
+} from './../../../../core/model/major/model/Major';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
@@ -5,6 +10,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MajorService } from 'src/app/core/model/major/major.service';
 
 @Component({
   selector: 'app-major-create-popup',
@@ -14,23 +20,20 @@ import {
 export class MajorCreatePopupComponent implements OnInit {
   headerTitle: string = '';
   headerData: any = {
-    supplierName: '',
-    customerTypeName: '',
-    CountryTypeName: '',
-    activeYn : false,
+    idMajor: '',
+    name: '',
     description: '',
   };
   employeeCreated = this.formBuilder.group({
-    supplierName: ['', Validators.required],
-    customerTypeName: ['', Validators.required],
-    CountryTypeName: ['', Validators.required],
+    idMajor: '',
+    name: ['', Validators.required],
     description: '',
-    activeYn : false,
   });
   constructor(
     public __dialog: MatDialog,
     private dialogRef: MatDialogRef<MajorCreatePopupComponent>,
     private formBuilder: FormBuilder,
+    private majorService: MajorService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -38,52 +41,41 @@ export class MajorCreatePopupComponent implements OnInit {
     if (this.data) {
       this.headerTitle = 'Edit Major';
       this.headerData = {
-        supplierName: this.data.supplierName,
-        customerTypeName: this.data.customerTypeName,
-        CountryTypeName: this.data.CountryTypeName,
-        activeYn : this.data.activeYn,
+        idMajor: this.data.idMajor,
+        name: this.data.name,
         description: this.data.description,
       };
     } else {
       this.headerTitle = 'Add New Major';
-      // this.headerData = {
-      //   id: 0,
-      //   cultureName: '',
-      //   uiCultureName: '',
-      //   displayName: '',
-      //   flagIcon: '',
-      //   isEnabled: true,
-      // };
+      this.headerData = {
+        idMajor: '',
+        name: '',
+        description: '',
+      };
     }
     console.log('data on popup', this.data);
   }
 
   onSubmit(): void {
     if (this.data) {
-      // const MajorParams: UpdateMajorDto = {
-      //     id: this.headerData.id,
-      //     cultureName: this.headerData.cultureName,
-      //     uiCultureName: this.headerData.uiCultureName,
-      //     displayName: this.headerData.displayName,
-      //     flagIcon: this.headerData.flagIcon,
-      //     isEnabled: true
-      // };
-      // this.MajorService.update(this.headerData.id, MajorParams).subscribe(res => {
-      //     console.log(res);
-      //     this.dialogRef.close(true);
-      // });
+      const MajorParams: UpdateMajorDto = {
+        idMajor: this.headerData.idMajor,
+        name: this.headerData.name,
+        description: this.headerData.description,
+      };
+      this.majorService.RequestUpdateMajor(MajorParams).subscribe((res) => {
+        console.log('update', res);
+        this.dialogRef.close(true);
+      });
     } else {
-      // const MajorParams: CreateMajorDto = {
-      //     cultureName: this.headerData.cultureName,
-      //     uiCultureName: this.headerData.uiCultureName,
-      //     displayName: this.headerData.displayName,
-      //     flagIcon: this.headerData.flagIcon,
-      //     isEnabled: true
-      // };
-      // this.MajorService.create(MajorParams).subscribe(res => {
-      //     console.log(res);
-      //     this.dialogRef.close(true);
-      // });
+      const MajorParams: MajorCreateDto = {
+        name: this.headerData.name,
+        description: this.headerData.description,
+      };
+      this.majorService.RequestCreateMajor(MajorParams).subscribe((res) => {
+        console.log('add', res);
+        this.dialogRef.close(true);
+      });
     }
   }
 

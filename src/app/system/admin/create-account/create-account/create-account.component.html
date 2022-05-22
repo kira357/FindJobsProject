@@ -6,7 +6,8 @@
     fxFlex="100%"
   >
     <div fxFlex.gt-md="100%" fxFlex.lg="40%" fxLayoutAlign="center start">
-      <form [formGroup]="employeeCreated">
+      <form [formGroup]="employeeCreated"
+      >
         <div
           fxLayout="row wrap"
           fxLayout.lt-sm="column"
@@ -20,20 +21,24 @@
           >
             <mat-label> Major </mat-label>
             <mat-select
-              formControlName="experience"
-              [(ngModel)]="experience"
-              (selectionChange)="select()"
+              formControlName="idMajor"
+              [(ngModel)]="_LIST_ITEM.idMajor"
+              (selectionChange)="select($event)"
             >
               <mat-option>
-                <ngx-mat-select-search name="experience">
+                <ngx-mat-select-search name="idMajor"
+                [(ngModel)]="search"
+                formControlName="search"
+                [placeholderLabel]="'Search' "
+                [noEntriesFoundLabel]="'NotFound'">
                   <mat-icon ngxMatSelectSearchClear>x</mat-icon>
                 </ngx-mat-select-search>
               </mat-option>
               <mat-option
-                *ngFor="let item of listExperienceJobs"
-                [value]="item"
+                *ngFor="let item of comboxMajor"
+                [value]="item.idMajor"
               >
-                {{ item }}</mat-option
+                {{ item.name }}</mat-option
               >
             </mat-select>
           </mat-form-field>
@@ -41,10 +46,11 @@
             style="margin-left: 5px"
             fxFlex="30"
             [required]="true"
-            [name]="'address'"
-            formControlName="address"
+            [name]="'firstname'"
+            formControlName="firstname"
             [placeholder]="'first name'"
             [title]="'first name'"
+            [(ngModel)]="_LIST_ITEM.firstName"
             [maxlength]="250"
           ></custom-input>
           <custom-input
@@ -52,9 +58,10 @@
             fxFlex="30"
             [required]="true"
             [name]="'address'"
-            formControlName="address"
+            formControlName="lastname"
             [placeholder]="'Last name'"
             [title]="'Last name'"
+            [(ngModel)]="_LIST_ITEM.lastName"
             [maxlength]="250"
           ></custom-input>
           <mat-form-field
@@ -63,52 +70,89 @@
             appearance="outline"
             floatLabel="always"
           >
-            <mat-label> Role </mat-label>
+            <mat-label> Gender </mat-label>
             <mat-select
-              formControlName="experience"
-              [(ngModel)]="experience"
-              (selectionChange)="select()"
+              formControlName="gender"
+              [(ngModel)]="_LIST_ITEM.gender"
+              (selectionChange)="select($event)"
             >
               <mat-option>
-                <ngx-mat-select-search name="role">
+                <ngx-mat-select-search name="gender">
                   <mat-icon ngxMatSelectSearchClear>x</mat-icon>
                 </ngx-mat-select-search>
               </mat-option>
-              <mat-option
-                *ngFor="let item of listExperienceJobs"
-                [value]="item"
-              >
+              <mat-option *ngFor="let item of gender" [value]="item">
                 {{ item }}</mat-option
               >
             </mat-select>
           </mat-form-field>
+       
           <custom-input
             style="margin-left: 5px"
             fxFlex="30"
             [required]="true"
-            [name]="'address'"
-            formControlName="address"
+            [name]="'username'"
+            formControlName="username"
             [placeholder]="'User name'"
             [title]="'User name'"
+            [(ngModel)]="_LIST_ITEM.userName"
             [maxlength]="250"
           ></custom-input>
           <custom-input
             style="margin-left: 5px"
             fxFlex="30"
+            [type]="'password'"
             [required]="true"
-            [name]="'address'"
-            formControlName="address"
+            [name]="'password'"
+            formControlName="password"
+            [placeholder]="'password'"
+            [title]="'password'"
+            [maxlength]="250"
+            [disabled]="isShowPassword"
+          ></custom-input>
+
+          <mat-form-field
+          style="margin-left: 5px"
+          fxFlex="30"
+          appearance="outline"
+          floatLabel="always"
+        >
+          <mat-label> Role </mat-label>
+          <mat-select
+            formControlName="roleName"
+            [(ngModel)]="_LIST_ITEM.roleName"
+            (selectionChange)="select($event)"
+          >
+            <mat-option>
+              <ngx-mat-select-search name="roleName">
+                <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+              </ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let item of comboxRole" [value]="item.name">
+              {{ item.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+          <custom-input
+            style="margin-left: 5px"
+            fxFlex="45"
+            [required]="true"
+            [name]="'email'"
+            formControlName="email"
             [placeholder]="'Email'"
+            [(ngModel)]="_LIST_ITEM.email"
             [title]="'Email'"
             [maxlength]="250"
           ></custom-input>
           <custom-input
             style="margin-left: 5px"
-            fxFlex="30"
+            fxFlex="45"
             [required]="true"
-            [name]="'address'"
-            formControlName="address"
+            [name]="'phonenumber'"
+            formControlName="phonenumber"
             [placeholder]="'Phone'"
+            [(ngModel)]="_LIST_ITEM.phoneNumber"
             [title]="'Phone'"
             [maxlength]="250"
           ></custom-input>
@@ -120,7 +164,12 @@
             fxFlex.md="15"
             fxLayoutAlign="start start"
           >
-            <custom-checkbox [name]="'active'" [title]="'Active'">
+            <custom-checkbox
+              [name]="'active'"
+              [title]="'Active'"
+              [(ngModel)]="_LIST_ITEM.isActive"
+              formControlName="isactive"
+            >
             </custom-checkbox>
           </div>
 
@@ -129,6 +178,9 @@
             fxFlex="100"
             [title]="'Description'"
             [placeholder]="'Description'"
+            [name]="'description'"
+            formControlName="description"
+            [(ngModel)]="_LIST_ITEM.description"
           ></custom-textarea>
         </div>
 
@@ -138,9 +190,9 @@
           fxLayoutAlign="end stretch"
           fxLayout.lt-sm="column"
         >
-          <custom-button type="reset"></custom-button>
-          <custom-button type="save"></custom-button>
-          <custom-button type="delete"></custom-button>
+          <custom-button type="reset"(click)="onReset()" ></custom-button>
+          <custom-button type="save" (click)="onAdd()"></custom-button>
+          <custom-button type="delete" (click)="onDelete()"></custom-button>
         </div>
       </form>
     </div>
@@ -149,6 +201,7 @@
         <custom-table
           [columns]="columns"
           [rows]="_LIST_DATA"
+          [selectedRow]="_LIST_ITEM"
           [pagingParams]="_PagingParams"
           (onRowClick)="onRowClick($event)"
           (onPageChanged)="onPageChanged($event)"

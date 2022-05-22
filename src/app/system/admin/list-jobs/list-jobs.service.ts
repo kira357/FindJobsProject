@@ -1,94 +1,107 @@
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListJobsService {
-    constructor() {}
+  constructor() {}
 
-    getColums = () => {
-        return [
-            { label: 'No', property: 'index', type: 'index', visible: true },
+  getColums = () => {
+    return [
+      {
+        label: '',
+        property: 'checkboxCol',
+        type: 'checkboxCol',
+        visible: true,
+      },
 
-            {
-                label: "image",
-                property: 'image',
-                type: 'image',
-                visible: true,
-                cssClasses: []
-            },
-            {
-                label: "Name jobs",
-                property: 'customerCode',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Major",
-                property: 'supplierName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "position",
-                property: 'supplierShortName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
+      { label: 'No', property: 'index', type: 'index', visible: true },
 
-            {
-                label: "Amount",
-                property: 'ifCode',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Work time",
-                property: 'customerTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Address",
-                property: 'CountryTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Salary",
-                property: 'Salary',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Day expire",
-                property: 'etlDate',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Description",
-                property: 'description',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Active",
-                property: 'activeYn',
-                type: 'checkbox',
-                visible: true,
-                cssClasses: []
-            },
-        ];
-    };
+      {
+        label: 'image',
+        property: 'jobImage',
+        type: 'image',
+        visible: true,
+        cssClasses: [],
+      },
+      {
+        label: 'company of jobs',
+        property: 'companyOfJobs',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Name job',
+        property: 'name',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'position',
+        property: 'position',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+
+      {
+        label: 'Amount',
+        property: 'amount',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Work time',
+        property: 'workTime',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Address',
+        property: 'address',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Salary min',
+        property: 'salaryMin',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Salary max',
+        property: 'salaryMax',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Day expire',
+        property: 'dateExpire',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Active',
+        property: 'isActive',
+        type: 'checkbox',
+        visible: true,
+        cssClasses: [],
+      },
+      {
+        label: 'Actions',
+        property: 'button',
+        type: 'button',
+        visible: true,
+        buttons: ['delete', 'edit'],
+      },
+    ];
+  };
 }

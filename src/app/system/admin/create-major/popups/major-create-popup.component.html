@@ -20,28 +20,44 @@
   <div class="">
     <form [formGroup]="employeeCreated">
       <div fxLayout="column">
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between stretch">
+        <div
+          fxLayout="column"
+          fxFlex="100"
+          fxLayoutAlign="space-between stretch"
+        >
           <custom-input
-            fxFlex="70"
-            [name]="'majorName'"
+            fxFlex="100"
+            [name]="'idMajor'"
+            [title]="'ID major'"
+            [maxlength]="250"
+            [disabled]="true"
+            formControlName="idMajor"
+            [(ngModel)]="headerData.idMajor"
+          ></custom-input>
+          <custom-input
+            fxFlex="100"
+            [name]="'name'"
             [title]="'Major name'"
             [maxlength]="250"
-            formControlName="supplierName"
-            [(ngModel)]="headerData.supplierName"
+            formControlName="name"
+            [(ngModel)]="headerData.name"
           ></custom-input>
-          <custom-checkbox
-            fxFlex="30"
-            [name]="'active'"
-            [title]="'Active'"
-            formControlName="activeYn"
-            [(ngModel)]="headerData.activeYn"
-          >
-          </custom-checkbox>
+
+          <custom-textarea
+            fxFlex="100"
+            [title]="'Description'"
+            [placeholder]="'Description'"
+            formControlName="description"
+            [(ngModel)]="headerData.description"
+          ></custom-textarea>
         </div>
 
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
           <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
-          <custom-button [type]="'closeAll'" (click)="onClose()"></custom-button>
+          <custom-button
+            [type]="'closeAll'"
+            (click)="onClose()"
+          ></custom-button>
         </div>
       </div>
     </form>

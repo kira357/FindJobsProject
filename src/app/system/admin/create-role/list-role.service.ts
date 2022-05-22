@@ -11,8 +11,15 @@ export class ListRoleService {
       { label: 'No', property: 'index', type: 'index', visible: true },
 
       {
+        label: 'Id',
+        property: 'id',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
         label: 'Role name',
-        property: 'supplierShortName',
+        property: 'name',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
@@ -23,13 +30,6 @@ export class ListRoleService {
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
-      },
-      {
-        label: 'Active',
-        property: 'activeYn',
-        type: 'checkbox',
-        visible: true,
-        cssClasses: [],
       },
       {
         label: 'Actions',

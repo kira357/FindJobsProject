@@ -20,50 +20,35 @@
   <div class="">
     <form [formGroup]="employeeCreated">
       <div fxLayout="column">
-        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between stretch">
+        <div fxLayout="column" fxFlex="100" fxLayoutAlign="space-between stretch">
           <custom-input
-            fxFlex="70"
-            [name]="'cultureName'"
-            [title]="'cultureName'"
+            fxFlex="100"
+            [name]="'id'"
+            [title]="'ID'"
             [maxlength]="250"
-            formControlName="supplierName"
-            [(ngModel)]="headerData.supplierName"
+            formControlName="id"
+            [disabled]="true"
+            [(ngModel)]="headerData.id"
           ></custom-input>
-          <!-- <custom-checkbox
-            fxFlex="50"
-            [name]="'uiCultureName'"
-            [title]="'uiCultureName'"
+          <custom-input
+            fxFlex="100"
+            [name]="'name'"
+            [title]="'Role Name'"
             [maxlength]="250"
-            formControlName="customerTypeName"
-            [(ngModel)]="headerData.customerTypeName"
-          ></custom-checkbox> -->
-          <custom-checkbox
-            fxFlex="30"
-            [name]="'active'"
-            [title]="'Active'"
-            formControlName="activeYn"
-            [(ngModel)]="headerData.activeYn"
-          >
-          </custom-checkbox>
+            formControlName="name"
+            [(ngModel)]="headerData.name"
+          ></custom-input>
+          <custom-textarea
+          fxFlex="100"
+          [title]="'Description'"
+          [placeholder]="'Description'"
+          [name]="'description'"
+          formControlName="description"
+          [(ngModel)]="headerData.description"
+        ></custom-textarea>
+
         </div>
-        <!-- <div fxLayout="row" fxFlex="100">
-          <custom-input
-            fxFlex="50"
-            [name]="'displayName'"
-            [title]="'displayName'"
-            [maxlength]="250"
-            formControlName="CountryTypeName"
-            [(ngModel)]="headerData.CountryTypeName"
-          ></custom-input>
-          <custom-input
-            fxFlex="50"
-            [name]="'flagIcon'"
-            [title]="'flagIcon'"
-            [maxlength]="250"
-            formControlName="description"
-            [(ngModel)]="headerData.description"
-          ></custom-input>
-        </div> -->
+
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
           <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
           <custom-button [type]="'closeAll'" (click)="onClose()"></custom-button>

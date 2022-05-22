@@ -4,6 +4,7 @@ import { RecruitmentListJobsComponent } from './recruitment-list-jobs/recruitmen
 import { RouterModule, Routes } from '@angular/router';
 import { CustomTableModule } from 'src/app/core/component/custom-table/custom-table.module';
 import { RecruitmentListJobsService } from './recruitment-list-jobs/recruitment-list-jobs.service';
+import { ListJobsCreatePopupModule } from './popups/list-jobs-create-popup.module';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), CustomTableModule],
   declarations: [RecruitmentListJobsComponent],
+  entryComponents: [ListJobsCreatePopupModule],
   providers: [RecruitmentListJobsService],
 })
 export class RecruitmentListJobsModule {}

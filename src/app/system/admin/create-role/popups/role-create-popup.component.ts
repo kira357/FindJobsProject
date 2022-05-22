@@ -1,3 +1,4 @@
+import { VMUpdateRole, VMRole, VMCreateRole } from './../../../../core/model/roles/model/Roles';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
@@ -5,6 +6,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { RolesService } from 'src/app/core/model/roles/Roles.service';
 
 @Component({
   selector: 'app-role-create-popup',
@@ -14,23 +16,20 @@ import {
 export class RoleCreatePopupComponent implements OnInit {
   headerTitle: string = '';
   headerData: any = {
-    supplierName: '',
-    customerTypeName: '',
-    CountryTypeName: '',
-    activeYn : false,
+    id: '',
+    name: '',
     description: '',
   };
   employeeCreated = this.formBuilder.group({
-    supplierName: ['', Validators.required],
-    customerTypeName: ['', Validators.required],
-    CountryTypeName: ['', Validators.required],
+    id: '',
+    name: ['', Validators.required],
     description: '',
-    activeYn : false,
   });
   constructor(
     public __dialog: MatDialog,
     private dialogRef: MatDialogRef<RoleCreatePopupComponent>,
     private formBuilder: FormBuilder,
+    private rolesService: RolesService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -38,52 +37,41 @@ export class RoleCreatePopupComponent implements OnInit {
     if (this.data) {
       this.headerTitle = 'Edit Role';
       this.headerData = {
-        supplierName: this.data.supplierName,
-        customerTypeName: this.data.customerTypeName,
-        CountryTypeName: this.data.CountryTypeName,
-        activeYn : this.data.activeYn,
+        id: this.data.id,
+        name : this.data.name,
         description: this.data.description,
       };
     } else {
       this.headerTitle = 'Add New Role';
-      // this.headerData = {
-      //   id: 0,
-      //   cultureName: '',
-      //   uiCultureName: '',
-      //   displayName: '',
-      //   flagIcon: '',
-      //   isEnabled: true,
-      // };
+      this.headerData = {
+        id: '',
+        name: '',
+        description: '',
+      };
     }
     console.log('data on popup', this.data);
   }
 
   onSubmit(): void {
     if (this.data) {
-      // const RoleParams: UpdateRoleDto = {
-      //     id: this.headerData.id,
-      //     cultureName: this.headerData.cultureName,
-      //     uiCultureName: this.headerData.uiCultureName,
-      //     displayName: this.headerData.displayName,
-      //     flagIcon: this.headerData.flagIcon,
-      //     isEnabled: true
-      // };
-      // this.RoleService.update(this.headerData.id, RoleParams).subscribe(res => {
-      //     console.log(res);
-      //     this.dialogRef.close(true);
-      // });
+      const RoleParams: VMUpdateRole = {
+          id : this.headerData.id,
+          name: this.headerData.name,
+          description: this.headerData.description,
+      };
+      this.rolesService.RequestUpdateRole(RoleParams).subscribe(res => {
+          console.log(res);
+          this.dialogRef.close(true);
+      });
     } else {
-      // const RoleParams: CreateRoleDto = {
-      //     cultureName: this.headerData.cultureName,
-      //     uiCultureName: this.headerData.uiCultureName,
-      //     displayName: this.headerData.displayName,
-      //     flagIcon: this.headerData.flagIcon,
-      //     isEnabled: true
-      // };
-      // this.RoleService.create(RoleParams).subscribe(res => {
-      //     console.log(res);
-      //     this.dialogRef.close(true);
-      // });
+      const RoleParams: VMCreateRole = {
+          name: this.headerData.name,
+          description: this.headerData.description,
+      };
+      this.rolesService.RequestCreateRole(RoleParams).subscribe(res => {
+          console.log(res);
+          this.dialogRef.close(true);
+      });
     }
   }
 

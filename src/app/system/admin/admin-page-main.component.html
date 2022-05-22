@@ -29,7 +29,9 @@
 
     <button mat-button [matMenuTriggerFor]="userMenu">
       <mat-icon>person</mat-icon>
-      <span fxShow fxHide.xs> </span>
+      <span fxShow fxHide.xs>
+        {{userName}}
+      </span>
     </button>
     <mat-menu
       #userMenu="matMenu"
@@ -42,7 +44,7 @@
         <span>Account</span>
       </a>
 
-      <a mat-menu-item [routerLink]="['/account/login']">
+      <a mat-menu-item (click)="LogOut()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Log out</span>
       </a>

@@ -45,58 +45,42 @@
     background-position: 0% 50%;
   }
 }
-.loginbaslik {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 3rem;
-  font-style: italic;
-}
-::ng-deep .snack-fails {
-  background-color: red;
-  color: white;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }
 
-::ng-deep .snack-success {
-  background-color: rgb(0, 218, 0);
-  color: white;
-}
-.custom-card {
-  width: 500px;
-  background-color: white;
-  margin: auto;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+button.button-login {
+  background:rgb(40,23,86);
 }
 
-.card-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  background-image: linear-gradient(to left, #141e30, #243b55);
-  height: auto;
+
+.page-content {
+  background-color: #fafaf8;
+  .mat-form-field {
+    padding: 0;
+  }
 }
-.footer-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0;
+
+.welcome {
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 30px;
+  color: #444444;
 }
-.btn {
-  font-size: 1rem;
-  background-image: linear-gradient(to right, #141e30, #243b55);
-  width: 100px;
+
+.detail {
+  font-family: "Open Sans";
+  font-size: 16px;
+  color: #444444;
 }
-.btn:hover {
-  background-image: linear-gradient(to right, #174fb8, #496d95);
-  width: 100px;
-}
-.custom-input {
-  border-radius: 8px;
+
+:host ::ng-deep {
+  .mat-form-field-prefix .mat-icon-button .mat-icon,
+  .mat-form-field-suffix .mat-icon-button .mat-icon {
+    height: 1.1em;
+    line-height: 1.1em;
+  }
 }

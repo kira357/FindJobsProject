@@ -8,32 +8,34 @@ export class RecruitmentListJobsService {
 
   getColums = () => {
     return [
+      { label: '', property: 'checkboxCol', type: 'checkboxCol', visible: true },
+      
       { label: 'No', property: 'index', type: 'index', visible: true },
 
       {
         label: 'image',
-        property: 'image',
+        property: 'jobImage',
         type: 'image',
         visible: true,
         cssClasses: [],
       },
       {
-        label: 'Name jobs',
-        property: 'customerCode',
+        label: 'company of jobs',
+        property: 'companyOfJobs',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
-        label: 'Major',
-        property: 'supplierName',
+        label: 'Name job',
+        property: 'name',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
         label: 'position',
-        property: 'supplierShortName',
+        property: 'position',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
@@ -41,52 +43,59 @@ export class RecruitmentListJobsService {
 
       {
         label: 'Amount',
-        property: 'ifCode',
+        property: 'amount',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
         label: 'Work time',
-        property: 'customerTypeName',
+        property: 'workTime',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
         label: 'Address',
-        property: 'CountryTypeName',
+        property: 'address',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
-        label: 'Salary',
-        property: 'Salary',
+        label: 'Salary min',
+        property: 'salaryMin',
+        type: 'text',
+        visible: true,
+        cssClasses: ['text-secondary', 'font-medium'],
+      },
+      {
+        label: 'Salary max',
+        property: 'salaryMax',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
         label: 'Day expire',
-        property: 'etlDate',
-        type: 'text',
-        visible: true,
-        cssClasses: ['text-secondary', 'font-medium'],
-      },
-      {
-        label: 'Description',
-        property: 'description',
+        property: 'dateExpire',
         type: 'text',
         visible: true,
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
         label: 'Active',
-        property: 'activeYn',
+        property: 'isActive',
         type: 'checkbox',
         visible: true,
         cssClasses: [],
+      },
+      {
+        label: 'Actions',
+        property: 'button',
+        type: 'button',
+        visible: true,
+        buttons: ['delete', 'edit'],
       },
     ];
   };

@@ -1,9 +1,11 @@
+import { Major } from './../../../../core/model/major/model/Major';
 import { ListMajorService } from '../list-major.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { MatDialog } from '@angular/material/dialog';
 import { MajorCreatePopupComponent } from '../popups/major-create-popup.component';
+import { MajorService } from 'src/app/core/model/major/major.service';
 
 @Component({
   selector: 'app-create-major',
@@ -14,105 +16,16 @@ export class CreateMajorComponent implements OnInit {
   constructor(
     private listMajorService: ListMajorService,
     private formBuilder: FormBuilder,
-    private __dialog: MatDialog
+    private __dialog: MatDialog,
+    private majorService: MajorService
   ) {}
 
   _PagingParams = new PagingParams();
-  ngOnInit() {}
+  ngOnInit() {
+    this.getListData();
+  }
   columns = this.listMajorService.getColums();
-  _LIST_DATA = [
-    {
-      tradeTypeName: 'TradeType1',
-      customerCode: 'CustomerCode1',
-      supplierName: 'FullName1',
-      supplierShortName: 'ShortName1',
-      ifCode: 'Code1',
-      customerTypeName: 'CustomerType1',
-      CountryTypeName: 'Country1',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description1',
-    },
-    {
-      tradeTypeName: 'TradeType2',
-      customerCode: 'CustomerCode2',
-      supplierName: 'FullName2',
-      supplierShortName: 'ShortName2',
-      ifCode: 'Code2',
-      customerTypeName: 'CustomerType2',
-      CountryTypeName: 'Country2',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description2',
-    },
-    {
-      tradeTypeName: 'TradeType3',
-      customerCode: 'CustomerCode3',
-      supplierName: 'FullName3',
-      supplierShortName: 'ShortName3',
-      ifCode: 'Code3',
-      customerTypeName: 'CustomerType3',
-      CountryTypeName: 'Country3',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description3',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-    {
-      tradeTypeName: 'TradeType4',
-      customerCode: 'CustomerCode4',
-      supplierName: 'FullName4',
-      supplierShortName: 'ShortName4',
-      ifCode: 'Code4',
-      customerTypeName: 'CustomerType4',
-      CountryTypeName: 'Country4',
-      sysUserYn: true,
-      activeYn: true,
-      LasterETLDate: '2020-01-01',
-      description: 'Description4',
-    },
-  ];
+  _LIST_DATA: Major[] = [];
 
   public onAdd(): void {
     this.__dialog
@@ -124,6 +37,7 @@ export class CreateMajorComponent implements OnInit {
       .subscribe((data: any) => {
         if (data) {
           console.log('save data successfully', data);
+          this.getListData();
         }
       });
   }
@@ -136,32 +50,49 @@ export class CreateMajorComponent implements OnInit {
         width: '350px',
         autoFocus: false,
         data: {
-          supplierName: $event.supplierName,
-          customerTypeName: $event.customerTypeName,
-          CountryTypeName: $event.CountryTypeName,
-          activeYn: $event.activeYn,
+          idMajor: $event.idMajor,
+          name: $event.name,
           description: $event.description,
         } as any,
       })
       .afterClosed()
       .subscribe((data: any) => {
         if (data) {
-          console.log('save data successfully', data);
+          this.getListData();
         }
       });
   }
   onDelete($event: any) {
     console.log('onDelete', $event);
+    this.majorService.RequestDeleteMajor($event).subscribe((data: any) => {
+      this.getListData();
+    });
   }
   onChangeUserType(evt: any) {
     console.log(evt);
   }
   onPageChanged(params: PagingParams) {
     this._PagingParams = params;
-    console.log('onPageChanged', this._PagingParams);
+    this.majorService
+      .RequestGetListMajor(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getListData after pagin', data);
+        this._LIST_DATA = data.data;
+        this._PagingParams.totalRows = data.totalCount;
+      });
   }
 
   onRowClick(evt: any) {
     console.log('onRowClick', evt);
+  }
+
+  getListData() {
+    this.majorService
+      .RequestGetListMajor(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getListData', data);
+        this._LIST_DATA = data.data;
+        this._PagingParams.totalRows = data.totalCount;
+      });
   }
 }

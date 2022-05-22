@@ -5,9 +5,12 @@
   [rows]="_LIST_DATA"
   [pagingParams]="_PagingParams"
   [showAddButton]="false"
+  (onCheckedRows)="onCheckedRows($event)"
   [heightTb]="755"
   (onPageChanged)="onPageChanged($event)"
   (onRowClick)="onRowClick($event)"
+  (onEdit)="onEdit($event)"
+  (onDelete)="onDelete($event)"
 >
 </custom-table>
   </div>

@@ -1,3 +1,4 @@
+import { CustomTextareaModule } from './../../../../core/component/custom-textarea/custom-textarea.module';
 import { CustomCheckboxModule } from './../../../../core/component/custom-checkbox/custom-checkbox.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -33,7 +34,8 @@ import { MaterialModule } from 'src/app/material.module';
     CustomButtonModule,
     MatDialogModule,
     MaterialModule,
-    CustomCheckboxModule
+    CustomCheckboxModule,
+    CustomTextareaModule
   ],
   entryComponents: [RoleCreatePopupComponent],
 })

@@ -1,3 +1,4 @@
+import { CustomInputModule } from './../../core/component/custom-input/custom-input.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    CustomInputModule,
     RouterModule.forChild(routes),
   ],
   declarations: [RegisterPageComponent],

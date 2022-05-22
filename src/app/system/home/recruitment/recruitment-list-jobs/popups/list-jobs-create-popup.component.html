@@ -1,7 +1,25 @@
 <div>
-  <div>Header</div>
+  <div class="header-content" fxLayout="row">
+    <div class="header-title" fxFlex="80">
+      {{ headerTitle }}
+    </div>
+    <div class="close-button" fxFlex="20">
+      <button
+        style="height: 24px"
+        class="bg-white cursor-pointer text-base"
+        type="button"
+        (click)="onClose()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
   <div>
-    <form [formGroup]="employeeCreated">
+    <hr class="header-line" />
+  </div>
+  <div class="">
+    <form [formGroup]="employeeCreated" fxLayout="column" fxLayoutGap="10px">
+      <div>
       <div class="w-full h-full page-content main mt-2" fxLayout="row">
         <div
           fxFlex.gt-sm="20%"
@@ -12,7 +30,7 @@
           <img
             class="custom-img"
             id="blah"
-            [src]="imageFile ? imageFile.link : defaultImageSrc"
+            [src]="imageFile ? imageFile.link : headerData.jobImage"
             alt="your image"
           />
           <input
@@ -23,6 +41,7 @@
             id="imageFile"
             formControlName="imageFile"
             (change)="handleChange($event)"
+            [(ngModel)]="headerData.imageFile"
           />
         </div>
         <div
@@ -35,11 +54,12 @@
           <div>
             <custom-input
               [required]="true"
-              [name]="'nameCompany'"
-              formControlName="nameCompany"
+              [name]="'companyOfJobs'"
+              formControlName="companyOfJobs"
               [placeholder]="'Name company'"
               [title]="'Name company'"
               [maxlength]="250"
+              [(ngModel)]="headerData.companyOfJobs"
             ></custom-input>
 
             <custom-input
@@ -49,6 +69,7 @@
               [placeholder]="'Name Jobs'"
               [title]="'Name Jobs'"
               [maxlength]="250"
+              [(ngModel)]="headerData.name"
             ></custom-input>
 
             <div fxLayoutAlign="center center">
@@ -61,7 +82,7 @@
                 <mat-label> Major </mat-label>
                 <mat-select
                   formControlName="idMajor"
-                  (selectionChange)="select()"
+                  [(ngModel)]="headerData.idMajor"
                 >
                   <mat-option>
                     <ngx-mat-select-search
@@ -92,27 +113,9 @@
                 [placeholder]="'position'"
                 [title]="'position'"
                 [maxlength]="250"
+                [(ngModel)]="headerData.position"
               ></custom-input>
             </div>
-
-            <!-- <div
-              class="form-group"
-              style="padding-bottom: 1.34375em; width: 99%; margin: 0 6px"
-              *ngIf="check === 'IT'"
-            >
-              <label for="tag">Tag Jobs</label>
-              <ng-multiselect-dropdown
-                id="tag"
-                name="tag"
-                formControlName="tag"
-                [placeholder]="'custom placeholder'"
-                [settings]="dropdownSettings"
-                [data]="listTagJobs"
-                (onSelect)="onItemSelect($event)"
-                (onSelectAll)="onSelectAll($event)"
-              >
-              </ng-multiselect-dropdown>
-            </div> -->
 
             <div>
               <custom-input
@@ -123,6 +126,7 @@
                 [placeholder]="'amount'"
                 [title]="'Amount'"
                 [maxlength]="250"
+                [(ngModel)]="headerData.amount"
               ></custom-input>
               <mat-form-field
                 style="margin-left: 5px"
@@ -133,7 +137,7 @@
                 <mat-label> Experience </mat-label>
                 <mat-select
                   formControlName="experience"
-                  (selectionChange)="select()"
+                  [(ngModel)]="headerData.experience"
                 >
                   <mat-option>
                     <ngx-mat-select-search name="experience">
@@ -158,6 +162,7 @@
                 [placeholder]="'workTime'"
                 [title]="'WorkTime'"
                 [maxlength]="250"
+                [(ngModel)]="headerData.workTime"
               ></custom-input>
             </div>
 
@@ -170,6 +175,7 @@
                 [placeholder]="'salaryMin'"
                 [title]="'SalaryMin'"
                 [maxlength]="250"
+                [(ngModel)]="headerData.salaryMin"
               ></custom-input>
               <custom-input
                 style="margin-left: 5px"
@@ -180,6 +186,7 @@
                 [placeholder]="'salaryMax'"
                 [title]="'SalaryMax'"
                 [maxlength]="250"
+                [(ngModel)]="headerData.salaryMax"
               ></custom-input>
             </div>
             <div>
@@ -191,6 +198,7 @@
                 [placeholder]="'address'"
                 [title]="'Address'"
                 [maxlength]="250"
+                [(ngModel)]="headerData.address"
               ></custom-input>
 
               <custom-input-date
@@ -199,8 +207,8 @@
                 fxFlex.sm="100"
                 [title]="'Date Expire'"
                 [name]="'dateExpire'"
-                [(ngModel)]="getDateExpire"
                 formControlName="dateExpire"
+                [(ngModel)]="headerData.dateExpire"
               >
               </custom-input-date>
             </div>
@@ -212,19 +220,16 @@
           [styles]="{ height: '300px' }"
           [modules]="modules"
           formControlName="jobDetail"
-          (onContentChanged)="onChange($event)"
+          [(ngModel)]="headerData.jobDetail"
         ></quill-editor>
       </div>
-
-      <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayout.lt-sm="column"
-        fxFlexFill
-        fxLayoutAlign="end center"
-      >
+    </div>
+      <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
         <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
-        <custom-button [type]="'reset'" (click)="onReset()"></custom-button>
+        <custom-button
+          [type]="'closeAll'"
+          (click)="onClose()"
+        ></custom-button>
       </div>
     </form>
   </div>

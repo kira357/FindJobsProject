@@ -1,4 +1,4 @@
-import { UserService } from './../../../../core/model/user/user.service';
+
 import { CustomButtonModule } from './../../../../core/component/custom-button/custom-button.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -33,7 +33,7 @@ const routes: Routes = [
     CustomInputDateModule,
     CustomButtonModule,
   ],
-  providers: [UserService],
+
   declarations: [CreateJobsComponent],
 })
 export class CreateJobsModule {}

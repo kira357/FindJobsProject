@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -20,6 +21,7 @@ export class AdminPageMainComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     public spinnerService: SpinnerService,
+    private router: Router,
 
   ) {}
 
@@ -28,12 +30,22 @@ export class AdminPageMainComponent implements OnInit {
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.checkLogin()
   }
 
-  handleLogout = () => {
-    // if (this.cookieService.check('user')) {
-    //   this.cookieService.delete('user');
-    //   this.cookieService.delete('username');
-    // }
+  LogOut = () => {
+    localStorage.removeItem('data')
+    this.router.navigate(['/account/login'])
   };
+
+  checkLogin(){
+    const data = localStorage.getItem('data')
+    if(data){
+      const dataJson = JSON.parse(data)
+      if(dataJson.data.roleName === 'admin'){
+        this.userName = dataJson.data.userName
+        this.isAdmin = true
+      }
+    }
+  }
 }
