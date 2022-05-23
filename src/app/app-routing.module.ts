@@ -1,8 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { ClientComponent } from './system/home/client/client.component';
+import { DetailPageComponent } from './system/home/client/detail-page/detail-page.component';
 
 const routes: Routes = [
+  { path: '', component: ClientComponent },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./system/home/client/client.module').then(
+        (m) => m.ClientModule
+      ),
+  },
+
   {
     path: 'admin',
     loadChildren: () =>

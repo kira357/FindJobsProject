@@ -6,11 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPageMainModule } from './system/admin/admin-page-main.module';
+import { ClientModule } from './system/home/client/client.module';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, AdminPageMainModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, AdminPageMainModule, ClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -157,7 +157,7 @@ export class ListJobsCreatePopupComponent implements OnInit {
  
   onSubmit(): void {
     if (this.data) {
-      this.formData.append('imageFile', this.files[0] ,this.files[0].name)
+      this.formData.append('imageFile', this.files[0])
       this.formData.append('name', this.headerData.name);
       this.formData.append('companyOfJobs', this.headerData.companyOfJobs);
       this.formData.append('dateExpire', this.headerData.dateExpire);
