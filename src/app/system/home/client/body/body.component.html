@@ -1,63 +1,141 @@
 <header class="bg-dark py-5">
   <div class="container px-4 px-lg-5 my-5">
     <div class="row">
-        <div class="col-xl-9 mx-auto"><h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1></div>
-        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-                <div class="form-row" fxLayout="row">
-                    <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email" placeholder="Enter your jobs..." /></div>
-                    <div class="col-12 col-md-3"><button class="btn btn-block btn-lg btn-primary" type="submit">Sign up!</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        </div>
+      <div class="col-xl-9 mx-auto">
+        <h1 class="mb-5">
+          Build a landing page for your business or project and generate more
+          leads!
+        </h1>
+      </div>
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <form>
+          <div class="form-row" fxLayout="row">
+            <div class="col-12 col-md-9 mb-2 mb-md-0">
+              <input
+                class="form-control form-control-lg"
+                type="email"
+                placeholder="Enter your jobs..."
+              />
+            </div>
+            <div class="col-12 col-md-3">
+              <button class="btn btn-block btn-lg btn-primary" type="submit">
+                Sign up!
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </header>
 <!--main page-->
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
-      <div class="côlumn gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-          <div class="col mb-5">
-              <div class="card h-100">
-                  <!-- Product image-->
-                  <img class="card-img-top" src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg" alt="...">
-                  <!-- Product details-->
-                  <div class="card-body p-4">
-                      <div class="text-center">
-                          <!-- Product name-->
-                          <a [routerLink]="['/home/item-page']" ><h5 class="fw-bolder">Fancy Product</h5></a>
-                          <!-- Product price-->
-                          $40.00 - $80.00
-                      </div>
-                  </div>
-                  <!-- Product actions-->
-                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                      <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                  </div>
-              </div>
-          </div>
-          <div class="col mb-5">
-              <div class="card h-100">
-                  <!-- Product image-->
-                  <img class="card-img-top" src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg" alt="...">
-                  <!-- Product details-->
-                  <div class="card-body p-4">
-                      <div class="text-center">
-                          <!-- Product name-->
-                          <a  ><h5 class="fw-bolder">Fancy Product</h5></a>
-                          <!-- Product price-->
-                          $40.00 - $80.00
-                      </div>
-                  </div>
-                  <!-- Product actions-->
-                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                      <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                  </div>
-              </div>
-          </div>
 
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+  <div class="container px-lg-5" fxLayout="row" fxLayoutGap="10px">
+    <!-- col.// -->
+    <main class="col-md-9" fxFlex="60">
+        <header class="border-bottom mb-4 pb-3">
+          <div
+            class="form-inline"
+            fxFlex="row"
+          >
+            <span class="mr-md-auto">32 Jobs found </span>
+          </div>
+        </header>
+      <!-- sect-heading -->
 
+      <div>
+        <article class="mb-2" style="border: 1px solid black; padding: 27px 0px;">
+          <div fxLayout="row">
+            <div fxFlex="20"  fxLayoutAlign="center top" style="padding:0px ;">
+              <img
+                style="object-fit: cover; width: 65px; height: 65px; border-radius: 15px; border: 1px solid ;"
+                src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
+              />
+            </div>
+            <!-- col.// -->
+            <div fxFlex="55">
+              <div class="info-main">
+                <a [routerLink]="['home/item-page']" class="h5 title" style="text-decoration: none">
+                  Great product name goes here
+                </a>
+                <div class="mb-2 mt-1">
+                  <div>Recruiment</div>
+                </div>
+                <div class="mb-2 mt-1">
+                  <div>Major</div>
+                </div>
+                <div class="mb-2 mt-1">
+                  <div>Salary</div>
+                </div>
+                <div class="mb-2 mt-1">
+                  <div>Address</div>
+                </div>
+              </div>
+              <!-- info-main.// -->
+            </div>
+            <aside fxFlex="15">
+              <div
+                fxLayout="column"
+                fxLayoutAlign="center stretch"
+                fxLayoutGap="10px"
+              >
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="space-between center"
+                >
+                  <div>
+                    <div>
+                      <span> Amount:<span> 1 </span></span>
+                    </div>
+                    <div>
+                      <span> Work time:<span> 40h </span></span>
+                    </div>
+                    <div>
+                      <span> Experience:<span> 1 năm kinh nghiệm </span></span>
+                    </div>
+                    <div>
+                      <span> Time:<span> 20/09/2022 </span></span>
+                    </div>
+                  </div>
+                </div>    
+                <a href="#" class="btn btn-primary mt-1">
+                  Apply now
+                </a>           
+              </div>
+              
+              <!-- info-aside.// -->
+            </aside>
+            <div fxFlex="10" fxLayoutAlign="end top">
+              <a href="#" class="mr-2" style="font-size: 25px"
+              ><i class="fa fa-heart"></i>
+            </a>
+            </div>
+          </div>
+          <!-- row.// -->
+
+        </article>
+        <!-- card-product .// -->
       </div>
+      
+    </main>
+    <main class="col-md-9" fxFlex="40">
+      <header class="border-bottom mb-4 pb-3">
+        <div
+          class="form-inline"
+          fxFlex="row"
+        >
+        <span class="mr-md-auto"> Review jobs</span>
+        </div>
+      </header>
+      <!-- sect-heading -->
+
+      <div style="width: 100%; height: 700px">
+
+    </div>
+
+      <nav aria-label="Page navigation sample"></nav>
+    </main>
   </div>
 </section>

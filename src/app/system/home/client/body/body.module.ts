@@ -1,7 +1,11 @@
+import { CustomInputModule } from './../../../../core/component/custom-input/custom-input.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BodyComponent } from './body.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from 'src/app/material.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
 const routes: Routes = [
   {
     path: '',
@@ -11,6 +15,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FlexLayoutModule,
+    MaterialModule,
+    MatFormFieldModule,
+    CustomInputModule,
     RouterModule.forChild(routes)
   ],
   declarations: [BodyComponent],
