@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxPaginationModule } from 'ngx-pagination';
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,7 @@ const routes: Routes = [
     MaterialModule,
     MatFormFieldModule,
     CustomInputModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes)
   ],
   declarations: [BodyComponent],

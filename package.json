@@ -39,6 +39,7 @@
     "ng-zorro-antd": "^13.1.1",
     "ngx-cookie-service": "^13.2.0",
     "ngx-mat-select-search": "^4.1.1",
+    "ngx-pagination": "^5.1.1",
     "ngx-quicklink": "^0.2.7",
     "ngx-quill": "^16.2.0",
     "ngx-toastr": "^14.3.0",

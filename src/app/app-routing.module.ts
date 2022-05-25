@@ -4,7 +4,7 @@ import { ClientComponent } from './system/home/client/client.component';
 import { DetailPageComponent } from './system/home/client/detail-page/detail-page.component';
 
 const routes: Routes = [
-  { path: '', component: ClientComponent },
+  { path: '', component: ClientComponent  },
   {
     path: 'home',
     loadChildren: () =>

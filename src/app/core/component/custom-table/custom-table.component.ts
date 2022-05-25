@@ -32,6 +32,7 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() columns: any[] = [];
     @Input() columnsMerge: any[]=[];
     @Input() pagingParams: PagingParams;
+    @Input() disable: boolean;
     @Input() rows: any[] = [];
     @Input() amtRows: number = 0;
     @Input() showAddButton: boolean = false;
@@ -46,6 +47,7 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     @Output() onEdit = new EventEmitter<any>();
     @Output() onDelete = new EventEmitter<any>();
     @Output() onPageChanged = new EventEmitter<PagingParams>();
+    @Output() onCheck = new EventEmitter<any>();
     @Output() onCheckedRows = new EventEmitter<any[]>();
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -158,6 +160,10 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
         this.pagingParams.currentPage = event.pageIndex;
         this.pagingParams.pageSize = event.pageSize;
         this.onPageChanged.emit(this.pagingParams);
+    }
+
+    checkToActive( event : any) {
+        this.onCheck.emit((event.checked));
     }
 
     calcHeightTable() {

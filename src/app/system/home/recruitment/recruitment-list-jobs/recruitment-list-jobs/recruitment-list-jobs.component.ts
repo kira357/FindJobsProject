@@ -4,6 +4,7 @@ import { PagingParams } from 'src/app/core/model/paging-params';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ListJobsCreatePopupComponent } from '../popups/list-jobs-create-popup.component';
+import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
 
 @Component({
   selector: 'app-recruitment-list-jobs',
@@ -14,10 +15,12 @@ export class RecruitmentListJobsComponent implements OnInit {
   constructor(
     private recruitmentListJobsService: RecruitmentListJobsService,
     private jobsService: JobsService,
-    private __dialog: MatDialog
+    private __dialog: MatDialog,
+    private recruitmentService: RecruitmentService
   ) {}
 
   _PagingParams = new PagingParams();
+  rowData : any;
   ngOnInit() {
     this.getListData();
   }
@@ -27,18 +30,22 @@ export class RecruitmentListJobsComponent implements OnInit {
 
   onPageChanged(params: PagingParams) {
     this._PagingParams = params;
-    this.jobsService
-      .RequestGetListJob(this._PagingParams)
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data);
+    this.recruitmentService
+      .RequestGetListJob(this._PagingParams, dataJson.data.id)
       .subscribe((data: any) => {
-        console.log('getListData after pagin', data);
+        console.log('getListData', data);
         this._LIST_DATA = data.data;
         this._PagingParams.totalRows = data.totalCount;
       });
   }
 
   getListData() {
-    this.jobsService
-      .RequestGetListJob(this._PagingParams)
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data);
+    this.recruitmentService
+      .RequestGetListJob(this._PagingParams, dataJson.data.id)
       .subscribe((data: any) => {
         console.log('getListData', data);
         this._LIST_DATA = data.data;
@@ -48,6 +55,7 @@ export class RecruitmentListJobsComponent implements OnInit {
 
   onRowClick($event: any) {
     console.log('onRowClick', $event);
+    this.rowData = $event;
   }
   onEdit($event: any): void {
     console.log('onEdit', $event);
@@ -88,7 +96,17 @@ export class RecruitmentListJobsComponent implements OnInit {
     //   this.getListData();
     // });
   }
-  onCheckedRows($event : any){
+  async onCheck($event:any){
+    console.log('onCheck',  this.rowData);
+      this.rowData.isActive = $event;
+      await this.recruitmentService
+        .RequestUpdateActive(this.rowData)
+        .subscribe((data: any) => {
+          console.log('data', data.ok);
+          this.getListData();
+        });
+  }
+  onCheckedRows($event: any) {
     console.log('onCheckedRows', $event);
   }
 }

@@ -21,6 +21,7 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    localStorage.removeItem("data");
     this.formGroup = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -31,14 +32,14 @@ export class LoginPageComponent implements OnInit {
     // console.log(this.formGroup.value);
     this.authenService
       .RequestLogin(this.formGroup.value)
-      .subscribe((data) => {
-        if (data) {
+      .subscribe((data:any) => {
+        if (data.ok !== null) {
           this.dataRespone = {
             data : data,
           };
           console.log(this.dataRespone);
           localStorage.setItem("data", JSON.stringify(this.dataRespone));
-          if(this.dataRespone.data.roleName === 'admin'){
+          if(this.dataRespone.data.roleName === 'Admin' || data.ok === 'Admin'){
             this.router.navigate(['/admin']);
           }
           if(this.dataRespone.data.roleName === 'Recruitment'){
@@ -47,6 +48,8 @@ export class LoginPageComponent implements OnInit {
           if(this.dataRespone.data.roleName === 'Student'){
             this.router.navigate(['/home']);
           }
+        }else{
+          alert("Email or Password is incorrect");
         }
       });
   }

@@ -97,7 +97,7 @@
                                 {{ column.label }}
                             </th>
                             <td *matCellDef="let row" class="text-center" [ngClass]="column.cssClasses" mat-cell>
-                                <mat-checkbox [checked]="row[column.property]" [class.mat-checkbox-disabled]="false" disabled> </mat-checkbox>
+                                <mat-checkbox [checked]="row[column.property]" [class.mat-checkbox-disabled]="false" [disabled]="disable" (change)="checkToActive($event)"> </mat-checkbox>
                             </td>
                         </ng-container>
                         <!-- TYPE YES OR NO -->

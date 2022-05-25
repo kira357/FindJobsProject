@@ -14,11 +14,6 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./detail-page/detail-page.module').then((m) => m.DetailPageModule),
       },
-      {
-        path: 'quick-details',
-        loadChildren: () =>
-          import('./quick-detail/quick-detail.module').then((m) => m.QuickDetailModule),
-      },
     ]
   },
 ];
