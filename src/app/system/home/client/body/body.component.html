@@ -2,25 +2,30 @@
   <div class="container px-4 px-lg-5 my-5">
     <div class="row">
       <div class="col-xl-9 mx-auto">
-        <h1 class="mb-5">
+        <h1 class="mb-5" style="color: white;">
           Build a landing page for your business or project and generate more
           leads!
         </h1>
       </div>
       <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
         <form>
-          <div class="form-row" fxLayout="row">
-            <div class="col-12 col-md-9 mb-2 mb-md-0">
-              <input
-                class="form-control form-control-lg"
-                type="email"
-                placeholder="Enter your jobs..."
-              />
+          <div class="form-row" fxLayout="column">
+            <div fxLayout="row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input
+                  class="form-control form-control-lg"
+                  type="email"
+                  placeholder="Enter your jobs..."
+                />
+              </div>
+              <div class="col-12 col-md-3 ml-1">
+                <button class="btn btn-block btn-lg btn-primary" type="submit">
+                  Finding!
+                </button>
+              </div>
             </div>
-            <div class="col-12 col-md-3">
-              <button class="btn btn-block btn-lg btn-primary" type="submit">
-                Sign up!
-              </button>
+            <div>
+
             </div>
           </div>
         </form>
@@ -34,19 +39,19 @@
 <section class="section-content padding-y">
   <div class="container px-lg-5" fxLayout="row" fxLayoutGap="10px">
     <!-- col.// -->
-    <main class="col-md-9" fxFlex="60">
-        <header class="border-bottom mb-4 pb-3">
+    <main class="col-md-9" fxFlex="50">
+        <header class="border-bottom my-3">
           <div
-            class="form-inline"
+            class="form-inline py-2"
             fxFlex="row"
           >
-            <span class="mr-md-auto">32 Jobs found </span>
+            <span class="mr-md-auto" style="font-size: 15px; font-weight: 500;">32 Jobs found </span>
           </div>
         </header>
       <!-- sect-heading -->
 
       <div>
-        <article class="mb-2" style="border: 1px solid black; padding: 27px 0px;">
+        <article class="mb-2 card" style="padding: 25px 0px;">
           <div fxLayout="row">
             <div fxFlex="20"  fxLayoutAlign="center top" style="padding:0px ;">
               <img
@@ -55,84 +60,72 @@
               />
             </div>
             <!-- col.// -->
-            <div fxFlex="55">
-              <div class="info-main">
-                <a [routerLink]="['home/item-page']" class="h5 title" style="text-decoration: none">
-                  Great product name goes here
-                </a>
-                <div class="mb-2 mt-1">
-                  <div>Recruiment</div>
-                </div>
-                <div class="mb-2 mt-1">
-                  <div>Major</div>
-                </div>
-                <div class="mb-2 mt-1">
-                  <div>Salary</div>
-                </div>
-                <div class="mb-2 mt-1">
-                  <div>Address</div>
+            <div fxFlex="100">
+              <div class="info-main px-2" fxLayout="column">
+                <div fxFlex="row" fxLayoutAlign="space-between start">
+                  <a [routerLink]="['home/item-page']" class="h5 title" style="text-decoration: none">
+                    Great product name goes here
+                  </a>
+                  <a class="mr-2" style="font-size: 25px"
+                  ><i class="fa fa-heart"></i></a>
+                </div>  
+                <div fxLayout="row" fxLayoutAlign="space-between stretch">
+                  <div>
+                    <div class="mb-1">
+                      <a href="#" style="text-decoration: none">Recruiment</a>
+                    </div>
+                    <div class="mb-1 ">
+                      <div>Major</div>
+                    </div>
+                    <div class="mb-1">
+                      <div>Salary</div>
+                    </div>
+                    <div class="mb-1">
+                      <div>Address</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="mb-1">
+                      <span> Amount:<span> 1 </span></span>
+                    </div>
+                    <div class="mb-1">
+                      <span> Work time:<span> 40h </span></span>
+                    </div>
+                    <div class="mb-1">
+                      <span> Experience:<span> 1 năm kinh nghiệm </span></span>
+                    </div>
+                    <div class="mb-1">
+                      <span> Time:<span> 20/09/2022 </span></span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- info-main.// -->
             </div>
-            <aside fxFlex="15">
-              <div
-                fxLayout="column"
-                fxLayoutAlign="center stretch"
-                fxLayoutGap="10px"
-              >
-                <div
-                  fxLayout="row"
-                  fxLayoutAlign="space-between center"
-                >
-                  <div>
-                    <div>
-                      <span> Amount:<span> 1 </span></span>
-                    </div>
-                    <div>
-                      <span> Work time:<span> 40h </span></span>
-                    </div>
-                    <div>
-                      <span> Experience:<span> 1 năm kinh nghiệm </span></span>
-                    </div>
-                    <div>
-                      <span> Time:<span> 20/09/2022 </span></span>
-                    </div>
-                  </div>
-                </div>    
-                <a href="#" class="btn btn-primary mt-1">
-                  Apply now
-                </a>           
-              </div>
-              
-              <!-- info-aside.// -->
-            </aside>
-            <div fxFlex="10" fxLayoutAlign="end top">
-              <a href="#" class="mr-2" style="font-size: 25px"
-              ><i class="fa fa-heart"></i>
-            </a>
-            </div>
           </div>
-          <!-- row.// -->
-
+          <div style="width: 100%; text-align: right; padding-right: 10px;">
+            <a [routerLink]="['home/quick-details']" class="btn btn-primary mt-1" style="width: 200px;">
+              Quick detail
+            </a>     
+          </div>
         </article>
         <!-- card-product .// -->
       </div>
       
     </main>
-    <main class="col-md-9" fxFlex="40">
-      <header class="border-bottom mb-4 pb-3">
+    <main class="col-md-9" fxFlex="50">
+      <header class="border-bottom my-3">
         <div
-          class="form-inline"
+          class="form-inline py-2"
           fxFlex="row"
         >
-        <span class="mr-md-auto"> Review jobs</span>
+          <span class="mr-md-auto" style="font-size: 15px; font-weight: 500;">Review jobs</span>
         </div>
       </header>
       <!-- sect-heading -->
 
       <div style="width: 100%; height: 700px">
-
+          <router-outlet></router-outlet>
     </div>
 
       <nav aria-label="Page navigation sample"></nav>
