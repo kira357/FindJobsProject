@@ -163,10 +163,10 @@ export class CreateJobsComponent implements OnInit {
     this.newForm.dateExpire = moment(this.newForm.dateExpire).format(
       'YYYY-MM-DD'
     );
-     
+
     console.log('before', this.newForm);
 
-   this.formData.append('imageFile', this.files[0] ,this.files[0].name) 
+    this.formData.append('imageFile', this.files[0], this.files[0].name);
     this.formData.append('name', this.newForm.name);
     this.formData.append('companyOfJobs', this.newForm.companyOfJobs);
     this.formData.append('dateExpire', this.newForm.dateExpire);

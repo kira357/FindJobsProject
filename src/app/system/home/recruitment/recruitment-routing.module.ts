@@ -17,6 +17,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'create-post',
+        loadChildren: () =>
+          import('./create-post/create-post.module').then(
+            (m) => m.CreatePostModule
+          ),
+      },
+      {
         path: 'recruitment-list-jobs',
         loadChildren: () =>
           import('./recruitment-list-jobs/recruitment-list-jobs.module').then(
