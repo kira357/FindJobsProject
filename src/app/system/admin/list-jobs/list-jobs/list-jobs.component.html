@@ -6,9 +6,11 @@
   [pagingParams]="_PagingParams"
   [showAddButton]="false"
   [heightTb]="755"
+  [disable]="false"
   (onCheckedRows)="onCheckedRows($event)"
   (onPageChanged)="onPageChanged($event)"
   (onRowClick)="onRowClick($event)"
+  (onCheck)="onCheck($event)"
   (onEdit)="onEdit($event)"
   (onDelete)="onDelete($event)"
 >

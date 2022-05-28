@@ -40,6 +40,10 @@ export class UserService {
     });
   };
 
+  RequestUpdateActive = (job: any) => {
+    return this.http.put(`${this.rootURL}/update-active`, job);
+  };
+
   RequestDeteleUser = (User: VMDeleteUser, Id: any) => {
     return this.http.delete(`${this.rootURL}/delete-user/${Id}`, {
       headers: this.headers,

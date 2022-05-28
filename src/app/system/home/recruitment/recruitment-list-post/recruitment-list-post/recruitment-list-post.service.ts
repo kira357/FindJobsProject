@@ -9,86 +9,67 @@ export class RecruitmentListPostService {
 
     getColums = () => {
         return [
-            { label: 'No', property: 'index', type: 'index', visible: true },
-
-            {
-                label: "TradeType",
-                property: 'tradeTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "CustomerCode",
-                property: 'customerCode',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "FullName",
-                property: 'supplierName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "ShortName",
-                property: 'supplierShortName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-
-            {
-                label: "Code",
-                property: 'ifCode',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "CustomerType",
-                property: 'customerTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Country",
-                property: 'CountryTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "SysUser",
-                property: 'sysUserYn',
-                type: 'checkbox',
-                visible: true,
-                cssClasses: []
-            },
-            {
-                label: "Active",
-                property: 'activeYn',
-                type: 'checkbox',
-                visible: true,
-                cssClasses: []
-            },
-            {
-                label: "LasterETL",
-                property: 'etlDate',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Description",
-                property: 'description',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            }
+          { label: '', property: 'checkboxCol', type: 'checkboxCol', visible: true },
+          
+          { label: 'No', property: 'index', type: 'index', visible: true },
+    
+          {
+            label: 'image',
+            property: 'image',
+            type: 'image',
+            visible: true,
+            cssClasses: [],
+          },
+          {
+            label: 'Title',
+            property: 'title',
+            type: 'text',
+            visible: true,
+            cssClasses: ['text-secondary', 'font-medium', 'w-96','break-all'],
+          },
+          {
+            label: 'Name major',
+            property: 'nameMajor',
+            type: 'text',
+            visible: true,
+            cssClasses: ['text-secondary', 'font-medium'],
+          },
+          {
+            label: 'Summary',
+            property: 'summary',
+            type: 'text',
+            visible: true,
+            cssClasses: ['text-secondary', 'font-medium', 'w-96','break-all'],
+          },
+          {
+            label: 'View',
+            property: 'view',
+            type: 'text',
+            visible: true,
+            cssClasses: ['text-secondary', 'font-medium'],
+          },
+    
+          {
+            label: 'Date Post',
+            property: 'datePost',
+            type: 'text',
+            visible: true,
+            cssClasses: ['text-secondary', 'font-medium'],
+          },
+          {
+            label: 'Active',
+            property: 'isActive',
+            type: 'yn',
+            visible: true,
+            cssClasses: [],
+          },
+          {
+            label: 'Actions',
+            property: 'button',
+            type: 'button',
+            visible: true,
+            buttons: ['delete', 'edit'],
+          },
         ];
-    };
+      };
 }

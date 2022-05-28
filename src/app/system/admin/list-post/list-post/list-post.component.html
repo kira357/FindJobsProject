@@ -1,3 +1,18 @@
-<p>
-  list-post works!
-</p>
+<div fxFlex.gt-md="100%" fxFlex.lg="100%" fxLayoutAlign="center center" fxFlexFill>
+  <div fxLayout="row wrap" fxFlexFill fxLayout.lt-sm="column" fxLayoutAlign="start stretch">
+    <custom-table
+  [columns]="columns"
+  [rows]="_LIST_DATA"
+  [pagingParams]="_PagingParams"
+  [showAddButton]="false"
+  [disable]="false"
+  [heightTb]="755"
+  (onPageChanged)="onPageChanged($event)"
+  (onCheck)="onCheck($event)"
+  (onRowClick)="onRowClick($event)"
+  (onEdit)="onEdit($event)"
+  (onDelete)="onDelete($event)"
+>
+</custom-table>
+  </div>
+</div>

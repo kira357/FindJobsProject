@@ -65,7 +65,7 @@ export class ListJobsService {
         property: 'address',
         type: 'text',
         visible: true,
-        cssClasses: ['text-secondary', 'font-medium'],
+        cssClasses: ['text-secondary', 'font-medium','w-72','break-all'],
       },
       {
         label: 'Salary min',
@@ -101,6 +101,7 @@ export class ListJobsService {
         type: 'button',
         visible: true,
         buttons: ['delete', 'edit'],
+        cssClasses: [ 'text-secondary', 'font-medium'],
       },
     ];
   };

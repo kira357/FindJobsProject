@@ -106,8 +106,8 @@
                                 {{ column.label }}
                             </th>
                             <td *matCellDef="let row" class="text-center" [ngClass]="column.cssClasses" mat-cell>
-                                <ng-container *ngIf="row[column.property] === true">Y</ng-container>
-                                <ng-container *ngIf="row[column.property] !== true">N</ng-container>
+                                <ng-container *ngIf="row[column.property] === true">Approved</ng-container>
+                                <ng-container *ngIf="row[column.property] !== true">Wait for approval</ng-container>
                             </td> </ng-container
                         ><!-- TYPE ACTIVED OR INACTIVED -->
                         <ng-container *ngIf="column.type === 'buttonYn'" [matColumnDef]="column.property">

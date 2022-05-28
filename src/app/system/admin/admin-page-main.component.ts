@@ -42,7 +42,7 @@ export class AdminPageMainComponent implements OnInit {
     const data = localStorage.getItem('data')
     if(data){
       const dataJson = JSON.parse(data)
-      if(dataJson.data.roleName === 'admin'){
+      if(dataJson.data.roleName === 'Admin'){
         this.userName = dataJson.data.userName
         this.isAdmin = true
       }

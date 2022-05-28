@@ -31,7 +31,7 @@ export class RecruitmentListJobsService {
         property: 'name',
         type: 'text',
         visible: true,
-        cssClasses: ['text-secondary', 'font-medium'],
+        cssClasses: ['text-secondary', 'font-medium', 'w-72','break-all'],
       },
       {
         label: 'position',
@@ -60,7 +60,7 @@ export class RecruitmentListJobsService {
         property: 'address',
         type: 'text',
         visible: true,
-        cssClasses: ['text-secondary', 'font-medium'],
+        cssClasses: ['text-secondary', 'font-medium','w-72','break-all'],
       },
       {
         label: 'Salary min',
@@ -81,12 +81,12 @@ export class RecruitmentListJobsService {
         property: 'dateExpire',
         type: 'text',
         visible: true,
-        cssClasses: ['text-secondary', 'font-medium'],
+        cssClasses: ['text-secondary', 'font-medium','w-44'],
       },
       {
         label: 'Active',
         property: 'isActive',
-        type: 'checkbox',
+        type: 'yn',
         visible: true,
         cssClasses: [],
       },

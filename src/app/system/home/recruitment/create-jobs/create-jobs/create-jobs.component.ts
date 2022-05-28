@@ -183,7 +183,7 @@ export class CreateJobsComponent implements OnInit {
     console.log('after', this.newForm);
     this.jobService.RequestCreateJob(this.formData).subscribe((data) => {
       console.log('data', data);
-      this.newForm = {};
+      this.employeeCreated.reset();
     });
   };
 
@@ -205,7 +205,9 @@ export class CreateJobsComponent implements OnInit {
         this.comboxMajor = data.data;
       });
   }
-  onReset() {}
+  onReset() {
+    this.employeeCreated.reset();
+  }
 
   onClose() {}
 }

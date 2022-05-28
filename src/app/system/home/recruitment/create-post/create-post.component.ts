@@ -9,6 +9,7 @@ import { PagingParams } from 'src/app/core/model/paging-params';
 import Quill from 'quill';
 import 'node_modules/quill-emoji/dist/quill-emoji.js';
 import BlotFormatter from 'quill-blot-formatter';
+import { BlogService } from 'src/app/core/model/blogs/Blogs.service';
 Quill.register('modules/blotFormatter', BlotFormatter);
 
 @Component({
@@ -28,7 +29,8 @@ export class CreatePostComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private majorService: MajorService,
-    private jobService: JobsService
+    private jobService: JobsService,
+    private blogService: BlogService
   ) {
     this.modules = {
       'emoji-shortname': true,
@@ -113,10 +115,6 @@ export class CreatePostComponent implements OnInit {
     this.newForm = this.employeeCreated.value;
     const data = localStorage.getItem('data');
     const dataJson = JSON.parse(data);
-    this.newForm.dateExpire = moment(this.newForm.dateExpire).format(
-      'YYYY-MM-DD'
-    );
-
     console.log('before', this.newForm);
 
     this.formData.append('title', this.newForm.title);
@@ -124,10 +122,14 @@ export class CreatePostComponent implements OnInit {
     this.formData.append('imageFile', this.files[0], this.files[0].name);
     this.formData.append('summary', this.newForm.summary);
     this.formData.append('description', this.newForm.description);
-    this.formData.append('Id', dataJson.data.id);
-    this.jobService.RequestCreateJob(this.formData).subscribe((data) => {
+    this.formData.append('idUser', dataJson.data.id);
+    this.formData.append(
+      'datePost',
+      moment(this.currentDate).format('YYYY-MM-DD')
+    );
+    this.blogService.RequestCreatePost(this.formData).subscribe((data) => {
       console.log('data', data);
-      this.newForm = {};
+      this.employeeCreated.reset();
     });
   };
   onReset() {}

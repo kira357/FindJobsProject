@@ -2,21 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import { PagingParams } from 'src/app/core/model/paging-params';
+import { UserService } from 'src/app/core/model/user/User.service';
 import { ListJobsCreatePopupComponent } from 'src/app/system/home/recruitment/recruitment-list-jobs/popups/list-jobs-create-popup.component';
 import { ListJobsService } from '../list-jobs.service';
 
 @Component({
   selector: 'app-list-jobs',
   templateUrl: './list-jobs.component.html',
-  styleUrls: ['./list-jobs.component.scss']
+  styleUrls: ['./list-jobs.component.scss'],
 })
 export class ListJobsComponent implements OnInit {
   constructor(
     private listJobsService: ListJobsService,
     private jobsService: JobsService,
+    private userService: UserService,
     private __dialog: MatDialog
   ) {}
-
+  rowData: any;
   _PagingParams = new PagingParams();
   ngOnInit() {
     this.getListData();
@@ -48,6 +50,7 @@ export class ListJobsComponent implements OnInit {
 
   onRowClick($event: any) {
     console.log('onRowClick', $event);
+    this.rowData = $event;
   }
   onEdit($event: any): void {
     console.log('onEdit', $event);
@@ -83,12 +86,22 @@ export class ListJobsComponent implements OnInit {
       });
   }
   onDelete($event: any) {
-    // console.log('onDelete', $event);
-    // this.majorService.RequestDeleteMajor($event).subscribe((data: any) => {
-    //   this.getListData();
-    // });
+    console.log('onDelete', $event);
+    this.jobsService.RequestDeleteJob($event).subscribe((data: any) => {
+      this.getListData();
+    });
   }
-  onCheckedRows($event : any){
+  async onCheck($event: any) {
+    console.log('onCheck', this.rowData);
+    this.rowData.isActive = $event;
+    await this.userService
+      .RequestUpdateActive(this.rowData)
+      .subscribe((data: any) => {
+        console.log('data', data.ok);
+        this.getListData();
+      });
+  }
+  onCheckedRows($event: any) {
     console.log('onCheckedRows', $event);
   }
 }
