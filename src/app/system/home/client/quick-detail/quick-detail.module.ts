@@ -1,3 +1,4 @@
+import { ApplyJobPopupModule } from './popups/apply-job-popup.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuickDetailComponent } from './quick-detail.component';
@@ -6,6 +7,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { CustomInputModule } from 'src/app/core/component/custom-input/custom-input.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 const routes: Routes = [
   {
@@ -24,5 +26,6 @@ const routes: Routes = [
   ],
   declarations: [QuickDetailComponent],
   exports: [QuickDetailComponent],
+  entryComponents: [ApplyJobPopupModule],
 })
 export class QuickDetailModule {}

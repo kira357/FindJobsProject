@@ -10,10 +10,10 @@ import BlotFormatter from 'quill-blot-formatter';
 Quill.register('modules/blotFormatter', BlotFormatter);
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { debounceTime, ReplaySubject, Subject } from 'rxjs';
-import { MajorService } from 'src/app/core/model/major/major.service';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import * as moment from 'moment';
+import { MajorService } from 'src/app/core/model/major/major.service';
 
 @Component({
   selector: 'app-create-jobs',

@@ -1,0 +1,85 @@
+<div>
+  <div class="header-content" fxLayout="row">
+    <div class="header-title" fxFlex="80">{{ headerTitle }}</div>
+    <div class="close-button" fxFlex="20">
+      <button
+        style="height: 24px"
+        class="bg-white cursor-pointer text-base"
+        type="button"
+        (click)="onClose()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <hr class="header-line" />
+  </div>
+  <div class="">
+    <form [formGroup]="employeeCreated">
+      <div class="w-full h-full page-content main mt-2" fxLayout="column">
+        <div
+          fxLayout="column"
+          fxFlex="100"
+          fxLayoutAlign="space-between stretch"
+        >
+          <div class="text-center">
+            <h3>
+              {{ headerData.name }}
+            </h3>
+          </div>
+          <div fxLayout="column">
+            <div
+              fxLayout="row"
+              fxLayoutAlign="start center"
+              fxFlex="10"
+              fxLayoutGap="10px"
+            >
+              <label fxFlex="20" for="imageFile" class="mr-2">Your CV </label>
+              <input
+                fxFlex="80"
+                type="file"
+                class="mx-3"
+                accept="application/msword, application/pdf"
+                name="imageFile"
+                id="imageFile"
+                formControlName="imageFile"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+            <div
+              class="small form-text"
+              fxFlex="90"
+              fxLayoutAlign="center center"
+            >
+              We accept .doc .docx, .pdf files, no password protected, up to 1MB
+            </div>
+          </div>
+
+          <div fxLayout="column my-2" fxLayoutAlign="start center">
+            <label for="description" style="width: 100%"
+              >What skills, work projects or achievements make you a strong
+              candidate?</label
+            >
+            <custom-textarea
+              style="width: 100%"
+              fxFlex="100"
+              id="description"
+              [placeholder]="'Description'"
+              formControlName="description"
+              [(ngModel)]="headerData.description"
+            ></custom-textarea>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
+          <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
+          <custom-button
+            [type]="'closeAll'"
+            (click)="onClose()"
+          ></custom-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

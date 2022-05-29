@@ -1,10 +1,11 @@
+import { MajorService } from 'src/app/core/model/major/major.service';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { debounceTime, Subject } from 'rxjs';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
-import { MajorService } from 'src/app/core/model/major/major.service';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import Quill from 'quill';
 import 'node_modules/quill-emoji/dist/quill-emoji.js';

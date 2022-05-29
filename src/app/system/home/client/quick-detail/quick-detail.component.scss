@@ -75,8 +75,11 @@ body {
     }
    .detail-job{
      max-height: 700px;
-      overflow-y: auto;
-   }
+    overflow-y: scroll;
+}
+.detail-job::-webkit-scrollbar {
+  display: none;
+}
 }
 
 .tag {
