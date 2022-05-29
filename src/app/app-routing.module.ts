@@ -4,13 +4,21 @@ import { ClientComponent } from './system/home/client/client.component';
 import { DetailPageComponent } from './system/home/client/detail-page/detail-page.component';
 
 const routes: Routes = [
-  { path: '', component: ClientComponent  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./system/home/client/client.module').then((m) => m.ClientModule),
+  },
   {
     path: 'home',
     loadChildren: () =>
-      import('./system/home/client/client.module').then(
-        (m) => m.ClientModule
-      ),
+      import('./system/home/client/client.module').then((m) => m.ClientModule),
+  },
+
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./system/home/blog/blog.module').then((m) => m.BlogModule),
   },
 
   {

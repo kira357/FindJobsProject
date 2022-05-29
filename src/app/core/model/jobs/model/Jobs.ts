@@ -18,12 +18,13 @@ export interface VMJobDto {
   imageFile: File;
 }
 export interface VMGetJobDto {
-  id: any;
+  idJob: any;
   idRecruitment: string;
   companyOfJobs: string;
-  RecruitmentName: string;
+  recruitmentName: string;
   name: string;
   majorId: string;
+  nameMajor: string;
   position: string;
   jobImage: string;
   jobDetail: string;
@@ -35,11 +36,12 @@ export interface VMGetJobDto {
   address: string;
   isActive: boolean;
   dateExpire: any;
-  imageFile: File;
+  imageUser: any;
+  // imageFile: File;
 }
 export interface VMUpdateJobDto {
   idJob: any;
-  idRecruitment:  any;
+  idRecruitment: any;
   companyOfJobs: string;
   name: string;
   idMajor: string;

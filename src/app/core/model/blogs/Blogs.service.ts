@@ -31,8 +31,27 @@ export class BlogService {
       },
     });
   };
+
+  RequestGetItemPost = (pagingParams: PagingParams, Id: any) => {
+    return this.http.get(`${this.rootURL}/getitem-post/${Id}`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
   RequestGetAllListPost = (pagingParams: PagingParams) => {
     return this.http.get(`${this.rootURL}/getlist-post`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
+  RequestGetAllListPostActive = (pagingParams: PagingParams) => {
+    return this.http.get(`${this.rootURL}/getlist-post-active`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,

@@ -27,16 +27,34 @@ export class JobsService {
       },
     });
   };
+  RequestGetItemJob = (pagingParams: PagingParams , Id :any) => {
+    return this.http.get(`${this.rootURL}/getitem-job/${Id}`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
+  RequestGetListJobActive = (pagingParams: PagingParams) => {
+    return this.http.get(this.rootURL + '/getlist-Job-active', {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
 
   RequestCreateJob = (job: any) => {
-    return this.http.post(`${this.rootURL}/create-Job`, job);
+    return this.http.post(`${this.rootURL}/create-job`, job);
   };
 
   RequestUpdateJob = (job: any) => {
-    return this.http.put(`${this.rootURL}/update-Job`, job);
+    return this.http.put(`${this.rootURL}/update-job`, job);
   };
   RequestDeleteJob = (job: VMDeleteJobDto) => {
-    return this.http.delete(`${this.rootURL}/delete-Job`, {
+    return this.http.delete(`${this.rootURL}/delete-job`, {
       headers: this.headers,
       body: job,
     });

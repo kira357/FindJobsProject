@@ -31,25 +31,52 @@ body {
   object-fit: cover;
 }
 .card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   padding: 20px;
   min-height: 250px;
-  .title-job{
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .title-job {
+    color: #353535;
+    font-family: ""Roboto"";
+    font-size: 27px;
+    line-height: 32.4px;
+    text-shadow: #000000 1px 1px 1px;
   }
-  .name-company{
+  .name-company {
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 10px;
   }
-  .icon{
+  .icon {
     font-size: 14px;
-    padding: 0px 10px;
+    margin-right: 10px;
   }
+    .footer-item {
+      width: 100%;
+      color: #221f20;
+      letter-spacing: 0.3px;
+      line-height: 28.8px;
+      padding: 0px 0 20px;
+      align-items: center;
+      a{
+        cursor: pointer;
+      }
+      .btn-readmore {
+        background-color: #ea1e30;
+        border: 1px solid;
+        border-radius: 30px;
+        text-decoration: none;
+        color: #ffffff;
+        font-family: Roboto;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        line-height: 27px;
+        padding: 5px 25px;
+        text-align: center;
+      }
+    }
+   .detail-job{
+     max-height: 700px;
+      overflow-y: auto;
+   }
 }
 
 .tag {
@@ -76,19 +103,17 @@ body {
   font-size: 13px;
 }
 .user {
-  display: flex;
   margin-top: auto;
-}
-
-.user img {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-.user-info h5 {
-  margin: 0;
-}
-.user-info small {
-  color: #545d7a;
+  img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  h5 {
+    margin: 0;
+  }
+  small {
+    color: #545d7a;
+  }
 }

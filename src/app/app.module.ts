@@ -1,3 +1,4 @@
+import { BlogModule } from './system/home/blog/blog.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,7 @@ import { ClientModule } from './system/home/client/client.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, AdminPageMainModule, ClientModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, AdminPageMainModule, ClientModule , BlogModule],
   providers: [],
   bootstrap: [AppComponent],
 })

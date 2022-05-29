@@ -47,6 +47,7 @@
     "quill-blot-formatter": "^1.0.5",
     "quill-emoji": "^0.2.0",
     "rxjs": "~7.5.0",
+    "scss-scaffold": "0.0.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

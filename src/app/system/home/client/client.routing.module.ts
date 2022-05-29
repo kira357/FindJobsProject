@@ -10,9 +10,9 @@ export const routes: Routes = [
     component: ClientComponent,
     children: [
       {
-        path: 'item-page',
-        loadChildren: () =>
-          import('./detail-page/detail-page.module').then((m) => m.DetailPageModule),
+         path: 'quick-detail/:id',
+          loadChildren: () =>
+          import('./quick-detail/quick-detail.module').then((m) => m.QuickDetailModule),
       },
     ]
   },
