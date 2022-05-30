@@ -12,58 +12,44 @@ export class ListCVService {
             { label: '', property: 'checkboxCol', type: '', visible: true },
             { label: 'No', property: 'index', type: 'index', visible: true },
             {
-                label: "Name CV",
-                property: 'customerCode',
+                label: "Name candidate",
+                property: 'nameCandidate',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
             {
-                label: "Id student",
-                property: 'supplierName',
+                label: "Name Jobs",
+                property: 'nameJob',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
             {
-                label: "Name student",
-                property: 'supplierShortName',
+                label: "Introduction",
+                property: 'introduction',
+                type: 'text',
+                visible: true,
+                cssClasses: ['text-secondary', 'font-medium']
+            },
+            {
+                label: "Date apply",
+                property: 'dateApply',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
 
             {
-                label: "Major",
-                property: 'ifCode',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Grannd",
-                property: 'customerTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Day request",
-                property: 'etlDate',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Description",
-                property: 'description',
-                type: 'text',
+                label: "Resume",
+                property: 'resume',
+                type: 'file',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
             {
                 label: "Active",
-                property: 'activeYn',
+                property: 'isActive',
                 type: 'checkbox',
                 visible: true,
                 cssClasses: []

@@ -59,13 +59,18 @@ export class QuickDetailComponent implements OnInit {
     });
   }
   onApply(){
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data);
     this.__dialog
     .open(ApplyJobPopupComponent, {
       width: '700px',
       autoFocus: false,
       data: {
         idJob: this._ITEM_DATA.idJob,
+        idRecruitment: this._ITEM_DATA.idRecruitment,
+        idUser : dataJson.data.id,
         name: this._ITEM_DATA.name,
+
       } as any,
     })
     .afterClosed()

@@ -48,6 +48,7 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
     @Output() onDelete = new EventEmitter<any>();
     @Output() onPageChanged = new EventEmitter<PagingParams>();
     @Output() onCheck = new EventEmitter<any>();
+    @Output() onDowloadFile = new EventEmitter<any>();
     @Output() onCheckedRows = new EventEmitter<any[]>();
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -164,6 +165,10 @@ export class CustomTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     checkToActive( event : any) {
         this.onCheck.emit((event.checked));
+    }
+    ClickToDowloadFile( event : any) {
+        console.log('event', event);
+        this.onDowloadFile.emit((event));
     }
 
     calcHeightTable() {

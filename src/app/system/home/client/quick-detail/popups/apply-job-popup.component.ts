@@ -1,3 +1,4 @@
+import { CandidateService } from './../../../../../core/model/candidateJob/candidate.service';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
@@ -20,19 +21,22 @@ export class ApplyJobPopupComponent implements OnInit {
   headerTitle: string = '';
   headerData: any = {
     idJob: '',
+    idRecruitment: '',
+    idUser : '',
     name: '',
+    introduction: '',
   };
   employeeCreated = this.formBuilder.group({
     idJob: '',
     name: ['', Validators.required],
-    description: ['', Validators.required],
+    introduction: ['', Validators.required],
     imageFile: ['', Validators.required],
   });
   constructor(
     public __dialog: MatDialog,
     private dialogRef: MatDialogRef<ApplyJobPopupComponent>,
     private formBuilder: FormBuilder,
-    private majorService: MajorService,
+    private candidateService: CandidateService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -41,24 +45,27 @@ export class ApplyJobPopupComponent implements OnInit {
       this.headerTitle = 'Apply job';
       this.headerData = {
         idJob: this.data.idJob,
+        idRecruitment: this.data.idRecruitment,
+        idUser : this.data.idUser,
         name: this.data.name,
       };
     }
     console.log('data on popup', this.data);
   }
-
+  formData = new FormData();
   onSubmit(): void {
     if (this.data) {
-      const MajorParams: any = {
-        idJob: this.headerData.idJob,
-        name: this.headerData.name,
-        imageFile : this.file,
-      };
-      console.log('MajorParams', MajorParams);
-      // this.majorService.RequestUpdateMajor(MajorParams).subscribe((res) => {
-      //   console.log('update', res);
-      //   this.dialogRef.close(true);
-      // });
+      this.formData.append("idJob", this.headerData.idJob),
+      this.formData.append("idRecruitment", this.headerData.idRecruitment),
+      this.formData.append("idCandicate", this.headerData.idUser),
+      this.formData.append("name",this.headerData.name),
+      this.formData.append("introduction",this.headerData.introduction),
+      this.formData.append("fileApply",this.file),
+
+      this.candidateService.RequestApplyJob(this.formData).subscribe((res) => {
+        console.log('update', res);
+        this.dialogRef.close(true);
+      });
     }
   }
 

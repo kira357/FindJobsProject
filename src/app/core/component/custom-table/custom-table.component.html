@@ -91,6 +91,15 @@
                             </td>
                         </ng-container>
 
+                        <ng-container *ngIf="column.type === 'file'" [matColumnDef]="column.property">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>
+                                {{ column.label  }}
+                            </th>
+                            <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>
+                                <a (click)="ClickToDowloadFile(row[column.property])">{{ row[column.property] }}</a>
+                            </td>
+                        </ng-container>
+
                         <!-- TYPE CHECKBOX -->
                         <ng-container *ngIf="column.type === 'checkbox'" [matColumnDef]="column.property">
                             <th *matHeaderCellDef mat-header-cell mat-sort-header>
