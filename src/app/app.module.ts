@@ -1,3 +1,4 @@
+import { DetailJobModule } from './system/home/client/detail-page/detail-job.module';
 import { BlogModule } from './system/home/blog/blog.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -9,10 +10,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPageMainModule } from './system/admin/admin-page-main.module';
 import { ClientModule } from './system/home/client/client.module';
 
-
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, AdminPageMainModule, ClientModule , BlogModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AdminPageMainModule,
+    ClientModule,
+    BlogModule,
+    DetailJobModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

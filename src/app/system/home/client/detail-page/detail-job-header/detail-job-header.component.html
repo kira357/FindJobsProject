@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container px-lg-5">
+    <a class="navbar-brand" [routerLink]="['']"><h1 style="margin: 0;">UTC2 FINDING JOBS</h1></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['']"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link "
+            id="navbarDropdown"
+            [routerLink]="['/blog']"
+            role="button"
+            aria-expanded="false"
+            style="  font-size: 1rem;"
+            >Blog</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link "
+            id="navbarDropdown"
+            href="#"
+            role="button"
+            aria-expanded="false"
+            style="  font-size: 1rem;"
+            >Create CV</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link "
+            id="navbarDropdown"
+            href="#"
+            role="button"
+            aria-expanded="false"
+            style="  font-size: 1rem;"
+            >Chat</a
+          >
+        </li>
+      </ul>
+      <form class="d-flex">
+          <a class=" button mr-1" href="#!" >Sign In</a>
+          <a class=" button " href="#!">Sign Up</a>
+      </form>
+    </div>
+  </div>
+</nav>

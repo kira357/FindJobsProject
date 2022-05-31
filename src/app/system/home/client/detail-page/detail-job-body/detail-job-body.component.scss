@@ -1,30 +1,53 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-* {
-  box-sizing: border-box;
+#ContentsLayout-Blog {
+  width: 1140px;
+  min-height: 400px;
+  margin: 20px auto 0 auto;
 }
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background-color: #f7f8fc;
-  font-family: "Roboto", sans-serif;
-  color: #10182f;
+
+#Content-Blog-Menu {
+  width: 290px;
+  min-height: 400px;
+  float: right;
+  background-color: white;
+  .popular-posts {
+    background-color: #ffffff;
+    box-shadow: #000000 0px 0px 6px 0px;
+    color: #221f20;
+    letter-spacing: 0.3px;
+    line-height: 28.8px;
+    margin: 0px 0px 30px;
+    padding: 30px;
+    .title-popular-post {
+      color: #ea1e30;
+      font-family: "Roboto", Condensed;
+      font-size: 24px;
+      letter-spacing: 0.6px;
+      line-height: 38.4px;
+      margin: 0px 0px 24px;
+    }
+  }
+  .wwp-list {
+    color: #221f20;
+    display: inline;
+    font-family: Roboto;
+    letter-spacing: 0.3px;
+    line-height: 28.8px;
+    text-align: left;
+    li {
+      display: list-item;
+      margin: 0px 0px 16px;
+      text-align: left;
+    }
+  }
 }
-.container {
-  display: flex;
-  width: 1040px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+
+#Content-Blog {
+  width: 750px;
+  min-height: 400px;
+  float: left;
+  background-color: white;
 }
-.card {
-  margin: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  width: 300px;
-}
+
 .card-header img {
   width: 100%;
   height: 200px;
@@ -40,7 +63,6 @@ body {
     line-height: 32.4px;
     text-shadow: #000000 1px 1px 1px;
     text-decoration: none;
-
   }
   .name-company {
     font-size: 14px;
@@ -75,10 +97,10 @@ body {
       text-align: center;
     }
   }
-  .detail-job {
-    max-height: 700px;
-    overflow-y: scroll;
-  }
+  // .detail-job {
+  //   max-height: 700px;
+  //   overflow-y: scroll;
+  // }
   .detail-job::-webkit-scrollbar {
     display: none;
   }

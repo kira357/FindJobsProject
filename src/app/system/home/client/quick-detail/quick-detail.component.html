@@ -7,10 +7,14 @@
     />
   </div>
   <div class="card-body" fxLayout="column" fxFlexAlign="start center">
-    <div fxFlex="100">
-      <h4 class="title-job">
+    <div fxFlex="100" style="margin-bottom: 10px">
+      <a
+        class="title-job"
+        [routerLink]="['/detail-job', id]"
+        [queryParams]="{ debug: true }"
+      >
         {{ _ITEM_DATA.name }}
-      </h4>
+      </a>
     </div>
     <div fxFlex="100">
       <p class="name-company">
@@ -42,9 +46,30 @@
     <div class="my-2" fxFlex="100" fxLayout="row">
       <span class="tag tag-teal">{{ _ITEM_DATA.nameMajor }}</span>
     </div>
-    <div fxLayout="row" class="footer-item" fxFlexAlign="space-between center" fxLayoutGap="10px">
-      <a class="btn-readmore" fxFlex="95" (click)="onApply()"> Apply Now </a>
-      <a style="font-size: 25px" fxFlexAlign="center end" fxFlex="5"><i class="fa fa-heart"></i></a>
+    <div
+      fxLayout="row"
+      class="footer-item"
+      fxFlexAlign="space-between center"
+      fxLayoutGap="10px"
+    >
+      <button
+        *ngIf="isActive; else templateName"
+        class="btn-readmore cursor"
+        fxFlex="95"
+        (click)="onApply()"
+        [disabled]="isActive"
+        [ngClass]="{ disable: isActive }"
+      >
+        Applied
+      </button>
+      <ng-template #templateName>
+        <button class="btn-readmore cursor" fxFlex="95" (click)="onApply()">
+          Apply Now
+        </button>
+      </ng-template>
+      <a style="font-size: 25px" fxFlexAlign="center end" fxFlex="5"
+        ><i class="fa fa-heart"></i
+      ></a>
     </div>
     <div class="border-top my-3">
       <div class="py-2 detail-job">

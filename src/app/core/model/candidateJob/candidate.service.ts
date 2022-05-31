@@ -36,6 +36,14 @@ export class CandidateService {
     });
   };
 
+  RequestCheckIsApply = (Id: any, idJob :any) => {
+    return this.http.get(`${this.rootURL}/is-apply/${Id}`, {
+      headers: this.headers,
+      params: {
+        idJob: idJob,
+      },
+    });
+  };
   RequestApplyJob = (candidate: any) => {
     return this.http.post(`${this.rootURL}/apply-job`, candidate);
   };

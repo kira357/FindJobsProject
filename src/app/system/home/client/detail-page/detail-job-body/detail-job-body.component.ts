@@ -1,18 +1,18 @@
-import { CandidateService } from './../../../../core/model/candidateJob/candidate.service';
-import { ApplyJobPopupComponent } from './popups/apply-job-popup.component';
-import { JobsService } from 'src/app/core/model/jobs/jobs.service';
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PagingParams } from 'src/app/core/model/paging-params';
-import { VMGetJobDto } from 'src/app/core/model/jobs/model/Jobs';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { CandidateService } from 'src/app/core/model/candidateJob/candidate.service';
+import { JobsService } from 'src/app/core/model/jobs/jobs.service';
+import { VMGetJobDto } from 'src/app/core/model/jobs/model/Jobs';
+import { PagingParams } from 'src/app/core/model/paging-params';
+import { ApplyJobPopupComponent } from '../../quick-detail/popups/apply-job-popup.component';
 
 @Component({
-  selector: 'app-quick-detail',
-  templateUrl: './quick-detail.component.html',
-  styleUrls: ['./quick-detail.component.scss'],
+  selector: 'app-detail-job-body',
+  templateUrl: './detail-job-body.component.html',
+  styleUrls: ['./detail-job-body.component.scss'],
 })
-export class QuickDetailComponent implements OnInit {
+export class DetailJobBodyComponent implements OnInit {
   constructor(
     private _Activatedroute: ActivatedRoute,
     private jobsService: JobsService,
@@ -41,7 +41,6 @@ export class QuickDetailComponent implements OnInit {
     isActive: false,
     dateExpire: '',
     imageUser: '',
-    // imageFile: '',
   };
   getData: any;
   sub: any;
@@ -59,6 +58,7 @@ export class QuickDetailComponent implements OnInit {
       this.jobsService
         .RequestGetItemJob(this._PagingParams, this.id)
         .subscribe((data: any) => {
+          console.log('data', data);
           this._ITEM_DATA = data.data[0];
         });
       this.candidateService

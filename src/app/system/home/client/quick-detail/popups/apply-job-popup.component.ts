@@ -11,6 +11,7 @@ import {
   MajorCreateDto,
   UpdateMajorDto,
 } from 'src/app/core/model/major/model/Major';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-apply-job-popup',
@@ -22,7 +23,7 @@ export class ApplyJobPopupComponent implements OnInit {
   headerData: any = {
     idJob: '',
     idRecruitment: '',
-    idUser : '',
+    idUser: '',
     name: '',
     introduction: '',
   };
@@ -46,7 +47,7 @@ export class ApplyJobPopupComponent implements OnInit {
       this.headerData = {
         idJob: this.data.idJob,
         idRecruitment: this.data.idRecruitment,
-        idUser : this.data.idUser,
+        idUser: this.data.idUser,
         name: this.data.name,
       };
     }
@@ -55,17 +56,20 @@ export class ApplyJobPopupComponent implements OnInit {
   formData = new FormData();
   onSubmit(): void {
     if (this.data) {
-      this.formData.append("idJob", this.headerData.idJob),
-      this.formData.append("idRecruitment", this.headerData.idRecruitment),
-      this.formData.append("idCandicate", this.headerData.idUser),
-      this.formData.append("name",this.headerData.name),
-      this.formData.append("introduction",this.headerData.introduction),
-      this.formData.append("fileApply",this.file),
-
-      this.candidateService.RequestApplyJob(this.formData).subscribe((res) => {
-        console.log('update', res);
-        this.dialogRef.close(true);
-      });
+      const dateApply = moment().format('YYYY-MM-DD');
+      this.formData.append('idJob', this.headerData.idJob),
+        this.formData.append('idRecruitment', this.headerData.idRecruitment),
+        this.formData.append('idCandicate', this.headerData.idUser),
+        this.formData.append('name', this.headerData.name),
+        this.formData.append('introduction', this.headerData.introduction),
+        this.formData.append('dateApply' , dateApply),
+        this.formData.append('fileApply', this.file),
+        this.candidateService
+          .RequestApplyJob(this.formData)
+          .subscribe((res) => {
+            console.log('update', res);
+            this.dialogRef.close(true);
+          });
     }
   }
 
@@ -75,7 +79,7 @@ export class ApplyJobPopupComponent implements OnInit {
   file: any;
   filename: string;
   onFileSelected(evt: any) {
-      this.file = evt.target.files[0];
-      this.filename = this.file.name;
+    this.file = evt.target.files[0];
+    this.filename = this.file.name;
   }
 }

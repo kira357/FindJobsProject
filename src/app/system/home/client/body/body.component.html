@@ -132,7 +132,7 @@
         </article>
         <!-- card-product .// -->
       </div>
-      <pagination-controls (pageChange)="_PagingParams.currentPage = $event"></pagination-controls>
+      <pagination-controls (pageChange)="onpageChange($event)"></pagination-controls>
     </main>
     <main class="col-md-9" fxFlex="50">
       <header class="border-bottom my-3">
@@ -144,7 +144,7 @@
       </header>
       <!-- sect-heading -->
 
-      <div class="content-container ">
+      <div class="content-container">
         <router-outlet></router-outlet>
       </div>
 

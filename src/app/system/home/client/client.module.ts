@@ -8,7 +8,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClientRoutingModule } from './client.routing.module';
 import { MaterialModule } from 'src/app/material.module';
 import { BodyModule } from './body/body.module';
-import { DetailPageModule } from './detail-page/detail-page.module';
 
 @NgModule({
   imports: [
@@ -19,7 +18,6 @@ import { DetailPageModule } from './detail-page/detail-page.module';
     HeaderModule,
     FooterModule,
     BodyModule,
-    DetailPageModule,
   ],
   declarations: [ClientComponent],
   exports: [ClientComponent],

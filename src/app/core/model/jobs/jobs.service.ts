@@ -27,7 +27,7 @@ export class JobsService {
       },
     });
   };
-  RequestGetItemJob = (pagingParams: PagingParams , Id :any) => {
+  RequestGetItemJob = (pagingParams: PagingParams, Id: any) => {
     return this.http.get(`${this.rootURL}/getitem-job/${Id}`, {
       headers: this.headers,
       params: {
@@ -36,6 +36,7 @@ export class JobsService {
       },
     });
   };
+
   RequestGetListJobActive = (pagingParams: PagingParams) => {
     return this.http.get(this.rootURL + '/getlist-Job-active', {
       headers: this.headers,

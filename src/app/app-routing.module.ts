@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './system/home/client/client.component';
-import { DetailPageComponent } from './system/home/client/detail-page/detail-page.component';
 
 const routes: Routes = [
   {
@@ -19,6 +18,13 @@ const routes: Routes = [
     path: 'blog',
     loadChildren: () =>
       import('./system/home/blog/blog.module').then((m) => m.BlogModule),
+  },
+  {
+    path: 'detail-job/:id',
+    loadChildren: () =>
+      import('./system/home/client/detail-page/detail-job.module').then(
+        (m) => m.DetailJobModule
+      ),
   },
 
   {
