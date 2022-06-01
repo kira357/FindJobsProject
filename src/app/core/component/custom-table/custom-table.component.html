@@ -118,7 +118,19 @@
                                 <ng-container *ngIf="row[column.property] === true">Approved</ng-container>
                                 <ng-container *ngIf="row[column.property] !== true">Wait for approval</ng-container>
                             </td> </ng-container
-                        ><!-- TYPE ACTIVED OR INACTIVED -->
+                        >
+                        <!-- PENDING YES OR NO -->
+                        <ng-container *ngIf="column.type === 'pending'" [matColumnDef]="column.property">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>
+                                {{ column.label }}
+                            </th>
+                            <td *matCellDef="let row" class="text-center" [ngClass]="column.cssClasses" mat-cell>
+                                <ng-container *ngIf="row[column.property] === true">Is Pending</ng-container>
+                                <ng-container *ngIf="row[column.property] !== true">Accpect CV</ng-container>
+                            </td> </ng-container
+                        >
+                        
+                        <!-- TYPE ACTIVED OR INACTIVED -->
                         <ng-container *ngIf="column.type === 'buttonYn'" [matColumnDef]="column.property">
                             <th *matHeaderCellDef mat-header-cell mat-sort-header>
                                 {{ column.label }}

@@ -11,7 +11,7 @@ import { saveAs } from 'file-saver';
 export class ListCvComponent implements OnInit {
   constructor(
     private listCvService: ListCVService,
-    private candidateService: CandidateService,
+    private candidateService: CandidateService
   ) {}
 
   _PagingParams = new PagingParams();
@@ -55,8 +55,10 @@ export class ListCvComponent implements OnInit {
       console.log('onDowloadFile', data);
       const blob = new Blob([data], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
-      saveAs(data, evt)  
+      saveAs(data, evt);
     });
   }
+  onEdit(evt: any) {}
+
   onDelete(evt: any) {}
 }

@@ -1,4 +1,6 @@
+import { CommentService } from './../../../../../core/model/comment/comment.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CandidateService } from 'src/app/core/model/candidateJob/candidate.service';
@@ -6,6 +8,7 @@ import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import { VMGetJobDto } from 'src/app/core/model/jobs/model/Jobs';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { ApplyJobPopupComponent } from '../../quick-detail/popups/apply-job-popup.component';
+import { UserComment } from 'src/app/core/model/comment/model/comment';
 
 @Component({
   selector: 'app-detail-job-body',
@@ -14,10 +17,12 @@ import { ApplyJobPopupComponent } from '../../quick-detail/popups/apply-job-popu
 })
 export class DetailJobBodyComponent implements OnInit {
   constructor(
+    private formBuilder: FormBuilder,
     private _Activatedroute: ActivatedRoute,
     private jobsService: JobsService,
     private candidateService: CandidateService,
-    private __dialog: MatDialog
+    private __dialog: MatDialog,
+    private commentService : CommentService
   ) {}
 
   _PagingParams = new PagingParams();
@@ -42,9 +47,15 @@ export class DetailJobBodyComponent implements OnInit {
     dateExpire: '',
     imageUser: '',
   };
+  commentArray : UserComment[] = [];
   getData: any;
   sub: any;
   id: any;
+
+  commentCreated = this.formBuilder.group({
+    commentMsg: ['', Validators.required],
+  });
+
   ngOnInit() {
     this.getListData();
   }
@@ -64,9 +75,13 @@ export class DetailJobBodyComponent implements OnInit {
       this.candidateService
         .RequestCheckIsApply(dataJson.data.id, this.id)
         .subscribe((data: any) => {
-          console.log('data', data);
           this.isActive = data.isActive;
         });
+        this.commentService.RequestGetCommentUserOnJobs(this._PagingParams, this.id).subscribe((data: any) => {
+          console.log('comment', data);
+          this.commentArray = data.data;
+        }
+        )
     });
   }
   onApply() {
@@ -90,5 +105,10 @@ export class DetailJobBodyComponent implements OnInit {
           this.getListData();
         }
       });
+  }
+  addComment(item_data :any ){
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data);
+  
   }
 }

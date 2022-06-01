@@ -1,7 +1,7 @@
 <div fxFlex fxLayout="column">
   <section class="py-5">
     <div id="ContentsLayout-Blog" fxLayout="row" fxLayoutGap="30px">
-      <div id="Content-Blog" fxFlex="70">
+      <div id="Content-Blog" fxFlex="70" fxLayout="column">
         <div class="card m-0" fxFlexFill fxFlex="100">
           <div class="card-header">
             <img
@@ -11,6 +11,35 @@
             />
           </div>
           <div class="card-body" fxLayout="column" fxFlexAlign="start center">
+            <div
+              fxLayout="row"
+              class="footer-item"
+              fxFlexAlign="space-between center"
+              fxLayoutGap="10px"
+            >
+              <button
+                *ngIf="isActive; else templateName"
+                class="btn-readmore cursor"
+                fxFlex="95"
+                (click)="onApply()"
+                [disabled]="isActive"
+                [ngClass]="{ disable: isActive }"
+              >
+                Applied
+              </button>
+              <ng-template #templateName>
+                <button
+                  class="btn-readmore cursor"
+                  fxFlex="95"
+                  (click)="onApply()"
+                >
+                  Apply Now
+                </button>
+              </ng-template>
+              <a style="font-size: 25px" fxFlexAlign="center end" fxFlex="5"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </div>
             <div fxFlex="100" style="margin-bottom: 10px">
               <a class="title-job">
                 {{ _ITEM_DATA.name }}
@@ -48,35 +77,7 @@
             <div class="my-2" fxFlex="100" fxLayout="row">
               <span class="tag tag-teal">{{ _ITEM_DATA.nameMajor }}</span>
             </div>
-            <div
-              fxLayout="row"
-              class="footer-item"
-              fxFlexAlign="space-between center"
-              fxLayoutGap="10px"
-            >
-              <button
-                *ngIf="isActive; else templateName"
-                class="btn-readmore cursor"
-                fxFlex="95"
-                (click)="onApply()"
-                [disabled]="isActive"
-                [ngClass]="{ disable: isActive }"
-              >
-                Applied
-              </button>
-              <ng-template #templateName>
-                <button
-                  class="btn-readmore cursor"
-                  fxFlex="95"
-                  (click)="onApply()"
-                >
-                  Apply Now
-                </button>
-              </ng-template>
-              <a style="font-size: 25px" fxFlexAlign="center end" fxFlex="5"
-                ><i class="fa fa-heart"></i
-              ></a>
-            </div>
+
             <div class="border-top my-3">
               <div class="py-2 detail-job">
                 <div [innerHTML]="_ITEM_DATA.jobDetail"></div>
@@ -84,7 +85,48 @@
             </div>
           </div>
         </div>
+        <h1>Comment</h1>
+        <hr />
+        <div class="form-group">
+          <form [formGroup]="commentCreated">
+            <custom-textarea
+              placeholder="Your Comment Please....."
+              formControlName="commentMsg"
+            ></custom-textarea>
+            <br />
+            <button
+              class="btn btn-success pull-right"
+              (click)="addComment(_ITEM_DATA)"
+            >
+              Comment.
+            </button>
+            <br />
+            <hr />
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let item of commentArray">
+                <div fxLayout="column">
+                  <div fxFlex="100">
+                    <div class="user mt-0 mb-1" fxLayoutAlign="start center">
+                      <img
+                        src="{{
+                          item.urlAvatar
+                            ? item.urlAvatar
+                            : 'https://www.hopenetwichita.org/wp-content/uploads/2020/08/NO-IMAGE-AVAILABLE-3.png'
+                        }}"
+                        alt="user"
+                      />
+                      <div class="user-info">
+                        <h5>{{ item.userName }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </form>
+        </div>
       </div>
+
       <div id="Content-Blog-Menu" fxFlex="30">
         <section class="widget popular-posts" fxLayout="column">
           <header
@@ -286,3 +328,9 @@
     </div>
   </section>
 </div>
+
+<!-- <div class="border-top my-3">
+                            <div class="py-2 detail-job">
+                              <div [innerHTML]="item.commentMsg"></div>
+                            </div>
+                          </div> -->
