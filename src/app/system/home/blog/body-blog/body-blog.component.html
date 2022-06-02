@@ -10,10 +10,14 @@
                        <div class="card-header">
                         <img
                         src="{{ item.image }}"
+                        [routerLink]="['/detail-blog', item.idBlog]"
+                        [queryParams]="{ debug: true }"
                       />
                             </div>
                             <div class="card-body">
-                              <a class="title">
+                              <a class="title"
+                              [routerLink]="['/detail-blog', item.idBlog]"
+                              [queryParams]="{ debug: true }">
                                {{item.title}}
                               </a>
                               <a class="user">

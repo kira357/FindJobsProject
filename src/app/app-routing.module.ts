@@ -26,6 +26,13 @@ const routes: Routes = [
         (m) => m.DetailJobModule
       ),
   },
+  {
+    path: 'detail-blog/:id',
+    loadChildren: () =>
+      import('./system/home/blog/detail-blog/detail-blog.module').then(
+        (m) => m.DetailBlogModule
+      ),
+  },
 
   {
     path: 'admin',

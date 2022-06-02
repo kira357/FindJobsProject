@@ -20,6 +20,7 @@ const routes: Routes = [
     DetailJobRoutingModule,
     DetailJobHeaderModule,
     DetailJobBodyModule,
+    HeaderModule,
   ],
   declarations: [DetailJobComponent],
   exports: [DetailJobComponent],

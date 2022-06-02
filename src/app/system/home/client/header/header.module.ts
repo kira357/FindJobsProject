@@ -4,14 +4,9 @@ import { HeaderComponent } from './header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: HeaderComponent,
-  },
-];
+
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule,RouterModule],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
 })

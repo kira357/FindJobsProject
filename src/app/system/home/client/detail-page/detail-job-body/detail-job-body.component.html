@@ -66,7 +66,7 @@
                 src="{{
                   _ITEM_DATA.imageUser
                     ? _ITEM_DATA.imageUser
-                    : 'https://www.hopenetwichita.org/wp-content/uploads/2020/08/NO-IMAGE-AVAILABLE-3.png'
+                    : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
                 }}"
                 alt="user"
               />
@@ -106,18 +106,54 @@
               <li class="list-group-item" *ngFor="let item of commentArray">
                 <div fxLayout="column">
                   <div fxFlex="100">
-                    <div class="user mt-0 mb-1" fxLayoutAlign="start center">
-                      <img
-                        src="{{
-                          item.urlAvatar
-                            ? item.urlAvatar
-                            : 'https://www.hopenetwichita.org/wp-content/uploads/2020/08/NO-IMAGE-AVAILABLE-3.png'
-                        }}"
-                        alt="user"
-                      />
-                      <div class="user-info">
-                        <h5>{{ item.userName }}</h5>
-                      </div>
+                    <div id="reader user">
+                      <ol>
+                        <li> 
+                          <div class="comment_box "> <a href="#"> <img  src="{{
+                            item.urlAvatar
+                              ? item.urlAvatar
+                              : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                          }}"
+                          alt="avatar"> </a>
+                            <div class="inside_comment">
+                              <div class="comment-meta">
+                                <div class="commentsuser">{{item.userName}}</div>
+                                <div class="comment_date">{{item.commentDate}}</div>
+                              </div>
+                            </div>
+                            <div class="comment-body">
+                              <p>{{item.commentMsg}}</p>
+                            </div>
+                            <div class="reply"> <a href="#">Reply</a> </div>
+                            <div class="arrow-down"></div>
+                          </div>
+                          <ul class="children" *ngFor="let reply of item.replies">
+                            <li> 
+                              <!--Comment Box 2-->
+                              
+                              <div class="comment_box"> <a href="#"> <img src="{{
+                                reply.urlAvatar
+                                  ? reply.urlAvatar
+                                  : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                              }}"
+                              alt="avatar"> </a>
+                                <div class="inside_comment">
+                                  <div class="comment-meta">
+                                    <div class="commentsuser">{{reply.userName}}</div>
+                                    <div class="comment_date">{{reply.createOn}}</div>
+                                  </div>
+                                </div>
+                                <div class="comment-body">
+                                  <p>{{reply.replyMsg}}</p>
+                                </div>
+                                <div class="reply"> <a href="#">Reply</a> </div>
+                                <div class="arrow-down"></div>
+                              </div>
+
+                            </li>
+                          </ul>
+                        </li>
+                      </ol>
                     </div>
                   </div>
                 </div>

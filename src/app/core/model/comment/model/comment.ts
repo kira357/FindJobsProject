@@ -4,6 +4,7 @@ export interface UserComment {
   idJob: any;
   urlAvatar: string;
   userName: string;
+  replies: any[];
   commentMsg: string;
   commentDate: Date;
   commentOn: string;

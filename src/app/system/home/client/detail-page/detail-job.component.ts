@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailJobComponent implements OnInit {
   constructor(
-    private _Activatedroute: ActivatedRoute,
   ) {}
 
   ngOnInit() {}

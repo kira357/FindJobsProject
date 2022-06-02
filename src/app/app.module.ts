@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPageMainModule } from './system/admin/admin-page-main.module';
 import { ClientModule } from './system/home/client/client.module';
+import { DetailBlogModule } from './system/home/blog/detail-blog/detail-blog.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { ClientModule } from './system/home/client/client.module';
     ClientModule,
     BlogModule,
     DetailJobModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,3 +1,4 @@
+import { HeaderModule } from './../client/header/header.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';

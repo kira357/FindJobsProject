@@ -12,6 +12,8 @@ export interface VMCreateBlogDto {
 export interface VMGetBlogDto {
   idBlog: any;
   idUser: any;
+  imageUser: any;
+  nameUser: any;
   title: string;
   image: string;
   summary: string;

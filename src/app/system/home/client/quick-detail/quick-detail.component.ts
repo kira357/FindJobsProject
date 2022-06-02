@@ -64,7 +64,7 @@ export class QuickDetailComponent implements OnInit {
       this.candidateService
         .RequestCheckIsApply(dataJson.data.id, this.id)
         .subscribe((data: any) => {
-          console.log('data', data);
+          console.log('check', data);
           this.isActive = data.isActive;
         });
     });
