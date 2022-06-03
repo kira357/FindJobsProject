@@ -49,46 +49,7 @@
               </div>
             </div>
           </div>
-          <h1>Comment</h1>
-          <hr />
-          <div class="form-group">
-            <form [formGroup]="commentCreated">
-              <custom-textarea
-                placeholder="Your Comment Please....."
-                formControlName="commentMsg"
-              ></custom-textarea>
-              <br />
-              <button
-                class="btn btn-success pull-right"
-                (click)="addComment(_ITEM_DATA)"
-              >
-                Comment.
-              </button>
-              <br />
-              <hr />
-              <ul class="list-group">
-                <li class="list-group-item" *ngFor="let item of commentArray">
-                  <div fxLayout="column">
-                    <div fxFlex="100">
-                      <div class="user mt-0 mb-1" fxLayoutAlign="start center">
-                        <img
-                          src="{{
-                            item.urlAvatar
-                              ? item.urlAvatar
-                              : 'https://www.hopenetwichita.org/wp-content/uploads/2020/08/NO-IMAGE-AVAILABLE-3.png'
-                          }}"
-                          alt="user"
-                        />
-                        <div class="user-info">
-                          <h5>{{ item.userName }}</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </form>
-          </div>
+          <custom-commentbox [idPostion]="id"></custom-commentbox>
         </div>
 
         <div id="Content-Blog-Menu" fxFlex="30">

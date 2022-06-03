@@ -8,6 +8,7 @@ import { CustomTextareaModule } from 'src/app/core/component/custom-textarea/cus
 import { MaterialModule } from 'src/app/material.module';
 import { HeaderModule } from '../../client/header/header.module';
 import { BodyBlogModule } from '../body-blog/body-blog.module';
+import { CommentboxModule } from 'src/app/core/component/commentbox/commentbox.module';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MaterialModule,
     HeaderModule,
+    CommentboxModule,
     RouterModule.forChild(routes),
   ],
   declarations: [DetailBlogComponent],

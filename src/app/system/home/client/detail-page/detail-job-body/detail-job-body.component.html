@@ -85,82 +85,8 @@
             </div>
           </div>
         </div>
-        <h1>Comment</h1>
-        <hr />
-        <div class="form-group">
-          <form [formGroup]="commentCreated">
-            <custom-textarea
-              placeholder="Your Comment Please....."
-              formControlName="commentMsg"
-            ></custom-textarea>
-            <br />
-            <button
-              class="btn btn-success pull-right"
-              (click)="addComment(_ITEM_DATA)"
-            >
-              Comment.
-            </button>
-            <br />
-            <hr />
-            <ul class="list-group">
-              <li class="list-group-item" *ngFor="let item of commentArray">
-                <div fxLayout="column">
-                  <div fxFlex="100">
-                    <div id="reader user">
-                      <ol>
-                        <li> 
-                          <div class="comment_box "> <a href="#"> <img  src="{{
-                            item.urlAvatar
-                              ? item.urlAvatar
-                              : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                          }}"
-                          alt="avatar"> </a>
-                            <div class="inside_comment">
-                              <div class="comment-meta">
-                                <div class="commentsuser">{{item.userName}}</div>
-                                <div class="comment_date">{{item.commentDate}}</div>
-                              </div>
-                            </div>
-                            <div class="comment-body">
-                              <p>{{item.commentMsg}}</p>
-                            </div>
-                            <div class="reply"> <a href="#">Reply</a> </div>
-                            <div class="arrow-down"></div>
-                          </div>
-                          <ul class="children" *ngFor="let reply of item.replies">
-                            <li> 
-                              <!--Comment Box 2-->
-                              
-                              <div class="comment_box"> <a href="#"> <img src="{{
-                                reply.urlAvatar
-                                  ? reply.urlAvatar
-                                  : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                              }}"
-                              alt="avatar"> </a>
-                                <div class="inside_comment">
-                                  <div class="comment-meta">
-                                    <div class="commentsuser">{{reply.userName}}</div>
-                                    <div class="comment_date">{{reply.createOn}}</div>
-                                  </div>
-                                </div>
-                                <div class="comment-body">
-                                  <p>{{reply.replyMsg}}</p>
-                                </div>
-                                <div class="reply"> <a href="#">Reply</a> </div>
-                                <div class="arrow-down"></div>
-                              </div>
 
-                            </li>
-                          </ul>
-                        </li>
-                      </ol>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </form>
-        </div>
+        <custom-commentbox [idPostion]="id" [_ITEM_DATA]="_ITEM_DATA"></custom-commentbox>
       </div>
 
       <div id="Content-Blog-Menu" fxFlex="30">

@@ -50,9 +50,6 @@ export class DetailBlogComponent implements OnInit {
   sub: any;
   id: any;
 
-  commentCreated = this.formBuilder.group({
-    commentMsg: ['', Validators.required],
-  });
 
   ngOnInit() {
     this.getListData();
@@ -75,17 +72,7 @@ export class DetailBlogComponent implements OnInit {
         .subscribe((data: any) => {
           this.isActive = data.isActive;
         });
-      this.commentService
-        .RequestGetCommentUserOnJobs(this._PagingParams, this.id)
-        .subscribe((data: any) => {
-          console.log('comment', data);
-          this.commentArray = data.data;
-        });
     });
   }
 
-  addComment(item_data: any) {
-    const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
-  }
 }

@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MaterialModule } from 'src/app/material.module';
 import { RouterModule, Routes } from '@angular/router';
+import { CommentboxModule } from 'src/app/core/component/commentbox/commentbox.module';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     CustomTextareaModule,
     MatFormFieldModule,
     MaterialModule,
+    CommentboxModule,
     RouterModule.forChild(routes),
   ],
   declarations: [DetailJobBodyComponent],
