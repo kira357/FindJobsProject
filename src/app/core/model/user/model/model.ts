@@ -36,7 +36,7 @@ export interface VMGetUser {
   lastName: string;
   fullName: string;
   email?: string;
-  pphoneNumber?: string;
+  phoneNumber?: string;
   roleName: string;
   dateOfBirth?: string;
   gender?: string;
@@ -45,6 +45,13 @@ export interface VMGetUser {
   urlAvatar: string;
   description: string;
   isActive: boolean;
+}
+export interface VMGetCurrentUser {
+  id: any;
+  fullName: string;
+  roleName: string;
+  nameMajor: string;
+  urlAvatar: string;
 }
 export interface VMCreateUser {
   lastName: string;

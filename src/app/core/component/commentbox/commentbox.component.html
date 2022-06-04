@@ -24,121 +24,207 @@
           <div fxFlex="100">
             <div id="reader user">
               <ol>
-                <li> 
-                  <div class="comment_box "> <a href="#"> <img  src="{{
-                    item.urlAvatar
-                      ? item.urlAvatar
-                      : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                  }}"
-                  alt="avatar"> </a>
-                    <div class="inside_comment">
-                      <div class="comment-meta">
-                        <div class="commentsuser">{{item.userName}}</div>
-                        <div class="comment_date">{{item.commentDate}}</div>
+                <li>
+                  <div class="comment_box">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                      <div fxLayout="row" fxLayoutAlign="center center">
+                        <a class="mr-2">
+                          <img
+                            class="rounded-full w-[30px] h-[30px]"
+                            src="{{
+                              item.urlAvatar
+                                ? item.urlAvatar
+                                : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                            }}"
+                            alt="avatar"
+                          />
+                        </a>
+                        <div class="inside_comment">
+                          <div class="comment-meta">
+                            <div class="commentsuser">{{ item.userName }}</div>
+                            <div class="comment_date">
+                              {{ item.commentDate }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="reply">
+                        <a (click)="ReplyComment(item.id, item.idUser)"
+                          >Reply</a
+                        >
                       </div>
                     </div>
-                    <div class="comment-body">
-                      <p>{{item.commentMsg}}</p>
+                    <div
+                      class="comment-body py-0 mt-[10px] max-w-2xl break-all"
+                    >
+                      <p class="py-0 px-5">{{ item.commentMsg }}</p>
                     </div>
-                    <div class="reply"> <a (click)="ReplyComment(item.id)">Reply</a> </div>
-                    <div class="arrow-down"></div>
                   </div>
 
                   <ul class="children">
                     <!--  show commentbox-reply -->
-                    <li [hidden]="!item['openReply']">        
-                      <div class="comment_box"> <a > <img src="{{
-                        item.urlAvatar
-                          ? item.urlAvatar
-                          : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                      }}"
-                      alt="avatar"> </a>
-                        <div class="inside_comment">
-                          <div class="comment-meta">
-                            <div class="commentsuser">{{item.userName}}</div>
-                            <div class="comment_date">{{item.createOn}}</div>
+                    <li [hidden]="!item['openReply']">
+                      <div class="comment_box show_box">
+                        <div
+                          fxLayout="row"
+                          fxLayoutAlign="space-between center"
+                        >
+                          <div fxLayout="row" fxLayoutAlign="center center">
+                            <a class="mr-2">
+                              <img
+                                class="rounded-full w-[30px] h-[30px]"
+                                src="{{
+                                  currentUser.urlAvatar
+                                    ? currentUser.urlAvatar
+                                    : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                                }}"
+                                alt="avatar"
+                              />
+                            </a>
+                            <div class="inside_comment">
+                              <div class="comment-meta">
+                                <div class="commentsuser">
+                                  {{ currentUser.fullName }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="close-button">
+                            <button
+                              style="height: 24px"
+                              class="bg-white cursor-pointer text-base"
+                              type="button"
+                              (click)="ReplyComment(item.id, item.idUser)"
+                            >
+                              <mat-icon>close</mat-icon>
+                            </button>
                           </div>
                         </div>
                         <div class="comment-body">
                           <custom-textarea
-                          [rows]="2"
-                          placeholder="Your Comment Please....."
-                          formControlName="commentMsg"
-                          [required]="true"
-                        ></custom-textarea>
+                            [rows]="2"
+                            [classInput]="':host::ng-deep .mat-form-field'"
+                            placeholder="Your Comment Please....."
+                            formControlName="commentMsg"
+                            [required]="true"
+                          ></custom-textarea>
                         </div>
-                        <div class="reply"> 
+                        <div class="reply" fxLayoutAlign="end center">
                           <button
-                          class="btn btn-success pull-right"
-                          (click)="ReplyComment(item.id)"
-                          [disabled]="!commentCreated.valid"
-                        >
-                          Reply
-                        </button> 
-                      </div>
-                        <div class="arrow-down">
+                            class="btn btn-success pull-right"
+                            [disabled]="!commentCreated.valid"
+                            (click)="addReply(item.id)"
+                          >
+                            Reply
+                          </button>
                         </div>
                       </div>
                     </li>
                   </ul>
 
                   <ul class="children" *ngFor="let reply of item.replies">
+                    <li>
+                      <div class="comment_box">
+                        <div
+                          fxLayout="row"
+                          fxLayoutAlign="space-between center"
+                        >
+                          <div fxLayout="row" fxLayoutAlign="center center">
+                            <a class="mr-2">
+                              <img
+                                class="rounded-full w-[30px] h-[30px]"
+                                src="{{
+                                  reply.urlAvatar
+                                    ? reply.urlAvatar
+                                    : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                                }}"
+                                alt="avatar"
+                              />
+                            </a>
+                            <div class="inside_comment">
+                              <div class="comment-meta">
+                                <div class="commentsuser">
+                                  {{ reply.userName }}
+                                </div>
+                                <div class="comment_date">
+                                  {{ reply.createOn }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="reply">
+                            <a (click)="ReplyComment(reply.id, reply.idUser)"
+                              >Reply</a
+                            >
+                          </div>
+                        </div>
+                        <div
+                          class="comment-body py-0 mt-[10px] max-w-2xl break-all"
+                        >
+                          <p class="py-0 px-5">{{ reply.replyMsg }}</p>
+                        </div>
+                      </div>
+                    </li>
+
                     <!--  commentbox-reply -->
-                    <!-- <li [hidden]="!item['openReply']">        
-                      <div class="comment_box"> <a > <img src="{{
-                        item.urlAvatar
-                          ? item.urlAvatar
-                          : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                      }}"
-                      alt="avatar"> </a>
-                        <div class="inside_comment">
-                          <div class="comment-meta">
-                            <div class="commentsuser">{{item.userName}}</div>
-                            <div class="comment_date">{{item.createOn}}</div>
+                    <li [hidden]="!reply['openChildReply']">
+                      <div class="comment_box show_box">
+                        <div
+                          fxLayout="row"
+                          fxLayoutAlign="space-between center"
+                        >
+                          <div fxLayout="row" fxLayoutAlign="center center">
+                            <a class="mr-2">
+                              <img
+                                class="rounded-full w-[30px] h-[30px]"
+                                src="{{
+                                  currentUser.urlAvatar
+                                    ? currentUser.urlAvatar
+                                    : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                                }}"
+                                alt="avatar"
+                              />
+                            </a>
+                            <div class="inside_comment">
+                              <div class="comment-meta">
+                                <div class="commentsuser">
+                                  {{ currentUser.fullName }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="close-button">
+                            <button
+                              style="height: 24px"
+                              class="bg-white cursor-pointer text-base"
+                              type="button"
+                              (click)="ReplyComment(reply.id, reply.idUser)"
+                            >
+                              <mat-icon>close</mat-icon>
+                            </button>
                           </div>
                         </div>
                         <div class="comment-body">
                           <custom-textarea
-                          [rows]="2"
-                          placeholder="Your Comment Please....."
-                          formControlName="commentMsg"
-                          [required]="true"
-                        ></custom-textarea>
+                            [rows]="2"
+                            [classInput]="':host::ng-deep .mat-form-field'"
+                            placeholder="Your Comment Please....."
+                            formControlName="commentMsg"
+                            [required]="true"
+                          ></custom-textarea>
                         </div>
-                        <div class="reply"> 
+                        <div class="reply" fxLayoutAlign="end center">
                           <button
-                          class="btn btn-success pull-right"
-                          (click)="ReplyComment(item.id)"
-                          [disabled]="!commentCreated.valid"
-                        >
-                          Reply
-                        </button> 
-                      </div>
-                        <div class="arrow-down">
+                            class="btn btn-success pull-right"
+                            [disabled]="!commentCreated.valid"
+                            (click)="addReply(reply.id)"
+                          >
+                            Reply
+                          </button>
                         </div>
-                      </div>
-                    </li> -->
-                        <!--  reply -->
-                    <li>                                  
-                      <div class="comment_box"> <a > <img src="{{
-                        reply.urlAvatar
-                          ? reply.urlAvatar
-                          : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                      }}"
-                      alt="avatar"> </a>
-                        <div class="inside_comment">
-                          <div class="comment-meta">
-                            <div class="commentsuser">{{reply.userName}}</div>
-                            <div class="comment_date">{{reply.createOn}}</div>
-                          </div>
-                        </div>
-                        <div class="comment-body">
-                          <p>{{reply.replyMsg}}</p>
-                        </div>
-                        <div class="reply"> <a >Reply</a> </div>
-                        <div class="arrow-down"></div>
                       </div>
                     </li>
+                    <!--  reply -->
                   </ul>
                 </li>
               </ol>
