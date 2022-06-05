@@ -14,13 +14,6 @@ export const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'login',
-        loadChildren: () =>
-          import('./admin-page-login/admin-page-login.module').then(
-            (m) => m.AdminPageLoginModule
-          ),
-      },
-      {
         path: 'list-jobs',
         loadChildren: () =>
           import('./list-jobs/list-jobs.module').then((m) => m.ListJobsModule),
@@ -49,6 +42,13 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./create-account/create-account.module').then(
             (m) => m.CreateAccountModule
+          ),
+      },
+      {
+        path: 'information-account',
+        loadChildren: () =>
+          import('./admin-information/admin-information.module').then(
+            (m) => m.AdminInformationModule
           ),
       },
     ],

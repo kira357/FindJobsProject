@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/material.module';
-import { AdminPageLoginComponent } from './admin-page-login/admin-page-login.component';
+import { AdminInformationComponent } from './admin-information.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminPageLoginComponent,
+    component: AdminInformationComponent,
   },
 ];
 @NgModule({
@@ -18,6 +18,6 @@ const routes: Routes = [
     MaterialModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [AdminPageLoginComponent],
+  declarations: [AdminInformationComponent],
 })
-export class AdminPageLoginModule {}
+export class AdminInformationModule {}

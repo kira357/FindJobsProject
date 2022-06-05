@@ -51,6 +51,13 @@ const routes: Routes = [
             (m) => m.ListCommentModule
           ),
       },
+      {
+        path: 'information',
+        loadChildren: () =>
+          import('./recruitment-information/recruitment-information.module').then(
+            (m) => m.RecruitmentInformationModule
+          ),
+      },
     ],
   },
 ];

@@ -30,7 +30,7 @@
     <button mat-button [matMenuTriggerFor]="userMenu">
       <mat-icon>person</mat-icon>
       <span fxShow fxHide.xs>
-        {{userName}}
+        {{ userName }}
       </span>
     </button>
     <mat-menu
@@ -71,13 +71,15 @@
 
         <a mat-list-item [routerLink]="['/admin/list-jobs']">
           <mat-icon mat-list-icon> list_alt </mat-icon>
-          <p mat-line>List Jobs</p>
+          <p mat-line>List jobs</p>
         </a>
         <a mat-list-item [routerLink]="['/admin/list-post']">
-          <mat-icon mat-list-icon> forum </mat-icon>
-          <p mat-line>List Post</p>
+          <div style="display: flex; align-items: center; margin-left: 6px;">
+            <i class="fa-brands fa-blogger" style="font-size: 20px;"></i>
+            <p style="margin-left: 26px;">List post</p>
+          </div>
         </a>
-        
+
         <a mat-list-item [routerLink]="['/admin/create-role']">
           <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
           <p mat-line>Create roles</p>
@@ -86,12 +88,16 @@
           <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
           <p mat-line>Create majors</p>
         </a>
-        
+
         <a mat-list-item [routerLink]="['/admin/create-account']">
           <mat-icon mat-list-icon>person</mat-icon>
           <p mat-line>Account</p>
         </a>
 
+        <!-- <a mat-list-item [routerLink]="['/admin/information-account']">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <p mat-line>Information Admin</p>
+        </a> -->
 
         <mat-divider></mat-divider>
 
