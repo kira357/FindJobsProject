@@ -17,8 +17,8 @@ export class CommentService {
     'Content-Type': 'application/json',
   });
 
-  RequestGetAllListComment = (pagingParams: PagingParams, Id: any) => {
-    return this.http.get(`${this.rootURL}/get-all-list-comment/${Id}`, {
+  RequestGetAllListComment = (pagingParams: PagingParams) => {
+    return this.http.get(`${this.rootURL}/get-all-list-comment`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,

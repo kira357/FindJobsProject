@@ -74,14 +74,7 @@ export class CreateJobsComponent implements OnInit {
   modules = {};
   defaultImageSrc = '/assets/image/default-image.png';
 
-  listExperienceJobs: any[] = [
-    'Không yêu cầu kinh nghiệm',
-    '1 năm kinh nghiệm',
-    '2 năm kinh nghiệm',
-    '3 năm kinh nghiệm',
-    '4 năm kinh nghiệm',
-    '5 năm kinh nghiệm',
-  ];
+  listExperienceJobs: any[] = [ 'Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'];
   comboxMajor: any[] = [];
   _PagingParams = new PagingParams();
   getDateExpire: any;
@@ -153,7 +146,6 @@ export class CreateJobsComponent implements OnInit {
   }
   newForm: any;
   datePipe: DatePipe = new DatePipe('en-US');
-  currentDate = new Date();
   dateExpire: any;
   formData = new FormData();
   onSubmit = () => {
@@ -191,8 +183,6 @@ export class CreateJobsComponent implements OnInit {
     console.log('descriptions', evt.html);
   };
 
-  onClickDelete = (id: any) => {};
-
   select = () => {
     console.log('123', this.check);
   };
@@ -209,5 +199,4 @@ export class CreateJobsComponent implements OnInit {
     this.employeeCreated.reset();
   }
 
-  onClose() {}
 }

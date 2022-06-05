@@ -18,13 +18,6 @@ export class ListAccountService {
         cssClasses: ['text-secondary', 'font-medium'],
       },
       {
-        label: 'Gender',
-        property: 'gender',
-        type: 'text',
-        visible: true,
-        cssClasses: ['text-secondary', 'font-medium'],
-      },
-      {
         label: 'Phone number',
         property: 'phoneNumber',
         type: 'text',

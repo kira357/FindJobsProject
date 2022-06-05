@@ -81,8 +81,8 @@
                   <mat-icon ngxMatSelectSearchClear>x</mat-icon>
                 </ngx-mat-select-search>
               </mat-option>
-              <mat-option *ngFor="let item of gender" [value]="item">
-                {{ item }}</mat-option
+              <mat-option *ngFor="let item of gender" [value]="item.value">
+                {{ item.name }}</mat-option
               >
             </mat-select>
           </mat-form-field>

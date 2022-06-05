@@ -5,6 +5,9 @@ import { debounceTime, Subject } from 'rxjs';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import { MajorService } from 'src/app/core/model/major/major.service';
 import { PagingParams } from 'src/app/core/model/paging-params';
+import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
+import { UserService } from 'src/app/core/model/user/User.service';
+import { ApiAuthenService } from 'src/app/services/api-authen.service';
 
 @Component({
   selector: 'app-admin-page-login',
@@ -14,9 +17,9 @@ import { PagingParams } from 'src/app/core/model/paging-params';
 export class RecruitmentInformationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private majorService: MajorService,
-    private jobService: JobsService
+    private apiAuthenService: ApiAuthenService,
+    private userService: UserService
   ) {
     this.onSearch = new Subject();
     this.onSearch.pipe(debounceTime(100)).subscribe((str) => {
@@ -29,20 +32,15 @@ export class RecruitmentInformationComponent implements OnInit {
     });
   }
   defaultImageSrc = '/assets/image/default-image.png';
-  employeeCreated = this.formBuilder.group({
+  updateUser = this.formBuilder.group({
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
-    username: ['', Validators.required],
     email: ['', Validators.required],
     phonenumber: ['', Validators.required],
-    description: ['', Validators.required],
     address: ['', Validators.required],
-    gender: ['', Validators.required],
-    roleName: ['', Validators.required],
     experience: ['', Validators.required],
     imageFile: '',
     idMajor: ['', Validators.required],
-    password: ['', Validators.required],
     search: '',
   });
   private _search: string;
@@ -58,14 +56,14 @@ export class RecruitmentInformationComponent implements OnInit {
     return this._search;
   }
   comboxMajor: any[] = [];
-  gender: any[] = ['Nam', 'Nữ'];
-  listExperienceJobs: any[] = [
-    'Không yêu cầu kinh nghiệm',
-    '1 năm kinh nghiệm',
-    '2 năm kinh nghiệm',
-    '3 năm kinh nghiệm',
-    '4 năm kinh nghiệm',
-    '5 năm kinh nghiệm',
+  listExperience: any[] = [
+    'Dưới 1 năm',
+    '1 năm',
+    '2 năm',
+    '3 năm',
+    '4 năm',
+    '5 năm',
+    'Trên 5 năm',
   ];
   _PagingParams = new PagingParams();
   onSearch: Subject<string>;
@@ -92,8 +90,11 @@ export class RecruitmentInformationComponent implements OnInit {
         name: '',
       };
     }
+  };
+  ngOnInit() {
+    this.getCurrentUser();
+    this.getComboxMajor();
   }
-  ngOnInit() {}
   getComboxMajor() {
     this.majorService
       .RequestGetListMajor(this._PagingParams)
@@ -102,8 +103,48 @@ export class RecruitmentInformationComponent implements OnInit {
         this.comboxMajor = data.data;
       });
   }
-  onAdd(){}
+
+  data = localStorage.getItem('data');
+  currentUser: VMGetCurrentUser;
+  getCurrentUser() {
+    const dataJson = JSON.parse(this.data || '');
+    this.apiAuthenService
+      .RequestGetCurrentUser(dataJson.data.id)
+      .subscribe((data: any) => {
+        this.currentUser = data[0];
+        console.log('123', this.currentUser);
+      });
+  }
+
+  openEdit: boolean = false;
+  formData = new FormData();
+  onEdit() {
+    console.log('onEdit', this.updateUser.value);
+    this.formData.append('imageFile', this.files[0]);
+    this.formData.append('firstName', this.updateUser.value.firstname);
+    this.formData.append('lastName', this.updateUser.value.lastname);
+    this.formData.append('phoneNumber', this.updateUser.value.phonenumber);
+    this.formData.append('idMajor', this.updateUser.value.idMajor);
+    this.formData.append('address', this.updateUser.value.address);
+    this.formData.append('experience', this.updateUser.value.experience);
+
+    this.userService
+      .RequestUpdateInfoUser(this.formData , this.currentUser.id)
+      .subscribe((data: any) => {
+        console.log('data', data);
+        this.openEdit = false;
+        this.updateUser.reset();
+        this.getCurrentUser();
+      });
+  }
+  onOpenEdit() {
+    if (this.openEdit) {
+      this.openEdit = false;
+    } else {
+      this.openEdit = true;
+    }
+  }
   onReset() {
-    this.employeeCreated.reset();
+    this.updateUser.reset();
   }
 }

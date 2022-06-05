@@ -40,6 +40,10 @@ export class UserService {
     });
   };
 
+  RequestUpdateInfoUser = (User: FormData, Id: any) => {
+    return this.http.put(`${this.rootURL}/update-information/${Id}`, User);
+  };
+
   RequestUpdateActive = (job: any) => {
     return this.http.put(`${this.rootURL}/update-active`, job);
   };

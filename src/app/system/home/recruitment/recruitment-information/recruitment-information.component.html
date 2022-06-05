@@ -1,206 +1,4 @@
-<!-- <div fxLayout="column">
-  <div
-    fxLayout.gt-sm="row"
-    fxLayoutGap="20px"
-    fxLayout.lt-md="column"
-    fxFlex="100%"
-  >
-    <div fxFlex.gt-md="100%" fxFlex.lg="40%" fxLayoutAlign="center start">
-      <form [formGroup]="employeeCreated"
-      >
 
-      <div
-      fxFlex.gt-sm="20%"
-      fxFlex="100%"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-    >
-      <img
-        class="custom-img"
-        id="blah"
-        [src]="imageFile ? imageFile.link : defaultImageSrc"
-        alt="your image"
-      />
-      <input
-        type="file"
-        class="my-3"
-        accept="image/*"
-        name="imageFile"
-        id="imageFile"
-        formControlName="imageFile"
-      />
-    </div>
-
-        <div
-          fxLayout="row wrap"
-          fxLayout.lt-sm="column"
-          fxLayoutAlign="start stretch"
-        >
-          <mat-form-field
-            style="margin-left: 5px"
-            fxFlex="100"
-            appearance="outline"
-            floatLabel="always"
-          >
-            <mat-label> Major </mat-label>
-            <mat-select
-              formControlName="idMajor"
-            >
-              <mat-option>
-                <ngx-mat-select-search name="idMajor"
-                [(ngModel)]="search"
-                formControlName="search"
-                [placeholderLabel]="'Search' "
-                [noEntriesFoundLabel]="'NotFound'">
-                  <mat-icon ngxMatSelectSearchClear>x</mat-icon>
-                </ngx-mat-select-search>
-              </mat-option>
-              <mat-option
-                *ngFor="let item of comboxMajor"
-                [value]="item.idMajor"
-              >
-                {{ item.name }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field
-          style="margin-left: 5px"
-          fxFlex="33,33%"
-          appearance="outline"
-          floatLabel="always"
-        >
-          <mat-label> Experience </mat-label>
-          <mat-select
-            formControlName="experience"
-          >
-            <mat-option>
-              <ngx-mat-select-search name="experience">
-                <mat-icon ngxMatSelectSearchClear>x</mat-icon>
-              </ngx-mat-select-search>
-            </mat-option>
-            <mat-option
-              *ngFor="let item of listExperienceJobs"
-              [value]="item"
-            >
-              {{ item }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-
-
-          <custom-input
-            style="margin-left: 5px"
-            fxFlex="30"
-            [required]="true"
-            [name]="'firstname'"
-            formControlName="firstname"
-            [placeholder]="'first name'"
-            [title]="'first name'"
-            [maxlength]="250"
-          ></custom-input>
-          <custom-input
-            style="margin-left: 5px"
-            fxFlex="30"
-            [required]="true"
-            [name]="'address'"
-            formControlName="lastname"
-            [placeholder]="'Last name'"
-            [title]="'Last name'"
-            [maxlength]="250"
-          ></custom-input>
-          <mat-form-field
-            style="margin-left: 5px"
-            fxFlex="30"
-            appearance="outline"
-            floatLabel="always"
-          >
-            <mat-label> Gender </mat-label>
-            <mat-select
-              formControlName="gender"
-            >
-              <mat-option>
-                <ngx-mat-select-search name="gender">
-                  <mat-icon ngxMatSelectSearchClear>x</mat-icon>
-                </ngx-mat-select-search>
-              </mat-option>
-              <mat-option *ngFor="let item of gender" [value]="item">
-                {{ item }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-       
-          <custom-input
-            style="margin-left: 5px"
-            fxFlex="30"
-            [required]="true"
-            [name]="'username'"
-            formControlName="username"
-            [placeholder]="'User name'"
-            [title]="'User name'"
-            [maxlength]="250"
-          ></custom-input>
-
-          <custom-input
-            style="margin-left: 5px"
-            fxFlex="45"
-            [required]="true"
-            [name]="'email'"
-            formControlName="email"
-            [placeholder]="'Email'"
-            [title]="'Email'"
-            [maxlength]="250"
-          ></custom-input>
-          <custom-input
-            style="margin-left: 5px"
-            fxFlex="45"
-            [required]="true"
-            [name]="'phonenumber'"
-            formControlName="phonenumber"
-            [placeholder]="'Phone'"
-            [title]="'Phone'"
-            [maxlength]="250"
-          ></custom-input>
-
-          <div
-            class="px-2"
-            fxFlex="5"
-            fxFlex.sm="100"
-            fxFlex.md="15"
-            fxLayoutAlign="start start"
-          >
-
-          </div>
-          <custom-textarea
-            class="mt-3"
-            fxFlex="100"
-            [title]="'Description'"
-            [placeholder]="'Description'"
-            [name]="'description'"
-            formControlName="description"
-          ></custom-textarea>
-        </div>
-
-        <div
-          fxLayout="row wrap"
-          fxLayoutGap="10px"
-          fxLayoutAlign="end stretch"
-          fxLayout.lt-sm="column"
-        >
-          <custom-button type="reset"(click)="onReset()" ></custom-button>
-          <custom-button type="save" (click)="onAdd()"></custom-button>
-        </div>
-
-        
-      </form>
-    </div>
-    <div fxFlex.gt-md="100%" fxFlex.lg="60%" fxLayoutAlign="start stretch">
-      <div fxFlex="100">
-     
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <section class="section-content padding-y">
   <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
@@ -217,15 +15,15 @@
       <div>
         <article class="mb-2 card" style="padding: 25px 0px">
           <div fxLayout="column">
-            <div style="text-align: right;" class="px-2">
-              <mat-icon>edit</mat-icon>
+            <div style="text-align: right" class="px-2" (click)="onOpenEdit()">
+              <i class="fa-solid fa-pencil edit-icon"></i>
             </div>
             <div fxLayout="row" fxLayoutAlign="start center">
               <div fxLayout="row" fxFlex="20">
                 <img
                   class="custom-img px-3"
                   id="blah"
-                  [src]="imageFile ? imageFile.link : defaultImageSrc"
+                  [src]="currentUser?.urlAvatar"
                   alt="your image"
                 />
               </div>
@@ -236,25 +34,7 @@
                       <label class="custom-label" for="name">name:</label>
                     </div>
                     <div fxFlex="90">
-                      <span class="custom-span">Name</span>
-                    </div>
-                  </div>
-                  <div fxLayout="row">
-                    <div fxFlex="10">
-                      <label class="custom-label" for="phone">Phone: </label>
-                    </div>
-                    <div fxFlex="90">
-                      <span class="custom-span">Phone</span>
-                    </div>
-                  </div>
-                  <div fxLayout="row">
-                    <div fxFlex="10">
-                      <label class="custom-label" for="address"
-                        >Address:
-                      </label>
-                    </div>
-                    <div fxFlex="90">
-                      <span class="custom-span">Address</span>
+                      <span class="custom-span">{{currentUser?.fullName}}</span>
                     </div>
                   </div>
                   <div fxLayout="row">
@@ -262,7 +42,7 @@
                       <label class="custom-label" for="major">Major: </label>
                     </div>
                     <div fxFlex="90">
-                      <span class="custom-span">Major</span>
+                      <span class="custom-span">{{currentUser?.nameMajor}}</span>
                     </div>
                   </div>
                   <div fxLayout="row">
@@ -272,12 +52,168 @@
                       </label>
                     </div>
                     <div fxFlex="90">
-                      <span class="custom-span">Experience</span>
+                      <span class="custom-span">{{currentUser?.experience}}</span>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div fxFlex="10">
+                      <label class="custom-label" for="phone">Phone: </label>
+                    </div>
+                    <div fxFlex="90">
+                      <span class="custom-span">{{currentUser?.phoneNumber}}</span>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div fxFlex="10">
+                      <label class="custom-label" for="address"
+                        >Address:
+                      </label>
+                    </div>
+                    <div fxFlex="90">
+                      <span class="custom-span">{{currentUser?.address}}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </article>
+        <!-- card-product .// -->
+      </div>
+      <div *ngIf="openEdit">
+        <article class="mb-2 card" style="padding: 25px 0px">
+          <div fxLayout="column">
+            <form [formGroup]="updateUser">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column">
+                  <img
+                    class="custom-img"
+                    id="blah"
+                    [src]="imageFile ? imageFile.link : currentUser.urlAvatar"
+                    alt="your image"          
+                  />
+                  <input
+                    type="file"
+                    class="my-3"
+                    accept="image/*"
+                    name="imageFile"
+                    id="imageFile"
+                    formControlName="imageFile"
+                    (change)="handleChange($event)"
+                  />
+                </div>
+                <div fxFlex="80">
+                  <div fxLayout="column" fxLayoutGap="15px">
+                    <div fxLayout="row">
+                      <custom-input
+                        fxFlex="50"
+                        [required]="true"
+                        [name]="'firstname'"
+                        formControlName="firstname"
+                        [placeholder]="'first name'"
+                        [title]="'first name'"
+                        [maxlength]="250"
+                        [(ngModel)]="currentUser.firstName"
+                      ></custom-input>
+                      <custom-input
+                        fxFlex="50"
+                        [required]="true"
+                        [name]="'lastname'"
+                        formControlName="lastname"
+                        [placeholder]="'Last name'"
+                        [title]="'Last name'"
+                        [maxlength]="250"
+                        [(ngModel)]="currentUser.lastName"
+                      ></custom-input>
+                    </div>
+
+                    <div fxLayout="row">
+                      <mat-form-field
+                        style="margin-left: 5px"
+                        fxFlex="100"
+                        appearance="outline"
+                        floatLabel="always"
+                      >
+                        <mat-label> Major </mat-label>
+                        <mat-select formControlName="idMajor"  [(ngModel)]="currentUser.idMajor">
+                          <mat-option>
+                            <ngx-mat-select-search
+                              name="idMajor"
+                              [(ngModel)]="search"
+                              formControlName="search"
+                              [placeholderLabel]="'Search'"
+                              [noEntriesFoundLabel]="'NotFound'"
+                            >
+                              <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                            </ngx-mat-select-search>
+                          </mat-option>
+                          <mat-option
+                            *ngFor="let item of comboxMajor"
+                            [value]="item.idMajor"
+                          >
+                            {{ item.name }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayout="row">
+                      <mat-form-field
+                        style="margin-left: 5px"
+                        fxFlex="33,33%"
+                        appearance="outline"
+                        floatLabel="always"
+                      >
+                        <mat-label> Experience </mat-label>
+                        <mat-select formControlName="experience" [(ngModel)]="currentUser.experience">
+                          <mat-option>
+                            <ngx-mat-select-search name="experience">
+                              <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                            </ngx-mat-select-search>
+                          </mat-option>
+                          <mat-option
+                            *ngFor="let item of listExperience"
+                            [value]="item"
+                          >
+                            {{ item }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayout="row">
+                      <custom-input
+                        fxFlex="100"
+                        [required]="true"
+                        [name]="'phonenumber'"
+                        formControlName="phonenumber"
+                        [placeholder]="'Phone'"
+                        [title]="'Phone'"
+                        [maxlength]="250"
+                        [(ngModel)]="currentUser.phoneNumber"
+                      ></custom-input>
+                    </div>
+                    <div fxLayout="row">
+                      <custom-input
+                        fxFlex="100"
+                        [required]="true"
+                        [name]="'address'"
+                        formControlName="address"
+                        [placeholder]="'Address'"
+                        [title]="'Address'"
+                        [maxlength]="250"
+                        [(ngModel)]="currentUser.address"
+                      ></custom-input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div fxLayoutAlign="end center">
+                <custom-button
+                  [type]="'save'"
+                  (click)="onEdit()"
+                  style="margin-right: 10px"
+                ></custom-button>
+              </div>
+            </form>
           </div>
         </article>
         <!-- card-product .// -->

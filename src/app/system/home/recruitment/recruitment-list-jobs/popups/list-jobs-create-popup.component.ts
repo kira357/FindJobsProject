@@ -113,14 +113,7 @@ export class ListJobsCreatePopupComponent implements OnInit {
     });
   }
 
-  listExperienceJobs: any[] = [
-    'Không yêu cầu kinh nghiệm',
-    '1 năm kinh nghiệm',
-    '2 năm kinh nghiệm',
-    '3 năm kinh nghiệm',
-    '4 năm kinh nghiệm',
-    '5 năm kinh nghiệm',
-  ];
+  listExperienceJobs: any[] = [ 'Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'];
   comboxMajor: any[] = [];
 
   ngOnInit(): void {

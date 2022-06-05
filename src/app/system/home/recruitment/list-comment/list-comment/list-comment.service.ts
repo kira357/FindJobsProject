@@ -12,83 +12,35 @@ export class ListCommentService {
             { label: 'No', property: 'index', type: 'index', visible: true },
 
             {
-                label: "TradeType",
-                property: 'tradeTypeName',
+                label: "User name",
+                property: 'userName',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
             {
-                label: "CustomerCode",
-                property: 'customerCode',
+                label: "Job name",
+                property: 'jobName',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
             {
-                label: "FullName",
-                property: 'supplierName',
+                label: "Comment",
+                property: 'commentMsg',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
             {
-                label: "ShortName",
-                property: 'supplierShortName',
+                label: "Comment create",
+                property: 'commentDate',
                 type: 'text',
                 visible: true,
                 cssClasses: ['text-secondary', 'font-medium']
             },
 
-            {
-                label: "Code",
-                property: 'ifCode',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "CustomerType",
-                property: 'customerTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Country",
-                property: 'CountryTypeName',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "SysUser",
-                property: 'sysUserYn',
-                type: 'checkbox',
-                visible: true,
-                cssClasses: []
-            },
-            {
-                label: "Active",
-                property: 'activeYn',
-                type: 'checkbox',
-                visible: true,
-                cssClasses: []
-            },
-            {
-                label: "LasterETL",
-                property: 'etlDate',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            },
-            {
-                label: "Description",
-                property: 'description',
-                type: 'text',
-                visible: true,
-                cssClasses: ['text-secondary', 'font-medium']
-            }
+        
         ];
     };
 }

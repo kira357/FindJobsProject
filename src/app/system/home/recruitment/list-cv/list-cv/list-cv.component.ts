@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { ListCVService } from '../list-cv.service';
 import { saveAs } from 'file-saver';
+import { CommentService } from 'src/app/core/model/comment/comment.service';
 @Component({
   selector: 'app-list-cv',
   templateUrl: './list-cv.component.html',
@@ -11,7 +12,7 @@ import { saveAs } from 'file-saver';
 export class ListCvComponent implements OnInit {
   constructor(
     private listCvService: ListCVService,
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
   ) {}
 
   _PagingParams = new PagingParams();

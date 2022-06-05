@@ -49,9 +49,15 @@ export interface VMGetUser {
 export interface VMGetCurrentUser {
   id: any;
   fullName: string;
+  firstName: string;
+  lastName: string;
   roleName: string;
+  experience: string;
   nameMajor: string;
+  idMajor: number;
   urlAvatar: string;
+  phoneNumber: string;
+  address: string;
 }
 export interface VMCreateUser {
   lastName: string;

@@ -69,7 +69,10 @@ export class CreateAccountComponent implements OnInit {
 
   comboxMajor: any[] = [];
   comboxRole: any[] = [];
-  gender: any[] = ['Nam', 'Nữ'];
+  gender: any[] = [
+    { value: 0, name: 'Nữ' },
+    { value: 1, name: 'Nam' },
+  ];
 
   check: any;
 
@@ -100,7 +103,7 @@ export class CreateAccountComponent implements OnInit {
         this._PagingParams.totalRows = data.totalCount;
       });
   }
-  rowid : any;
+  rowid: any;
   onRowClick(evt: any) {
     this._LIST_ITEM = evt;
     this.isShowPassword = true;
@@ -137,7 +140,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onAdd() {
-    if ( this.rowid) {
+    if (this.rowid) {
       this.userService
         .RequestUpdateUser(this.employeeCreated.value, this._LIST_ITEM.id)
         .subscribe((data: any) => {
@@ -149,7 +152,7 @@ export class CreateAccountComponent implements OnInit {
       this.userService
         .RequestCreateUser(this.employeeCreated.value)
         .subscribe((data: any) => {
-          if(data){
+          if (data) {
             this.getListData();
           }
         });
@@ -168,7 +171,7 @@ export class CreateAccountComponent implements OnInit {
             this.getListData();
           }
         });
-    } 
+    }
   }
   filterMyOptions(evt: any) {
     console.log('filterMyOptions', evt);
