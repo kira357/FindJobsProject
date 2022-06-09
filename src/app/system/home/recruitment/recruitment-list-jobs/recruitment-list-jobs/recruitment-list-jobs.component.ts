@@ -91,10 +91,10 @@ export class RecruitmentListJobsComponent implements OnInit {
       });
   }
   onDelete($event: any) {
-    // console.log('onDelete', $event);
-    // this.majorService.RequestDeleteMajor($event).subscribe((data: any) => {
-    //   this.getListData();
-    // });
+    console.log('onDelete', $event);
+    this.jobsService.RequestDeleteJob($event).subscribe((data: any) => {
+      this.getListData();
+    });
   }
   async onCheck($event:any){
     console.log('onCheck',  this.rowData);
