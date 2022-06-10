@@ -67,9 +67,25 @@
           Apply Now
         </button>
       </ng-template>
-      <a style="font-size: 25px" fxFlexAlign="center end" fxFlex="5"
-        ><i class="fa fa-heart"></i
-      ></a>
+      <a
+        *ngIf="isLike; else nonFavourite"
+        style="font-size: 25px"
+        fxFlexAlign="center end"
+        fxFlex="5"
+        (click)="onFavourite(_ITEM_DATA.idJob)"
+      >
+        <mat-icon class="favourite">favorite</mat-icon></a
+      >
+      <ng-template #nonFavourite>
+        <a
+          style="font-size: 25px"
+          fxFlexAlign="center end"
+          fxFlex="5"
+          (click)="onFavourite(_ITEM_DATA.idJob)"
+        >
+          <mat-icon class="non-favourite">favorite_border</mat-icon></a
+        >
+      </ng-template>
     </div>
     <div class="border-top my-3">
       <div class="py-2 detail-job">

@@ -1,3 +1,5 @@
+import { VMCreateFavourite } from './../../../../core/model/favourite/model/favourite';
+import { FavouriteService } from './../../../../core/model/favourite/favourite.service';
 import { CandidateService } from './../../../../core/model/candidateJob/candidate.service';
 import { ApplyJobPopupComponent } from './popups/apply-job-popup.component';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
@@ -16,6 +18,7 @@ export class QuickDetailComponent implements OnInit {
   constructor(
     private _Activatedroute: ActivatedRoute,
     private jobsService: JobsService,
+    private favouriteService: FavouriteService,
     private candidateService: CandidateService,
     private __dialog: MatDialog
   ) {}
@@ -41,7 +44,6 @@ export class QuickDetailComponent implements OnInit {
     isActive: false,
     dateExpire: '',
     imageUser: '',
-    // imageFile: '',
   };
   getData: any;
   sub: any;
@@ -50,6 +52,7 @@ export class QuickDetailComponent implements OnInit {
     this.getListData();
   }
   isActive: boolean = false;
+  isLike: boolean = false;
   getListData() {
     const data = localStorage.getItem('data');
     const dataJson = JSON.parse(data);
@@ -62,10 +65,11 @@ export class QuickDetailComponent implements OnInit {
           this._ITEM_DATA = data.data[0];
         });
       this.candidateService
-        .RequestCheckIsApply(dataJson.data.id, this.id)
+        .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
         .subscribe((data: any) => {
-          console.log('check', data);
+          console.log('check like', data);
           this.isActive = data.isActive;
+          this.isLike = data.islike;
         });
     });
   }
@@ -90,5 +94,36 @@ export class QuickDetailComponent implements OnInit {
           this.getListData();
         }
       });
+  }
+
+  onFavourite(idJob: any) {
+    let favourite : VMCreateFavourite;
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data || '');
+    if (!this.isLike) {
+      this.isLike = true;
+      favourite = {
+        IdUser: dataJson.data.id,
+        idJob: idJob,
+        isLike: this.isLike,
+      };
+      this.favouriteService
+        .RequestCreateFavourite(favourite)
+        .subscribe((data: any) => {
+          this.getListData();
+        });
+    } else {
+      this.isLike = false;
+      favourite = {
+        IdUser: dataJson.data.id,
+        idJob: idJob,
+        isLike: this.isLike,
+      };
+      this.favouriteService
+        .RequestCreateFavourite(favourite)
+        .subscribe((data: any) => {
+          this.getListData();
+        });
+    }
   }
 }

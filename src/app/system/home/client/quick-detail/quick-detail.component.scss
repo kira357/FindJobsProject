@@ -40,7 +40,6 @@ body {
     line-height: 32.4px;
     text-shadow: #000000 1px 1px 1px;
     text-decoration: none;
-
   }
   .name-company {
     font-size: 14px;
@@ -109,8 +108,20 @@ body {
   opacity: 40%;
 }
 
-.card-body p {
-  font-size: 13px;
+.card-body {
+  p {
+    font-size: 13px;
+  }
+  .favourite {
+    color: #ea1e30;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .non-favourite {
+    color: #221f20;
+    font-size: 30px;
+    font-weight: 500;
+  }
 }
 .user {
   margin-top: auto;

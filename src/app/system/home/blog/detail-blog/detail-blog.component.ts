@@ -34,7 +34,7 @@ export class DetailBlogComponent implements OnInit {
     title: '',
     image: '',
     imageUser: '',
-    nameUser : '',
+    nameUser: '',
     summary: '',
     idMajor: '',
     nameMajor: '',
@@ -49,7 +49,6 @@ export class DetailBlogComponent implements OnInit {
   getData: any;
   sub: any;
   id: any;
-
 
   ngOnInit() {
     this.getListData();
@@ -68,11 +67,10 @@ export class DetailBlogComponent implements OnInit {
           this._ITEM_DATA = data.data[0];
         });
       this.candidateService
-        .RequestCheckIsApply(dataJson.data.id, this.id)
+        .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
         .subscribe((data: any) => {
           this.isActive = data.isActive;
         });
     });
   }
-
 }

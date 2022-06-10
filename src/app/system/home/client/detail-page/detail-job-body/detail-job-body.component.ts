@@ -9,6 +9,8 @@ import { VMGetJobDto } from 'src/app/core/model/jobs/model/Jobs';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { ApplyJobPopupComponent } from '../../quick-detail/popups/apply-job-popup.component';
 import { UserComment } from 'src/app/core/model/comment/model/comment';
+import { FavouriteService } from 'src/app/core/model/favourite/favourite.service';
+import { VMCreateFavourite } from 'src/app/core/model/favourite/model/favourite';
 
 @Component({
   selector: 'app-detail-job-body',
@@ -22,7 +24,8 @@ export class DetailJobBodyComponent implements OnInit {
     private jobsService: JobsService,
     private candidateService: CandidateService,
     private __dialog: MatDialog,
-    private commentService : CommentService
+    private favouriteService: FavouriteService,
+    private commentService: CommentService
   ) {}
 
   _PagingParams = new PagingParams();
@@ -47,7 +50,7 @@ export class DetailJobBodyComponent implements OnInit {
     dateExpire: '',
     imageUser: '',
   };
-  commentArray : UserComment[] = [];
+  commentArray: UserComment[] = [];
   getData: any;
   sub: any;
   id: any;
@@ -55,6 +58,7 @@ export class DetailJobBodyComponent implements OnInit {
     this.getListData();
   }
   isActive: boolean = false;
+  isLike: boolean = false;
   getListData() {
     const data = localStorage.getItem('data');
     const dataJson = JSON.parse(data);
@@ -68,9 +72,10 @@ export class DetailJobBodyComponent implements OnInit {
           this._ITEM_DATA = data.data[0];
         });
       this.candidateService
-        .RequestCheckIsApply(dataJson.data.id, this.id)
+        .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
         .subscribe((data: any) => {
           this.isActive = data.isActive;
+          this.isLike = data.islike;
         });
     });
   }
@@ -96,5 +101,34 @@ export class DetailJobBodyComponent implements OnInit {
         }
       });
   }
-
+  onFavourite(idJob: any) {
+    let favourite: VMCreateFavourite;
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data || '');
+    if (!this.isLike) {
+      this.isLike = true;
+      favourite = {
+        IdUser: dataJson.data.id,
+        idJob: idJob,
+        isLike: this.isLike,
+      };
+      this.favouriteService
+        .RequestCreateFavourite(favourite)
+        .subscribe((data: any) => {
+          this.getListData();
+        });
+    } else {
+      this.isLike = false;
+      favourite = {
+        IdUser: dataJson.data.id,
+        idJob: idJob,
+        isLike: this.isLike,
+      };
+      this.favouriteService
+        .RequestCreateFavourite(favourite)
+        .subscribe((data: any) => {
+          this.getListData();
+        });
+    }
+  }
 }

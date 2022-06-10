@@ -41,13 +41,23 @@
       <header class="border-bottom my-3">
         <div class="form-inline py-2" fxFlex="row">
           <span class="mr-md-auto" style="font-size: 15px; font-weight: 500"
-            >{{Amount}} Jobs found
+            >{{ Amount }} Jobs found
           </span>
         </div>
       </header>
       <!-- sect-heading -->
 
-      <div *ngFor="let item of _LIST_DATA | paginate: { itemsPerPage: 1, currentPage: _PagingParams.currentPage , totalItems: _PagingParams.totalRows }">
+      <div
+        *ngFor="
+          let item of _LIST_DATA
+            | paginate
+              : {
+                  itemsPerPage: 2,
+                  currentPage: _PagingParams.currentPage,
+                  totalItems: _PagingParams.totalRows
+                }
+        "
+      >
         <article class="mb-2 card" style="padding: 25px 0px">
           <div fxLayout="row">
             <div fxFlex="20" fxLayoutAlign="center top" style="padding: 0px">
@@ -73,20 +83,22 @@
                   >
                     {{ item.name }}
                   </a>
-                  <a class="mr-2" style="font-size: 25px"
-                    ><i class="fa fa-heart"></i
-                  ></a>
+                  <div class="mr-2 new-job"><span>New</span></div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="space-between stretch">
                   <div>
                     <div class="mb-1">
-                      <a href="#" style="text-decoration: none">{{item.recruitmentName}}</a>
+                      <a href="#" style="text-decoration: none">{{
+                        item.recruitmentName
+                      }}</a>
                     </div>
                     <div class="mb-1">
                       <div>Major: {{ item.nameMajor }}</div>
                     </div>
                     <div class="mb-1">
-                      <div>Salary: {{ item.salaryMin }} - {{ item.salaryMax }}</div>
+                      <div>
+                        Salary: {{ item.salaryMin }} - {{ item.salaryMax }}
+                      </div>
                     </div>
                     <div class="mb-1">
                       <div>Address: {{ item.address }}</div>
@@ -110,7 +122,9 @@
                     </div>
                     <div class="mb-1">
                       <span>
-                        Date expire:<span> {{ item.dateExpire | date}} </span></span
+                        Date expire:<span>
+                          {{ item.dateExpire | date }}
+                        </span></span
                       >
                     </div>
                   </div>
@@ -132,7 +146,9 @@
         </article>
         <!-- card-product .// -->
       </div>
-      <pagination-controls (pageChange)="onpageChange($event)"></pagination-controls>
+      <pagination-controls
+        (pageChange)="onpageChange($event)"
+      ></pagination-controls>
     </main>
     <main class="col-md-9" fxFlex="50">
       <header class="border-bottom my-3">

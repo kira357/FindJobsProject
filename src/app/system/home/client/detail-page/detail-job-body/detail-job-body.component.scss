@@ -96,6 +96,16 @@
       padding: 5px 25px;
       text-align: center;
     }
+    .favourite {
+      color: #ea1e30;
+      font-size: 30px;
+      font-weight: 500;
+    }
+    .non-favourite {
+      color: #221f20;
+      font-size: 30px;
+      font-weight: 500;
+    }
   }
   // .detail-job {
   //   max-height: 700px;
@@ -157,4 +167,3 @@
 .reply a {
   text-decoration: none;
 }
-

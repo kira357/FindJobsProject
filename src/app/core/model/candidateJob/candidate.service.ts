@@ -36,8 +36,8 @@ export class CandidateService {
     });
   };
 
-  RequestCheckIsApply = (Id: any, idJob :any) => {
-    return this.http.get(`${this.rootURL}/is-apply/${Id}`, {
+  RequestCheckIsApplyAndFavourite = (Id: any, idJob :any) => {
+    return this.http.get(`${this.rootURL}/is-apply-and-like/${Id}`, {
       headers: this.headers,
       params: {
         idJob: idJob,
