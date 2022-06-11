@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
@@ -9,7 +10,7 @@ import { PagingParams } from 'src/app/core/model/paging-params';
   styleUrls: ['./body.component.scss'],
 })
 export class BodyComponent implements OnInit {
-  constructor(private jobsService: JobsService) {}
+  constructor(private jobsService: JobsService, private router : Router) {}
   timePost: any[] = ['Laster post', 'New post', 'Old post'];
   _PagingParams = new PagingParams();
   _LIST_DATA: any = [];
@@ -34,5 +35,8 @@ export class BodyComponent implements OnInit {
   onpageChange(evt: any) {
     this._PagingParams.currentPage = evt;
     console.log('onpageChange', evt);
+  }
+  onClickQuickDetail(idJob:any){
+    this.router.navigate(['/home/quick-detail', idJob]);
   }
 }

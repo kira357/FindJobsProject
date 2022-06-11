@@ -17,11 +17,14 @@ body {
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+.no-outline {
+  outline: none;
+}
 .card {
   margin: 10px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  // border-radius: 10px;
+  // box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
 }
@@ -38,13 +41,15 @@ body {
     font-family: "" Roboto "";
     font-size: 27px;
     line-height: 32.4px;
+    word-break: break-word;
     text-shadow: #000000 1px 1px 1px;
     text-decoration: none;
   }
-  .name-company {
+  .info-job {
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 10px;
+    word-break: break-word;
   }
   .icon {
     font-size: 14px;

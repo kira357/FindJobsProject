@@ -1,20 +1,40 @@
 $color: yellow;
 
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+.header {
+  max-width: 1350px;
+}
+.container-xxl {
+  width: 100%;
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .button {
   display: inline-block;
-  padding: .25rem 1rem;
+  padding: 0.25rem 1rem;
   border-radius: 10rem;
   color: black;
   text-transform: none;
   text-decoration: none;
   font-size: 1rem;
-  letter-spacing: .15rem;
-  transition: all .3s;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
   position: relative;
   overflow: hidden;
   z-index: 1;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -25,14 +45,14 @@ $color: yellow;
     z-index: -2;
   }
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0%;
     height: 100%;
     background-color: darken($color, 10%);
-    transition: all .3s;
+    transition: all 0.3s;
     border-radius: 10rem;
     z-index: -1;
   }
@@ -42,5 +62,4 @@ $color: yellow;
       width: 100%;
     }
   }
-
 }

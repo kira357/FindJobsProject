@@ -11,10 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     MaterialModule,
-    FlexLayoutModule,
-    RecruitmentRoutingModule,
     IconModule,
     MatIconModule,
+    FlexLayoutModule,
+    RecruitmentRoutingModule,
   ],
   declarations: [RecruitmentComponent],
   exports: [RecruitmentComponent],

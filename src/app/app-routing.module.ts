@@ -19,6 +19,26 @@ const routes: Routes = [
     loadChildren: () =>
       import('./system/home/blog/blog.module').then((m) => m.BlogModule),
   },
+
+  {
+    path: 'chat',
+    loadChildren: () =>
+      import('./system/home/chat/chat/chat.module').then((m) => m.ChatModule),
+  },
+  {
+    path: 'create-cv',
+    loadChildren: () =>
+      import('./system/home/page-CV/page-CV.module').then(
+        (m) => m.PageCVModule
+      ),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./system/home/information/information.module').then(
+        (m) => m.InformationModule
+      ),
+  },
   {
     path: 'detail-job/:id',
     loadChildren: () =>

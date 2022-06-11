@@ -34,121 +34,133 @@
 <!--main page-->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-  <div class="container px-lg-5" fxLayout="row" fxLayoutGap="10px">
+<section class="section-content padding-y bg-gray p-1">
+  <div
+    class="container container-xxl bg-white pt-2"
+    fxLayout="row"
+    fxLayoutGap="10px"
+  >
     <!-- col.// -->
-    <main class="col-md-9" fxFlex="50">
-      <header class="border-bottom my-3">
-        <div class="form-inline py-2" fxFlex="row">
-          <span class="mr-md-auto" style="font-size: 15px; font-weight: 500"
-            >{{ Amount }} Jobs found
-          </span>
-        </div>
-      </header>
-      <!-- sect-heading -->
+    <main class="col-md-9 page-jobs" fxFlex="50">
+      <div class="page-jobs-inner">
+        <header class="border-bottom my-3">
+          <div class="form-inline py-2" fxFlex="row">
+            <span class="mr-md-auto" style="font-size: 15px; font-weight: 500"
+              >{{ Amount }} Jobs found
+            </span>
+          </div>
+        </header>
+        <!-- sect-heading -->
 
-      <div
-        *ngFor="
-          let item of _LIST_DATA
-            | paginate
-              : {
-                  itemsPerPage: 2,
-                  currentPage: _PagingParams.currentPage,
-                  totalItems: _PagingParams.totalRows
-                }
-        "
-      >
-        <article class="mb-2 card" style="padding: 25px 0px">
-          <div fxLayout="row">
-            <div fxFlex="20" fxLayoutAlign="center top" style="padding: 0px">
-              <img
-                style="
-                  object-fit: cover;
-                  width: 65px;
-                  height: 65px;
-                  border-radius: 15px;
-                  border: 1px solid;
-                "
-                src="{{ item.jobImage }}"
-              />
-            </div>
-            <!-- col.// -->
-            <div fxFlex="100">
-              <div class="info-main px-2" fxLayout="column">
-                <div fxFlex="row" fxLayoutAlign="space-between start">
-                  <a
-                    [routerLink]="['home/item-page']"
-                    class="h5 title"
-                    style="text-decoration: none"
-                  >
-                    {{ item.name }}
-                  </a>
-                  <div class="mr-2 new-job"><span>New</span></div>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="space-between stretch">
-                  <div>
-                    <div class="mb-1">
-                      <a href="#" style="text-decoration: none">{{
-                        item.recruitmentName
-                      }}</a>
-                    </div>
-                    <div class="mb-1">
-                      <div>Major: {{ item.nameMajor }}</div>
-                    </div>
-                    <div class="mb-1">
-                      <div>
-                        Salary: {{ item.salaryMin }} - {{ item.salaryMax }}
+        <div
+          *ngFor="
+            let item of _LIST_DATA
+              | paginate
+                : {
+                    itemsPerPage: 10,
+                    currentPage: _PagingParams.currentPage,
+                    totalItems: _PagingParams.totalRows
+                  }
+          "
+        >
+          <article
+            class="mb-2 card active-border"
+            tabindex="1"
+            style="padding: 25px 0px"
+            (click)="onClickQuickDetail(item.idJob)"
+          >
+            <div fxLayout="row">
+              <div fxFlex="20" fxLayoutAlign="center top" style="padding: 0px">
+                <img
+                  style="
+                    object-fit: cover;
+                    width: 65px;
+                    height: 65px;
+                    border-radius: 15px;
+                    border: 1px solid;
+                  "
+                  src="{{ item.jobImage }}"
+                />
+              </div>
+              <!-- col.// -->
+              <div fxFlex="100">
+                <div class="info-main px-2" fxLayout="column">
+                  <div fxFlex="row" fxLayoutAlign="space-between start">
+                    <a
+                      [routerLink]="['/detail-job', item.idJob]"
+                      [queryParams]="{ debug: true }"
+                      class="h5 title"
+                      style="text-decoration: none"
+                    >
+                      {{ item.name }}
+                    </a>
+                    <div class="mr-2 new-job"><span>New for you</span></div>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="space-between stretch">
+                    <div>
+                      <div class="mb-1">
+                        <a href="#" style="text-decoration: none">{{
+                          item.recruitmentName
+                        }}</a>
+                      </div>
+                      <div class="mb-1">
+                        <div>Major: {{ item.nameMajor }}</div>
+                      </div>
+                      <div class="mb-1">
+                        <div>
+                          Salary: {{ item.salaryMin }} - {{ item.salaryMax }}
+                        </div>
+                      </div>
+                      <div class="mb-1">
+                        <div>Address: {{ item.address }}</div>
                       </div>
                     </div>
-                    <div class="mb-1">
-                      <div>Address: {{ item.address }}</div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="mb-1">
-                      <span>
-                        Amount:<span> {{ item.amount }} </span></span
-                      >
-                    </div>
-                    <div class="mb-1">
-                      <span>
-                        Work time:<span> {{ item.workTime }}h </span></span
-                      >
-                    </div>
-                    <div class="mb-1">
-                      <span>
-                        Experience:<span> {{ item.experience }} </span></span
-                      >
-                    </div>
-                    <div class="mb-1">
-                      <span>
-                        Date expire:<span>
-                          {{ item.dateExpire | date }}
-                        </span></span
-                      >
+                    <div>
+                      <div class="mb-1">
+                        <span>
+                          Amount:<span> {{ item.amount }} </span></span
+                        >
+                      </div>
+                      <div class="mb-1">
+                        <span>
+                          Work time:<span> {{ item.workTime }}h </span></span
+                        >
+                      </div>
+                      <div class="mb-1">
+                        <span>
+                          Experience:<span> {{ item.experience }} </span></span
+                        >
+                      </div>
+                      <div class="mb-1">
+                        <span>
+                          Date expire:<span>
+                            {{ item.dateExpire | date }}
+                          </span></span
+                        >
+                      </div>
                     </div>
                   </div>
                 </div>
+                <!-- info-main.// -->
               </div>
-              <!-- info-main.// -->
             </div>
-          </div>
-          <div style="width: 100%; text-align: right; padding-right: 10px">
-            <a
-              [routerLink]="['/home/quick-detail', item.idJob]"
-              [queryParams]="{ debug: true }"
-              class="btn btn-primary mt-1"
-              style="width: 200px"
-            >
-              Quick detail
-            </a>
-          </div>
-        </article>
-        <!-- card-product .// -->
+            <!-- <div style="width: 100%; text-align: right; padding-right: 10px">
+              <a
+                [routerLink]="['/home/quick-detail', item.idJob]"
+                [queryParams]="{ debug: true }"
+                class="btn btn-primary mt-1"
+                style="width: 200px"
+              >
+                Quick detail
+              </a>
+            </div> -->
+          </article>
+          <!-- card-product .// -->
+        </div>
+        <pagination-controls
+          (pageChange)="onpageChange($event)"
+        ></pagination-controls>
       </div>
-      <pagination-controls
-        (pageChange)="onpageChange($event)"
-      ></pagination-controls>
     </main>
     <main class="col-md-9" fxFlex="50">
       <header class="border-bottom my-3">

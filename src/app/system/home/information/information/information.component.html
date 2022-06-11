@@ -1,3 +1,421 @@
-<p>
-  information works!
-</p>
+<app-header></app-header>
+<div class="my-profile">
+  <div fxFlex="100" fxLayout="column" fxLayoutGap="25px">
+    <section fxLayout="row" fxLayoutGap="25px">
+      <div fxFlex="60" fxLayout="column">
+        <div class="card m-0" fxFlex="100">
+          <div class="card-header">
+            <span>Profile</span>
+          </div>
+          <div
+            class="card-body"
+            fxLayout="column"
+            fxLayoutAlign="start stretch"
+          >
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header style="height: auto">
+                  <div fxLayout="column" fxFlex="100">
+                    <div fxLayout="row" class="border-bottom mb-3 pb-2">
+                      <mat-panel-title> Self aware panel </mat-panel-title>
+                      <mat-icon>account_circle</mat-icon>
+                    </div>
+                    <ng-container>
+                      <div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                          <div fxLayout="row" fxFlex="20">
+                            <img
+                              class="custom-img px-3"
+                              id="blah"
+                              [src]="currentUser.urlAvatar"
+                              alt="your image"
+                            />
+                          </div>
+                          <div fxFlex="80">
+                            <div fxLayout="column" fxLayoutGap="15px">
+                              <div fxLayout="row" fxLayoutGap="10px">
+                                <div>
+                                  <label class="custom-label" for="name"
+                                    >Name:</label
+                                  >
+                                </div>
+                                <div>
+                                  <span class="custom-span">{{
+                                    currentUser.fullName
+                                  }}</span>
+                                </div>
+                              </div>
+                              <div fxLayout="row" fxLayoutGap="10px">
+                                <div>
+                                  <label class="custom-label" for="major"
+                                    >Major:
+                                  </label>
+                                </div>
+                                <div>
+                                  <span class="custom-span">{{
+                                    currentUser.nameMajor
+                                  }}</span>
+                                </div>
+                              </div>
+                              <div fxLayout="row" fxLayoutGap="10px">
+                                <div>
+                                  <label class="custom-label" for="experience"
+                                    >Experience:
+                                  </label>
+                                </div>
+                                <div>
+                                  <span class="custom-span">{{
+                                    currentUser.experience
+                                  }}</span>
+                                </div>
+                              </div>
+                              <div fxLayout="row" fxLayoutGap="10px">
+                                <div>
+                                  <label class="custom-label" for="phone"
+                                    >Phone:
+                                  </label>
+                                </div>
+                                <div>
+                                  <span class="custom-span">{{
+                                    currentUser.phoneNumber
+                                  }}</span>
+                                </div>
+                              </div>
+                              <div fxLayout="row" fxLayoutGap="10px">
+                                <div>
+                                  <label class="custom-label" for="address"
+                                    >Address:
+                                  </label>
+                                </div>
+                                <div>
+                                  <span class="custom-span">{{
+                                    currentUser.address
+                                  }}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </mat-expansion-panel-header>
+                <ng-container>
+                  <div fxLayout="column">
+                    <form [formGroup]="updateUser">
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxLayout="column">
+                          <img
+                            class="custom-img"
+                            id="blah"
+                            [src]="imageFile ? imageFile.link : currentUser.urlAvatar"
+                            alt="your image"          
+                          />
+                          <input
+                            type="file"
+                            class="my-3"
+                            accept="image/*"
+                            name="imageFile"
+                            id="imageFile"
+                            formControlName="imageFile"
+                            (change)="handleChange($event)"
+                          />
+                        </div>
+                        <div fxFlex="80">
+                          <div fxLayout="column" fxLayoutGap="15px">
+                            <div fxLayout="row">
+                              <custom-input
+                                fxFlex="50"
+                                [required]="true"
+                                [name]="'firstname'"
+                                formControlName="firstname"
+                                [placeholder]="'first name'"
+                                [title]="'first name'"
+                                [maxlength]="250"
+                                [(ngModel)]="currentUser.firstName"
+                              ></custom-input>
+                              <custom-input
+                                fxFlex="50"
+                                [required]="true"
+                                [name]="'lastname'"
+                                formControlName="lastname"
+                                [placeholder]="'Last name'"
+                                [title]="'Last name'"
+                                [maxlength]="250"
+                                [(ngModel)]="currentUser.lastName"
+                              ></custom-input>
+                            </div>
+
+                            <div fxLayout="row">
+                              <mat-form-field
+                                style="margin-left: 5px"
+                                fxFlex="33,33%"
+                                appearance="outline"
+                                floatLabel="always"
+                              >
+                                <mat-label> Experience </mat-label>
+                                <mat-select formControlName="experience" [(ngModel)]="currentUser.experience">
+                                  <mat-option>
+                                    <ngx-mat-select-search name="experience">
+                                      <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                                    </ngx-mat-select-search>
+                                  </mat-option>
+                                  <mat-option
+                                    *ngFor="let item of listExperience"
+                                    [value]="item"
+                                  >
+                                    {{ item }}</mat-option
+                                  >
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div fxLayout="row">
+                              <custom-input
+                                fxFlex="100"
+                                [required]="true"
+                                [name]="'phonenumber'"
+                                formControlName="phonenumber"
+                                [placeholder]="'Phone'"
+                                [title]="'Phone'"
+                                [maxlength]="250"
+                                [(ngModel)]="currentUser.phoneNumber"
+                              ></custom-input>
+                            </div>
+                            <div fxLayout="row">
+                              <custom-input
+                                fxFlex="100"
+                                [required]="true"
+                                [name]="'address'"
+                                formControlName="address"
+                                [placeholder]="'Address'"
+                                [title]="'Address'"
+                                [maxlength]="250"
+                                [(ngModel)]="currentUser.address"
+                              ></custom-input>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div fxLayoutAlign="end center">
+                        <custom-button
+                          [type]="'save'"
+                          (click)="onEdit()"
+                          style="margin-right: 10px"
+                        ></custom-button>
+                      </div>
+                    </form>
+                  </div>
+                </ng-container>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+
+      <div id="Content-Blog-Menu" fxFlex="40">
+        <section class="widget popular-posts" fxLayout="column">
+          <header
+            class="border-bottom my-3 mb-2"
+            fxFlex="row"
+            fxFlexAlign="center center"
+          >
+            <div class="form-inline py-2">
+              <span
+                class="mr-md-auto title-popular-post"
+                style="font-size: 24px; font-weight: 500"
+                >Top bài viết có thể bạn cần
+              </span>
+            </div>
+          </header>
+          <ul class="wpp-list pl-0">
+            <li>
+              <a class="wpp-post-title"
+                >Bạn có biết QA là gì? QC là gì? [Cập nhật 2021]</a
+              >
+            </li>
+            <li>
+              <a class="wpp-post-title"
+                >Python là gì? Lập trình Python với 20 tài liệu học Python cơ
+                bản đến nâng cao hay nhất</a
+              >
+            </li>
+            <li>
+              <a class="wpp-post-title"
+                >Agile là gì? Scrum là gì? Quy trình vận hành ra sao?</a
+              >
+            </li>
+            <li>
+              <a class="wpp-post-title"
+                >Các series “Developer Chất” từ ITviec</a
+              >
+            </li>
+            <li>
+              <a class="wpp-post-title"
+                >UI UX là gì? Tại sao mọi Developer cần học UI UX?</a
+              >
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="py-5 bg-light">
+      <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Related products</h2>
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+        >
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <a><h5 class="fw-bolder">Fancy Product</h5></a>
+                  <!-- Product price-->
+                  $40.00 - $80.00
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >View options</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                Sale
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <a><h5 class="fw-bolder">Special Item</h5></a>
+                  <!-- Product reviews-->
+                  <div
+                    class="d-flex justify-content-center small text-warning mb-2"
+                  >
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  <span class="text-muted text-decoration-line-through"
+                    >$20.00</span
+                  >
+                  $18.00
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                Sale
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <a><h5 class="fw-bolder">Sale Item</h5></a>
+                  <!-- Product price-->
+                  <span class="text-muted text-decoration-line-through"
+                    >$50.00</span
+                  >
+                  $25.00
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
+                alt="..."
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  >
+                  <h5 class="fw-bolder">Popular Item</h5>
+                  <!-- Product reviews-->
+                  <div
+                    class="d-flex justify-content-center small text-warning mb-2"
+                  >
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  $40.00
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" href="#"
+                    >Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

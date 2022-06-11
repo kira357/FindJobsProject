@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container px-lg-5">
-    <a class="navbar-brand" [routerLink]="['']"><h1 style="margin: 0;">UTC2 FINDING JOBS</h1></a>
+  <div class="container-xxl header">
+    <a class="navbar-brand" [routerLink]="['']"
+      ><h1 style="margin: 0">UTC2 FINDING JOBS</h1></a
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -21,41 +23,67 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link "
+            class="nav-link"
             id="navbarDropdown"
             [routerLink]="['/blog']"
             role="button"
             aria-expanded="false"
-            style="  font-size: 1rem;"
+            style="font-size: 1rem"
             >Blog</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link "
+            class="nav-link"
             id="navbarDropdown"
-            href="#"
+            [routerLink]="['/create-cv']"
             role="button"
             aria-expanded="false"
-            style="  font-size: 1rem;"
+            style="font-size: 1rem"
             >Create CV</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link "
+            class="nav-link"
             id="navbarDropdown"
-            href="#"
+            [routerLink]="['/chat']"
             role="button"
             aria-expanded="false"
-            style="  font-size: 1rem;"
+            style="font-size: 1rem"
             >Chat</a
           >
         </li>
       </ul>
       <form class="d-flex">
-          <a class=" button mr-1" href="#!" >Sign In</a>
-          <a class=" button " href="#!">Sign Up</a>
+        <div *ngIf="dataJson; else noLogin">
+          <button mat-button [matMenuTriggerFor]="userMenu">
+            <span fxShow fxHide.xs style="color: black">
+              {{ currentUser.fullName }}
+            </span>
+            <mat-icon>person</mat-icon>
+          </button>
+          <mat-menu
+            #userMenu="matMenu"
+            xPosition="before"
+            yPosition="above"
+            [overlapTrigger]="false"
+          >
+            <a mat-menu-item [routerLink]="['/profile']">
+              <mat-icon>person</mat-icon>
+              <span>Account</span>
+            </a>
+
+            <a mat-menu-item (click)="LogOut()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Log out</span>
+            </a>
+          </mat-menu>
+        </div>
+        <ng-template #noLogin>
+          <a class="button mr-1" href="#!">Sign In</a>
+          <a class="button" href="#!">Sign Up</a>
+        </ng-template>
       </form>
     </div>
   </div>

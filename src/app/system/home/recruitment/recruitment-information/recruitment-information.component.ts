@@ -93,7 +93,6 @@ export class RecruitmentInformationComponent implements OnInit {
   };
   ngOnInit() {
     this.getCurrentUser();
-    this.getComboxMajor();
   }
   getComboxMajor() {
     this.majorService
