@@ -1,108 +1,98 @@
-<div id="Bottom-Blog">
-  <div id="ContentsLayout-Blog">
-    <div id="Content-Blog">
-      <div
-        *ngFor="
-          let item of _LIST_DATA
-            | paginate
-              : {
-                  itemsPerPage: 10,
-                  currentPage: _PagingParams.currentPage,
-                  totalItems: _PagingParams.totalRows
-                }
-        "
-      >
-        <article class="mb-2 card" style="padding: 20px">
-          <div class="tag-major">
-            <span class="tag tag-teal" style="width: 200px">{{
-              item.nameMajor
-            }}</span>
-          </div>
-          <div class="card-header">
+<div
+  id="ContentsLayout-Blog"
+  fxFlex="100"
+  fxLayout="row"
+  fxLayoutAlign="center"
+>
+  <div id="Content-Blog">
+    <div
+      *ngFor="
+        let item of _LIST_DATA
+          | paginate
+            : {
+                itemsPerPage: 10,
+                currentPage: _PagingParams.currentPage,
+                totalItems: _PagingParams.totalRows
+              }
+      "
+    >
+      <article class="card" style="padding: 20px">
+        <div class="tag-major">
+          <span class="tag tag-teal" style="width: 200px">{{
+            item.nameMajor
+          }}</span>
+        </div>
+        <div class="card-header">
+          <img
+            src="{{ item.image }}"
+            [routerLink]="['/detail-blog', item.idBlog]"
+            [queryParams]="{ debug: true }"
+          />
+        </div>
+        <div class="card-body">
+          <a
+            class="title"
+            [routerLink]="['/detail-blog', item.idBlog]"
+            [queryParams]="{ debug: true }"
+          >
+            {{ item.title }}
+          </a>
+          <a class="user">
             <img
-              src="{{ item.image }}"
-              [routerLink]="['/detail-blog', item.idBlog]"
-              [queryParams]="{ debug: true }"
+              src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
+              alt="user"
             />
-          </div>
-          <div class="card-body">
+            <div class="user-info">
+              <span>{{ item.nameUser }}</span>
+            </div>
+          </a>
+          <div fxLayout="column" class="footer-item">
+            <p>
+              {{ item.summary }}
+            </p>
             <a
-              class="title"
+              class="btn-readmore"
               [routerLink]="['/detail-blog', item.idBlog]"
               [queryParams]="{ debug: true }"
             >
-              {{ item.title }}
+              Đọc tiếp
             </a>
-            <a class="user">
-              <img
-                src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
-                alt="user"
-              />
-              <div class="user-info">
-                <span>{{ item.nameUser }}</span>
-              </div>
-            </a>
-            <div fxLayout="column" class="footer-item">
-              <p>
-                {{ item.summary }}
-              </p>
-              <a
-                class="btn-readmore"
-                [routerLink]="['/detail-blog', item.idBlog]"
-                [queryParams]="{ debug: true }"
-                > Đọc tiếp
-              </a>
-            </div>
           </div>
-        </article>
-        <!-- card-product .// -->
-      </div>
-      <pagination-controls
-        (pageChange)="_PagingParams.currentPage = $event"
-      ></pagination-controls>
+        </div>
+      </article>
+      <!-- card-product .// -->
     </div>
-    <div id="Content-Blog-Menu">
-      <section class="widget popular-posts" fxLayout="column">
-        <header
-          class="border-bottom my-3 mb-2"
-          fxFlex="row"
-          fxFlexAlign="center center"
-        >
-          <div class="form-inline py-2">
-            <span
-              class="mr-md-auto title-popular-post"
-              style="font-size: 24px; font-weight: 500"
-              >Top bài viết có thể bạn cần
-            </span>
-          </div>
-        </header>
-        <ul class="wpp-list pl-0">
-          <li>
-            <a class="wpp-post-title"
-              >Bạn có biết QA là gì? QC là gì? [Cập nhật 2021]</a
-            >
-          </li>
-          <li>
-            <a class="wpp-post-title"
-              >Python là gì? Lập trình Python với 20 tài liệu học Python cơ bản
-              đến nâng cao hay nhất</a
-            >
-          </li>
-          <li>
-            <a class="wpp-post-title"
-              >Agile là gì? Scrum là gì? Quy trình vận hành ra sao?</a
-            >
-          </li>
-          <li>
-            <a class="wpp-post-title">Các series “Developer Chất” từ ITviec</a>
-          </li>
-          <li>
-            <a class="wpp-post-title"
-              >UI UX là gì? Tại sao mọi Developer cần học UI UX?</a
-            >
-          </li>
-        </ul>
-      </section>
-    </div>
+    <pagination-controls
+      (pageChange)="_PagingParams.currentPage = $event"
+    ></pagination-controls>
+  </div>
+  <div id="Content-Blog-Menu">
+    <section class="widget popular-posts" fxLayout="column">
+      <header
+        class="border-bottom my-3 mb-2"
+        fxFlex="row"
+        fxFlexAlign="center center"
+      >
+        <div class="form-inline py-2">
+          <span
+            class="mr-md-auto title-popular-post"
+            style="font-size: 24px; font-weight: 500"
+            >Top bài viết có thể bạn cần
+          </span>
+        </div>
+      </header>
+      <ul class="wpp-list pl-0" *ngFor="let item of dataFilterByMajor">
+        <li>
+          <a class="wpp-post-title">{{ item.title }}</a>
+        </li>
+      </ul>
+    </section>
   </div>
 </div>
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-spin-clockwise"
+>
+  <p style="color: white">Please Wait.</p>
+</ngx-spinner>

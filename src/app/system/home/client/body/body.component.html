@@ -57,7 +57,7 @@
             let item of _LIST_DATA
               | paginate
                 : {
-                    itemsPerPage: 10,
+                    itemsPerPage: 4,
                     currentPage: _PagingParams.currentPage,
                     totalItems: _PagingParams.totalRows
                   }
@@ -97,7 +97,7 @@
                     <div class="mr-2 new-job"><span>New for you</span></div>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="space-between stretch">
-                    <div>
+                    <div class="description">
                       <div class="mb-1">
                         <a href="#" style="text-decoration: none">{{
                           item.recruitmentName
@@ -128,7 +128,7 @@
                       </div>
                       <div class="mb-1">
                         <span>
-                          Experience:<span> {{ item.experience }} </span></span
+                          Experience:<span> {{ item.experience }} năm </span></span
                         >
                       </div>
                       <div class="mb-1">
@@ -180,3 +180,6 @@
     </main>
   </div>
 </section>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+  <p style="color: white">Please Wait. </p>  
+  </ngx-spinner>   

@@ -28,7 +28,7 @@
   background-color: white;
   .popular-posts {
     background-color: #ffffff;
-    box-shadow: #000000 0px 0px 6px 0px;
+    box-shadow: #000000 0px 0px 1px 0px;
     color: #221f20;
     letter-spacing: 0.3px;
     line-height: 28.8px;
@@ -95,4 +95,7 @@
   small {
     color: #545d7a;
   }
+}
+.active-border:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

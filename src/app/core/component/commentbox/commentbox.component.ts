@@ -27,7 +27,19 @@ export class CommentboxComponent implements OnInit {
     private apiAuthenService: ApiAuthenService
   ) {}
   _PagingParams = new PagingParams();
-  currentUser: VMGetCurrentUser;
+  currentUser: VMGetCurrentUser = {
+    id: '',
+    fullName: '',
+    firstName: '',
+    lastName: '',
+    roleName: '',
+    experience: '',
+    nameMajor: '',
+    idMajor: 0,
+    urlAvatar: '',
+    phoneNumber: '',
+    address: '',
+  };
   getData: any;
   sub: any;
   id: any;

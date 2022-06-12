@@ -52,6 +52,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   exports: [
@@ -107,6 +108,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatFormFieldModule,
     FontAwesomeModule,
     ToastrModule,
+    NgxSpinnerModule,
   ],
 })
 export class MaterialModule {}

@@ -11,6 +11,8 @@ import { ApplyJobPopupComponent } from '../../quick-detail/popups/apply-job-popu
 import { UserComment } from 'src/app/core/model/comment/model/comment';
 import { FavouriteService } from 'src/app/core/model/favourite/favourite.service';
 import { VMCreateFavourite } from 'src/app/core/model/favourite/model/favourite';
+import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-detail-job-body',
@@ -25,10 +27,12 @@ export class DetailJobBodyComponent implements OnInit {
     private candidateService: CandidateService,
     private __dialog: MatDialog,
     private favouriteService: FavouriteService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private SpinnerService: NgxSpinnerService
   ) {}
 
   _PagingParams = new PagingParams();
+  _LIST_DATA: any = [];
   _ITEM_DATA: VMGetJobDto = {
     idJob: '',
     idRecruitment: '',
@@ -61,15 +65,25 @@ export class DetailJobBodyComponent implements OnInit {
   isLike: boolean = false;
   getListData() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '');
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
+      this.SpinnerService.show(); // show the spinner
       console.log('params', params);
       this.id = params.get('id');
       this.jobsService
         .RequestGetItemJob(this._PagingParams, this.id)
         .subscribe((data: any) => {
-          console.log('data', data);
-          this._ITEM_DATA = data.data[0];
+          if (data != null) {
+            this._ITEM_DATA = data.data[0];
+          }
+        });
+      this.jobsService
+        .RequestGetListJobActive(this._PagingParams)
+        .subscribe((data: any) => {
+          console.log('getListData', data);
+          data.data.dateExpire = moment().format('DD/MM/YYYY');
+          this._LIST_DATA = [...data.data];
+          this._PagingParams.totalRows = data.totalCount;
         });
       this.candidateService
         .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
@@ -77,11 +91,15 @@ export class DetailJobBodyComponent implements OnInit {
           this.isActive = data.isActive;
           this.isLike = data.islike;
         });
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.SpinnerService.hide();
+        }, 1000);
     });
   }
   onApply() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '');
     this.__dialog
       .open(ApplyJobPopupComponent, {
         width: '700px',

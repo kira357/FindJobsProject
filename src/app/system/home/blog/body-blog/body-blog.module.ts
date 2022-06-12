@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { BodyBlogComponent } from './body-blog.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from 'src/app/material.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 const routes: Routes = [
   {
     path: '',
@@ -15,6 +17,7 @@ const routes: Routes = [
     CommonModule,
     FlexLayoutModule,
     NgxPaginationModule,
+    MaterialModule,
     RouterModule.forChild(routes),
   ],
   declarations: [BodyBlogComponent],

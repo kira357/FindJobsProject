@@ -75,14 +75,15 @@ export class CreateJobsComponent implements OnInit {
   defaultImageSrc = '/assets/image/default-image.png';
 
   listExperienceJobs: any[] = [
-    'Dưới 1 năm',
-    '1 năm',
-    '2 năm',
-    '3 năm',
-    '4 năm',
-    '5 năm',
-    'Trên 5 năm',
+    {value : 0 , name : 'Dưới 1 năm'},
+    {value : 1 , name : '1 năm'},
+    {value : 2 , name : '2 năm'},
+    {value : 3 , name : '3 năm'},
+    {value : 4 , name : '4 năm'},
+    {value : 5 , name : '5 năm'},
+    {value : 6 , name : 'Trên 5 năm'},
   ];
+
   comboxMajor: any[] = [];
   _PagingParams = new PagingParams();
   getDateExpire: any;
@@ -159,7 +160,7 @@ export class CreateJobsComponent implements OnInit {
   onSubmit = () => {
     this.newForm = this.employeeCreated.value;
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     this.newForm.dateExpire = moment(this.newForm.dateExpire).format(
       'YYYY-MM-DD'
     );
@@ -184,6 +185,10 @@ export class CreateJobsComponent implements OnInit {
     this.jobService.RequestCreateJob(this.formData).subscribe((data) => {
       console.log('data', data);
       this.employeeCreated.reset();
+      this.formData.forEach((value, key) => {
+        this.formData.delete(key);
+      }
+      );
       this.newForm = {};
     });
   };

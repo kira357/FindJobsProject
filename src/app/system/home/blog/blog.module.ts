@@ -6,6 +6,7 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { HeaderModule } from '../client/header/header.module';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailBlogModule } from './detail-blog/detail-blog.module';
+import { MaterialModule } from 'src/app/material.module';
 
 const routes: Routes = [
   {

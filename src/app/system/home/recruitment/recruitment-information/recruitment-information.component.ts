@@ -57,13 +57,13 @@ export class RecruitmentInformationComponent implements OnInit {
   }
   comboxMajor: any[] = [];
   listExperience: any[] = [
-    'Dưới 1 năm',
-    '1 năm',
-    '2 năm',
-    '3 năm',
-    '4 năm',
-    '5 năm',
-    'Trên 5 năm',
+    {value : 0 , name : 'Dưới 1 năm'},
+    {value : 1 , name : '1 năm'},
+    {value : 2 , name : '2 năm'},
+    {value : 3 , name : '3 năm'},
+    {value : 4 , name : '4 năm'},
+    {value : 5 , name : '5 năm'},
+    {value : 6 , name : 'Trên 5 năm'},
   ];
   _PagingParams = new PagingParams();
   onSearch: Subject<string>;

@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MaterialModule } from 'src/app/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { CommentboxModule } from 'src/app/core/component/commentbox/commentbox.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 const routes: Routes = [
   {

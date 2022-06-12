@@ -115,7 +115,7 @@ export class CreatePostComponent implements OnInit {
   onSubmit = () => {
     this.newForm = this.employeeCreated.value;
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     console.log('before', this.newForm);
 
     this.formData.append('title', this.newForm.title);
@@ -131,6 +131,9 @@ export class CreatePostComponent implements OnInit {
     this.blogService.RequestCreatePost(this.formData).subscribe((data) => {
       console.log('data', data);
       this.employeeCreated.reset();
+      this.formData.forEach((value, key) => {
+        this.formData.delete(key);
+      });
     });
   };
   onReset() {}

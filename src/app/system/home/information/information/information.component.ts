@@ -1,9 +1,12 @@
+import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MajorService } from 'src/app/core/model/major/major.service';
 import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
 import { UserService } from 'src/app/core/model/user/User.service';
 import { ApiAuthenService } from 'src/app/services/api-authen.service';
+import { VMGetJobDto } from 'src/app/core/model/jobs/model/Jobs';
+import { PagingParams } from 'src/app/core/model/paging-params';
 
 @Component({
   selector: 'app-information',
@@ -15,7 +18,8 @@ export class InformationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private majorService: MajorService,
     private apiAuthenService: ApiAuthenService,
-    private userService: UserService
+    private userService: UserService,
+    private jobsService: JobsService,
   ) {}
   defaultImageSrc = '/assets/image/default-image.png';
   updateUser = this.formBuilder.group({
@@ -30,13 +34,13 @@ export class InformationComponent implements OnInit {
     search: '',
   });
   listExperience: any[] = [
-    'Dưới 1 năm',
-    '1 năm',
-    '2 năm',
-    '3 năm',
-    '4 năm',
-    '5 năm',
-    'Trên 5 năm',
+    {value : 0 , name : 'Dưới 1 '},
+    {value : 1 , name : '1 '},
+    {value : 2 , name : '2 '},
+    {value : 3 , name : '3 '},
+    {value : 4 , name : '4 '},
+    {value : 5 , name : '5 '},
+    {value : 6 , name : 'Trên 5 '},
   ];
   ngOnInit() {
     this.getCurrentUser();
@@ -56,13 +60,19 @@ export class InformationComponent implements OnInit {
     phoneNumber: '',
     address: '',
   };
+  _PagingParams = new PagingParams();
+  _LIST_DATA: VMGetJobDto[] = [];
   getCurrentUser() {
     const dataJson = JSON.parse(this.data || '');
     this.apiAuthenService
       .RequestGetCurrentUser(dataJson.data.id)
       .subscribe((data: any) => {
         this.currentUser = data[0];
-        console.log('123', this.currentUser);
+        this.jobsService.RequestGetJobFilterByMajor(this._PagingParams,this.currentUser.idMajor,this.currentUser.experience).subscribe((job: any) => {
+          console.log('job', job);
+          this._LIST_DATA = job.data;
+        }
+        );
       });
   }
   imageFile: { link: any; file: any; name: string } | undefined;
@@ -96,7 +106,6 @@ export class InformationComponent implements OnInit {
     this.formData.append('firstName', this.updateUser.value.firstname);
     this.formData.append('lastName', this.updateUser.value.lastname);
     this.formData.append('phoneNumber', this.updateUser.value.phonenumber);
-    this.formData.append('idMajor', this.updateUser.value.idMajor);
     this.formData.append('address', this.updateUser.value.address);
     this.formData.append('experience', this.updateUser.value.experience);
 
@@ -105,6 +114,10 @@ export class InformationComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('data', data);
         this.updateUser.reset();
+        this.formData.forEach((value, key) => {
+          this.formData.delete(key);
+        }
+        );
         this.getCurrentUser();
       });
   }

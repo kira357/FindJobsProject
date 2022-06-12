@@ -143,9 +143,9 @@
                           </mat-option>
                           <mat-option
                             *ngFor="let item of listExperience"
-                            [value]="item"
+                            [value]="item.value"
                           >
-                            {{ item }}</mat-option
+                            {{ item.name }}</mat-option
                           >
                         </mat-select>
                       </mat-form-field>

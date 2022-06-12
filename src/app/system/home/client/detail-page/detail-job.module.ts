@@ -1,3 +1,4 @@
+import { FooterModule } from './../footer/footer.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,6 +22,7 @@ const routes: Routes = [
     DetailJobHeaderModule,
     DetailJobBodyModule,
     HeaderModule,
+    FooterModule
   ],
   declarations: [DetailJobComponent],
   exports: [DetailJobComponent],

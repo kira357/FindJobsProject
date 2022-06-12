@@ -1,111 +1,222 @@
-<div fxFlex fxLayout="column">
-  <section class="py-5">
-    <div id="ContentsLayout-Blog" fxLayout="row" fxLayoutGap="30px">
-      <div id="Content-Blog" fxFlex="70" fxLayout="column">
-        <div class="card m-0" fxFlexFill fxFlex="100">
-          <div class="card-header">
-            <img
-              style="object-fit: cover; width: 100%; height: 300px"
-              src="{{ _ITEM_DATA.jobImage }}"
-              alt="rover"
-            />
-          </div>
-          <div class="card-body" fxLayout="column" fxFlexAlign="start center">
-            <div
-              fxLayout="row"
-              class="footer-item"
-              fxFlexAlign="space-between center"
-              fxLayoutGap="10px"
-            >
-              <button
-                *ngIf="isActive; else templateName"
-                class="btn-readmore cursor"
-                fxFlex="95"
-                (click)="onApply()"
-                [disabled]="isActive"
-                [ngClass]="{ disable: isActive }"
-              >
-                Applied
-              </button>
-              <ng-template #templateName>
-                <button
-                  class="btn-readmore cursor"
-                  fxFlex="95"
-                  (click)="onApply()"
-                >
-                  Apply Now
-                </button>
-              </ng-template>
-              <a
-              *ngIf="isLike; else nonFavourite"
-              style="font-size: 25px"
-              fxFlexAlign="center end"
-              fxFlex="5"
-              (click)="onFavourite(_ITEM_DATA.idJob)"
-            >
-              <mat-icon class="favourite">favorite</mat-icon></a
-            >
-            <ng-template #nonFavourite>
-              <a
-                style="font-size: 25px"
-                fxFlexAlign="center end"
-                fxFlex="5"
-                (click)="onFavourite(_ITEM_DATA.idJob)"
-              >
-                <mat-icon class="non-favourite">favorite_border</mat-icon></a
-              >
-            </ng-template>
-            </div>
-            <div fxFlex="100" style="margin-bottom: 10px">
-              <a class="title-job">
-                {{ _ITEM_DATA.name }}
-              </a>
-            </div>
-            <div fxFlex="100">
-              <p class="name-company">
-                <i class="fa-solid fa-building icon"></i>
-                <span> {{ _ITEM_DATA.companyOfJobs }}</span>
-              </p>
-              <p>
-                <i class="fa-solid fa-location-dot icon"></i>
-                <span>{{ _ITEM_DATA.address }}</span>
-              </p>
-              <p>
-                <i class="fa-solid fa-hand-holding-dollar icon"></i>
-                <span
-                  >{{ _ITEM_DATA.salaryMin }} - {{ _ITEM_DATA.salaryMax }}</span
-                >
-              </p>
-            </div>
-            <div class="user mt-0 mb-1" fxLayoutAlign="start center">
-              <img
-                src="{{
-                  _ITEM_DATA.imageUser
-                    ? _ITEM_DATA.imageUser
-                    : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
-                }}"
-                alt="user"
-              />
-              <div class="user-info">
-                <h5>{{ _ITEM_DATA.recruitmentName }}</h5>
-              </div>
-            </div>
-            <div class="my-2" fxFlex="100" fxLayout="row">
-              <span class="tag tag-teal">{{ _ITEM_DATA.nameMajor }}</span>
-            </div>
 
-            <div class="border-top my-3">
-              <div class="py-2 detail-job">
-                <div [innerHTML]="_ITEM_DATA.jobDetail"></div>
+<div class="container-xxl">
+  <div fxFlex="100" fxLayout="column" fxLayoutGap="25px">
+    <div fxLayout="row" fxLayoutGap="25px">
+      <div fxLayout="column" fxFlex="65">
+        <div fxLayout="column">
+          <div fxLayout="column">
+            <div class="card m-0" fxFlex="100">
+              <!-- <div class="card-header">
+                <img
+                  style="object-fit: cover; width: 100%; height: 300px"
+                  src="{{ _ITEM_DATA.jobImage }}"
+                  alt="rover"
+                />
+              </div> -->
+              <div
+                class="card-body"
+                fxLayout="column"
+                fxFlexAlign="start center"
+              >
+                <div class="header-card-body" fxLayout="column">
+                  <div fxFlex="100" style="margin-bottom: 10px">
+                    <a class="title-job">
+                      {{ _ITEM_DATA.name }}
+                    </a>
+                  </div>
+                  <div
+                    fxLayout="row"
+                    class="footer-item"
+                    fxFlexAlign="space-between center"
+                    fxLayoutGap="10px"
+                  >
+                    <button
+                      *ngIf="isActive; else templateName"
+                      class="btn-readmore cursor"
+                      fxFlex="95"
+                      (click)="onApply()"
+                      [disabled]="isActive"
+                      [ngClass]="{ disable: isActive }"
+                    >
+                      Applied
+                    </button>
+                    <ng-template #templateName>
+                      <button
+                        class="btn-readmore cursor"
+                        fxFlex="95"
+                        (click)="onApply()"
+                      >
+                        Apply Now
+                      </button>
+                    </ng-template>
+                    <a
+                      *ngIf="isLike; else nonFavourite"
+                      style="font-size: 25px"
+                      fxFlexAlign="center end"
+                      fxFlex="5"
+                      (click)="onFavourite(_ITEM_DATA.idJob)"
+                    >
+                      <mat-icon class="favourite">favorite</mat-icon></a
+                    >
+                    <ng-template #nonFavourite>
+                      <a
+                        style="font-size: 25px"
+                        fxFlexAlign="center end"
+                        fxFlex="5"
+                        (click)="onFavourite(_ITEM_DATA.idJob)"
+                      >
+                        <mat-icon class="non-favourite"
+                          >favorite_border</mat-icon
+                        ></a
+                      >
+                    </ng-template>
+                  </div>
+                </div>
+
+                <div fxFlex="100">
+                  <p>
+                    <i class="fa-solid fa-location-dot icon"></i>
+                    <span>{{ _ITEM_DATA.address }}</span>
+                  </p>
+                  <p>
+                    <i class="fa-solid fa-hand-holding-dollar icon"></i>
+                    <span
+                      >{{ _ITEM_DATA.salaryMin }} -
+                      {{ _ITEM_DATA.salaryMax }}</span
+                    >
+                  </p>
+                </div>
+                <div class="user mt-0 mb-1" fxLayoutAlign="start center">
+                  <img
+                    src="{{
+                      _ITEM_DATA.imageUser
+                        ? _ITEM_DATA.imageUser
+                        : 'https://e7.pngegg.com/pngimages/829/733/png-clipart-logo-brand-product-trademark-font-not-found-logo-brand.png'
+                    }}"
+                    alt="user"
+                  />
+                  <div class="user-info">
+                    <h5>{{ _ITEM_DATA.recruitmentName }}</h5>
+                  </div>
+                </div>
+                <div class="my-2" fxFlex="100" fxLayout="row">
+                  <span class="tag tag-teal">{{ _ITEM_DATA.nameMajor }}</span>
+                </div>
+
+                <div class="border-top my-3">
+                  <div class="py-2 detail-job">
+                    <div [innerHTML]="_ITEM_DATA.jobDetail"></div>
+                  </div>
+                </div>
               </div>
             </div>
+            <custom-commentbox
+              [idPostion]="id"
+              [_ITEM_DATA]="_ITEM_DATA"
+            ></custom-commentbox>
           </div>
         </div>
+        <section class="py-5" fxLayout="row" fxLayoutGap="25px">
+          <div fxFlex="100" fxLayout="column">
+            <h2 class="fw-bolder mb-4">Jobs you would like</h2>
 
-        <custom-commentbox [idPostion]="id" [_ITEM_DATA]="_ITEM_DATA"></custom-commentbox>
+            <div *ngFor="let item of _LIST_DATA">
+              <article
+                class="mb-2 card active-border"
+                tabindex="1"
+                style="padding: 25px 0px"
+              >
+                <div fxLayout="row">
+                  <div
+                    fxFlex="20"
+                    fxLayoutAlign="center top"
+                    style="padding: 0px"
+                  >
+                    <img
+                      style="
+                        object-fit: cover;
+                        width: 65px;
+                        height: 65px;
+                        border-radius: 15px;
+                        border: 1px solid;
+                      "
+                      src="{{ item.jobImage }}"
+                    />
+                  </div>
+                  <!-- col.// -->
+                  <div fxFlex="100">
+                    <div class="info-main px-2" fxLayout="column">
+                      <div fxFlex="row" fxLayoutAlign="space-between start">
+                        <a
+                          [routerLink]="['/detail-job', item.idJob]"
+                          [queryParams]="{ debug: true }"
+                          class="h5 title"
+                          style="text-decoration: none"
+                        >
+                          {{ item.name }}
+                        </a>
+                        <div class="mr-2 new-job"><span>New for you</span></div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="space-between stretch">
+                        <div class="description">
+                          <div class="mb-1">
+                            <a href="#" style="text-decoration: none">{{
+                              item.recruitmentName
+                            }}</a>
+                          </div>
+                          <div class="mb-1">
+                            <div>Major: {{ item.nameMajor }}</div>
+                          </div>
+                          <div class="mb-1">
+                            <div>
+                              Salary: {{ item.salaryMin }} -
+                              {{ item.salaryMax }}
+                            </div>
+                          </div>
+                          <div class="mb-1">
+                            <div>Address: {{ item.address }}</div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="mb-1">
+                            <span>
+                              Amount:<span> {{ item.amount }} </span></span
+                            >
+                          </div>
+                          <div class="mb-1">
+                            <span>
+                              Work time:<span>
+                                {{ item.workTime }}h
+                              </span></span
+                            >
+                          </div>
+                          <div class="mb-1">
+                            <span>
+                              Experience:<span>
+                                {{ item.experience }} năm
+                              </span></span
+                            >
+                          </div>
+                          <div class="mb-1">
+                            <span>
+                              Date expire:<span>
+                                {{ item.dateExpire | date }}
+                              </span></span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- info-main.// -->
+                  </div>
+                </div>
+              </article>
+              <!-- card-product .// -->
+            </div>
+          </div>
+        </section>
       </div>
-
-      <div id="Content-Blog-Menu" fxFlex="30">
+      <div id="Content-Blog-Menu" fxFlex="35">
         <section class="widget popular-posts" fxLayout="column">
           <header
             class="border-bottom my-3 mb-2"
@@ -113,202 +224,33 @@
             fxFlexAlign="center center"
           >
             <div class="form-inline py-2">
-              <span
+              <div
                 class="mr-md-auto title-popular-post"
                 style="font-size: 24px; font-weight: 500"
-                >Top bài viết có thể bạn cần
-              </span>
+                fxLayout="column"
+                fxLayoutAlign="center center"
+              >
+                <img
+                  style="object-fit: cover; width: 100%; height: 250px"
+                  src="{{ _ITEM_DATA.jobImage }}"
+                  alt="rover"
+                />
+                <p class="name-company">
+                  <span> {{ _ITEM_DATA.companyOfJobs }}</span>
+                </p>
+              </div>
             </div>
           </header>
-          <ul class="wpp-list pl-0">
-            <li>
-              <a class="wpp-post-title"
-                >Bạn có biết QA là gì? QC là gì? [Cập nhật 2021]</a
-              >
-            </li>
-            <li>
-              <a class="wpp-post-title"
-                >Python là gì? Lập trình Python với 20 tài liệu học Python cơ
-                bản đến nâng cao hay nhất</a
-              >
-            </li>
-            <li>
-              <a class="wpp-post-title"
-                >Agile là gì? Scrum là gì? Quy trình vận hành ra sao?</a
-              >
-            </li>
-            <li>
-              <a class="wpp-post-title"
-                >Các series “Developer Chất” từ ITviec</a
-              >
-            </li>
-            <li>
-              <a class="wpp-post-title"
-                >UI UX là gì? Tại sao mọi Developer cần học UI UX?</a
-              >
-            </li>
-          </ul>
         </section>
       </div>
     </div>
-  </section>
-
-  <section class="py-5 bg-light">
-    <div class="container px-4 px-lg-5 mt-5">
-      <h2 class="fw-bolder mb-4">Related products</h2>
-      <div
-        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-      >
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- Product image-->
-            <img
-              class="card-img-top"
-              src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
-              alt="..."
-            />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- Product name-->
-                <a><h5 class="fw-bolder">Fancy Product</h5></a>
-                <!-- Product price-->
-                $40.00 - $80.00
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="#"
-                  >View options</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- Sale badge-->
-            <div
-              class="badge bg-dark text-white position-absolute"
-              style="top: 0.5rem; right: 0.5rem"
-            >
-              Sale
-            </div>
-            <!-- Product image-->
-            <img
-              class="card-img-top"
-              src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
-              alt="..."
-            />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- Product name-->
-                <a><h5 class="fw-bolder">Special Item</h5></a>
-                <!-- Product reviews-->
-                <div
-                  class="d-flex justify-content-center small text-warning mb-2"
-                >
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                </div>
-                <!-- Product price-->
-                <span class="text-muted text-decoration-line-through"
-                  >$20.00</span
-                >
-                $18.00
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- Sale badge-->
-            <div
-              class="badge bg-dark text-white position-absolute"
-              style="top: 0.5rem; right: 0.5rem"
-            >
-              Sale
-            </div>
-            <!-- Product image-->
-            <img
-              class="card-img-top"
-              src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
-              alt="..."
-            />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- Product name-->
-                <a><h5 class="fw-bolder">Sale Item</h5></a>
-                <!-- Product price-->
-                <span class="text-muted text-decoration-line-through"
-                  >$50.00</span
-                >
-                $25.00
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- Product image-->
-            <img
-              class="card-img-top"
-              src="https://therichpost.com/wp-content/uploads/2021/05/dummyimage400x300.jpg"
-              alt="..."
-            />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- Product name-->
-                >
-                <h5 class="fw-bolder">Popular Item</h5>
-                <!-- Product reviews-->
-                <div
-                  class="d-flex justify-content-center small text-warning mb-2"
-                >
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                </div>
-                <!-- Product price-->
-                $40.00
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-
-<!-- <div class="border-top my-3">
-                            <div class="py-2 detail-job">
-                              <div [innerHTML]="item.commentMsg"></div>
-                            </div>
-                          </div> -->
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

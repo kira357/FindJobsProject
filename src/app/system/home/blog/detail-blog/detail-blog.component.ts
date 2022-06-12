@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BlogService } from 'src/app/core/model/blogs/Blogs.service';
 import { VMGetBlogDto } from 'src/app/core/model/blogs/model/Blog';
 import { CandidateService } from 'src/app/core/model/candidateJob/candidate.service';
@@ -24,7 +25,8 @@ export class DetailBlogComponent implements OnInit {
     private blogService: BlogService,
     private candidateService: CandidateService,
     private __dialog: MatDialog,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private SpinnerService: NgxSpinnerService
   ) {}
 
   _PagingParams = new PagingParams();
@@ -55,8 +57,9 @@ export class DetailBlogComponent implements OnInit {
   }
   isActive: boolean = false;
   getListData() {
+    this.SpinnerService.show();
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       console.log('params', params);
       this.id = params.get('id');
@@ -71,6 +74,10 @@ export class DetailBlogComponent implements OnInit {
         .subscribe((data: any) => {
           this.isActive = data.isActive;
         });
+      setTimeout(() => {
+        /** spinner ends after 1 seconds */
+        this.SpinnerService.hide();
+      }, 1000);
     });
   }
 }

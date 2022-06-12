@@ -113,7 +113,15 @@ export class ListJobsCreatePopupComponent implements OnInit {
     });
   }
 
-  listExperienceJobs: any[] = [ 'Dưới 1 năm', '1 năm', '2 năm', '3 năm', '4 năm', '5 năm', 'Trên 5 năm'];
+  listExperienceJobs: any[] = [
+    {value : 0 , name : 'Dưới 1 năm'},
+    {value : 1 , name : '1 năm'},
+    {value : 2 , name : '2 năm'},
+    {value : 3 , name : '3 năm'},
+    {value : 4 , name : '4 năm'},
+    {value : 5 , name : '5 năm'},
+    {value : 6 , name : 'Trên 5 năm'},
+  ];
   comboxMajor: any[] = [];
 
   ngOnInit(): void {

@@ -41,6 +41,16 @@ export class BlogService {
       },
     });
   };
+  RequestGetBlogFilterByMajor = (pagingParams: PagingParams, IdMajor: any) => {
+    return this.http.get(`${this.rootURL}/get-blog-filter-major`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+        IdMajor : IdMajor
+      },
+    });
+  };
   RequestGetAllListPost = (pagingParams: PagingParams) => {
     return this.http.get(`${this.rootURL}/getlist-post`, {
       headers: this.headers,

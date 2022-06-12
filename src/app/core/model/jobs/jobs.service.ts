@@ -36,6 +36,17 @@ export class JobsService {
       },
     });
   };
+  RequestGetJobFilterByMajor = (pagingParams: PagingParams, IdMajor: any , Experience : any) => {
+    return this.http.get(`${this.rootURL}/get-job-filter-major`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+        Experience : Experience,
+        IdMajor : IdMajor
+      },
+    });
+  };
 
   RequestGetListJobActive = (pagingParams: PagingParams) => {
     return this.http.get(this.rootURL + '/getlist-Job-active', {
