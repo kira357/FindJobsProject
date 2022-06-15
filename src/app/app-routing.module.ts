@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientComponent } from './system/home/client/client.component';
 
 const routes: Routes = [
   {
@@ -30,6 +29,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./system/home/page-CV/page-CV.module').then(
         (m) => m.PageCVModule
+      ),
+  },
+  {
+    path: 'cv-builder',
+    loadChildren: () =>
+      import('./system/home/cv-builder/cv-builder.module').then(
+        (m) => m.CvBuilderModule
+      ),
+  },
+  {
+    path: 'resume',
+    loadChildren: () =>
+      import('./system/home/resume/resume.module').then(
+        (m) => m.ResumeModule
       ),
   },
   {

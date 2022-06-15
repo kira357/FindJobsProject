@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { retry } from 'rxjs';
+import { retry, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PagingParams } from '../paging-params';
-import { VMDeleteJobDto, VMJobDto, VMUpdateJobDto } from './model/Jobs';
+import { VMDeleteJobDto } from './model/Jobs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ import { VMDeleteJobDto, VMJobDto, VMUpdateJobDto } from './model/Jobs';
 export class JobsService {
   readonly rootURL = `${environment.apis.default.url}/api/Job`;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -36,27 +36,21 @@ export class JobsService {
       },
     });
   };
-  RequestGetJobFilterByMajor = (pagingParams: PagingParams, IdMajor: any , Experience : any) => {
+  RequestGetJobFilterByMajor = (pagingParams: PagingParams, IdMajor: any, Experience: any) => {
     return this.http.get(`${this.rootURL}/get-job-filter-major`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,
         PageSize: pagingParams.pageSize,
-        Experience : Experience,
-        IdMajor : IdMajor
+        Experience: Experience,
+        IdMajor: IdMajor
       },
     });
   };
 
-  RequestGetListJobActive = (pagingParams: PagingParams) => {
-    return this.http.get(this.rootURL + '/getlist-Job-active', {
-      headers: this.headers,
-      params: {
-        IndexPage: pagingParams.currentPage,
-        PageSize: pagingParams.pageSize,
-      },
-    });
-  };
+  RequestGetListJobActive = (pagingParams: PagingParams): Observable<any> => new Observable<any>(observer => {
+    return observer.next({});
+  });
 
   RequestCreateJob = (job: any) => {
     return this.http.post(`${this.rootURL}/create-job`, job);

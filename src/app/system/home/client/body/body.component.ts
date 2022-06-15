@@ -27,19 +27,17 @@ export class BodyComponent implements OnInit {
   }
 
   getListData() {
-    this.SpinnerService.show();
+    // this.SpinnerService.show();
     this.jobsService
       .RequestGetListJobActive(this._PagingParams)
       .subscribe((data: any) => {
-        console.log('getListData', data);
-        data.data.dateExpire = moment().format('DD/MM/YYYY');
-        this._LIST_DATA = [...data.data];
-        this.Amount = data.totalCount;
-        this._PagingParams.totalRows = data.totalCount;
-        setTimeout(() => {
-          /** spinner ends after 1 seconds */
-          this.SpinnerService.hide();
-        }, 1000);
+        if (data) {
+          console.log('getListData', data);
+          data.data.dateExpire = moment().format('DD/MM/YYYY');
+          this._LIST_DATA = [...data.data];
+          this.Amount = data.totalCount;
+          this._PagingParams.totalRows = data.totalCount;          
+        }
       });
   }
   onpageChange(evt: any) {

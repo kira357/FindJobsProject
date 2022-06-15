@@ -1,46 +1,45 @@
-
-
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-:root {
-  --color-text: #9e9e9e;
-  --color-active-text: #4b4943;
-  --bg-partial: #f7f6f3;
-  --bg-page: #ffffff;
-  --bg-active: #e8e7e4;
 
-  --footer-height: 40px;
-  --toolbar-height: 50px;
-  --sidenav-color: var(--color-active-text);
-  --sidenav-toolbar-background: var(--bg-partial);
-  --sidenav-width: 280px;
-  --sidenav-item-color: #f7f6f3;
-  --sidenav-item-background-active: #f7f6f3;
-  --sidenav-item-border-color-active: #f7f6f3;
-  --sidenav-item-icon-color-active: #4b4943;
-  --sidenav-background: #f7f6f3;
-  --sidenav-item-icon-color: #4b4943;
-  --sidenav-item-color: #4b4943;
-  --toolbar-background: #fff;
-  --toolbar-color: #4b4943;
-  --secondary-toolbar-height: 50px;
-  --color-border: #e0e0e0;
-  --background-base: #fff;
-  --color-accent: 98, 0, 238;
-  --sidenav-item-color-active: #9e9e9e;
-  --sidenav-item-dropdown-background: #f7f6f3;
-  --sidenav-item-dropdown-background-hover: #e8e7e4;
-  --sidenav-item-color-active: #4b4943;
-  --color-input: 41, 121, 255;
-  --color-form-error: 229, 119, 62;
-  --form-el-font-size: 12px;
-  --form-lbl-font-size: 14px;
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+    --color-text: #9e9e9e;
+    --color-active-text: #4b4943;
+    --bg-partial: #f7f6f3;
+    --bg-page: #ffffff;
+    --bg-active: #e8e7e4;
+    --footer-height: 40px;
+    --toolbar-height: 50px;
+    --sidenav-color: var(--color-active-text);
+    --sidenav-toolbar-background: var(--bg-partial);
+    --sidenav-width: 280px;
+    --sidenav-item-color: #f7f6f3;
+    --sidenav-item-background-active: #f7f6f3;
+    --sidenav-item-border-color-active: #f7f6f3;
+    --sidenav-item-icon-color-active: #4b4943;
+    --sidenav-background: #f7f6f3;
+    --sidenav-item-icon-color: #4b4943;
+    --sidenav-item-color: #4b4943;
+    --toolbar-background: #fff;
+    --toolbar-color: #4b4943;
+    --secondary-toolbar-height: 50px;
+    --color-border: #e0e0e0;
+    --background-base: #fff;
+    --color-accent: 98, 0, 238;
+    --sidenav-item-color-active: #9e9e9e;
+    --sidenav-item-dropdown-background: #f7f6f3;
+    --sidenav-item-dropdown-background-hover: #e8e7e4;
+    --sidenav-item-color-active: #4b4943;
+    --color-input: 41, 121, 255;
+    --color-form-error: 229, 119, 62;
+    --form-el-font-size: 12px;
+    --form-lbl-font-size: 14px;
 }
 
 @import "../src/assets/scss/crm-custom.scss";
