@@ -1,27 +1,10 @@
-$( document ).ready(function() {
+$(document).ready(function () {
     $(document).foundation();
     $("form").parsley();
 
-// get elements ------------------------------
-
-// Events ------------------------------
-
-    $(document).on('click',".icon i[class='fas fa-trash']", function(){
-        $(this).closest(".cv__info").remove();
-    });
-
-    $(document).on('mouseenter','.cv__info:has(.btn-block)', function(){
-        $(this).find(".btn-block").css('opacity',1);
-    });
-
-    $(document).on('mouseleave','.cv__info:has(.btn-block)', function(){
-            $(this).find(".btn-block").css('opacity',0);
-    });
-
-
-// functions ----------------------------------
+    // functions ----------------------------------
     function generateDelBtn() {
-
+        console.log('generateDelBtn');
         // <button class="icon"><i class="fas fa-trash"></i></button>
         let i = document.createElement("i");
         let button = document.createElement("button");
@@ -35,7 +18,7 @@ $( document ).ready(function() {
     }
 
     function generateEditBtn() {
-
+        console.log('generateEditBtn');
         // <button class="icon"><i class="fas fa-paint-brush"></i></button>
         let i = document.createElement("i");
         let button = document.createElement("button");
@@ -49,6 +32,7 @@ $( document ).ready(function() {
     }
 
     function generateBtnBlock() {
+        console.log('generateBtnBlock');
         // <div class="btn-block">...</div>
         let divTag = document.createElement("div");
         divTag.append(generateEditBtn());
@@ -59,8 +43,9 @@ $( document ).ready(function() {
         return divTag
     }
 
-        function addInfo(inputName) {
-        $('#input-' + inputName).parsley().on('field:success', function() {
+    function addInfo(inputName) {
+        console.log('addInfo');
+        $('#input-' + inputName).parsley().on('field:success', function () {
             // In here, `this` is the parlsey instance of #some-input
             let to = document.getElementById('cv__' + inputName);
             if (to) {
@@ -91,13 +76,14 @@ $( document ).ready(function() {
     }
 
     function addWebSite(inputName) {
+        console.log('addWebSite');
         // get elements
         let input = document.getElementById("input-" + inputName);
         let button = document.getElementById("button-" + inputName + "_add");
 
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
-            if ($('#input-' + inputName).parsley().isValid() && input.value !== "" ) {
+            if ($('#input-' + inputName).parsley().isValid() && input.value !== "") {
 
                 let divTag = document.createElement("div");
                 divTag.classList.add("cv__info");
@@ -125,6 +111,7 @@ $( document ).ready(function() {
     }
 
     function addSocialMedia(inputName) {
+        console.log('addSocialMedia');
         // get elements
         let input = document.getElementById("input-" + inputName);
         let select = document.getElementById("select-" + inputName);
@@ -161,6 +148,7 @@ $( document ).ready(function() {
     }
 
     function addSkill(inputName) {
+        console.log('addSkill');
         // get elements
         let input = document.getElementById("input-" + inputName);
         let select = document.getElementById("select-" + inputName + "_level");
@@ -168,7 +156,7 @@ $( document ).ready(function() {
 
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
-            if ( $('#input-' + inputName).parsley().isValid() && $('#select-' + inputName + "_level").parsley().isValid() && input.value !== "") {
+            if ($('#input-' + inputName).parsley().isValid() && $('#select-' + inputName + "_level").parsley().isValid() && input.value !== "") {
 
                 let divTag = document.createElement("div");
                 divTag.classList.add("cv__info");
@@ -202,7 +190,7 @@ $( document ).ready(function() {
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
             // create <small> Level </small>
-            if ( $('#input-' + inputName).parsley().isValid() && $('#select-' + inputName + "_level").parsley().isValid() && input.value !== "") {
+            if ($('#input-' + inputName).parsley().isValid() && $('#select-' + inputName + "_level").parsley().isValid() && input.value !== "") {
 
                 let smallTag = document.createElement("small");
                 smallTag.textContent = " ( " + select.value + " ) ";
@@ -228,7 +216,7 @@ $( document ).ready(function() {
 
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
-            if ( $('#input-' + inputName).parsley().isValid() && input.value !== "") {
+            if ($('#input-' + inputName).parsley().isValid() && input.value !== "") {
                 // create <div> ... </div>
                 let divTag = document.createElement("div");
                 divTag.classList.add("cv__info");
@@ -255,14 +243,14 @@ $( document ).ready(function() {
 
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
-            if ( $("#" + blockID + " form").parsley().isValid()) {
+            if ($("#" + blockID + " form").parsley().isValid()) {
                 // create <h2> ... </h2>
                 let h2Tag = document.createElement("h2");
                 h2Tag.textContent = roleInput.value;
 
                 // create <small> ... </small>
                 let smallTag = document.createElement("small");
-                smallTag.textContent = fromInput.value + " - "  + (toInput.value ===! "" ? toInput.value : "Current");
+                smallTag.textContent = fromInput.value + " - " + (toInput.value === ! "" ? toInput.value : "Current");
                 h2Tag.appendChild(generateBtnBlock());
                 h2Tag.appendChild(smallTag); // <h2> ... <small> ... </small> </h2>
 
@@ -275,9 +263,9 @@ $( document ).ready(function() {
                 // create <div class="tags"> ... </div>
                 let tagsBlock = document.createElement("div");
                 pTags.textContent = descriptionInput.value;
-                let tags  = tagsInput.value.split(",");
+                let tags = tagsInput.value.split(",");
                 tagsBlock.classList.add("tags");
-                for (let i=0; i<tags.length; i++) {
+                for (let i = 0; i < tags.length; i++) {
                     // <span class="label">tag[i]</span>
                     let spanTag = document.createElement("span");
                     spanTag.classList.add("label");
@@ -317,7 +305,7 @@ $( document ).ready(function() {
 
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
-            if ( $("#" + blockID + " form").parsley().isValid()) {
+            if ($("#" + blockID + " form").parsley().isValid()) {
 
                 // create <h2> ... </h2>
                 let h2Tag = document.createElement("h2");
@@ -326,7 +314,7 @@ $( document ).ready(function() {
 
                 // create <small> ... </small>
                 let smallTag = document.createElement("small");
-                smallTag.textContent = fromInput.value + " - " + (toInput.value ===! "" ? toInput.value : "Current");
+                smallTag.textContent = fromInput.value + " - " + (toInput.value === ! "" ? toInput.value : "Current");
                 h2Tag.appendChild(smallTag); // <h2> ... <small> ... </small> </h2>
 
                 // create <h3> ... </h3>
@@ -380,7 +368,7 @@ $( document ).ready(function() {
 
         button.addEventListener("click", ($event) => {
             $event.preventDefault();
-            if ( $("#" + blockID + " form").parsley().isValid()) {
+            if ($("#" + blockID + " form").parsley().isValid()) {
                 // create <h2> ... </h2>
                 let h2Tag = document.createElement("h2");
                 h2Tag.textContent = degreeInput.value;
@@ -389,7 +377,7 @@ $( document ).ready(function() {
                 // create <small> ... </small>
                 let smallTag = document.createElement("small");
 
-                smallTag.textContent = fromInput.value + " - "  + (toInput.value ===! "" ? toInput.value : "Current");
+                smallTag.textContent = fromInput.value + " - " + (toInput.value === ! "" ? toInput.value : "Current");
                 h2Tag.appendChild(smallTag); // <h2> ... <small> ... </small> </h2>
 
                 // create <h3> ... </h3>
@@ -419,9 +407,9 @@ $( document ).ready(function() {
 
     function displayTheRequire(cssClassName) {
         let inputs = document.querySelectorAll("[required]");
-        for (let i=0 ; i<inputs.length; i++) {
+        for (let i = 0; i < inputs.length; i++) {
             let name = document.querySelector('label[for=' + inputs[i].id + ']');
-            if ( name ) {
+            if (name) {
                 let spanTag = document.createElement("span");
                 spanTag.textContent = " * ";
                 spanTag.classList.add(cssClassName);
@@ -430,7 +418,7 @@ $( document ).ready(function() {
         }
     }
 
-// events ----------------------------------
+    // events ----------------------------------
     addInfo("name");
     addInfo("job");
     addInfo("phone");
@@ -445,6 +433,17 @@ $( document ).ready(function() {
     addProject("project");
     addEducation("education");
     displayTheRequire("text-danger");
+
+    $(document).on('mouseenter', '.cv__info:has(.btn-block)', function () {
+        $(this).find(".btn-block").css('opacity', 1);
+    });
+
+    $(document).on('mouseleave', '.cv__info:has(.btn-block)', function () {
+        $(this).find(".btn-block").css('opacity', 0);
+    });
+    $(document).on('click', ".cv__info :button:nth-child(2)", function() {
+        $(this).closest(".cv__info").remove();
+    })
 });
 
 

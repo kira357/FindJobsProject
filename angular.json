@@ -53,7 +53,7 @@
                             "src/js/vendor/parsley/extra/validator/luhn.js",
                             "src/js/vendor/parsley/extra/validator/notequalto.js",
                             "src/js/vendor/parsley/extra/validator/datecomparison.js",
-                            "src/js/main.js"
+                            "src/js/resumeMain.js"
                         ]
                     },
                     "configurations": {
