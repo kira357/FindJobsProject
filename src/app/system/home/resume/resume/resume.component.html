@@ -585,20 +585,19 @@
           <div class="paper cv" id="paper">
             <!-- sidebar of cv -->
             <div class="cv__sidebar" id="paper-side">
-              <button
-                class="icon"
-                title="Change Me"
-                style="width: 15rem; height: 15rem"
-                class="btn b-avatar rounded-circle"
-              >
-                <img
-                  *ngIf="profileImage"
-                  class="thumbnail sidebar__img"
-                  src="https://avatars1.githubusercontent.com/u/16634831?s=460&v=4"
-                  alt="profile."
+              <div class="text-center">
+                <label for="changeProfile">
+                  <img class="thumbnail sidebar__img" [src]="imagePreview" />
+                  edit
+                  <i class="fas fa-upload"></i>
+                </label>
+                <input
+                  id="changeProfile"
+                  style="display: none"
+                  type="file"
+                  (change)="onFileChange($event)"
                 />
-                <input type="file" (change)="onFileChange($event)" />
-              </button>
+              </div>
 
               <h1 id="cv__name" class="cv__title sidebar__name">
                 Sakhri Houssem Eddine

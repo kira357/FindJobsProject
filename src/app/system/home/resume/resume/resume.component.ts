@@ -10,8 +10,7 @@ declare var $: any;
 })
 export class ResumeComponent implements OnInit {
 
-  profileImage: File;
-  imagePath: string;
+  imagePreview: string;
   constructor() { }
 
   ngOnInit() {
@@ -62,9 +61,14 @@ export class ResumeComponent implements OnInit {
     });
   }
   onFileChange(e) {
-    let files = e.target.files || e.dataTransfer.files;
-    if (!files.length) this.imagePath = "";
-    this.createImage(files[0]);
+    const file = (event.target as HTMLInputElement).files[0]; 
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
   createImage(file) {
     // let reader = new FileReader();
