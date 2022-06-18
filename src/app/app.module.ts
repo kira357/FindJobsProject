@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPageMainModule } from './system/admin/admin-page-main.module';
 import { ClientModule } from './system/home/client/client.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { WINDOW_PROVIDERS } from './window.providers';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     ResumeModule
   ],
-  providers: [],
+  providers: [WINDOW_PROVIDERS],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

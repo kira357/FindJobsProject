@@ -1,10 +1,12 @@
+import { WINDOW } from "./../../../../window.providers";
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
 import { UserService } from 'src/app/core/model/user/User.service';
 import { ApiAuthenService } from 'src/app/services/api-authen.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
+
 
 @Component({
   selector: 'app-header',
@@ -12,6 +14,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  HostUrl: string;
   userName: string = '';
   isAdmin: boolean = false;
   data : any ; 
@@ -22,11 +25,13 @@ export class HeaderComponent implements OnInit {
     public spinnerService: SpinnerService,
     private router: Router,
     private apiAuthenService: ApiAuthenService,
-    private userService: UserService
+    private userService: UserService,
+    @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit() {
     this.getCurrentUser();
+    this.HostUrl = this.window.location.href + '/resume';
   }
 
   LogOut = () => {

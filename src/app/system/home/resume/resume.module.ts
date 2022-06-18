@@ -6,13 +6,15 @@ import { HeaderModule } from '../client/header/header.module';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'resume',
     component: ResumeComponent,
   },
 ];
 @NgModule({
   imports: [
-    CommonModule, RouterModule.forChild(routes), HeaderModule
+    CommonModule, RouterModule.forRoot(routes, {
+      urlUpdateStrategy: 'deferred'
+    }), HeaderModule
   ],
   declarations: [ResumeComponent]
 })

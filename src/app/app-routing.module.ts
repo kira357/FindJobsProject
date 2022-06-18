@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ResumeComponent } from './system/home/resume/resume/resume.component';
 
 const routes: Routes = [
   {
@@ -26,10 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'resume',
-    loadChildren: () =>
-      import('./system/home/resume/resume.module').then(
-        (m) => m.ResumeModule
-      ),
+    component: ResumeComponent
   },
   {
     path: 'profile',
@@ -102,7 +100,7 @@ const routes: Routes = [
       // preloadingStrategy: PreloadAllModules,
       scrollPositionRestoration: 'enabled',
       relativeLinkResolution: 'corrected',
-      anchorScrolling: 'enabled',
+      anchorScrolling: 'enabled'
     }),
   ],
   exports: [RouterModule],
