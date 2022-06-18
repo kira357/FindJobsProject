@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPageMainModule } from './system/admin/admin-page-main.module';
 import { ClientModule } from './system/home/client/client.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CvBuilderModule } from './system/home/cv-builder/cv-builder.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +21,6 @@ import { CvBuilderModule } from './system/home/cv-builder/cv-builder.module';
     BlogModule,
     DetailJobModule,
     ReactiveFormsModule,
-    CvBuilderModule,
     ResumeModule
   ],
   providers: [],

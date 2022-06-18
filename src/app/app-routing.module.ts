@@ -25,20 +25,6 @@ const routes: Routes = [
       import('./system/home/chat/chat/chat.module').then((m) => m.ChatModule),
   },
   {
-    path: 'create-cv',
-    loadChildren: () =>
-      import('./system/home/page-CV/page-CV.module').then(
-        (m) => m.PageCVModule
-      ),
-  },
-  {
-    path: 'cv-builder',
-    loadChildren: () =>
-      import('./system/home/cv-builder/cv-builder.module').then(
-        (m) => m.CvBuilderModule
-      ),
-  },
-  {
     path: 'resume',
     loadChildren: () =>
       import('./system/home/resume/resume.module').then(
