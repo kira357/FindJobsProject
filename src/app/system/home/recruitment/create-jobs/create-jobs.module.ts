@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateJobsComponent } from './create-jobs/create-jobs.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MaterialModule } from '../../../../material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
@@ -23,7 +22,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     NgMultiSelectDropDownModule.forRoot(),
-    CKEditorModule,
     RouterModule.forChild(routes),
     MaterialModule,
     CustomInputModule,

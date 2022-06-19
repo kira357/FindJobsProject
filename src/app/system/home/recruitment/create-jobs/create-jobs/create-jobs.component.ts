@@ -1,4 +1,3 @@
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -133,7 +132,6 @@ export class CreateJobsComponent implements OnInit {
     search: '',
   });
 
-  editor = ClassicEditor;
   check: any;
 
   private _search: string;

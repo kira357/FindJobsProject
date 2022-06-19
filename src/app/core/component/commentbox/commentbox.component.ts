@@ -39,6 +39,7 @@ export class CommentboxComponent implements OnInit {
     urlAvatar: '',
     phoneNumber: '',
     address: '',
+    email: '',
   };
   getData: any;
   sub: any;

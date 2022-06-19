@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './system/home/client/client.component';
+import { ResumeComponent } from './system/home/resume/resume/resume.component';
 
 const routes: Routes = [
   {
@@ -8,11 +9,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./system/home/client/client.module').then((m) => m.ClientModule),
   },
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./system/home/client/client.module').then((m) => m.ClientModule),
-  },
+  // {
+  //   path: 'home',
+  //   loadChildren: () =>
+  //     import('./system/home/client/client.module').then((m) => m.ClientModule),
+  // },
 
   {
     path: 'blog',
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () =>
       import('./system/home/chat/chat/chat.module').then((m) => m.ChatModule),
+  },
+  {
+    path: 'resume',
+    component: ResumeComponent,
   },
   {
     path: 'create-cv',

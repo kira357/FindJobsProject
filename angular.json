@@ -34,13 +34,24 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./node_modules/quill-emoji/dist/quill-emoji.css",
               "src/styles.scss",
+              "src/css/vendor/parsley/parsley.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/css/main.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/@fortawesome/fontawesome-free/js/all.js"
+              "node_modules/@fortawesome/fontawesome-free/js/all.js",
+              "src/js/vendor/jquery/jquery.js",
+              "src/js/vendor/foundation/what-input.js",
+              "src/js/vendor/foundation/foundation.min.js",
+              "src/js/vendor/parsley/parsley.min.js",
+              "src/js/vendor/parsley/extra/validator/dateiso.js",
+              "src/js/vendor/parsley/extra/validator/words.js",
+              "src/js/vendor/parsley/extra/validator/luhn.js",
+              "src/js/vendor/parsley/extra/validator/notequalto.js",
+              "src/js/vendor/parsley/extra/validator/datecomparison.js"
             ]
           },
           "configurations": {

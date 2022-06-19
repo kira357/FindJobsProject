@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPageMainModule } from './system/admin/admin-page-main.module';
 import { ClientModule } from './system/home/client/client.module';
 import { DetailBlogModule } from './system/home/blog/detail-blog/detail-blog.module';
+import { WINDOW_PROVIDERS } from './window.providers';
+import { ResumeModule } from './system/home/resume/resume.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,9 +24,11 @@ import { DetailBlogModule } from './system/home/blog/detail-blog/detail-blog.mod
     ClientModule,
     BlogModule,
     DetailJobModule,
+    ReactiveFormsModule,
+    ResumeModule
 
   ],
-  providers: [],
+  providers: [WINDOW_PROVIDERS],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

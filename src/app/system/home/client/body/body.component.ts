@@ -47,7 +47,7 @@ export class BodyComponent implements OnInit {
     console.log('onpageChange', evt);
   }
   onClickQuickDetail(idJob: any) {
-    this.router.navigate(['/home/quick-detail', idJob], {
+    this.router.navigate(['/quick-detail', idJob], {
       queryParams: {
         debug: true,
       },

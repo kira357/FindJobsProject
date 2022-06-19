@@ -59,6 +59,7 @@ export class InformationComponent implements OnInit {
     urlAvatar: '',
     phoneNumber: '',
     address: '',
+    email: '',
   };
   _PagingParams = new PagingParams();
   _LIST_DATA: VMGetJobDto[] = [];

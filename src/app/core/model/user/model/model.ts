@@ -58,6 +58,7 @@ export interface VMGetCurrentUser {
   urlAvatar: string;
   phoneNumber: string;
   address: string;
+  email: string;
 }
 export interface VMCreateUser {
   lastName: string;

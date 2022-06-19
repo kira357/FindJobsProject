@@ -1,0 +1,379 @@
+#print-me {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+// ----------------------------------------------------
+// Size
+// ----------------------------------------------------
+$title-size: 1.4rem !important;
+$title-sidebar-size: 1rem !important;
+$paper-width: 59.5rem;
+$paper-height: 84.2rem;
+$text-size: 0.8rem;
+$time-size: 0.9rem;
+$title-1-size: 1.3rem;
+$title-2-size: 1.1rem;
+// ----------------------------------------------------
+// Colors
+// ----------------------------------------------------
+$bg-color: #e6e6e6;
+$sidebar-bg-color: #1779ba;
+$paper-bg-color: #fff;
+$paper-title-color: $sidebar-bg-color;
+$text-color: #26282b;
+$time-color: lighten($text-color, 40);
+$danger-color: #cc4b37;
+$success-color: #37cc56;
+// ----------------------------------------------------
+// Padding
+// ----------------------------------------------------
+$default-padding: 10px;
+$sidebar-padding: 1rem;
+// ----------------------------------------------------
+// Margins
+// ----------------------------------------------------
+$default-margin: 5px;
+$paper-title-margin-top: 0.5rem;
+// ----------------------------------------------------
+// Backgrounds
+// ----------------------------------------------------
+.bg--light-gray {
+  background-color: $bg-color;
+}
+
+// ----------------------------------------------------
+// paper
+// ----------------------------------------------------
+
+.paper {
+  width: $paper-width;
+  min-height: $paper-height;
+  margin: auto;
+  background-color: $paper-bg-color;
+}
+
+.cv {
+  &__sidebar {
+    padding: $sidebar-padding;
+    background-color: $sidebar-bg-color;
+    width: 30%;
+    display: table-cell;
+    color: $paper-bg-color;
+  }
+  &__main {
+    padding: $default-padding;
+    width: 65%;
+    display: table-cell;
+    h1 {
+      color: $paper-title-color;
+      font-size: $title-1-size;
+    }
+    h2 {
+      position: relative;
+      font-size: $title-2-size;
+      margin-bottom: 0;
+      small {
+        color: $time-color;
+        font-size: ($text-size + 0.2rem);
+        position: absolute;
+        right: 0;
+        top: 0.9rem;
+      }
+      + h3 {
+        color: $time-color;
+        font-size: $time-size;
+      }
+    }
+    p,
+    ul,
+    dd {
+      color: $text-color;
+      font-size: $text-size;
+      margin-bottom: 0;
+      padding-left: 10px;
+      text-align: justify;
+    }
+    .tags {
+      margin-left: $default-margin * 2;
+      span {
+        border-radius: 3px;
+        font-size: $text-size - 0.1rem;
+      }
+    }
+  }
+  &__title {
+    font-size: $title-size;
+  }
+}
+
+.sidebar {
+  &__title {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: $title-sidebar-size;
+  }
+  &__name {
+    text-align: center;
+    font-weight: 600;
+  }
+  &__job {
+    color: $bg-color;
+    text-align: center;
+    font-weight: 600;
+  }
+  &__info {
+    dd {
+      font-size: $text-size;
+      clear: both;
+      i {
+        margin-right: $default-padding * 2;
+      }
+      a {
+        color: $paper-bg-color;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  &__title {
+    margin-top: $paper-title-margin-top;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+.cv__main {
+  .cv__info {
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-top: $default-margin;
+  }
+  .info-skill{
+    flex-direction: column;
+    display: flex;
+  }
+}
+
+.cv__info {
+  padding: $default-margin;
+  border-radius: $default-margin;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ----------------------------------------------------
+// Form
+// ----------------------------------------------------
+.tabs {
+  li {
+    a {
+      font-size: $title-2-size;
+      text-decoration: none;
+    }
+    &:hover{
+      background-color: #c9c9c9c9
+    }
+  }
+}
+
+label {
+  font-weight: 600;
+}
+
+// ----------------------------------------------------
+// Tags
+// ----------------------------------------------------
+.tags {
+  margin: 8px 0px;
+  .label {
+    margin-right: $default-margin;
+    background-color: var($paper-title-color);
+  }
+}
+
+// ----------------------------------------------------
+// Text
+// ----------------------------------------------------
+.text-danger {
+  color: $danger-color;
+}
+
+// ----------------------------------------------------
+// Buttons
+// ----------------------------------------------------
+.button{
+  font-size: 25px;
+  padding-bottom: 0px;
+  color: #2c9d36;
+}
+.btn-block {
+  display: inline-block;
+  opacity: 0;
+  .cv__sidebar & {
+    // float: right;
+  }
+  #cv__skills & {
+    float: none;
+  }
+}
+
+.icon {
+  margin: 0 !important;
+  margin-right: 5px !important;
+  padding: 0 !important;
+  &:first-child {
+    color: $success-color;
+  }
+  &:nth-child(2) {
+    color: $danger-color;
+  }
+  i {
+    line-height: 1;
+    border-radius: 10%;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 !important;
+    font-size: 1rem;
+    &:hover {
+      font-size: 1.1rem;
+      color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border: 1px solid #eed3d7;
+}
+
+.parsley-errors-list {
+  margin-top: 3px !important;
+  margin-bottom: 2px !important;
+  padding: 0 !important;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+  color: #b94a48;
+
+  transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+.parsley-errors-list ul{
+  padding: 0!important;
+  margin: 0!important;
+}
+
+.container-xxl {
+  margin: 30px auto;
+  max-width: 1350px;
+}
+
+.tabs{
+  padding: 0;
+  border: 1px solid;
+  padding: 10px;
+.tabs-title{
+  width: calc(100% / 3);
+  padding:10px;
+}
+.is-active{
+  &:focus {
+    border-top: 1px;
+    border-left: 10px;
+    border-right: 1px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #ea2635;
+    border-radius: 10px;
+    color: #212529;
+    text-shadow: #000000 0px 0px 0px;
+  }
+}
+}
+.form-label{
+  width: 100%;
+}
+.link-project{
+  max-width: 600px;
+  word-break: break-all;
+}
+
+[contenteditable]{
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.5rem;
+  font-family: inherit;
+  color: inherit;
+  background-color: transparent;
+  resize: none;
+  overflow: auto;
+  &:hover {
+    outline-style: dotted;
+  }
+  &:focus {
+    outline-style: dashed;
+  }
+}
+
+.change-coler{
+  width: 30px;
+  height: 30px;
+  border-radius: 100rem;  
+}
+input{
+  padding: 5px 13px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+select{
+  width: 100%;
+  padding: 5px 7px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+:host::ng-deep .parsley-required li{
+  color: red !important;
+}
+.tabs-content{
+  padding: 10px;
+  border: 1px solid;
+  input{
+    width: 100%;
+  }
+  .custom-label{
+    display: flex;
+    flex-direction: column;
+  }
+}
+.tabs-panel{
+  button{
+    background-color: rgba(243, 31, 31, 0.505);
+    border-radius: 5px;
+    
+  }
+}

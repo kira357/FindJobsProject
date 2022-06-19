@@ -36,6 +36,7 @@ export class BodyBlogComponent implements OnInit {
     urlAvatar: '',
     phoneNumber: '',
     address: '',
+    email: '',
   };
   ngOnInit() {
     this.getCurrentUser();

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Cv Generator</title>
+    <!-- foundation styles -->
+    <link rel="stylesheet" src="/src/css/vendor/foundation/foundation.css" />
+    <!-- parsley styles -->
+    <link rel="stylesheet" src="/src/css/vendor/parsley/parsley.css" />
+    <!-- fontawesome styles -->
+    <!-- <link rel="stylesheet" src="/src/css/vendor/foundation/foundation.min.css" /> -->
+    <!-- main app styles -->
+    <link rel="stylesheet" src="/src/css/main.css" />
+  </head>
+  <app-header></app-header>
+  <body>
+    <div class="bg-gray container-xxl">
+      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <div fxLayout="column" fxFlex="40" fxLayoutGap="10px">
+
+          <div *ngFor="let item of listColor">
+              <span class="change-coler" (click)="changeColor(item.value)" [ngStyle]="{ 'background-color': item.value}">
+                {{item.name}}
+              </span>
+          </div>
+
+          <form id="form" data-parsley-trigger="focusin focusout keypress">
+            <!-- Name Form -->
+            <div fxLayout="column">
+              <label for="input-name">
+                <i class="fas fa-signature"></i> Full Name
+              </label>
+              <input
+                name="name"
+                id="input-name"
+                type="text"
+                placeholder="Your Full Name"
+                pattern="[a-zA-Z ]{3,30}"
+                data-parsley-minwords="2"
+                minlength="3"
+                [(ngModel)]="currentUser.fullName"
+                required
+              />
+            </div>
+
+            <!-- desired job -->
+            <div fxLayout="column">
+              <label for="input-job">
+                <i class="fas fa-briefcase"></i> Desired job
+              </label>
+              <input
+                name="job"
+                id="input-job"
+                type="text"
+                placeholder="Your Desired job"
+                minlength="3"
+                [(ngModel)]="desiredJob"
+              />
+            </div>
+
+            <!-- information block -->
+            <div fxLayout="column">
+              <div fxLayout="column">
+                <!-- Email -->
+                <label for="input-email">
+                  <i class="fas fa-at"></i> Email
+                </label>
+                <input
+                  name="email"
+                  data-parsley-type="email"
+                  id="input-email"
+                  type="email"
+                  placeholder="Your Email"
+                  required
+                  [(ngModel)]="currentUser.email"
+                />
+              </div>
+              <div fxLayout="column">
+                <!-- Phone -->
+                <label for="input-phone">
+                  <i class="fas fa-phone"></i> Phone
+                </label>
+                <input
+                  name="phone"
+                  id="input-phone"
+                  type="tel"
+                  data-parsley-length="[9, 14]"
+                  pattern="^[+]{0,1}[0-9]{1,4}[0-9]*"
+                  placeholder="Your Phone Number"
+                  required
+                  [(ngModel)]="currentUser.phoneNumber"
+                />
+              </div>
+            </div>
+          </form>
+
+          <!-- Links -->
+          <form data-parsley-trigger="submit focusin focusout keypress ">
+            <div fxLayout="column">
+              <label for="input-web-sites">
+                <i class="fas fa-link"></i> Links
+              </label>
+              <div fxLayout="row" fxLayoutGap="10px">
+                <div fxFlex="95">
+                  <input
+                    style="width: 100%;"
+                    name="web-sites"
+                    id="input-web-sites"
+                    type="url"
+                    placeholder="Your Site/Blog Link"
+                    required
+                  />
+                </div>
+                <div fxFlex="5" fxLayoutAlign="end start">
+                  <button
+                    id="button-web-sites_add"
+                    class="button expanded"
+                    type="submit"
+                    (click)="addWebSite('web-sites',$event)"
+                  >
+                    <i class="fas fa-plus-square"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- end Links -->
+
+          <!-- Social Media -->
+          <form
+            data-parsley-validate
+            data-parsley-trigger="submit focusin focusout keypress "
+          >
+          <div fxLayout="column">
+            <label for="select-social-media">
+              <i class="fas fa-network-wired"></i> Social Media
+            </label>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="25">
+                <select
+                style="width: 100%;"
+                name="socialMedia"
+                required="required"
+                aria-required="true"
+                class="custom-select"
+                placeholder="Please Select a Social media"
+                id="select-social-media"
+              >
+                <option value="">Please select</option>
+                <option value="linkedin-in">LinkedIn</option>
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="instagram">Instagram</option>
+                <option value="github">Github</option>
+                <option value="behance">Behance</option>
+                <option value="dribbble">Dribbble</option>
+                <option value="twitter">Twitter</option>
+              </select>
+              </div>
+              <div fxFlex="75">
+                <input
+                style="width: 100%;"
+                id="input-social-media"
+                type="url"
+                placeholder="Your Profile Link"
+                required
+              />
+              </div>
+              <div fxFlex="5" fxLayoutAlign="end start">
+                <button
+                id="button-social-media_add"
+                class="button expanded"
+                type="submit"
+                (click)="addSocialMedia('social-media', $event)"
+              >
+                <i class="fas fa-plus-square"></i>
+              </button>
+              </div>
+            </div>
+          </div>
+
+          </form>
+          <!-- end Social Media -->
+          <form data-parsley-trigger="focusout keypress">
+            <!-- Resume -->
+            <div fxLayout="column">
+              <label for="input-resume">
+                <i class="fas fa-pencil-alt"></i> Resume
+              </label>
+              <textarea
+                name="resume"
+                id="input-resume"
+                placeholder="Your Resume..."
+                data-parsley-minwords="20"
+                required
+              ></textarea>
+            </div>
+          </form>
+
+          <!-- end Resume -->
+
+          <ul
+            class="tabs"
+            data-active-collapse="true"
+            data-tabs
+            id="collapsing-tabs"
+            fxLayoutAlign="start strech" fxLayout="row wrap"
+
+          >
+            <!-- <li class="tabs-title is-active">
+              <a href="#experience" aria-selected="true"
+                ><i class="fas fa-briefcase"></i> Experiences</a
+              >
+            </li>
+            <li class="tabs-title">
+              <a href="#project"><i class="fas fa-box-open"></i> Projects</a>
+            </li>
+            <li class="tabs-title">
+              <a href="#education"
+                ><i class="fas fa-university"></i> Educations</a
+              >
+            </li>
+            <li class="tabs-title">
+              <a href="#skills"><i class="fas fa-wrench"></i> Skills</a>
+            </li>
+            <li class="tabs-title">
+              <a href="#languages"><i class="fa fa-language"></i> Languages</a>
+            </li>
+            <li class="tabs-title">
+              <a href="#interests"><i class="fas fa-plus"></i> Interests</a>
+            </li> -->
+            <li class="tabs-title" *ngFor="let item of listOption">
+              <a  aria-selected="true" (click)="openOption(item.href)"
+                ><i [class]="item.icon"></i> {{item.name}}</a
+              >
+            </li>
+          </ul>
+          <div class="tabs-content" data-tabs-content="collapsing-tabs" >
+            <!-- experiences -->
+            <ng-container [ngSwitch]="option">
+            <div *ngSwitchCase="'experience'" class="tabs-panel" id="experience">
+                <form data-parsley-validate data-parsley-trigger="submit focusin focusout keypress" fxLayout="column">
+                    <!-- Role -->
+                    <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                        <div fxFlex="50">
+                            <label class="form-label"> <i class="far fa-user"></i> Role
+                            <input id="experience_role" type="text" placeholder="Your Role" required>
+                            </label>
+                        </div>
+                        <div fxFlex="50">
+                            <label class="form-label"> <i class="far fa-building"></i> Company
+                            <input  id="experience_company" type="text" placeholder="Your Company" required>
+                        </label>
+                        </div>
+                    </div>
+                    <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                        <div fxFlex="50">
+                            <!-- From -->
+                            <label class="form-label"> <i class="far fa-calendar-alt"></i> From
+                            <input id="experience_from" name="experience_from" type="month" placeholder="From" required>
+                        </label>
+                        </div>
+                        <div fxFlex="50">
+                            <!-- To -->
+                            <label class="form-label"> <i class="far fa-calendar-alt"></i> To
+                            <input id="experience_to" type="month" name="experience_to" placeholder="To" data-parsley-date-gt="#experience_from">
+                        </label>
+                        </div>
+                    </div>
+                    <!-- Experience Description -->
+                    <div>
+                        <label class="form-label"> <i class="fas fa-tags"></i> Tags
+                        <input type="text" id="experience_tags" name="experience_tags" placeholder="Your Experience Tags (Tag1, Tag2, ...)">
+                    </label>
+                    </div>
+                    <!-- Experience Tags -->
+                    <div fxLayout="column">
+                        <label class="form-label"> <i class="fas fa-pencil-alt"></i> Description
+                        </label>
+                        <textarea required data-parsley-minwords="20" id="experience_description" name="experience_description" placeholder="Describe Your Experience"></textarea>
+                    </div>
+                    <button id="button-experience_add" class="button expanded" type="submit"  (click)="addExperience(option , $event)"><i class="fas fa-plus-square"></i></button>
+                </form>
+            </div>
+            <div *ngSwitchCase="'project'">
+              <div class="tabs-panel" id="project">
+                <form data-parsley-validate data-parsley-trigger="submit focusin focusout keypress " fxLayout="column">
+                    <!-- Role -->
+                <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                    <div fxFlex="50">
+                        <label class="form-label"> <i class="fas fa-signature"></i> Name
+                            <input id="project_name" type="text" placeholder="Your Project Name" required>
+                        </label>
+                    </div>
+                    <div fxFlex="50">
+                    <label class="form-label"> <i class="fas fa-link"></i> Link
+                        <input id="project_link" type="url" placeholder="Your Project Link">
+                    </label>
+                    </div>
+                </div>
+                <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                    <div fxFlex="50">
+                        <!-- From -->
+                        <label class="form-label"> <i class="far fa-calendar-alt"></i> From
+                            <input id="project_from" type="month" placeholder="From" required>
+                        </label>
+                    </div>
+                    <div fxFlex="50">
+                        <!-- To -->
+                    <label class="form-label"> <i class="far fa-calendar-alt"></i> To
+                        <input id="project_to" type="month" data-parsley-date-gt="#project_from" placeholder="To">
+                    </label>
+                    </div>
+                </div>
+                <div fxLayout="column">
+                  <!-- Projects Description -->
+                  <label> <i class="fas fa-pencil-alt"></i> Description
+                  </label>
+                  <textarea name="" id="project_description" placeholder="Describe Your Project" required data-parsley-minwords="20"></textarea>
+                </div>
+  
+                    <!-- Projects Tags -->
+                    <label> <i class="fas fa-tags"></i> Tags
+                    <input type="text" id="project_tags" name="" placeholder="Your Projects Tags (Tag1, Tag2, ...)">
+                </label>
+                    <button id="button-project_add" class="button expanded" type="submit" (click)="addProject(option,$event)"><i class="fas fa-plus-square"></i></button>
+                </form>
+            </div>
+          </div>
+          <div *ngSwitchCase="'education'">
+                      <!-- educations -->
+        <div class="tabs-panel" id="education">
+          <form data-parsley-validate data-parsley-trigger="submit focusin focusout keypress " fxLayout="column" fxLayoutGap="5px" >
+              <!-- Role -->
+              <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                  <div fxFlex="50">
+
+                      <label class="form-label">  <i class="fas fa-signature"></i> Degree
+                          <input id="education_degree" type="text" placeholder="Degree" required>
+                      </label>
+                  </div>
+                  <div fxFlex="50">
+                  <label  class="form-label"> <i class=" fa fa-university"></i>  School
+                      <input id="education_school" type="text" placeholder="School Name" required>
+                  </label>
+                  </div>
+              </div>
+              <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                  <div fxFlex="50">
+                      <!-- From -->
+                      <label class="form-label"> <i class="far fa-calendar-alt"></i> From
+                          <input id="education_from" type="month" placeholder="From" required>
+                      </label>
+                  </div>
+                  <div fxFlex="50">
+                      <!-- To -->
+                  <label class="form-label"> <i class="far fa-calendar-alt"></i> To
+                      <input id="education_to" type="month" placeholder="To" data-parsley-date-gt="#education_from">
+                  </label>                    
+                  </div>
+              </div>
+
+              <!-- Education Description -->
+              <div fxLayout="column">
+                  <label class="form-label"> <i class="fas fa-pencil-alt"></i> Description
+                  </label>
+                  <textarea id="education_description" placeholder="Describe Your Education"></textarea>
+              </div>
+              <button id="button-education_add" class="button expanded" type="submit" (click)="addEducation(option,$event)"><i class="fas fa-plus-square"></i></button>
+          </form>
+      </div>
+          </div>
+          <div *ngSwitchCase="'skills'">
+                      <!-- skills -->
+        <div class="tabs-panel" id="skills">
+          <form data-parsley-validate data-parsley-trigger="submit focusout keypress">
+              <div fxLayout="column">
+                <div fxLayout="row">
+                  <div fxFlex="70">
+                      <input id="input-skill" type="text" placeholder="Your Skill" required>
+                  </div>
+                  <div fxFlex="30">
+                      <select name="skill_level" id="select-skill_level" required>
+                      <option disabled selected>Level</option>
+                      <option value="50">Beginner</option>
+                      <option value="75">Intermediate</option>
+                      <option value="100">Expert</option>
+                  </select>
+                  </div>
+                </div>
+                  <button style="width: 100%;" id="button-skill_add" class="button expanded" type="submit" (click)="addSkills(option,$event)">
+                  <i class="fas fa-plus-square"></i>
+              </button>
+              </div>
+          </form>
+      </div>
+          </div>
+          <div *ngSwitchCase="'languages'">
+        <!-- languages -->
+        <div class="tabs-panel" id="languages">
+          <form data-parsley-validate data-parsley-trigger="submit focusout keypress">
+              <div fxLayout="column">
+                <div fxLayout="row">
+                  <div fxFlex="70">
+                      <input id="input-language" type="text" placeholder="Your language" required>
+                  </div>
+                  <div  fxFlex="30">
+                      <select name="language_level" id="select-language_level" required>
+                      <option disabled selected>Level</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Conversational">Conversational</option>
+                      <option value="Business">Business </option>
+                      <option value="Fluent">Fluent  </option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+              <button style="width: 100%;" id="button-language_add" class="button expanded" type="submit"
+              (click)="addLanguage(option,$event)">
+              <i class="fas fa-plus-square"></i>
+          </button>
+          </form>
+      </div>
+          </div>
+          <div *ngSwitchCase="'interests'">
+                      <!-- Interests -->
+        <div class="tabs-panel" id="interests">
+          <form data-parsley-validate data-parsley-trigger="focusout submit keypress">
+              <input id="input-interest" type="text" placeholder="Your interest" required>
+              <button style="width: 100%;" id="button-interest_add" class="button expanded" type="submit"
+              (click)="addInterest(option,$event)">
+              >
+              <i class="fas fa-plus-square"></i>
+          </button>
+          </form>
+      </div>
+          </div>
+            <div *ngSwitchDefault>
+              <div class="tabs-panel is-active" id="experience">
+                <form data-parsley-validate data-parsley-trigger="submit focusin focusout keypress" fxLayout="column">
+                    <!-- Role -->
+                    <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                        <div fxFlex="50">
+                            <label class="form-label"> <i class="far fa-user"></i> Role
+                            <input id="experience_role" type="text" placeholder="Your Role" required>
+                            </label>
+                        </div>
+                        <div fxFlex="50">
+                            <label class="form-label"> <i class="far fa-building"></i> Company
+                            <input  id="experience_company" type="text" placeholder="Your Company" required>
+                        </label>
+                        </div>
+                    </div>
+                    <div fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                        <div fxFlex="50">
+                            <!-- From -->
+                            <label class="form-label"> <i class="far fa-calendar-alt"></i> From
+                            <input id="experience_from" name="experience_from" type="month" placeholder="From" required>
+                        </label>
+                        </div>
+                        <div fxFlex="50">
+                            <!-- To -->
+                            <label class="form-label"> <i class="far fa-calendar-alt"></i> To
+                            <input id="experience_to" type="month" name="experience_to" placeholder="To" data-parsley-date-gt="#experience_from">
+                        </label>
+                        </div>
+                    </div>
+                    <!-- Experience Description -->
+                    <div>
+                        <label class="form-label"> <i class="fas fa-tags"></i> Tags
+                        <input type="text" id="experience_tags" name="experience_tags" placeholder="Your Experience Tags (Tag1, Tag2, ...)">
+                    </label>
+                    </div>
+                    <!-- Experience Tags -->
+                    <div fxLayout="column">
+                        <label class="form-label"> <i class="fas fa-pencil-alt"></i> Description
+                        </label>
+                        <textarea required data-parsley-minwords="20" id="experience_description" name="experience_description" placeholder="Describe Your Experience"></textarea>
+                    </div>
+                    <button id="button-experience_add" class="button expanded" type="submit" 
+                    (click)="addExperience(option , $event)"><i class="fas fa-plus-square"></i></button>
+                </form>
+            </div>
+            </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- cv paper -->
+        <div fxLayout="column" fxFlex="60">
+          <div class="cv" id="paper" fxLayout="row">
+            <!-- sidebar of cv -->
+            <div class="cv__sidebar" id="paper-side" fxLayout="column" fxFlex="30">
+              <div class="text-center">
+                <label for="changeProfile">
+                  <img class="thumbnail sidebar__img" [src]="imagePreview" />
+                  <!-- edit
+                  <i class="fas fa-upload"></i> -->
+                </label>
+                <input
+                  id="changeProfile"
+                  style="display: none"
+                  type="file"
+                  (change)="onFileChange($event)"
+                />
+              </div>
+
+              <h1 id="cv__name" class="cv__title sidebar__name" contenteditable="true">
+                {{currentUser.fullName}}
+              </h1>
+              <h2 id="cv__job" class="cv__title sidebar__job">
+                {{desiredJob}}
+              </h2>
+              <hr />
+              <dl class="sidebar__info">
+                <dd class="cv__info">
+                  <i class="fas fa-at"></i>
+                  <span id="cv__email">{{currentUser.email}}</span>
+                  <div class="btn-block">
+                    <button class="icon">
+                      <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="icon"><i class="fas fa-trash"></i></button>
+                  </div>
+                </dd>
+                <dd class="cv__info">
+                  <i class="fas fa-phone"></i>
+                  <span id="cv__phone">{{currentUser.phoneNumber}} </span>
+                  <div class="btn-block">
+                    <button class="icon">
+                      <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="icon"><i class="fas fa-trash"></i></button>
+                  </div>
+                </dd>
+                <dd>
+                  <div id="cv__web-sites">
+                    <div class="cv__info">
+                      <i class="fas fa-globe-europe"></i>
+                      <a href="https://www.facebook.com/dattrantd7/">www.facebook.com/dattrantd7</a>
+                      <div class="btn-block">
+                        <button class="icon">
+                          <i class="fas fa-paint-brush"></i>
+                        </button>
+                        <button class="icon">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </dd>
+                <dd id="cv__social-media">
+                  <div class="cv__info">
+                    <i class="fab fa-github"></i> https://github.com/kira357
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                
+                </dd>
+
+                <!-- skills -->
+                <dt class="sidebar__title clearfix">
+                  <i class="fas fa-wrench"></i> Skills
+                </dt>
+
+                <dd id="cv__skills">
+                  <div class="cv__info info-skill">
+                      <div>
+                          <span >Bootstrap</span>
+                          <div class="btn-block" >
+                              <button class="icon"><i class="fas fa-paint-brush"></i></button>
+                              <button class="icon"><i class="fas fa-trash"></i></button>
+                          </div>
+                      </div>
+                      <div >
+                          <progress class="secondary " max="100" value="90" style="width: 100%" > <button class="icon"><i class="fas fa-trash"></i></button></progress>
+                      </div>
+                  </div>
+                  </dd>
+
+                <!-- languages -->
+                <dt class="sidebar__title">
+                  <i class="fas fa-language"></i> Languages
+                </dt>
+                <dd id="cv__languages">
+                  <div class="cv__info">
+                    English
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="cv__info">
+                    French
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="cv__info">
+                    Arabic
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </dd>
+
+                <!-- interests -->
+                <dt class="sidebar__title">
+                  <i class="fas fa-plus"></i> Interests
+                </dt>
+                <dd id="cv__interests">
+                  <div class="cv__info">
+                    Film & Series
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="cv__info">
+                    Drawing
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="cv__info">
+                    Cocking
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </dd>
+              </dl>
+            </div>
+
+            <!-- main of cv -->
+            <div class="cv__main" fxFlex="70">
+              <!-- Resume -->
+              <h1 class="main__title">
+                <i class="fas fa-pencil-alt"></i> Resume
+              </h1>
+              <div class="cv__info" id="cv__resume">
+                <p>
+                  Versatile, motivated and passionate web developer of new
+                  technologies.
+                </p>
+                <p>
+                  Having gained experience with multiple technologies and
+                  completing several development projects, whether in business
+                  or freelance.
+                </p>
+                <p>
+                  Are actively seeking a Web Developer position within a dynamic
+                  team and with technical and professional development
+                  opportunities.
+                </p>
+              </div>
+
+              <!-- Experiences -->
+              <div id="cv__experiences">
+                <h1 class="main__title">
+                  <i class="fas fa-briefcase"></i> Experiences
+                </h1>
+
+                <div class="cv__experience cv__info">
+                  <h2>
+                    Full Stack Developer
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <small> November – December 2018</small>
+                  </h2>
+                  <h3>AhSB-Communication</h3>
+                  <p>It was my responsibility to :</p>
+                  <ul>
+                    <li>
+                      Perform unit tests under the supervision of the IANDI team
+                      on their Platform 1SPECT using PHP Unit .
+                    </li>
+                    <li>Develop websites using Ez-platform technology.</li>
+                    <li>Using the YouTrack Task Management Tool.</li>
+                    <li>Using Sourcetree for Git</li>
+                  </ul>
+                  <div class="tags">
+                    <span class="label">PHP7.3</span>
+                    <span class="label">Symfony</span>
+                    <span class="label">Ez-Platform</span>
+                    <span class="label">CSS3</span>
+                    <span class="label">SASS</span>
+                    <span class="label">Git</span>
+                    <span class="label">YouTrack</span>
+                    <span class="label">SourceTree</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Projects -->
+              <div id="cv__projects">
+                <h1 class="main__title">
+                  <i class="fas fa-box-open"></i> Projects
+                </h1>
+
+                <div class="cv__project cv__info">
+                  <h2>
+                    Image Classification
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <small>January - May 2018 (Master PFE)</small>
+                  </h2>
+                  <p>
+                    Development of a Desktop Application for Image
+                    Classification Using Python and the TensorFlow Library for
+                    Machine Learning.
+                  </p>
+                  <div class="tags">
+                    <span class="label">Python</span>
+                    <span class="label">TensorFlow</span>
+                  </div>
+                </div>
+
+                <div class="cv__project cv__info">
+                  <h2>
+                    SEOR Web application
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <small>January - May 2016 (License PFE)</small>
+                  </h2>
+                  <p>
+                    Development of a WEB application for the management of
+                    equipme for tntshe HSE department of the company SEOR using
+                    PHP 5.4 and pure CSS3 for a responsive interface.
+                  </p>
+                  <div class="tags">
+                    <span class="label">PHP5.4</span>
+                    <span class="label">CSS3</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Educations -->
+              <div id="cv__educations">
+                <h1 class="main__title">
+                  <i class="fa fa-university"></i> Educations
+                </h1>
+
+                <div class="cv__education cv__info">
+                  <h2>
+                    Master Degree in Computer Science
+                    <div class="btn-block">
+                      <button class="icon">
+                        <i class="fas fa-paint-brush"></i>
+                      </button>
+                      <button class="icon"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <small>Sept 2013 - Mai 2018</small>
+                  </h2>
+                  <h3>
+                    University of Science and Technologie Mohamed Boudiaf,Oran
+                    Algeria
+                  </h3>
+                  <p></p>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+          <button
+          title="Print Me"
+          id="print-me"
+          type="button"
+          (click)="print()"
+          class="btn btn-dark btn-lg"
+        >
+          <i class="fas fa-file-pdf"></i>
+        </button>
+        </div>
+      </div>
+    </div>
+    <!-- main app scripts -->
+    <script src="/src/js/vendor/jquery/jquery.js"></script>
+    <!-- foundation scripts -->
+    <script src="/src/js/vendor/foundation/what-input.js"></script>
+    <script src="/src/js/vendor/foundation/foundation.min.js"></script>
+    <!-- parsley scripts -->
+    <script src="/src/js/vendor/parsley/parsley.min.js"></script>
+    <!-- parsley extra scripts -->
+    <!--<script src="js/vendor/parsley/extra/plugin/bind.js"></script>-->
+    <!--<script src="js/vendor/parsley/extra/validator/comparison.js"></script>-->
+    <script src="/src/js/vendor/parsley/extra/validator/dateiso.js"></script>
+    <script src="/src/js/vendor/parsley/extra/validator/words.js"></script>
+    <script src="/src/js/vendor/parsley/extra/validator/luhn.js"></script>
+    <script src="/src/js/vendor/parsley/extra/validator/notequalto.js"></script>
+    <script src="/src/js/vendor/parsley/extra/validator/datecomparison.js"></script>
+    <!-- main app scripts -->
+    <!-- <script src="/src/js/resumeMain.js"></script> -->
+  </body>
+</html>
