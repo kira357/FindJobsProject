@@ -183,10 +183,12 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     const filename = 'Donwload_Resume.pdf';
     const a4Width = 210.0015555555555; // paper Standard Width
     const a4Height = 297.0000833333333; // paper Standard Height
-    const divWidth = document.getElementById('paper')!.offsetWidth;
+    const paper = document.getElementById('paper');
+    const divHeight = paper!.offsetHeight;
+    const divWidth = paper!.offsetWidth;
 
     // get paper color side
-    // const paperSide = document.getElementById('paper-side');
+    const paperSide = document.getElementById('paper-side');
 
     // calculate the color side  height
     const paperSideHeight = (a4Height / a4Width) * divWidth;
@@ -194,13 +196,10 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     // change the default height of the paper
     // paperSide!.setAttribute("style", "min-height:" + paperSideHeight + "px");
 
-    const paper = document.getElementById('paper');
-    const divHeight = paper!.offsetHeight;
-
     await html2canvas(paper!, {
       height: divHeight,
       width: divWidth,
-      scale: 1,
+      scale: 5,
       allowTaint: true,
       useCORS: true,
       logging: false,
@@ -209,7 +208,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
       const width = pdf.internal.pageSize.getWidth();
       let imgWidth = 300
       let pageHeight = pdf.internal.pageSize.height;
-      let imgHeight = (canvas.height * width) / canvas.width;
+      let imgHeight = (canvas.height * imgWidth) / canvas.width;
       let heightLeft = imgHeight;
       let position = 0;
 
@@ -218,7 +217,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
         'JPEG',
         0,
         0,
-        width,
+        imgWidth,
         imgHeight
       );
       heightLeft -= pageHeight;
@@ -230,12 +229,13 @@ export class ResumeComponent implements OnInit, AfterViewInit {
           'JPEG',
           0,
           position,
-          width,
+          imgWidth,
           imgHeight
         );
         heightLeft -= pageHeight;
       }
       pdf.save(filename);
+      // window.open(pdf.output('bloburl'));
       // paperSide!.removeAttribute('style');
       // document.getElementById('paper')!.removeAttribute('style');
     });
