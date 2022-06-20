@@ -71,12 +71,29 @@ export class ResumeComponent implements OnInit, AfterViewInit {
   data = localStorage.getItem('data');
   _LIST_DATA: VMGetJobDto[] = [];
   getCurrentUser() {
-    const dataJson = JSON.parse(this.data || '');
-    this.apiAuthenService
-      .RequestGetCurrentUser(dataJson.data.id)
-      .subscribe((data: any) => {
-        this.currentUser = data[0];
-      });
+    if(this.data !== null) {
+    const dataJson = JSON.parse(this.data ||  '{}');
+      this.apiAuthenService
+        .RequestGetCurrentUser(dataJson.data.id)
+        .subscribe((data: any) => {
+          this.currentUser = data[0];     
+        });
+    }else{
+      this.currentUser = {
+        id: '',
+        fullName: 'Tran Tien Dat',
+        firstName: '',
+        lastName: '',
+        roleName: '',
+        experience: '',
+        nameMajor: '',
+        idMajor: 0,
+        urlAvatar: '',
+        phoneNumber: '0907531899',
+        address: '',
+        email: 'dattrantd7@gmail.com',
+      };
+    }
   }
 
   // print() {
@@ -169,7 +186,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     const divWidth = document.getElementById('paper')!.offsetWidth;
 
     // get paper color side
-    const paperSide = document.getElementById('paper-side');
+    // const paperSide = document.getElementById('paper-side');
 
     // calculate the color side  height
     const paperSideHeight = (a4Height / a4Width) * divWidth;
@@ -183,13 +200,14 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     await html2canvas(paper!, {
       height: divHeight,
       width: divWidth,
-      scale: 5,
+      scale: 1,
       allowTaint: true,
       useCORS: true,
       logging: false,
     }).then((canvas) => {
-      let pdf = new jsPDF('p', 'mm', 'a4');
+      let pdf = new jsPDF('l', 'mm', 'a4');
       const width = pdf.internal.pageSize.getWidth();
+      let imgWidth = 300
       let pageHeight = pdf.internal.pageSize.height;
       let imgHeight = (canvas.height * width) / canvas.width;
       let heightLeft = imgHeight;
@@ -218,8 +236,8 @@ export class ResumeComponent implements OnInit, AfterViewInit {
         heightLeft -= pageHeight;
       }
       pdf.save(filename);
-      paperSide!.removeAttribute('style');
-      document.getElementById('paper')!.removeAttribute('style');
+      // paperSide!.removeAttribute('style');
+      // document.getElementById('paper')!.removeAttribute('style');
     });
   }
 

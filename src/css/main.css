@@ -1,4 +1,6 @@
-
+span{
+  padding-top: 0px !important;
+}
   .cv__sidebar {
     padding: 1rem;
     background-color: #1779ba;
@@ -30,7 +32,8 @@
       font-size: 0.8rem;
       margin-bottom: 0;
       padding-left: 10px;
-      text-align: justify; }
+      /* text-align: justify; */
+     }
     .cv__main .tags {
       margin-left: 10px; }
       .cv__main .tags span {
@@ -38,6 +41,8 @@
         font-size: 0.7rem; }
   .cv__title {
     font-size: 1.4rem !important; }
+
+
 
 .sidebar__title {
   text-transform: uppercase;
@@ -77,6 +82,9 @@
   background-color: rgba(0, 0, 0, 0.05);
   margin-top: 5px; }
 
+  .cv__info p{
+      width: clamp(45ch, 100%, 75ch);
+  }
 .cv__info {
   padding: 5px;
   border-radius: 5px; }
@@ -98,9 +106,10 @@ label {
   .label{
     background-color: #1779ba;
     color: #fff;
-    padding: 5px;
+    padding: 0px 2px;
     border-radius: 5px;
     margin-right: 5px;
+    line-height: 25px;
   }
 
 .text-danger {

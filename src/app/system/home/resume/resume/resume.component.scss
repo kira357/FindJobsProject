@@ -92,13 +92,16 @@ $paper-title-margin-top: 0.5rem;
       font-size: $text-size;
       margin-bottom: 0;
       padding-left: 10px;
-      text-align: justify;
+      // text-align: justify;
     }
     .tags {
       margin-left: $default-margin * 2;
+      display: flex;
+      align-items: center;
       span {
         border-radius: 3px;
         font-size: $text-size - 0.1rem;
+        padding-top: 0px !important;
       }
     }
   }
@@ -151,6 +154,9 @@ $paper-title-margin-top: 0.5rem;
   .cv__info {
     background-color: rgba(0, 0, 0, 0.05);
     margin-top: $default-margin;
+    p{
+      width: clamp(45ch, 100%, 75ch);
+    }
   }
   .info-skill{
     flex-direction: column;
@@ -192,6 +198,8 @@ label {
   margin: 8px 0px;
   .label {
     margin-right: $default-margin;
+    padding: 0px 2px;
+    line-height: 25px;
     background-color: var($paper-title-color);
   }
 }
