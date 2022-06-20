@@ -200,7 +200,7 @@ export class ResumeComponent implements OnInit, AfterViewInit {
     await html2canvas(paper!, {
       height: divHeight,
       width: divWidth,
-      scale: 1,
+      scale: 5,
       allowTaint: true,
       useCORS: true,
       logging: false,
