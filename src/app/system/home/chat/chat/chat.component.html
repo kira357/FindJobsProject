@@ -84,21 +84,20 @@
                                     </p>
                                 </div>
                                 <div class="type_msg mb-2">
-                                    <form [formGroup]="messageCreated">
                                         <div class="input_msg_write">
                                             <div style=" min-width: 0;">
                                                 <input type="text" style="margin-bottom: 0;" 
                                                 class="write_msg"
-                                                       placeholder="Type a message" onfocus="this.placeholder=''" onblur="this.placeholder='Type a message'"
-                                                        formControlName="message"
+                                                [value]="txtMessage"
+                                                (input)="txtMessage=$any($event.target).value" (keydown.enter)="sendMessage()"
+                                                       placeholder="Type a message" onfocus="this.placeholder=''"
+                                                    onblur="this.placeholder='Type a message'"
                                                        />
-
                                             </div>
-                                            <button class="msg_send_btn" type="submit" (click)="sendMessage($event);">
+                                            <button class="msg_send_btn" type="submit" (click)="sendMessage();">
                                                 <i class="fa fa-paper-plane-o"></i>
                                             </button>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

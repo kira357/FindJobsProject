@@ -1,3 +1,5 @@
+import { VMCreateChatRecruitment } from './../../../../core/model/chat/model/chat-recruitment';
+import { ChatRecruitment } from '../../../../core/model/chat/model/chat-recruitment';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
@@ -15,11 +17,12 @@ export class ChatComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apiAuthenService: ApiAuthenService,
-    private _signalRService : SignalrService
+    private _signalRService: SignalrService
   ) {}
   chatMessages: any[] = [];
   onlineUser: any[] = [];
   chatUsername: any;
+  txtMessage: string = ''; 
   currentUser: VMGetCurrentUser = {
     id: '',
     fullName: '',
@@ -43,6 +46,7 @@ export class ChatComponent implements OnInit {
       HubName.Chatting,
       MethodName.SendMessage
     );
+    this.receiveMessage();
   }
   data = localStorage.getItem('data');
   getCurrentUser() {
@@ -53,23 +57,28 @@ export class ChatComponent implements OnInit {
         this.currentUser = data[0];
       });
   }
-  sendMessage(msg: any) {
-    const data = this.messageCreated.value;
-    this.chatMessages.push({
-      Msg: data.message,
-      DateSend: moment(),
-      messagestatus: 'received',
-      IdUser : this.currentUser.id
-    });
-    const dataSend = {
-      Msg: data.message,
-      DateSend: moment(),
-      messagestatus: 'received',
-      IdUser : this.currentUser.id
-    };
-    this._signalRService.OnAskServerInvoke(dataSend);
+  messages = new Array<VMCreateChatRecruitment>();  
+  message : VMCreateChatRecruitment;  
+  sendMessage() {
+    if (this.txtMessage) {  
+      this.message = {
+        idChat: "",
+        idSender: "",
+        idReceiver: "",
+        messages: "",
+        timeSend: "",
+        connectionId: "",
+      }  
+      this.messages.push(this.message);  
+
+      this._signalRService.OnAskServerInvoke(this.message);
+      this.txtMessage = '';  
+    }  
+
   }
-  receiveMessage(msg: any) {
-  console.log('123', msg);
+  receiveMessage() {
+    this._signalRService.Message$.subscribe((data: ChatRecruitment) => {
+      this.chatMessages.push(data);
+    });
   }
 }

@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as signalR from '@microsoft/signalr';
+import { MethodName } from '../core/base/hub-methods.enum';
+import { ChatRecruitment } from '../core/model/chat/model/chat-recruitment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,8 @@ import * as signalR from '@microsoft/signalr';
 export class SignalrService {
   private hubConnection: signalR.HubConnection;
   private mapHubs: Map<string, signalR.HubConnection> = new Map();
-
+  Message$: BehaviorSubject<ChatRecruitment> = new BehaviorSubject<ChatRecruitment>({} as ChatRecruitment);
+  connectionEstablished = new EventEmitter<Boolean>();  
   constructor() {}
 
   get hub() {
@@ -33,13 +36,10 @@ export class SignalrService {
   data: any[] = [];
   OnStartToConnection = async () => {
     try {
-        this.hubConnection.on('receiveMessage',(data) => {
-            console.log("data receiver",data);
-            });
-            
       await this.hubConnection.start();
       if (this.hubConnection.state === signalR.HubConnectionState.Connected)
         console.log('SignalR Connected.');
+        this.connectionEstablished.emit(true);  
       return true;
     } catch (err) {
       if (this.hubConnection.state === signalR.HubConnectionState.Disconnected)
@@ -56,6 +56,7 @@ export class SignalrService {
   ) {
     if (this.mapHubs.has(hubName)) {
       const _hub = this.mapHubs.get(hubName);
+      this.handleHubMethod(methodName);
       if (_hub.state != signalR.HubConnectionState.Connected) {
         const _isConnected = await this.OnStartToConnection();
         if (_isConnected) {
@@ -72,6 +73,20 @@ export class SignalrService {
       console.log('Not found -- Cannot handle hub: ' + hubName);
     }
   }
+
+  private handleHubMethod(methodName: string) {
+    this.hubConnection.off(methodName);
+    this.hubConnection.on(methodName, data => {
+        const parseData = JSON.parse(data);
+        switch (methodName) {
+            case MethodName.SendMessage:
+                const { IdChat, IdSender, IdReceiver,Messages,TimeSend ,ConnectionId} = parseData.Data;
+                const Message: ChatRecruitment = { idChat : IdChat, idSender: IdSender, idReceiver: IdReceiver, messages : Messages, timeSend : TimeSend , connectionId : ConnectionId};
+                this.Message$.next(Message);
+                break;
+        }
+    });
+}
 
   private onReconnected(
     hubName: string,
