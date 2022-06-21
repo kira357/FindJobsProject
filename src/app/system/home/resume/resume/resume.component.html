@@ -12,6 +12,9 @@
     <link rel="stylesheet" src="/src/css/vendor/foundation/foundation.css" />
     <!-- parsley styles -->
     <link rel="stylesheet" src="/src/css/vendor/parsley/parsley.css" />
+    <!-- fontawesome styles -->
+    <!-- <link rel="stylesheet" src="/src/css/vendor/foundation/foundation.min.css" /> -->
+    <!-- main app styles -->
     <link rel="stylesheet" src="/src/css/main.css" />
   </head>
   <app-header></app-header>
@@ -490,7 +493,7 @@
 
         <!-- cv paper -->
         <div fxLayout="column" fxFlex="60">
-          <div class="cv" id="paper" fxLayout="row" fxLayoutAlign="start stretch">
+          <div class="cv" id="paper" fxLayout="row">
             <!-- sidebar of cv -->
             <div class="cv__sidebar" id="paper-side" fxLayout="column" fxFlex="30">
               <div class="text-center">
@@ -507,7 +510,7 @@
                 />
               </div>
 
-              <h1 id="cv__name" class="cv__title sidebar__name" contenteditable="true">
+              <h1 id="cv__name" class="cv__title sidebar__name">
                 {{currentUser.fullName}}
               </h1>
               <h2 id="cv__job" class="cv__title sidebar__job">
