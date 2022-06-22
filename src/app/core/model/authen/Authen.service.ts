@@ -1,4 +1,4 @@
-import { VMUserRegister, VMUserLogin } from './model/Authen';
+import { VMUserRegister, VMUserLogin, VMRecruitmentRegister } from './model/Authen';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,6 +24,11 @@ export class AuthenService {
     return this.http
       .post(`${this.rootURL}/register`, User, { headers: this.headers })
       .pipe(retry(2));
+  };
+
+  RequestRecruitmentRegister = (User: any) => {
+    return this.http
+      .post(`${this.rootURL}/register-recruitment`, User);
   };
   RequestLogin = (User: VMUserLogin) => {
     return this.http.post(`${this.rootURL}/login`, User);

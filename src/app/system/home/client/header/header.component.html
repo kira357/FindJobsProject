@@ -81,8 +81,8 @@
           </mat-menu>
         </div>
         <ng-template #noLogin>
-          <a class="button mr-1" href="#!">Sign In</a>
-          <a class="button" href="#!">Sign Up</a>
+          <a class="button mr-1" [routerLink]="['/account/login']">Sign In</a>
+          <a class="button" [routerLink]="['/account/register']">Sign Up</a>
         </ng-template>
       </form>
     </div>

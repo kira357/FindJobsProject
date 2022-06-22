@@ -1,0 +1,105 @@
+/* You can add global styles to this file, and also import other style files */
+.main {
+    width: 100%;
+    height: 100%;
+  }
+  .custom-img {
+    object-fit: cover;
+    max-width: 150px;
+    max-height: 150px;
+    height: 150px;
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+  }
+  .bg-cover{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 5px #000000;
+  }
+
+  .color {
+    background: linear-gradient(
+      132deg,
+      #f44336,
+      #e91e63,
+      #9c27b0,
+      #673ab7,
+      #3f51b5,
+      #2196f3,
+      #03a9f4,
+      #00bcd4,
+      #009688,
+      #4caf50,
+      #ffc107,
+      #ff9800,
+      #f44336,
+      #e91e63,
+      #9c27b0,
+      #673ab7,
+      #3f51b5,
+      #2196f3,
+      #03a9f4,
+      #00bcd4,
+      #009688,
+      #4caf50,
+      #ffc107,
+      #ff9800
+    );
+    background-size: 400% 400%;
+    animation: BackgroundGradient 30s ease infinite;
+  }
+  @keyframes BackgroundGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+  }
+  
+  button.button-login {
+    background:rgb(40,23,86);
+  }
+  
+  
+  .page-content {
+    background-color: #fafaf8;
+    .mat-form-field {
+      padding: 0;
+    }
+  }
+  
+  .welcome {
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 30px;
+    color: #444444;
+  }
+  
+  .detail {
+    font-family: "Open Sans";
+    font-size: 16px;
+    color: #444444;
+  }
+  
+  :host ::ng-deep {
+    .mat-form-field-prefix .mat-icon-button .mat-icon,
+    .mat-form-field-suffix .mat-icon-button .mat-icon {
+      height: 1.1em;
+      line-height: 1.1em;
+    }
+  }
+  

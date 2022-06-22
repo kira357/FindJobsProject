@@ -135,6 +135,9 @@ export class ListPostCreatePopupComponent implements OnInit {
       this.formData.append('description', this.headerData.description);
 
       this.postService.RequestUpdatePost(this.formData).subscribe((res) => {
+        // this.formData.forEach((value, key) => {
+        //   this.formData.delete(key);
+        // });
         console.log('update', res);
         this.dialogRef.close(true);
       });

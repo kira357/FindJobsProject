@@ -31,7 +31,7 @@ export class ListPostComponent implements OnInit {
   onPageChanged(params: PagingParams) {
     this._PagingParams = params;
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     this.blogService
       .RequestGetAllListPost(this._PagingParams)
       .subscribe((data: any) => {
@@ -43,7 +43,7 @@ export class ListPostComponent implements OnInit {
 
   getListData() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     this.blogService
     .RequestGetAllListPost(this._PagingParams)
       .subscribe((data: any) => {

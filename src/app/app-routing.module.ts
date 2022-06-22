@@ -90,6 +90,13 @@ const routes: Routes = [
             (m) => m.RegisterPageModule
           ),
       },
+      {
+        path: 'recruitment-register',
+        loadChildren: () =>
+          import('./system/recruitment-register/recruitment-register.module').then(
+            (m) => m.RecruitmentRegisterModule
+          ),
+      },
     ],
   },
   {

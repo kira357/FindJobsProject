@@ -6,28 +6,29 @@
     fxFlex="100%"
     fxLayout="row"
     fxLayoutAlign="center center"
+    class="con"
   >
-    <div @fadeInUp class="overflow-hidden w-full max-w-xl">
+    <div @fadeInUp class="overflow-hidden w-full max-w-xl box">
       <div class="px-6 mt-2">
         <h1 class="welcome">WelcomeBack Login Account</h1>
         <h4 class="detail">Go Go jobs is waiting for you</h4>
       </div>
       <form
         [formGroup]="formGroup"
-        class="p-6"
+        class="p-6 "
         fxLayout="column"
         fxLayoutGap="16px"
         (ngSubmit)="onSubmit()"
       >
-        <div fxFlex="auto" fxLayout="column">
+        <div fxFlex="auto" fxLayout="column" >
           <mat-form-field
             appearance="outline"
             floatLabel="always"
             style="width: 100%"
           >
-            <mat-label>Email</mat-label>
+            <mat-label >Email</mat-label>
             <input formControlName="email" matInput required />
-            <mat-error *ngIf="formGroup.get('email').hasError('required')"
+            <mat-error *ngIf="formGroup.get('email')?.hasError('required')"
               >We need a email to log you in
             </mat-error>
           </mat-form-field>
@@ -43,7 +44,7 @@
               matInput
               required
             />
-            <mat-error *ngIf="formGroup.get('password').hasError('required')"
+            <mat-error *ngIf="formGroup.get('password')?.hasError('required')"
               >We need a password to log you in
             </mat-error>
           </mat-form-field>
@@ -74,12 +75,12 @@
           >
             Sign in
           </button>
-          <div style="text-align: center;">
+          <div style="text-align: center;" fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
             <a [routerLink]="['/account/register']" class="caption"
             >Sign up account</a
             >
-
           </div>
+
         </div>
       </form>
     </div>
@@ -90,8 +91,8 @@
     fxShow.gt-sm
     fxLayout="row"
     fxLayoutAlign="center center"
-    class="color"
+    class="bg-cover"
   >
-    <div @fadeInUp class="overflow-hidden w-full max-w-xl"></div>
+    <div @fadeInUp class="overflow-hidden w-full max-w-xl"><img src="https://utc2.edu.vn/upload/company/logo-15725982242.png" alt="utc2"></div>
   </div>
 </div>
