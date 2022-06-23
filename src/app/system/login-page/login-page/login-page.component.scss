@@ -20,6 +20,9 @@ a{
   padding: 10px 20px;
   border-radius: 10px;
 }
+.main-wrapper{
+
+}
 
 .color {
   background: linear-gradient(
@@ -71,14 +74,26 @@ input:-webkit-autofill:active {
 }
 
 button.button-login {
-  background:rgb(40,23,86);
+  background:#281756;
 }
 
 
 .page-content {
-  background-color: #fafaf8;
+  // background-color: #fffba3;
+  background-image: url('../../../../assets/image/bg_login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
   .mat-form-field {
     padding: 0;
+  }
+  .layout{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
   }
 }
 
@@ -86,13 +101,13 @@ button.button-login {
   font-family: "Open Sans";
   font-weight: 700;
   font-size: 30px;
-  color: #444444;
+  color: #281756;
 }
 
 .detail {
   font-family: "Open Sans";
   font-size: 16px;
-  color: #444444;
+  color: #281756;
 }
 
 :host ::ng-deep {
@@ -102,6 +117,14 @@ button.button-login {
     line-height: 1.1em;
   }
 }
+.box {
+	padding: 45px 70px 55px;
+  border: 0px solid;
+  border-radius: 0;
+  outline: none;
+
+}
+
 
 
 

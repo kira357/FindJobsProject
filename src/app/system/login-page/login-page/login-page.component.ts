@@ -53,4 +53,10 @@ export class LoginPageComponent implements OnInit {
         }
       });
   }
+  Register(){
+    this.router.navigate(['/account/register']);
+  }
+  RegisterRecruitment(){
+    this.router.navigate(['/account/recruitment-register']);
+  }
 }

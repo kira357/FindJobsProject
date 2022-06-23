@@ -2,6 +2,7 @@ export interface ChatRecruitment {
   idChat: string;
   idSender: string;
   idReceiver: string;
+  type :string;
   messages: string;
   timeSend: string;
   connectionId: string;
@@ -18,6 +19,7 @@ export interface VMCreateChatRecruitment {
   idChat: string;
   idSender: string;
   idReceiver: string;
+  type :string;
   messages: string;
   timeSend: string;
   connectionId: string;

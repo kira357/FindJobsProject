@@ -48,29 +48,29 @@
                                 </div>
                                 <div class="msg_history" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="chatMessages.length>0">
                                     <div *ngFor="let msg of chatMessages" style="margin-bottom:2px;">
-                                        <div class="incoming_msg" *ngIf="msg.messagestatus == 'received'">
+                                        <div class="incoming_msg" *ngIf="msg.type == 'received'">
                                             <div class="received_msg">
                                                 <div class="received_withd_msg">
                                                     <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
                                                         <div class="mb-1">
                                                             <img class="imgUser" [src]="currentUser.urlAvatar" alt="profile.">
                                                             <span class="time_date">
-                                                                {{msg.senderid}} | {{msg.DateSend | date :  "shortTime"}}
+                                                                {{msg.idSender}} | {{msg.timeSend | date :  "shortTime"}}
                                                             </span>
                                                         </div>
                                                         <p>
-                                                            {{msg.Msg}}
+                                                            {{msg.messages}}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
-                                        <div class="outgoing_msg" *ngIf="msg.messagestatus == 'sent'">
+                                        <div class="outgoing_msg" *ngIf="msg.type == 'sent'">
                                             <div class="sent_msg">
                                                 <div fxLayout="row" fxLayoutAlign="start end">
                                                     <p>
-                                                        {{msg.msg}}
+                                                        {{msg.messages}}
                                                     </p>
                                                     <img class="imgUser" [src]="currentUser.urlAvatar" alt="profile.">
                                                 </div>

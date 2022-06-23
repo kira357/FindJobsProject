@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Type } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as signalR from '@microsoft/signalr';
@@ -80,8 +80,8 @@ export class SignalrService {
         const parseData = JSON.parse(data);
         switch (methodName) {
             case MethodName.SendMessage:
-                const { IdChat, IdSender, IdReceiver,Messages,TimeSend ,ConnectionId} = parseData.Data;
-                const Message: ChatRecruitment = { idChat : IdChat, idSender: IdSender, idReceiver: IdReceiver, messages : Messages, timeSend : TimeSend , connectionId : ConnectionId};
+                const { IdChat, IdSender, IdReceiver,Messages,TimeSend ,ConnectionId,Type} = parseData.Data;
+                const Message = { idChat : IdChat, idSender: IdSender, idReceiver: IdReceiver, messages : Messages, type :Type,timeSend : TimeSend , connectionId : ConnectionId};
                 this.Message$.next(Message);
                 break;
         }

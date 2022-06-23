@@ -1,6 +1,6 @@
 import { VMCreateChatRecruitment } from './../../../../core/model/chat/model/chat-recruitment';
 import { ChatRecruitment } from '../../../../core/model/chat/model/chat-recruitment';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { HubName, MethodName } from 'src/app/core/base/hub-methods.enum';
@@ -17,9 +17,10 @@ export class ChatComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apiAuthenService: ApiAuthenService,
-    private _signalRService: SignalrService
+    private _signalRService: SignalrService,
+    private _ngZone: NgZone  
   ) {}
-  chatMessages: any[] = [];
+  chatMessages = new Array<VMCreateChatRecruitment>();  
   onlineUser: any[] = [];
   chatUsername: any;
   txtMessage: string = ''; 
@@ -37,6 +38,7 @@ export class ChatComponent implements OnInit {
     address: '',
     email: '',
   };
+
   messageCreated = this.formBuilder.group({
     message: '',
   });
@@ -57,20 +59,19 @@ export class ChatComponent implements OnInit {
         this.currentUser = data[0];
       });
   }
-  messages = new Array<VMCreateChatRecruitment>();  
   message : VMCreateChatRecruitment;  
   sendMessage() {
     if (this.txtMessage) {  
       this.message = {
         idChat: "",
-        idSender: "",
+        idSender: this.currentUser.id,
         idReceiver: "",
-        messages: "",
-        timeSend: "",
+        type: "sent",
+        messages: this.txtMessage,
+        timeSend: new Date().getTime().toString(),
         connectionId: "",
       }  
-      this.messages.push(this.message);  
-
+      this.chatMessages.push(this.message);  
       this._signalRService.OnAskServerInvoke(this.message);
       this.txtMessage = '';  
     }  
@@ -78,7 +79,12 @@ export class ChatComponent implements OnInit {
   }
   receiveMessage() {
     this._signalRService.Message$.subscribe((data: ChatRecruitment) => {
-      this.chatMessages.push(data);
+      this._ngZone.run(() => {
+        if(this.currentUser.id !== data.idSender){
+          this.message.type = "received";
+          this.chatMessages.push(data);
+        }
+      });
     });
   }
 }
