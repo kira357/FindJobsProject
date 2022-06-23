@@ -12,6 +12,7 @@ import { ClientModule } from './system/home/client/client.module';
 import { WINDOW_PROVIDERS } from './window.providers';
 import { ResumeModule } from './system/home/resume/resume.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +25,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     BlogModule,
     DetailJobModule,
     ReactiveFormsModule,
-    ResumeModule
-
+    ResumeModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [WINDOW_PROVIDERS],
   bootstrap: [AppComponent],

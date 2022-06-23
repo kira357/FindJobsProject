@@ -17,52 +17,20 @@
   <div>
     <hr class="header-line" />
   </div>
-  <div class="">
+  <div >
     <form [formGroup]="employeeCreated" fxLayout="column" fxLayoutGap="10px">
       <div>
-      <div class="w-full h-full page-content main mt-2" fxLayout="row">
+      <div class="w-full h-full page-content main mt-2 overflow " fxLayout="row">
         <div
-          fxFlex.gt-sm="20%"
-          fxFlex="100%"
-          fxLayout="column"
-          fxLayoutAlign="center center"
+        fxFlex.gt-sm="100%"
+        fxHide
+        fxShow.gt-sm
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
         >
-          <img
-            class="custom-img"
-            id="blah"
-            [src]="imageFile ? imageFile.link : headerData.jobImage"
-            alt="your image"
-          />
-          <input
-            type="file"
-            class="my-3"
-            accept="image/*"
-            name="imageFile"
-            id="imageFile"
-            formControlName="imageFile"
-            (change)="handleChange($event)"
-            [(ngModel)]="headerData.imageFile"
-          />
-        </div>
-        <div
-          fxFlex.gt-sm="80%"
-          fxHide
-          fxShow.gt-sm
-          fxLayout="column"
-          fxLayoutAlign="left left"
-        >
-          <div>
+          <div fxLayout="row wrap">
             <custom-input
-              [required]="true"
-              [name]="'companyOfJobs'"
-              formControlName="companyOfJobs"
-              [placeholder]="'Name company'"
-              [title]="'Name company'"
-              [maxlength]="250"
-              [(ngModel)]="headerData.companyOfJobs"
-            ></custom-input>
-
-            <custom-input
+              fxFlex="33"
               [required]="true"
               [name]="'name'"
               formControlName="name"
@@ -72,9 +40,9 @@
               [(ngModel)]="headerData.name"
             ></custom-input>
 
-            <div fxLayoutAlign="center center">
+            <div fxLayoutAlign="center center" fxFlex="67">
               <mat-form-field
-                fxFlex="50%"
+                fxFlex="50"
                 appearance="outline"
                 floatLabel="always"
                 style="width: 100%"
@@ -117,7 +85,7 @@
               ></custom-input>
             </div>
 
-            <div>
+            <div fxFlex="100">
               <custom-input
                 fxFlex="33,33%"
                 [required]="true"
@@ -166,7 +134,7 @@
               ></custom-input>
             </div>
 
-            <div>
+            <div fxFlex="50">
               <custom-input
                 fxFlex="50%"
                 [required]="true"
@@ -189,7 +157,7 @@
                 [(ngModel)]="headerData.salaryMax"
               ></custom-input>
             </div>
-            <div>
+            <div fxFlex="50">
               <custom-input
                 fxFlex="50"
                 [required]="true"

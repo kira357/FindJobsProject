@@ -27,6 +27,8 @@ export class RecruitmentRegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
       imageFile: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
     });
   }
   formData = new FormData();
@@ -35,7 +37,10 @@ export class RecruitmentRegisterComponent implements OnInit {
     this.formData.append('imageFile', this.files[0], this.files[0].name);
     this.formData.append('nameCompany', this.formGroup.value.nameCompany);
     this.formData.append('website', this.formGroup.value.website);
+    this.formData.append('fax', this.formGroup.value.fax);
     this.formData.append('email', this.formGroup.value.email);
+    this.formData.append('firstName', this.formGroup.value.firstName);
+    this.formData.append('lastName', this.formGroup.value.lastName);
     this.formData.append('password', this.formGroup.value.password);
     this.authenService
       .RequestRecruitmentRegister(this.formData)

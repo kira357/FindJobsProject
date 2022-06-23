@@ -17,7 +17,7 @@ export class RecruitmentService {
     'Content-Type': 'application/json',
   });
 
-  RequestGetListJob = (pagingParams: PagingParams , Id : any) => {
+  RequestGetListJob = (pagingParams: PagingParams, Id: any) => {
     return this.http.get(`${this.rootURL}/getlist-recruiment/${Id}`, {
       headers: this.headers,
       params: {
@@ -26,22 +26,13 @@ export class RecruitmentService {
       },
     });
   };
-
-  RequestCreateJob = (job: any) => {
-    return this.http.post(`${this.rootURL}/create-Job`, job);
-  };
-
-  RequestUpdateJob = (job: any) => {
-    return this.http.put(`${this.rootURL}/update-Job`, job);
+  RequestGetCurrentRecruitment = (Id: any) => {
+    return this.http.get(`${this.rootURL}/get-current-recruitment/${Id}`, {
+      headers: this.headers,
+    });
   };
 
   RequestUpdateActive = (job: any) => {
     return this.http.put(`${this.rootURL}/update-active`, job);
-  };
-  RequestDeleteJob = (job: any) => {
-    return this.http.delete(`${this.rootURL}/delete-Job`, {
-      headers: this.headers,
-      body: job,
-    });
   };
 }

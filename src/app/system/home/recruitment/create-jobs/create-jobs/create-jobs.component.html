@@ -1,9 +1,8 @@
 <div>
-  <div>Header</div>
-  <div>
+  <div class="mt-3">
     <form [formGroup]="employeeCreated">
       <div class="w-full h-full page-content main mt-2" fxLayout="row">
-        <div
+        <!-- <div
           fxFlex.gt-sm="20%"
           fxFlex="100%"
           fxLayout="column"
@@ -24,25 +23,17 @@
             formControlName="imageFile"
             (change)="handleChange($event)"
           />
-        </div>
+        </div> -->
         <div
-          fxFlex.gt-sm="80%"
+          fxFlex.gt-sm="100%"
           fxHide
           fxShow.gt-sm
           fxLayout="column"
-          fxLayoutAlign="left left"
+          fxLayoutAlign="start stretch"
         >
-          <div>
+          <div fxLayout="row wrap">
             <custom-input
-              [required]="true"
-              [name]="'nameCompany'"
-              formControlName="nameCompany"
-              [placeholder]="'Name company'"
-              [title]="'Name company'"
-              [maxlength]="250"
-            ></custom-input>
-
-            <custom-input
+              fxFlex="33"
               [required]="true"
               [name]="'name'"
               formControlName="name"
@@ -51,9 +42,9 @@
               [maxlength]="250"
             ></custom-input>
 
-            <div fxLayoutAlign="center center">
+            <div fxLayoutAlign="center center" fxFlex="67">
               <mat-form-field
-                fxFlex="50%"
+                fxFlex="50"
                 appearance="outline"
                 floatLabel="always"
                 style="width: 100%"
@@ -114,7 +105,7 @@
               </ng-multiselect-dropdown>
             </div> -->
 
-            <div>
+            <div fxFlex="100">
               <custom-input
                 fxFlex="33,33%"
                 [required]="true"
@@ -161,9 +152,9 @@
               ></custom-input>
             </div>
 
-            <div>
+            <div fxFlex="50">
               <custom-input
-                fxFlex="50%"
+                fxFlex="50"
                 [required]="true"
                 [name]="'salaryMin'"
                 formControlName="salaryMin"
@@ -173,7 +164,7 @@
               ></custom-input>
               <custom-input
                 style="margin-left: 5px"
-                fxFlex="50%"
+                fxFlex="50"
                 [required]="true"
                 [name]="'salaryMax'"
                 formControlName="salaryMax"
@@ -182,7 +173,7 @@
                 [maxlength]="250"
               ></custom-input>
             </div>
-            <div>
+            <div fxFlex="50">
               <custom-input
                 fxFlex="50"
                 [required]="true"
@@ -209,7 +200,7 @@
       </div>
       <div>
         <quill-editor
-          [styles]="{ height: '300px' }"
+          [styles]="{ height: heightQuill+'px' }"
           [modules]="modules"
           formControlName="jobDetail"
           (onContentChanged)="onChange($event)"
@@ -222,6 +213,7 @@
         fxLayout.lt-sm="column"
         fxFlexFill
         fxLayoutAlign="end center"
+        class="mt-2"
       >
         <custom-button [type]="'save'" (click)="onSubmit()"></custom-button>
         <custom-button [type]="'reset'" (click)="onReset()"></custom-button>

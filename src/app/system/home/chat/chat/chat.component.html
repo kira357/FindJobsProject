@@ -89,12 +89,12 @@
                                                 <input type="text" style="margin-bottom: 0;" 
                                                 class="write_msg"
                                                 [value]="txtMessage"
-                                                (input)="txtMessage=$any($event.target).value" (keydown.enter)="sendMessage()"
+                                                (input)="txtMessage=$any($event.target).value" (keydown.enter)="SendMessage()"
                                                        placeholder="Type a message" onfocus="this.placeholder=''"
                                                     onblur="this.placeholder='Type a message'"
                                                        />
                                             </div>
-                                            <button class="msg_send_btn" type="submit" (click)="sendMessage();">
+                                            <button class="msg_send_btn" type="submit" (click)="SendMessage();">
                                                 <i class="fa fa-paper-plane-o"></i>
                                             </button>
                                         </div>

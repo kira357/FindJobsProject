@@ -3,7 +3,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as signalR from '@microsoft/signalr';
 import { MethodName } from '../core/base/hub-methods.enum';
-import { ChatRecruitment } from '../core/model/chat/model/chat-recruitment';
+import { ChatRecruitment, VMCreateChatRecruitment } from '../core/model/chat/model/chat-recruitment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import { ChatRecruitment } from '../core/model/chat/model/chat-recruitment';
 export class SignalrService {
   private hubConnection: signalR.HubConnection;
   private mapHubs: Map<string, signalR.HubConnection> = new Map();
-  Message$: BehaviorSubject<ChatRecruitment> = new BehaviorSubject<ChatRecruitment>({} as ChatRecruitment);
+  Message$: BehaviorSubject<VMCreateChatRecruitment> = new BehaviorSubject<VMCreateChatRecruitment>({} as VMCreateChatRecruitment);
   connectionEstablished = new EventEmitter<Boolean>();  
   constructor() {}
 
@@ -121,9 +121,9 @@ export class SignalrService {
     }
   };
 
-  OnAskServerInvoke = (message : any) => {
+  OnAskServerInvoke = (message : VMCreateChatRecruitment) => {
     this.hubConnection
-      .invoke('SendMessage', message)
+      .invoke('SendMessages', message)
       .then((data) => console.log('Invoke success' , data))
       .catch((err) => console.log('Invoke fail ', err));
   };

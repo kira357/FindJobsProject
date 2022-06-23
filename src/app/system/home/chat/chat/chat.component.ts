@@ -60,7 +60,7 @@ export class ChatComponent implements OnInit {
       });
   }
   message : VMCreateChatRecruitment;  
-  sendMessage() {
+  SendMessage() {
     if (this.txtMessage) {  
       this.message = {
         idChat: "",
@@ -71,14 +71,15 @@ export class ChatComponent implements OnInit {
         timeSend: new Date().getTime().toString(),
         connectionId: "",
       }  
-      this.chatMessages.push(this.message);  
       this._signalRService.OnAskServerInvoke(this.message);
+      this.chatMessages.push(this.message);  
       this.txtMessage = '';  
     }  
 
   }
   receiveMessage() {
-    this._signalRService.Message$.subscribe((data: ChatRecruitment) => {
+    this._signalRService.Message$.subscribe((data: any) => {
+      console.log('123',data);
       this._ngZone.run(() => {
         if(this.currentUser.id !== data.idSender){
           this.message.type = "received";

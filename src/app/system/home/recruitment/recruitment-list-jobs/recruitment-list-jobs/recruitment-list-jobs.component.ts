@@ -20,7 +20,7 @@ export class RecruitmentListJobsComponent implements OnInit {
   ) {}
 
   _PagingParams = new PagingParams();
-  rowData : any;
+  rowData: any;
   ngOnInit() {
     this.getListData();
   }
@@ -31,7 +31,7 @@ export class RecruitmentListJobsComponent implements OnInit {
   onPageChanged(params: PagingParams) {
     this._PagingParams = params;
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     this.recruitmentService
       .RequestGetListJob(this._PagingParams, dataJson.data.id)
       .subscribe((data: any) => {
@@ -43,7 +43,7 @@ export class RecruitmentListJobsComponent implements OnInit {
 
   getListData() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '{}');
     this.recruitmentService
       .RequestGetListJob(this._PagingParams, dataJson.data.id)
       .subscribe((data: any) => {
@@ -66,14 +66,12 @@ export class RecruitmentListJobsComponent implements OnInit {
         data: {
           address: $event.address,
           amount: $event.amount,
-          companyOfJobs: $event.companyOfJobs,
           dateExpire: $event.dateExpire,
           experience: $event.experience,
           idJob: $event.idJob,
           idRecruitment: $event.idRecruitment,
           isActive: $event.isActive,
           jobDetail: $event.jobDetail,
-          jobImage: $event.jobImage,
           idMajor: $event.idMajor,
           name: $event.name,
           position: $event.position,
@@ -96,15 +94,15 @@ export class RecruitmentListJobsComponent implements OnInit {
       this.getListData();
     });
   }
-  async onCheck($event:any){
-    console.log('onCheck',  this.rowData);
-      this.rowData.isActive = $event;
-      await this.recruitmentService
-        .RequestUpdateActive(this.rowData)
-        .subscribe((data: any) => {
-          console.log('data', data.ok);
-          this.getListData();
-        });
+  async onCheck($event: any) {
+    console.log('onCheck', this.rowData);
+    this.rowData.isActive = $event;
+    await this.recruitmentService
+      .RequestUpdateActive(this.rowData)
+      .subscribe((data: any) => {
+        console.log('data', data.ok);
+        this.getListData();
+      });
   }
   onCheckedRows($event: any) {
     console.log('onCheckedRows', $event);

@@ -1,3 +1,4 @@
+import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -7,12 +8,12 @@ import Quill from 'quill';
 import 'node_modules/quill-emoji/dist/quill-emoji.js';
 import BlotFormatter from 'quill-blot-formatter';
 Quill.register('modules/blotFormatter', BlotFormatter);
-import { MatFormFieldControl } from '@angular/material/form-field';
 import { debounceTime, ReplaySubject, Subject } from 'rxjs';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import * as moment from 'moment';
 import { MajorService } from 'src/app/core/model/major/major.service';
+import { VMGetRecruitment } from 'src/app/core/model/recruitmentJob/model/recruitment';
 
 @Component({
   selector: 'app-create-jobs',
@@ -24,7 +25,8 @@ export class CreateJobsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private majorService: MajorService,
-    private jobService: JobsService
+    private jobService: JobsService,
+    private recruitmentService: RecruitmentService
   ) {
     this.modules = {
       'emoji-shortname': true,
@@ -74,19 +76,18 @@ export class CreateJobsComponent implements OnInit {
   defaultImageSrc = '/assets/image/default-image.png';
 
   listExperienceJobs: any[] = [
-    {value : 0 , name : 'Dưới 1 năm'},
-    {value : 1 , name : '1 năm'},
-    {value : 2 , name : '2 năm'},
-    {value : 3 , name : '3 năm'},
-    {value : 4 , name : '4 năm'},
-    {value : 5 , name : '5 năm'},
-    {value : 6 , name : 'Trên 5 năm'},
+    { value: 0, name: 'Dưới 1 năm' },
+    { value: 1, name: '1 năm' },
+    { value: 2, name: '2 năm' },
+    { value: 3, name: '3 năm' },
+    { value: 4, name: '4 năm' },
+    { value: 5, name: '5 năm' },
+    { value: 6, name: 'Trên 5 năm' },
   ];
 
   comboxMajor: any[] = [];
   _PagingParams = new PagingParams();
   getDateExpire: any;
-
   imageFile: { link: any; file: any; name: string } | undefined;
   files: any[] = [];
   handleChange = (evt: any) => {
@@ -114,7 +115,6 @@ export class CreateJobsComponent implements OnInit {
 
   Form: any;
   descriptions: any;
-
   employeeCreated = this.formBuilder.group({
     name: ['', Validators.required],
     nameCompany: ['', Validators.required],
@@ -147,14 +147,17 @@ export class CreateJobsComponent implements OnInit {
     return this._search;
   }
   onSearch: Subject<string>;
-
+  heightQuill = window.innerHeight - 420
   ngOnInit() {
     this.getComboxMajor();
+    this.getCurrentRecruitment();
+    console.log('heightQuill', this.heightQuill);
   }
   newForm: any;
   datePipe: DatePipe = new DatePipe('en-US');
   dateExpire: any;
   formData = new FormData();
+  currentRecruitment: VMGetRecruitment;
   onSubmit = () => {
     this.newForm = this.employeeCreated.value;
     const data = localStorage.getItem('data');
@@ -165,9 +168,9 @@ export class CreateJobsComponent implements OnInit {
 
     console.log('before', this.newForm);
 
-    this.formData.append('imageFile', this.files[0], this.files[0].name);
+    this.formData.append('jobImage', this.currentRecruitment.logo);
+    this.formData.append('companyOfJobs', this.currentRecruitment.nameCompany);
     this.formData.append('name', this.newForm.name);
-    this.formData.append('companyOfJobs', this.newForm.nameCompany);
     this.formData.append('dateExpire', this.newForm.dateExpire);
     this.formData.append('address', this.newForm.address);
     this.formData.append('position', this.newForm.position);
@@ -185,8 +188,7 @@ export class CreateJobsComponent implements OnInit {
       this.employeeCreated.reset();
       this.formData.forEach((value, key) => {
         this.formData.delete(key);
-      }
-      );
+      });
       this.newForm = {};
     });
   };
@@ -205,6 +207,15 @@ export class CreateJobsComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getlist major', data);
         this.comboxMajor = data.data;
+      });
+  }
+  getCurrentRecruitment() {
+    const data = localStorage.getItem('data');
+    const dataJson = JSON.parse(data || '{}');
+    this.recruitmentService
+      .RequestGetCurrentRecruitment(dataJson.data.id)
+      .subscribe((data: any) => {
+        this.currentRecruitment = data;
       });
   }
   onReset() {

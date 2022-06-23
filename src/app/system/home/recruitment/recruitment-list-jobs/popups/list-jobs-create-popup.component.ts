@@ -14,6 +14,8 @@ import 'node_modules/quill-emoji/dist/quill-emoji.js';
 import BlotFormatter from 'quill-blot-formatter';
 import Quill from 'quill';
 import { MajorService } from 'src/app/core/model/major/major.service';
+import { VMGetRecruitment } from 'src/app/core/model/recruitmentJob/model/recruitment';
+import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
 Quill.register('modules/blotFormatter', BlotFormatter);
 @Component({
   selector: 'app-list-jobs-create-popup',
@@ -28,14 +30,12 @@ export class ListJobsCreatePopupComponent implements OnInit {
   headerData: any = {
     address: '',
     amount: '',
-    companyOfJobs: '',
     dateExpire: '',
     experience: '',
     idJob: '',
     idRecruitment: '',
     isActive: '',
     jobDetail: '',
-    jobImage: '',
     idMajor: '',
     name: '',
     position: '',
@@ -46,9 +46,6 @@ export class ListJobsCreatePopupComponent implements OnInit {
   };
   employeeCreated = this.formBuilder.group({
     name: ['', Validators.required],
-    companyOfJobs: ['', Validators.required],
-    imageFile: '',
-    jobImage: '',
     dateExpire: ['', Validators.required],
     address: ['', Validators.required],
     position: ['', Validators.required],
@@ -67,6 +64,7 @@ export class ListJobsCreatePopupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private jobService: JobsService,
     private majorService: MajorService,
+    private recruitmentService: RecruitmentService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.modules = {
@@ -131,15 +129,12 @@ export class ListJobsCreatePopupComponent implements OnInit {
       this.headerData = {
         address: this.data.address,
         amount: this.data.amount,
-        companyOfJobs: this.data.companyOfJobs,
         dateExpire: this.data.dateExpire,
         experience: this.data.experience,
         idJob: this.data.idJob,
         idRecruitment: this.data.idRecruitment,
         isActive: this.data.isActive,
         jobDetail: this.data.jobDetail,
-        jobImage: this.data.jobImage,
-        imageFile : '',
         idMajor: this.data.idMajor,
         name: this.data.name,
         position: this.data.position,
@@ -148,6 +143,7 @@ export class ListJobsCreatePopupComponent implements OnInit {
         salaryMin: this.data.salaryMin,
         workTime: this.data.workTime,
       };
+      this.getCurrentRecruitment();
     }
     console.log('data on popup', this.data);
   }
@@ -158,9 +154,7 @@ export class ListJobsCreatePopupComponent implements OnInit {
  
   onSubmit(): void {
     if (this.data) {
-      this.formData.append('imageFile', this.files[0])
       this.formData.append('name', this.headerData.name);
-      this.formData.append('companyOfJobs', this.headerData.companyOfJobs);
       this.formData.append('dateExpire', this.headerData.dateExpire);
       this.formData.append('address', this.headerData.address);
       this.formData.append('position', this.headerData.position);
@@ -175,6 +169,10 @@ export class ListJobsCreatePopupComponent implements OnInit {
       this.formData.append('idRecruitment', this.headerData.idRecruitment);
       this.jobService.RequestUpdateJob(this.formData).subscribe((res) => {
         console.log('update', res);
+        this.employeeCreated.reset();
+      this.formData.forEach((value, key) => {
+        this.formData.delete(key);
+      });
         this.dialogRef.close(true);
       });
     }
@@ -230,6 +228,14 @@ export class ListJobsCreatePopupComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getlist major', data);
         this.comboxMajor = data.data;
+      });
+  }
+  currentRecruitment: VMGetRecruitment;
+  getCurrentRecruitment() {
+    this.recruitmentService
+      .RequestGetCurrentRecruitment(this.data.idRecruitment)
+      .subscribe((data: any) => {
+        this.currentRecruitment = data;
       });
   }
 }
