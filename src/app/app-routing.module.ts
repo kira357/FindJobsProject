@@ -9,11 +9,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./system/home/client/client.module').then((m) => m.ClientModule),
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: () =>
-  //     import('./system/home/client/client.module').then((m) => m.ClientModule),
-  // },
+  {
+    path: 'all-jobs',
+    loadChildren: () =>
+      import('./system/home/job-page/job-page.module').then((m) => m.JobPageModule),
+  },
 
   {
     path: 'blog',
@@ -28,7 +28,8 @@ const routes: Routes = [
   },
   {
     path: 'resume',
-    component: ResumeComponent,
+    loadChildren: () =>
+      import('./system/home/resume/resume.module').then((m) => m.ResumeModule),
   },
   {
     path: 'create-cv',

@@ -8,15 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: 'resume',
+    path: '',
     component: ResumeComponent,
   },
 ];
 @NgModule({
   imports: [
-    CommonModule, RouterModule.forRoot(routes, {
-      urlUpdateStrategy: 'deferred'
-    }), HeaderModule, FlexLayoutModule,FormsModule,ReactiveFormsModule
+    CommonModule,
+    RouterModule.forChild(routes),
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [ResumeComponent],
 })

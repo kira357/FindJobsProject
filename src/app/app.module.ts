@@ -1,3 +1,4 @@
+import { FooterModule } from './system/home/client/footer/footer.module';
 import { DetailJobModule } from './system/home/client/detail-page/detail-job.module';
 import { BlogModule } from './system/home/blog/blog.module';
 import { MatMenuModule } from '@angular/material/menu';
@@ -13,6 +14,7 @@ import { WINDOW_PROVIDERS } from './window.providers';
 import { ResumeModule } from './system/home/resume/resume.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { HeaderModule } from './system/home/client/header/header.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +28,8 @@ import { ToastrModule } from 'ngx-toastr';
     DetailJobModule,
     ReactiveFormsModule,
     ResumeModule,
+    HeaderModule,
+    FooterModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

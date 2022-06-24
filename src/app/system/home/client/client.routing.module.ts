@@ -7,15 +7,15 @@ export const routes: Routes = [
   {
     path: '',
     component: ClientComponent,
-    children: [
-      {
-        path: 'quick-detail/:id',
-        loadChildren: () =>
-          import('./quick-detail/quick-detail.module').then(
-            (m) => m.QuickDetailModule
-          ),
-      },
-    ],
+    // children: [
+    //   {
+    //     path: 'quick-detail/:id',
+    //     loadChildren: () =>
+    //       import('./quick-detail/quick-detail.module').then(
+    //         (m) => m.QuickDetailModule
+    //       ),
+    //   },
+    // ],
   },
 ];
 

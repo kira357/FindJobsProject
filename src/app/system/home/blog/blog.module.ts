@@ -18,7 +18,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BlogRoutingModule,
-    HeaderModule,
     BodyBlogModule,
     RouterModule.forChild(routes),
   ],
