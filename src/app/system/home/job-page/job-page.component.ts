@@ -113,7 +113,7 @@ export class JobPageComponent implements OnInit {
     console.log('onpageChange', evt);
   }
   onClickQuickDetail(idJob: any) {
-    this.router.navigate(['/quick-detail', idJob], {
+    this.router.navigate(['/all-jobs/quick-detail', idJob], {
       queryParams: {
         debug: true,
       },

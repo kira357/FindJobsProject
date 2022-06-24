@@ -4,7 +4,7 @@ export interface VMGetRecruitment {
   email: string;
   typeCompany: number;
   description: string;
-  Summary: boolean;
+  summary: string;
   address: string;
   logo: string;
   urlLogo: string;

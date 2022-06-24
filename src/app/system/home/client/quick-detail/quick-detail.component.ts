@@ -55,7 +55,7 @@ export class QuickDetailComponent implements OnInit {
   isLike: boolean = false;
   getListData() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '');
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       console.log('params', params);
       this.id = params.get('id');
@@ -75,7 +75,7 @@ export class QuickDetailComponent implements OnInit {
   }
   onApply() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data);
+    const dataJson = JSON.parse(data || '');
     this.__dialog
       .open(ApplyJobPopupComponent, {
         width: '700px',

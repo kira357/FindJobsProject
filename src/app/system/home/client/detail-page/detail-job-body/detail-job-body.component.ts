@@ -1,3 +1,4 @@
+import { VMGetRecruitment } from 'src/app/core/model/recruitmentJob/model/recruitment';
 import { CommentService } from './../../../../../core/model/comment/comment.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,6 +14,7 @@ import { FavouriteService } from 'src/app/core/model/favourite/favourite.service
 import { VMCreateFavourite } from 'src/app/core/model/favourite/model/favourite';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
 
 @Component({
   selector: 'app-detail-job-body',
@@ -28,6 +30,7 @@ export class DetailJobBodyComponent implements OnInit {
     private __dialog: MatDialog,
     private favouriteService: FavouriteService,
     private commentService: CommentService,
+    private recruitmentService: RecruitmentService,
     private SpinnerService: NgxSpinnerService
   ) {}
 
@@ -91,10 +94,11 @@ export class DetailJobBodyComponent implements OnInit {
           this.isActive = data.isActive;
           this.isLike = data.islike;
         });
-        setTimeout(() => {
-          /** spinner ends after 5 seconds */
-          this.SpinnerService.hide();
-        }, 1000);
+      this.getRecruitment(this.id);
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.SpinnerService.hide();
+      }, 1000);
     });
   }
   onApply() {
@@ -148,5 +152,26 @@ export class DetailJobBodyComponent implements OnInit {
           this.getListData();
         });
     }
+  }
+  _DATA_COMPANY: VMGetRecruitment = {
+    idRecruitment: '',
+    nameCompany: '',
+    email: '',
+    typeCompany: 0,
+    description: '',
+    summary: '',
+    address: '',
+    logo: '',
+    urlLogo: '',
+    typeOfWork: 0,
+    amount: 0,
+  };
+  getRecruitment(idRecruitment: any) {
+    this.recruitmentService
+      .RequestGetCurrentRecruitment(idRecruitment)
+      .subscribe((data: any) => {
+        this._DATA_COMPANY = data;
+        console.log('getRecruitment', this._DATA_COMPANY);
+      });
   }
 }
