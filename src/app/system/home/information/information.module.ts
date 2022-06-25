@@ -13,6 +13,7 @@ import { CustomButtonModule } from 'src/app/core/component/custom-button/custom-
 import { CustomInputDateModule } from 'src/app/core/component/custom-input-date/custom-input-date.module';
 import { CustomInputModule } from 'src/app/core/component/custom-input/custom-input.module';
 import { CustomSelectModule } from 'src/app/core/component/custom-select/custom-select.module';
+import { FooterModule } from '../client/footer/footer.module';
 
 const routes: Routes = [
   {
@@ -36,6 +37,8 @@ const routes: Routes = [
     CustomButtonModule,
     CustomTextareaModule,
     CustomSelectModule,
+    HeaderModule,
+    FooterModule,
     RouterModule.forChild(routes),
   ],
   declarations: [InformationComponent],

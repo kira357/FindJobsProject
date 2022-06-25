@@ -1,5 +1,3 @@
-
-
 <section class="section-content padding-y">
   <div fxLayout="row" fxLayoutGap="10px" fxFlex="100">
     <!-- col.// -->
@@ -18,59 +16,75 @@
             <div style="text-align: right" class="px-2" (click)="onOpenEdit()">
               <i class="fa-solid fa-pencil edit-icon"></i>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start center">
-              <div fxLayout="row" fxFlex="20">
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <div fxLayout="column" fxFlex="30" fxLayoutGap="15px" class="px-3">
                 <img
                   class="custom-img px-3"
                   id="blah"
-                  [src]="currentUser?.urlAvatar"
+                  [src]="_DATA_FORMAT.urlLogo"
                   alt="your image"
                 />
+                <div fxFlex="100">
+                  <label class="custom-label" for="name"
+                    >Name company:
+                    <span class="custom-span">{{
+                      _DATA_FORMAT.nameCompany
+                    }}</span>
+                  </label>
+                </div>
+                <div fxFlex="100">
+                  <label class="custom-label" for="address"
+                    >Summary:
+                    <span class="custom-span">{{ _DATA_FORMAT.summary }}</span>
+                  </label>
+                </div>
+                <div fxFlex="100">
+                  <label class="custom-label" for="experience"
+                    >Type of company:
+                    <span class="custom-span">{{
+                      _DATA_FORMAT.typeCompany
+                    }}</span>
+                  </label>
+                </div>
+                <div fxFlex="100">
+                  <label class="custom-label" for="address"
+                    >Amount:
+                    <span class="custom-span">{{ _DATA_FORMAT.amount }}</span>
+                  </label>
+                </div>
+                <div fxFlex="100">
+                  <label class="custom-label" for="address"
+                    >Type of work:
+                    <span class="custom-span">{{
+                      _DATA_FORMAT.typeOfWork
+                    }}</span>
+                  </label>
+                </div>
+                <div fxFlex="100">
+                  <label class="custom-label" for="address"
+                    >Address:
+                    <span class="custom-span">{{ _DATA_FORMAT.address }}</span>
+                  </label>
+                </div>
+                <div fxFlex="100">
+                  <label class="custom-label" for="address"
+                    >Website:
+                    <span class="custom-span">{{ _DATA_FORMAT.website }}</span>
+                  </label>
+                </div>
               </div>
-              <div fxFlex="80">
+              <div fxFlex="70">
                 <div fxLayout="column" fxLayoutGap="15px">
-                  <div fxLayout="row">
-                    <div fxFlex="10">
-                      <label class="custom-label" for="name">name:</label>
-                    </div>
-                    <div fxFlex="90">
-                      <span class="custom-span">{{currentUser?.fullName}}</span>
-                    </div>
-                  </div>
-                  <div fxLayout="row">
-                    <div fxFlex="10">
-                      <label class="custom-label" for="major">Major: </label>
-                    </div>
-                    <div fxFlex="90">
-                      <span class="custom-span">{{currentUser?.nameMajor}}</span>
-                    </div>
-                  </div>
-                  <div fxLayout="row">
-                    <div fxFlex="10">
-                      <label class="custom-label" for="experience"
-                        >Experience:
-                      </label>
-                    </div>
-                    <div fxFlex="90">
-                      <span class="custom-span">{{currentUser?.experience}}</span>
-                    </div>
-                  </div>
-                  <div fxLayout="row">
-                    <div fxFlex="10">
-                      <label class="custom-label" for="phone">Phone: </label>
-                    </div>
-                    <div fxFlex="90">
-                      <span class="custom-span">{{currentUser?.phoneNumber}}</span>
-                    </div>
-                  </div>
-                  <div fxLayout="row">
+                  <div fxLayout="column">
                     <div fxFlex="10">
                       <label class="custom-label" for="address"
-                        >Address:
+                        >Description:
                       </label>
                     </div>
                     <div fxFlex="90">
-                      <span class="custom-span">{{currentUser?.address}}</span>
+                      <span class="custom-span"
+                        ><div [innerHTML]="_DATA_FORMAT.descriptions"></div>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -83,14 +97,14 @@
       <div *ngIf="openEdit">
         <article class="mb-2 card" style="padding: 25px 0px">
           <div fxLayout="column">
-            <form [formGroup]="updateUser">
-              <div fxLayout="row" fxLayoutAlign="start center">
+            <form [formGroup]="updateRecruitment">
+              <div fxLayout="row" fxLayoutAlign="start stretch">
                 <div fxLayout="column">
                   <img
                     class="custom-img"
                     id="blah"
-                    [src]="imageFile ? imageFile.link : currentUser.urlAvatar"
-                    alt="your image"          
+                    [src]="imageFile ? imageFile.link : _DATA_COMPANY.urlLogo"
+                    alt="your image"
                   />
                   <input
                     type="file"
@@ -103,77 +117,115 @@
                   />
                 </div>
                 <div fxFlex="80">
-                  <div fxLayout="column" fxLayoutGap="15px">
-                    <div fxLayout="row">
+                  <div fxLayout="column" fxLayoutGap="15px" class="px-2">
+                    <div fxLayout="row wrap">
                       <custom-input
-                        fxFlex="50"
+                        fxFlex="33"
                         [required]="true"
-                        [name]="'firstname'"
-                        formControlName="firstname"
-                        [placeholder]="'first name'"
-                        [title]="'first name'"
+                        [name]="'Name company'"
+                        formControlName="nameCompany"
+                        [placeholder]="'Name company'"
+                        [title]="'Name company'"
                         [maxlength]="250"
-                        [(ngModel)]="currentUser.firstName"
+                        [(ngModel)]="_DATA_COMPANY.nameCompany"
                       ></custom-input>
-                      <custom-input
-                        fxFlex="50"
-                        [required]="true"
-                        [name]="'lastname'"
-                        formControlName="lastname"
-                        [placeholder]="'Last name'"
-                        [title]="'Last name'"
-                        [maxlength]="250"
-                        [(ngModel)]="currentUser.lastName"
-                      ></custom-input>
-                    </div>
-
-                    <div fxLayout="row">
                       <mat-form-field
                         style="margin-left: 5px"
-                        fxFlex="33,33%"
+                        fxFlex="33"
                         appearance="outline"
                         floatLabel="always"
                       >
-                        <mat-label> Experience </mat-label>
-                        <mat-select formControlName="experience" [(ngModel)]="currentUser.experience">
+                        <mat-label> Type of company </mat-label>
+                        <mat-select
+                          formControlName="typeCompany"
+                          [(ngModel)]="_DATA_COMPANY.typeCompany"
+                        >
                           <mat-option>
-                            <ngx-mat-select-search name="experience">
+                            <ngx-mat-select-search name="typeCompany">
                               <mat-icon ngxMatSelectSearchClear>x</mat-icon>
                             </ngx-mat-select-search>
                           </mat-option>
                           <mat-option
-                            *ngFor="let item of listExperience"
+                            *ngFor="let item of typeCompany"
                             [value]="item.value"
                           >
                             {{ item.name }}</mat-option
                           >
                         </mat-select>
                       </mat-form-field>
-                    </div>
-                    <div fxLayout="row">
+                      <mat-form-field
+                        style="margin-left: 5px"
+                        fxFlex="33"
+                        appearance="outline"
+                        floatLabel="always"
+                      >
+                        <mat-label> Type of work </mat-label>
+                        <mat-select
+                          formControlName="typeOfWork"
+                          [(ngModel)]="_DATA_COMPANY.typeOfWork"
+                        >
+                          <mat-option>
+                            <ngx-mat-select-search name="typeOfWork">
+                              <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                            </ngx-mat-select-search>
+                          </mat-option>
+                          <mat-option
+                            *ngFor="let item of typeOfWork"
+                            [value]="item.value"
+                          >
+                            {{ item.name }}</mat-option
+                          >
+                        </mat-select>
+                      </mat-form-field>
                       <custom-input
-                        fxFlex="100"
+                        fxFlex="33"
                         [required]="true"
-                        [name]="'phonenumber'"
-                        formControlName="phonenumber"
-                        [placeholder]="'Phone'"
-                        [title]="'Phone'"
+                        [name]="'Amount'"
+                        formControlName="amount"
+                        [placeholder]="'Amount employee'"
+                        [title]="'Amount employee'"
                         [maxlength]="250"
-                        [(ngModel)]="currentUser.phoneNumber"
+                        [(ngModel)]="_DATA_COMPANY.amount"
                       ></custom-input>
-                    </div>
-                    <div fxLayout="row">
                       <custom-input
-                        fxFlex="100"
+                        fxFlex="33"
                         [required]="true"
-                        [name]="'address'"
+                        [name]="'Address'"
                         formControlName="address"
-                        [placeholder]="'Address'"
+                        [placeholder]="'Address company'"
                         [title]="'Address'"
                         [maxlength]="250"
-                        [(ngModel)]="currentUser.address"
+                        [(ngModel)]="_DATA_COMPANY.address"
+                      ></custom-input>
+                      <custom-input
+                        fxFlex="33"
+                        [required]="true"
+                        [name]="'Website'"
+                        formControlName="website"
+                        [placeholder]="'Website company'"
+                        [title]="'Website company'"
+                        [maxlength]="250"
+                        [(ngModel)]="_DATA_COMPANY.website"
                       ></custom-input>
                     </div>
+                    <custom-textarea
+                      fxFlex="100"
+                      [required]="true"
+                      [name]="'Summary'"
+                      formControlName="summary"
+                      [placeholder]="'Summary of company'"
+                      [rows]="3"
+                      [title]="'Summary of company'"
+                      [maxlength]="250"
+                      [(ngModel)]="_DATA_COMPANY.summary"
+                    ></custom-textarea>
+                    <quill-editor
+                      fxFlex="100"
+                      [styles]="{ height: heightQuill + 'px' }"
+                      [modules]="modules"
+                      [(ngModel)]="_DATA_FORMAT.descriptions"
+                      formControlName="descriptions"
+                    ></quill-editor>
                   </div>
                 </div>
               </div>

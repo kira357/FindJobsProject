@@ -3,7 +3,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as signalR from '@microsoft/signalr';
 import { MethodName } from '../core/base/hub-methods.enum';
-import { ChatRecruitment, VMCreateChatRecruitment } from '../core/model/chat/model/chat-recruitment';
+import {
+  ChatRecruitment,
+  VMCreateChatRecruitment,
+} from '../core/model/chat/model/chat-recruitment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +14,9 @@ import { ChatRecruitment, VMCreateChatRecruitment } from '../core/model/chat/mod
 export class SignalrService {
   private hubConnection: signalR.HubConnection;
   private mapHubs: Map<string, signalR.HubConnection> = new Map();
-  Message$: BehaviorSubject<VMCreateChatRecruitment> = new BehaviorSubject<VMCreateChatRecruitment>({} as VMCreateChatRecruitment);
-  connectionEstablished = new EventEmitter<Boolean>();  
+  Message$: BehaviorSubject<VMCreateChatRecruitment> =
+    new BehaviorSubject<VMCreateChatRecruitment>({} as VMCreateChatRecruitment);
+  connectionEstablished = new EventEmitter<Boolean>();
   constructor() {}
 
   get hub() {
@@ -27,7 +31,7 @@ export class SignalrService {
         // }
         // accessTokenFactory: () => this.oAuthService.getAccessToken()
         skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
+        transport: signalR.HttpTransportType.WebSockets,
       })
       .configureLogging(signalR.LogLevel.Trace)
       .build());
@@ -39,7 +43,7 @@ export class SignalrService {
       await this.hubConnection.start();
       if (this.hubConnection.state === signalR.HubConnectionState.Connected)
         console.log('SignalR Connected.');
-        this.connectionEstablished.emit(true);  
+      this.connectionEstablished.emit(true);
       return true;
     } catch (err) {
       if (this.hubConnection.state === signalR.HubConnectionState.Disconnected)
@@ -76,17 +80,33 @@ export class SignalrService {
 
   private handleHubMethod(methodName: string) {
     this.hubConnection.off(methodName);
-    this.hubConnection.on(methodName, data => {
-        const parseData = JSON.parse(data);
-        switch (methodName) {
-            case MethodName.SendMessage:
-                const { IdChat, IdSender, IdReceiver,Messages,TimeSend ,ConnectionId,Type} = parseData.Data;
-                const Message = { idChat : IdChat, idSender: IdSender, idReceiver: IdReceiver, messages : Messages, type :Type,timeSend : TimeSend , connectionId : ConnectionId};
-                this.Message$.next(Message);
-                break;
-        }
+    this.hubConnection.on(methodName, (data) => {
+      const parseData = JSON.parse(data);
+      switch (methodName) {
+        case MethodName.SendMessage:
+          const {
+            IdChat,
+            IdSender,
+            IdReceiver,
+            Messages,
+            TimeSend,
+            ConnectionId,
+            Type,
+          } = parseData.Data;
+          const Message = {
+            idChat: IdChat,
+            idSender: IdSender,
+            idReceiver: IdReceiver,
+            messages: Messages,
+            type: Type,
+            timeSend: TimeSend,
+            connectionId: ConnectionId,
+          };
+          this.Message$.next(Message);
+          break;
+      }
     });
-}
+  }
 
   private onReconnected(
     hubName: string,
@@ -121,10 +141,10 @@ export class SignalrService {
     }
   };
 
-  OnAskServerInvoke = (message : VMCreateChatRecruitment) => {
+  OnAskServerInvoke = (message: any, userId: string) => {
     this.hubConnection
-      .invoke('SendMessages', message)
-      .then((data) => console.log('Invoke success' , data))
+      .invoke('SendMessages', message, userId)
+      .then((data) => console.log('Invoke success', data))
       .catch((err) => console.log('Invoke fail ', err));
   };
 

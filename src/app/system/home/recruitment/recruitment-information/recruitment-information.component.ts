@@ -5,42 +5,79 @@ import { debounceTime, Subject } from 'rxjs';
 import { JobsService } from 'src/app/core/model/jobs/jobs.service';
 import { MajorService } from 'src/app/core/model/major/major.service';
 import { PagingParams } from 'src/app/core/model/paging-params';
+import { VMGetRecruitment } from 'src/app/core/model/recruitmentJob/model/recruitment';
+import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
 import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
 import { UserService } from 'src/app/core/model/user/User.service';
 import { ApiAuthenService } from 'src/app/services/api-authen.service';
-
+import Quill from 'quill';
+import 'node_modules/quill-emoji/dist/quill-emoji.js';
+import BlotFormatter from 'quill-blot-formatter';
+Quill.register('modules/blotFormatter', BlotFormatter);
 @Component({
   selector: 'app-admin-page-login',
   templateUrl: './recruitment-information.component.html',
   styleUrls: ['./recruitment-information.component.scss'],
 })
 export class RecruitmentInformationComponent implements OnInit {
+  modules = {};
   constructor(
     private formBuilder: FormBuilder,
     private majorService: MajorService,
     private apiAuthenService: ApiAuthenService,
-    private userService: UserService
+    private userService: UserService,
+    private recruitmentService: RecruitmentService
   ) {
+    this.modules = {
+      'emoji-shortname': true,
+      'emoji-textarea': false,
+      'emoji-toolbar': true,
+      blotFormatter: {
+        // empty object for default behaviour.
+      },
+      toolbar: {
+        container: [
+          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+          ['blockquote', 'code-block'],
+
+          [{ header: 1 }, { header: 2 }], // custom button values
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+          [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+          [{ direction: 'rtl' }], // text direction
+
+          [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+          [{ font: [] }],
+          [{ align: [] }],
+
+          ['clean'], // remove formatting button
+
+          ['link', 'image', 'video'], // link and image, video
+          ['emoji'],
+        ],
+        handlers: { emoji: function () {} },
+      },
+    };
     this.onSearch = new Subject();
-    this.onSearch.pipe(debounceTime(100)).subscribe((str) => {
-      console.log('onSearch', str);
-      let comboxfilter = this.comboxMajor.filter(
-        (x) => x.name.indexOf(str) > -1
-      );
-      console.log('comboxfilter', comboxfilter);
-      str ? (this.comboxMajor = comboxfilter) : this.getComboxMajor();
-    });
   }
   defaultImageSrc = '/assets/image/default-image.png';
-  updateUser = this.formBuilder.group({
-    firstname: ['', Validators.required],
+
+  updateRecruitment = this.formBuilder.group({
+    nameCompany: ['', Validators.required],
     lastname: ['', Validators.required],
     email: ['', Validators.required],
-    phonenumber: ['', Validators.required],
+    typeCompany: ['', Validators.required],
+    typeOfWork: ['', Validators.required],
+    amount: ['', Validators.required],
     address: ['', Validators.required],
-    experience: ['', Validators.required],
+    summary:  ['', Validators.required],
+    descriptions:  ['', Validators.required],
+    website: '',
+    fax: '',
     imageFile: '',
-    idMajor: ['', Validators.required],
     search: '',
   });
   private _search: string;
@@ -55,16 +92,21 @@ export class RecruitmentInformationComponent implements OnInit {
   get search() {
     return this._search;
   }
+  heightQuill = window.innerHeight - 420
   comboxMajor: any[] = [];
-  listExperience: any[] = [
-    {value : 0 , name : 'Dưới 1 năm'},
-    {value : 1 , name : '1 năm'},
-    {value : 2 , name : '2 năm'},
-    {value : 3 , name : '3 năm'},
-    {value : 4 , name : '4 năm'},
-    {value : 5 , name : '5 năm'},
-    {value : 6 , name : 'Trên 5 năm'},
-  ];
+
+  typeOfWork: any[] = [
+    { value: 1, name: 'Off site' },
+    { value: 2, name: 'On site' },
+    { value: 3, name: 'Full time' },
+    { value: 4, name: 'Part time' },
+  ]
+  typeCompany: any[] = [
+    { value: 1, name: 'Out source' },
+    { value: 2, name: 'Product' },
+    { value: 3, name: 'Service' },
+    { value: 4, name: 'Other' },
+  ]
   _PagingParams = new PagingParams();
   onSearch: Subject<string>;
   imageFile: { link: any; file: any; name: string } | undefined;
@@ -92,50 +134,68 @@ export class RecruitmentInformationComponent implements OnInit {
     }
   };
   ngOnInit() {
-    this.getCurrentUser();
-  }
-  getComboxMajor() {
-    this.majorService
-      .RequestGetListMajor(this._PagingParams)
-      .subscribe((data: any) => {
-        console.log('getlist major', data);
-        this.comboxMajor = data.data;
-      });
+    // this.getCurrentUser();
+    this.getRecruitment();
   }
 
   data = localStorage.getItem('data');
   currentUser: VMGetCurrentUser;
-  getCurrentUser() {
+
+  _DATA_COMPANY: VMGetRecruitment = {
+    idRecruitment: '',
+    nameCompany: '',
+    email: '',
+    typeCompany: 0,
+    descriptions: '',
+    summary: '',
+    address: '',
+    logo: '',
+    urlLogo: '',
+    typeOfWork: 0,
+    amount: 0,
+    website: '',
+    fax: '',
+  };
+  _DATA_FORMAT :any ={}
+  getRecruitment() {
     const dataJson = JSON.parse(this.data || '');
-    this.apiAuthenService
-      .RequestGetCurrentUser(dataJson.data.id)
+    this.recruitmentService
+      .RequestGetCurrentRecruitment(dataJson.data.id)
       .subscribe((data: any) => {
-        this.currentUser = data[0];
-        console.log('123', this.currentUser);
+        this._DATA_COMPANY = data;
+        this._DATA_FORMAT = {...this._DATA_COMPANY, typeOfWork : this.typeOfWork.find(x => x.value == this._DATA_COMPANY.typeOfWork)?.name , typeCompany : this.typeCompany.find(x => x.value == this._DATA_COMPANY.typeCompany)?.name}
+      });
+  }
+
+
+  formData = new FormData();
+  onEdit() {
+    this.formData.append('imageFile', this.files[0]);
+    this.formData.append('nameCompany', this.updateRecruitment.value.nameCompany);
+    this.formData.append('typeCompany', this.updateRecruitment.value.typeCompany);
+    this.formData.append('typeOfWork', this.updateRecruitment.value.typeOfWork);
+    this.formData.append('amount', this.updateRecruitment.value.amount);
+    this.formData.append('address', this.updateRecruitment.value.address);
+    this.formData.append('website', this.updateRecruitment.value.website);
+    this.formData.append('summary', this.updateRecruitment.value.summary);
+    this.formData.append('descriptions', this.updateRecruitment.value.descriptions);
+
+    this.recruitmentService
+      .RequestUpdateCurrentRecruitment(this.formData, this._DATA_COMPANY.idRecruitment)
+      .subscribe((data: any) => {
+        console.log('data', data);
+        this.openEdit = false;
+        this.updateRecruitment.reset();
+        this.getRecruitment();
+        //detele all key in formdata
+        this.formData.forEach((value, key) => {
+          this.formData.delete(key);
+        });
+        // this.getCurrentUser();
       });
   }
 
   openEdit: boolean = false;
-  formData = new FormData();
-  onEdit() {
-    console.log('onEdit', this.updateUser.value);
-    this.formData.append('imageFile', this.files[0]);
-    this.formData.append('firstName', this.updateUser.value.firstname);
-    this.formData.append('lastName', this.updateUser.value.lastname);
-    this.formData.append('phoneNumber', this.updateUser.value.phonenumber);
-    this.formData.append('idMajor', this.updateUser.value.idMajor);
-    this.formData.append('address', this.updateUser.value.address);
-    this.formData.append('experience', this.updateUser.value.experience);
-
-    this.userService
-      .RequestUpdateInfoUser(this.formData , this.currentUser.id)
-      .subscribe((data: any) => {
-        console.log('data', data);
-        this.openEdit = false;
-        this.updateUser.reset();
-        this.getCurrentUser();
-      });
-  }
   onOpenEdit() {
     if (this.openEdit) {
       this.openEdit = false;
@@ -143,7 +203,5 @@ export class RecruitmentInformationComponent implements OnInit {
       this.openEdit = true;
     }
   }
-  onReset() {
-    this.updateUser.reset();
-  }
+
 }

@@ -7,6 +7,7 @@ import { HeaderModule } from '../client/header/header.module';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailBlogModule } from './detail-blog/detail-blog.module';
 import { MaterialModule } from 'src/app/material.module';
+import { FooterModule } from '../client/footer/footer.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
     CommonModule,
     BlogRoutingModule,
     BodyBlogModule,
+    HeaderModule,
+    FooterModule,
     RouterModule.forChild(routes),
   ],
   declarations: [BlogComponent],

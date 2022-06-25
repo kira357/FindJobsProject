@@ -9,6 +9,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { HeaderModule } from '../../client/header/header.module';
 import { BodyBlogModule } from '../body-blog/body-blog.module';
 import { CommentboxModule } from 'src/app/core/component/commentbox/commentbox.module';
+import { FooterModule } from '../../client/footer/footer.module';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
     CustomTextareaModule,
     MatFormFieldModule,
     MaterialModule,
-    HeaderModule,
+       HeaderModule,
+    FooterModule,
     CommentboxModule,
     RouterModule.forChild(routes),
   ],

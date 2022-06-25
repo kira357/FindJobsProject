@@ -14,7 +14,7 @@ import { CustomTextareaModule } from 'src/app/core/component/custom-textarea/cus
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { QuillModule } from 'ngx-quill';
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +36,7 @@ const routes: Routes = [
     CustomCheckboxModule,
     CustomSelectModule,
     MatExpansionModule,
+    QuillModule.forRoot(),
     RouterModule.forChild(routes),
   ],
   declarations: [RecruitmentInformationComponent],

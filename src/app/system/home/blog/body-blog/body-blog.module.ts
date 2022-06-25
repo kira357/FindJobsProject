@@ -6,6 +6,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HeaderModule } from '../../client/header/header.module';
+import { FooterModule } from '../../client/footer/footer.module';
 const routes: Routes = [
   {
     path: '',

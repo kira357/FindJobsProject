@@ -58,11 +58,15 @@ export class LoginPageComponent implements OnInit {
               );
             }
           }
-          if (this.dataRespone.data.roleName === 'Student') {
-            this.router.navigate(['/home']);
+          if (this.dataRespone.data.roleName === '') {
+            this.router.navigate(['']);
+            this._toastrService.success('Login Success', 'Success');
           }
         } else {
-          alert('Email or Password is incorrect');
+          this._toastrService.error(
+            'Email or Password is incorrect',
+            'Error'
+          );
         }
       });
   }

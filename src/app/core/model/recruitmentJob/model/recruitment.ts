@@ -3,11 +3,13 @@ export interface VMGetRecruitment {
   nameCompany: string;
   email: string;
   typeCompany: number;
-  description: string;
+  descriptions: string;
   summary: string;
   address: string;
   logo: string;
   urlLogo: string;
   typeOfWork: number;
   amount: number;
+  website:string;
+  fax :string;
 }

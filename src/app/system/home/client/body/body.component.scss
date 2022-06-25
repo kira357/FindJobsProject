@@ -413,3 +413,6 @@
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+.active-border:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

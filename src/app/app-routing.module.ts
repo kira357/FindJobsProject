@@ -31,13 +31,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./system/home/resume/resume.module').then((m) => m.ResumeModule),
   },
-  {
-    path: 'create-cv',
-    loadChildren: () =>
-      import('./system/home/page-CV/page-CV.module').then(
-        (m) => m.PageCVModule
-      ),
-  },
+
   {
     path: 'profile',
     loadChildren: () =>

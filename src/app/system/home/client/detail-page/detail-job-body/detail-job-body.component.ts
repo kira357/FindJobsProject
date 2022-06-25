@@ -15,7 +15,7 @@ import { VMCreateFavourite } from 'src/app/core/model/favourite/model/favourite'
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
-
+import { faUserGroup ,faGear,faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-detail-job-body',
   templateUrl: './detail-job-body.component.html',
@@ -158,20 +158,50 @@ export class DetailJobBodyComponent implements OnInit {
     nameCompany: '',
     email: '',
     typeCompany: 0,
-    description: '',
+    descriptions: '',
     summary: '',
     address: '',
     logo: '',
     urlLogo: '',
     typeOfWork: 0,
     amount: 0,
+    website: '',
+    fax: '',
   };
+  typeOfWork: any[] = [
+    { value: 1, name: 'Off site' },
+    { value: 2, name: 'On site' },
+    { value: 3, name: 'Full time' },
+    { value: 4, name: 'Part time' },
+  ];
+  typeCompany: any[] = [
+    { value: 1, name: 'Out source' },
+    { value: 2, name: 'Product' },
+    { value: 3, name: 'Service' },
+    { value: 4, name: 'Other' },
+  ];
+  newArray: any[] = [];
+  _DATA_FORMAT = {} as any;
   getRecruitment(idRecruitment: any) {
     this.recruitmentService
       .RequestGetCurrentRecruitment(idRecruitment)
       .subscribe((data: any) => {
         this._DATA_COMPANY = data;
         console.log('getRecruitment', this._DATA_COMPANY);
+        this._DATA_FORMAT = {
+          ...this._DATA_COMPANY,
+          typeOfWork: this.typeOfWork.find(
+            (x) => x.value == this._DATA_COMPANY.typeOfWork
+          )?.name,
+          typeCompany: this.typeCompany.find(
+            (x) => x.value == this._DATA_COMPANY.typeCompany
+          )?.name,
+        };
+        this.newArray.push(
+          { icon: faTimesCircle, name: this._DATA_FORMAT.typeOfWork },
+          { icon: faGear, name: this._DATA_FORMAT.typeCompany },
+          { icon: faUserGroup, name: this._DATA_FORMAT.amount }
+        );
       });
   }
 }

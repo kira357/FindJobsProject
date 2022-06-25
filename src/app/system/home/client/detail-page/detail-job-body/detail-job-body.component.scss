@@ -193,7 +193,9 @@
   grid-row-end: span 2;
   .jd-page__employer-overview-inner {
     position: sticky;
-    top: 0;
+    top: 0;  
+    max-width: 400px;
+    width: 370px;
     .employer-long-overview {
       background-color: #ffffff;
       padding: 20px;
@@ -239,6 +241,21 @@
           color: #58595b;
           font-size: 13px;
           line-height: 21px;
+          .svg-icon {
+            display: flex;
+            align-items: center;
+            line-height: 15px;
+            fa-icon {
+              fill: currentColor;
+              width: 14px;
+              height: 14px;
+              color: #7a7a7a;
+              flex-shrink: 0;
+            }
+          }
+          .svg-icon__text{
+            margin-left: 10px;
+          }
         }
         .employer-long-overview__jobs {
           margin: 0 -20px -20px;
@@ -248,7 +265,6 @@
           cursor: pointer;
           a {
             text-decoration: none;
-
           }
           .employer-long-overview__employer-url {
             align-self: center;
@@ -274,6 +290,10 @@
             color: #ea1e30;
             border: 1px solid #ea1e30;
             background: #fff;
+          }
+          .ibutton--outlined:hover {
+            background: #ea1e30;
+            color: #fff;
           }
         }
       }

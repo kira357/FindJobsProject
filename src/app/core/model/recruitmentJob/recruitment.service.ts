@@ -31,6 +31,9 @@ export class RecruitmentService {
       headers: this.headers,
     });
   };
+  RequestUpdateCurrentRecruitment = (data: any, Id: any) => {
+    return this.http.put(`${this.rootURL}/update-recruiment/${Id}`, data);
+  };
 
   RequestUpdateActive = (job: any) => {
     return this.http.put(`${this.rootURL}/update-active`, job);

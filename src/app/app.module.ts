@@ -28,8 +28,6 @@ import { HeaderModule } from './system/home/client/header/header.module';
     DetailJobModule,
     ReactiveFormsModule,
     ResumeModule,
-    HeaderModule,
-    FooterModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

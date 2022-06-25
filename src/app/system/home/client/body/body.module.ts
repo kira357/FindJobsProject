@@ -8,6 +8,8 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { FooterModule } from '../footer/footer.module';
+import { HeaderModule } from '../header/header.module';
 const routes: Routes = [
   {
     path: '',
@@ -23,6 +25,8 @@ const routes: Routes = [
     CustomInputModule,
     NgxPaginationModule,
     NgxMatSelectSearchModule,
+    HeaderModule,
+    FooterModule,
     RouterModule.forChild(routes),
   ],
   declarations: [BodyComponent],

@@ -18,12 +18,12 @@ export class ChatComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apiAuthenService: ApiAuthenService,
     private _signalRService: SignalrService,
-    private _ngZone: NgZone  
+    private _ngZone: NgZone
   ) {}
-  chatMessages = new Array<VMCreateChatRecruitment>();  
+  chatMessages = new Array<VMCreateChatRecruitment>();
   onlineUser: any[] = [];
   chatUsername: any;
-  txtMessage: string = ''; 
+  txtMessage: string = '';
   currentUser: VMGetCurrentUser = {
     id: '',
     fullName: '',
@@ -39,6 +39,13 @@ export class ChatComponent implements OnInit {
     email: '',
   };
 
+  users:any;
+  chatUser:any;
+
+  messages: any[] = [];
+  displayMessages: any[] = []
+  message: string
+  connectedUsers: any[] = []
   messageCreated = this.formBuilder.group({
     message: '',
   });
@@ -59,30 +66,21 @@ export class ChatComponent implements OnInit {
         this.currentUser = data[0];
       });
   }
-  message : VMCreateChatRecruitment;  
-  SendMessage() {
-    if (this.txtMessage) {  
-      this.message = {
-        idChat: "",
-        idSender: this.currentUser.id,
-        idReceiver: "",
-        type: "sent",
-        messages: this.txtMessage,
-        timeSend: new Date().getTime().toString(),
-        connectionId: "",
-      }  
-      this._signalRService.OnAskServerInvoke(this.message);
-      this.chatMessages.push(this.message);  
-      this.txtMessage = '';  
-    }  
 
+  SendMessage() {
+    if (this.txtMessage) {
+     
+      this._signalRService.OnAskServerInvoke( this.txtMessage , this.currentUser.id);
+      // this.chatMessages.push(this.message);
+      this.txtMessage = '';
+    }
   }
   receiveMessage() {
     this._signalRService.Message$.subscribe((data: any) => {
-      console.log('123',data);
+      console.log('123', data);
       this._ngZone.run(() => {
-        if(this.currentUser.id !== data.idSender){
-          this.message.type = "received";
+        if (this.currentUser.id !== data.idSender) {
+          // this.message.type = 'received';
           this.chatMessages.push(data);
         }
       });

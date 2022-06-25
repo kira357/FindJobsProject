@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HeaderModule } from '../client/header/header.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FooterModule } from '../client/footer/footer.module';
 
 const routes: Routes = [
   {
@@ -18,6 +19,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FlexLayoutModule,
     FormsModule,
+    HeaderModule,
+    FooterModule,
     ReactiveFormsModule,
   ],
   declarations: [ResumeComponent],

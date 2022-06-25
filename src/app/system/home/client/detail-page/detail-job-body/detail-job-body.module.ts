@@ -9,7 +9,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { CommentboxModule } from 'src/app/core/component/commentbox/commentbox.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -26,6 +26,7 @@ const routes: Routes = [
     MaterialModule,
     CommentboxModule,
     RouterModule.forChild(routes),
+    FontAwesomeModule
   ],
   declarations: [DetailJobBodyComponent],
   exports: [DetailJobBodyComponent],
