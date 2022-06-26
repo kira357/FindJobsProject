@@ -141,13 +141,13 @@ export class SignalrService {
     }
   };
 
-  OnAskServerInvoke = (message: any, userId: string) => {
+  OnAskServerInvoke = (message: any) => {
     this.hubConnection
-      .invoke('SendMessages', message, userId)
+      .invoke('SendMessages', message)
       .then((data) => console.log('Invoke success', data))
       .catch((err) => console.log('Invoke fail ', err));
   };
-
+ 
   onDisconnect = () => {
     this.hubConnection.onclose(() => {
       console.log('Connection closed');

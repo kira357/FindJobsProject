@@ -23,4 +23,9 @@ export class ChatRecruitmentService {
       headers: this.headers,
     });
   };
+  RequestGetIdMessage = (userId: string) => {
+    return this.http.get(`${this.rootURL}/received-messages/${userId}`, {
+      headers: this.headers,
+    });
+  };
 }

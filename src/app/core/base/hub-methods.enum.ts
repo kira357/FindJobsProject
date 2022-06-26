@@ -4,4 +4,6 @@ export enum HubName {
 
 export enum MethodName {
   SendMessage = 'receiveMessage',
+  BroadcastUserOnConnect = 'BroadcastUserOnConnect',
+  BroadcastUserOnDisconnect = 'BroadcastUserOnDisconnect',
 }

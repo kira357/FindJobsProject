@@ -39,22 +39,19 @@ export class ChatComponent implements OnInit {
     email: '',
   };
 
-  users:any;
-  chatUser:any;
+  users: any;
+  chatUser: any;
 
   messages: any[] = [];
-  displayMessages: any[] = []
-  message: string
-  connectedUsers: any[] = []
+  displayMessages: any[] = [];
+  message: string;
+  connectedUsers: any[] = [];
   messageCreated = this.formBuilder.group({
     message: '',
   });
   ngOnInit() {
     this.getCurrentUser();
-    this._signalRService.OnAskServerListener(
-      HubName.Chatting,
-      MethodName.SendMessage
-    );
+    this._signalRService.OnAskServerListener(HubName.Chatting, 'ReceiveDM');
     this.receiveMessage();
   }
   data = localStorage.getItem('data');
@@ -69,9 +66,18 @@ export class ChatComponent implements OnInit {
 
   SendMessage() {
     if (this.txtMessage) {
-     
-      this._signalRService.OnAskServerInvoke( this.txtMessage , this.currentUser.id);
-      // this.chatMessages.push(this.message);
+      let chatMessage :ChatRecruitment= {
+        idChat: 0,
+        idSender: this.currentUser.id,
+        idReceiver: this.currentUser.id,
+        timeSend: new Date().toString(),
+        type: 'sent',
+        messages: this.txtMessage,
+        connectionId: this.currentUser.id,
+      };
+
+      this._signalRService.OnAskServerInvoke(JSON.stringify(chatMessage));
+      this.chatMessages.push(chatMessage);
       this.txtMessage = '';
     }
   }
