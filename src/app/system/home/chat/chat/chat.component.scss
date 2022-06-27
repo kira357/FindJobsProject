@@ -1,302 +1,635 @@
-.loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3399dd;
-    width: 80px;
-    height: 80px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-  }
+// .loader {
+//     border: 16px solid #f3f3f3;
+//     border-radius: 50%;
+//     border-top: 16px solid #3399dd;
+//     width: 80px;
+//     height: 80px;
+//     -webkit-animation: spin 2s linear infinite; /* Safari */
+//     animation: spin 2s linear infinite;
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     margin-top: -50px;
+//     margin-left: -50px;
+//   }
   
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-    }
+//   /* Safari */
+//   @-webkit-keyframes spin {
+//     0% {
+//       -webkit-transform: rotate(0deg);
+//     }
   
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
-  }
+//     100% {
+//       -webkit-transform: rotate(360deg);
+//     }
+//   }
   
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
+//   @keyframes spin {
+//     0% {
+//       transform: rotate(0deg);
+//     }
   
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+//     100% {
+//       transform: rotate(360deg);
+//     }
+//   }
   
-  .form-control {
-    height: auto !important;
-  }
+//   .form-control {
+//     height: auto !important;
+//   }
   
-  label {
-    margin-bottom: 0px !important;
-  }
+//   label {
+//     margin-bottom: 0px !important;
+//   }
   
-  .content {
-    width: 100%;
-    padding: 15px;
-    margin: 0 auto;
-  }
+//   .content {
+//     width: 100%;
+//     padding: 15px;
+//     margin: 0 auto;
+//   }
   
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-  }
+//   .form-signin {
+//     width: 100%;
+//     max-width: 330px;
+//     padding: 15px;
+//     margin: 0 auto;
+//   }
   
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
+//   .form-signin .checkbox {
+//     font-weight: 400;
+//   }
   
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
+//   .form-signin .form-control {
+//     position: relative;
+//     box-sizing: border-box;
+//     height: auto;
+//     padding: 10px;
+//     font-size: 16px;
+//   }
   
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
+//   .form-signin .form-control:focus {
+//     z-index: 2;
+//   }
   
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-  }
+//   .form-signin input[type="email"] {
+//     margin-bottom: -1px;
+//   }
   
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-  }
+//   .form-signin input[type="password"] {
+//     margin-bottom: 10px;
+//   }
   
-  .container {
-    max-width: 1170px;
-    margin: auto;
-  }
+//   .container {
+//     max-width: 1170px;
+//     margin: auto;
+//   }
   
-  img {
-    max-width: 100%;
-  }
+//   img {
+//     max-width: 100%;
+//   }
   
-  .top_spac {
-    margin: 20px 0 0;
-  }
+//   .top_spac {
+//     margin: 20px 0 0;
+//   }
   
-  .srch_bar .input-group-addon button {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: medium none;
-    padding: 0;
-    color: #707070;
-    font-size: 18px;
-  }
+//   .srch_bar .input-group-addon button {
+//     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+//     border: medium none;
+//     padding: 0;
+//     color: #707070;
+//     font-size: 18px;
+//   }
   
-  .srch_bar .input-group-addon {
-    margin: 0 0 0 -27px;
-  }
+//   .srch_bar .input-group-addon {
+//     margin: 0 0 0 -27px;
+//   }
   
-  .chat_img {
-    float: left;
-    width: 5%;
-  }
+//   .chat_img {
+//     float: left;
+//     width: 5%;
+//   }
   
-  .inbox_chat {
-    height: 550px;
-    overflow-y: auto;
-    .chat_list {
-      border-bottom: 1px solid #c4c4c4;
-      margin: 0;
-      padding: 18px 16px 10px;
-    }
-    .active_chat {
-      background: #ebebeb;
-    }
-  }
-  .chat_people {
-    overflow: hidden;
-    clear: both;
-    .chat_ib {
-      float: left;
-      padding: 0 0 0 15px;
-      width: 88%;
-      h5 {
-        font-size: 15px;
-        color: #464646;
-        margin: 0 0 8px 0;
-      }
-      p {
-        font-size: 14px;
-        color: #989898;
-        margin: auto;
-      }
-      h5 span {
-        font-size: 13px;
-        float: right;
-      }
-    }
-  }
+//   .inbox_chat {
+//     height: 550px;
+//     overflow-y: auto;
+//     .chat_list {
+//       border-bottom: 1px solid #c4c4c4;
+//       margin: 0;
+//       padding: 18px 16px 10px;
+//     }
+//     .active_chat {
+//       background: #ebebeb;
+//     }
+//   }
+//   .chat_people {
+//     overflow: hidden;
+//     clear: both;
+//     .chat_ib {
+//       float: left;
+//       padding: 0 0 0 15px;
+//       width: 88%;
+//       h5 {
+//         font-size: 15px;
+//         color: #464646;
+//         margin: 0 0 8px 0;
+//       }
+//       p {
+//         font-size: 14px;
+//         color: #989898;
+//         margin: auto;
+//       }
+//       h5 span {
+//         font-size: 13px;
+//         float: right;
+//       }
+//     }
+//   }
   
-  .incoming_msg_img {
-    display: inline-table;
-    width: 28px;
-    float: left;
-  }
+//   .incoming_msg_img {
+//     display: inline-table;
+//     width: 28px;
+//     float: left;
+//   }
   
-  .received_msg {
-    display: inline-table;
-    padding: 0 0 0 2px;
-    vertical-align: top;
-    /*width: 92%;*/
-    margin-bottom: 2px;
-    float: left;
-  }
+//   .received_msg {
+//     display: inline-table;
+//     padding: 0 0 0 2px;
+//     vertical-align: top;
+//     /*width: 92%;*/
+//     margin-bottom: 2px;
+//     float: left;
+//   }
   
-  .time_date {
-    color: #747474;
-    display: initial;
-    font-size: 11px;
-    /*margin: 8px 0 0;*/
-  }
+//   .time_date {
+//     color: #747474;
+//     display: initial;
+//     font-size: 11px;
+//     /*margin: 8px 0 0;*/
+//   }
   
-  .received_withd_msg {
-    /*width: 57%;*/
-    p {
-      background: #ebebeb none repeat scroll 0 0;
-      border-radius: 0px 20px 20px 20px;
-      color: #646464;
-      font-size: 14px;
-      margin: 0;
-      padding: 5px 10px 5px 12px;
-      /*width: 100%;*/
-    }
-    .imgUser{
-      width: 20px;
-      height: 20px;
-      border-radius: 100rem;
-    }
-  }
+//   .received_withd_msg {
+//     /*width: 57%;*/
+//     p {
+//       background: #ebebeb none repeat scroll 0 0;
+//       border-radius: 0px 20px 20px 20px;
+//       color: #646464;
+//       font-size: 14px;
+//       margin: 0;
+//       padding: 5px 10px 5px 12px;
+//       /*width: 100%;*/
+//     }
+//     .imgUser{
+//       width: 20px;
+//       height: 20px;
+//       border-radius: 100rem;
+//     }
+//   }
   
-  .mesgs {
-    float: left;
-    padding: 8px 15px 0 25px;
-    width: 70%;
-    .type_msg {
-      border-top: 1px solid #c4c4c4;
-      position: relative;
-      .input_msg_write input {
-        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-        border: medium none;
-        color: #4c4c4c;
-        font-size: 15px;
-        min-height: 48px;
-        width: 100%;
-        padding-right: 43px;
-        word-wrap: break-word;
-      }
-    }
-  }
+//   .mesgs {
+//     float: left;
+//     padding: 8px 15px 0 25px;
+//     width: 70%;
+//     .type_msg {
+//       border-top: 1px solid #c4c4c4;
+//       position: relative;
+//       .input_msg_write input {
+//         background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+//         border: medium none;
+//         color: #4c4c4c;
+//         font-size: 15px;
+//         min-height: 48px;
+//         width: 100%;
+//         padding-right: 43px;
+//         word-wrap: break-word;
+//       }
+//     }
+//   }
   
   
-  .outgoing_msg {
-    overflow: hidden;
-    margin-bottom: 3px;
-  }
+//   .outgoing_msg {
+//     overflow: hidden;
+//     margin-bottom: 3px;
+//   }
   
-  .sent_msg {
-    float: right;
-    p {
-      background: #05728f none repeat scroll 0 0;
-      border-radius: 20px 20px 0px 20px;
-      font-size: 14px;
-      margin: 0;
-      color: #fff;
-      padding: 5px 10px 5px 12px;
-      width: 100%;
-      max-width: 500px;
-      word-break: break-all;
-    }
+//   .sent_msg {
+//     float: right;
+//     p {
+//       background: #05728f none repeat scroll 0 0;
+//       border-radius: 20px 20px 0px 20px;
+//       font-size: 14px;
+//       margin: 0;
+//       color: #fff;
+//       padding: 5px 10px 5px 12px;
+//       width: 100%;
+//       max-width: 500px;
+//       word-break: break-all;
+//     }
   
-  }
+//   }
   
-  .msg_send_btn {
-    background: #05728f none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 50%;
-    color: #fff;
-    cursor: pointer;
-    font-size: 17px;
-    height: 33px;
-    position: absolute;
-    right: 0;
-    top: 11px;
-    width: 33px;
-    margin-right: 5px;
-  }
-  .container-xxl {
-    margin: 30px auto;
-    max-width: 1350px;
-  }
-  .messaging {
-    padding: 0 0 1px 0;
-    .inbox_msg {
-      border: 1px solid #c4c4c4;
-      clear: both;
-      overflow: hidden;
-      .inbox_people {
-        background: #f8f8f8 none repeat scroll 0 0;
-        float: left;
-        overflow: hidden;
-        width: 30%;
-        border-right: 1px solid #c4c4c4;
-        .headind_srch {
-          padding: 10px 29px 10px 20px;
-          overflow: hidden;
-          border-bottom: 1px solid #c4c4c4;
-          .recent_heading {
-            float: left;
-            width: 55%;
-            h4 {
-              color: #05728f;
-              font-size: 21px;
-              margin: auto;
-            }
-            h5 {
-              margin: 0 !important;
-              font-size: 20px;
-              font-weight: 500;
-            }
-          }
-          .srch_bar {
-            display: inline-block;
-            text-align: right;
-            input {
-              border: 1px solid #cdcdcd;
-              border-width: 0 0 1px 0;
-              width: 80%;
-              padding: 2px 0 4px 6px;
-              background: none;
-            }
-            .search-bar {
-              margin: 0;
-              padding-right: 20px;
-            }
-          }
-        }
-      }
-    }
-  }
-  .msg_history {
-    height: 480px;
-    overflow-y: auto;
-    /*padding-bottom:5px;*/
-  }
+//   .msg_send_btn {
+//     background: #05728f none repeat scroll 0 0;
+//     border: medium none;
+//     border-radius: 50%;
+//     color: #fff;
+//     cursor: pointer;
+//     font-size: 17px;
+//     height: 33px;
+//     position: absolute;
+//     right: 0;
+//     top: 11px;
+//     width: 33px;
+//     margin-right: 5px;
+//   }
+//   .container-xxl {
+//     margin: 30px auto;
+//     max-width: 1350px;
+//   }
+//   .messaging {
+//     padding: 0 0 1px 0;
+//     .inbox_msg {
+//       border: 1px solid #c4c4c4;
+//       clear: both;
+//       overflow: hidden;
+//       .inbox_people {
+//         background: #f8f8f8 none repeat scroll 0 0;
+//         float: left;
+//         overflow: hidden;
+//         width: 30%;
+//         border-right: 1px solid #c4c4c4;
+//         .headind_srch {
+//           padding: 10px 29px 10px 20px;
+//           overflow: hidden;
+//           border-bottom: 1px solid #c4c4c4;
+//           .recent_heading {
+//             float: left;
+//             width: 55%;
+//             h4 {
+//               color: #05728f;
+//               font-size: 21px;
+//               margin: auto;
+//             }
+//             h5 {
+//               margin: 0 !important;
+//               font-size: 20px;
+//               font-weight: 500;
+//             }
+//           }
+//           .srch_bar {
+//             display: inline-block;
+//             text-align: right;
+//             input {
+//               border: 1px solid #cdcdcd;
+//               border-width: 0 0 1px 0;
+//               width: 80%;
+//               padding: 2px 0 4px 6px;
+//               background: none;
+//             }
+//             .search-bar {
+//               margin: 0;
+//               padding-right: 20px;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+//   .msg_history {
+//     height: 480px;
+//     overflow-y: auto;
+//     /*padding-bottom:5px;*/
+//   }
   
+.bg-gray {
+  background-color: #ececec;
+}
+
+.chat {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.card {
+  height: 500px;
+}
+
+.contacts_body {
+  padding: 0.75rem 0 !important;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+.msg_card_body {
+  overflow-y: auto;
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+  border-bottom: 0 !important;
+}
+
+.card-footer {
+  border-radius: 0 0 15px 15px !important;
+  border-top: 0 !important;
+}
+
+.container {
+  align-content: center;
+}
+
+.search {
+  border-radius: 15px 0 0 15px !important;
+
+}
+
+.search:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+.type_msg {
+  height: 60px !important;
+  overflow-y: auto;
+}
+
+.type_msg:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+.attach_btn {
+  border-radius: 15px 0 0 15px !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.send_btn {
+  border-radius: 0 15px 15px 0 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.search_btn {
+  border-radius: 0 15px 15px 0 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.contacts {
+  list-style: none;
+  padding: 0;
+}
+
+.contacts li {
+  width: 100% !important;
+  padding: 5px 10px;
+  margin-bottom: 15px !important;
+}
+
+.contacts li:hover {
+  background-clip: #eee;
+}
+
+.active {
+  background-color: #daeff7;
+}
+
+.user_img {
+  height: 46px;
+  width: 46px;
+  border: 1.5px solid #f9f9f9;
+
+}
+
+.user_img_msg {
+  height: 40px;
+  width: 40px;
+  border: 1.5px solid #f9f9f9;
+
+}
+
+.img_cont {
+  position: relative;
+  height: 46px;
+  width: 46px;
+}
+
+.img_cont_msg {
+  height: 40px;
+  width: 40px;
+}
+
+.online_icon {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: #4cd137;
+  border-radius: 50%;
+  bottom: 0.2em;
+  right: 0.4em;
+  border: 1.5px solid white;
+}
+
+.offline {
+  background-color: #c23616 !important;
+}
+
+.user_info {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
+}
+
+.user_info span {
+  font-size: 18px;
+}
+
+.user_info p {
+  font-size: 12px;
+}
+
+.video_cam {
+  margin-left: 50px;
+  margin-top: 5px;
+}
+
+.video_cam span {
+  color: #0d6efd;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.msg_cotainer {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  background-color: #c2f4ff;
+  padding: 10px;
+  position: relative;
+}
+
+.msg_cotainer_send {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  border-radius: 25px;
+  background-color: #d0fad9;
+  padding: 10px;
+  position: relative;
+}
+
+.msg_time {
+  position: absolute;
+  left: 15px;
+  top: -22px;
+  font-size: 12px;
+  min-width: 160px;
+  color: #999;
+}
+
+.msg_time_send {
+  position: absolute;
+  right: 15px;
+  top: -22px;
+  font-size: 12px;
+  color: #999;
+  min-width: 160px;
+  text-align: right;
+}
+
+.msg_head {
+  position: relative;
+  background-color: #f0f4f8;
+}
+
+#action_menu_btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.action_menu {
+  z-index: 1;
+  position: absolute;
+  padding: 15px 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 15px;
+  top: 30px;
+  right: 15px;
+  display: none;
+}
+
+.action_menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action_menu ul li {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+}
+
+.action_menu ul li i {
+  padding-right: 10px;
+
+}
+
+.action_menu ul li:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.contacts_card {
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+@media(max-width: 576px) {
+  .contacts_card {
+      margin-bottom: 15px !important;
+  }
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 20px;
+  top: 25px;
+
+}
+
+.dropdownIcon i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.menuList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #ececec;
+  border-radius: 6px;
+  position: relative;
+  z-index: 999;
+  top: 22px;
+  max-width: 200px;
+  right: 0;
+}
+
+.menuList li,
+.userList li {
+  margin-bottom: 0 !important;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: #daeff7;
+}
+
+.positionRelative {
+  position: relative;
+}
+
+.messageItem {
+  position: relative;
+  cursor: pointer;
+  padding-right: 30px;
+}
+
+.messageListIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.messageItem:hover .messageListIcon {
+  display: block !important;
+}
+
+.userList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #ececec;
+  position: absolute;
+  right: 10px;
+  z-index: 999;
+  top: 15px;
+  max-width: 200px;
+}
+.mouseCursor{
+  cursor: pointer;
+}

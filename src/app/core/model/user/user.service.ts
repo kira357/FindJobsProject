@@ -28,6 +28,15 @@ export class UserService {
       },
     });
   };
+  RequestGetAllListWithNoRole = (pagingParams: PagingParams) => {
+    return this.http.get(this.rootURL + '/getAllListWithNoRole', {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
 
   RequestCreateUser = (User: VMCreateUser) => {
     return this.http.post(`${this.rootURL}/create-user`, User, {

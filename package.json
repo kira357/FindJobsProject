@@ -33,6 +33,7 @@
     "@visurel/iconify-angular": "^11.0.0",
     "bootstrap": "^5.1.3",
     "file-saver": "^2.0.5",
+    "guid-typescript": "^1.0.9",
     "html2canvas": "^1.4.1",
     "jquery": "^3.6.0",
     "jspdf": "^2.5.1",

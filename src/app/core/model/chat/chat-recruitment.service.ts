@@ -23,9 +23,18 @@ export class ChatRecruitmentService {
       headers: this.headers,
     });
   };
-  RequestGetIdMessage = (userId: string) => {
+  getUserReceivedMessages = (userId: string) => {
     return this.http.get(`${this.rootURL}/received-messages/${userId}`, {
       headers: this.headers,
+    });
+  };
+  getAllMessage = (pagingParams: PagingParams) => {
+    return this.http.get(`${this.rootURL}/received-messages`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
     });
   };
 }
