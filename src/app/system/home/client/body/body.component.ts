@@ -7,6 +7,7 @@ import { PagingParams } from 'src/app/core/model/paging-params';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject, debounceTime } from 'rxjs';
 import { MajorService } from 'src/app/core/model/major/major.service';
+import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
 
 @Component({
   selector: 'app-body',
@@ -21,7 +22,8 @@ export class BodyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private SpinnerService: NgxSpinnerService,
-    private majorService: MajorService
+    private majorService: MajorService,
+    private recruitmentService: RecruitmentService
   ) {
     this.onSearch = new Subject();
     this.onSearch.pipe(debounceTime(100)).subscribe((str) => {
@@ -87,40 +89,6 @@ export class BodyComponent implements OnInit {
       amountJobs: '6',
     },
   ];
-  fakeComboxMajor: any = [
-    {
-      idMajor: 1,
-      name: 'Công nghệ thông tin',
-    },
-    {
-      idMajor: 2,
-      name: 'Kế toán',
-    },
-    {
-      idMajor: 3,
-      name: 'Khoa học máy tính',
-    },
-    {
-      idMajor: 4,
-      name: 'Khoa học máy tính',
-    },
-    {
-      idMajor: 5,
-      name: 'Khoa học máy tính',
-    },
-    {
-      idMajor: 6,
-      name: 'Khoa học máy tính',
-    },
-    {
-      idMajor: 7,
-      name: 'Khoa học máy tính',
-    },
-    {
-      idMajor: 8,
-      name: 'Khoa học máy tính',
-    },
-  ];
   fakeBlog: any = [
     {
       idBlog: 1,
@@ -155,7 +123,7 @@ export class BodyComponent implements OnInit {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
   ];
-  newArray : any = [];
+  newArray: any = [];
   searchJob = this.formBuilder.group({
     idMajor: [''],
     search: '',
@@ -175,8 +143,9 @@ export class BodyComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.newArray = this.fakeBlog.slice(0,2)
+    this.newArray = this.fakeBlog.slice(0, 2);
     this.getListData();
+    this.getAllCompany();
     this.getComboxMajor();
   }
 
@@ -215,8 +184,13 @@ export class BodyComponent implements OnInit {
         this.comboxMajor = data.data;
       });
   }
-  // gotoDetail(item:any){
-  //   this.router.navigate(['/detail-job',{state : {data:item}}]);
-  // }
+  listCompany : any[]= [];
+  getAllCompany() {
+    this.recruitmentService
+      .RequestGetListCompany(this._PagingParams)
+      .subscribe((data: any) => {
+        this.listCompany = data.data;
+      });
+  }
   select() {}
 }

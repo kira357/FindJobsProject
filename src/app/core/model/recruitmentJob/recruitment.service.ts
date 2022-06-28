@@ -26,6 +26,16 @@ export class RecruitmentService {
       },
     });
   };
+
+  RequestGetListCompany = (pagingParams: PagingParams) => {
+    return this.http.get(`${this.rootURL}/get-list-company`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
   RequestGetCurrentRecruitment = (Id: any) => {
     return this.http.get(`${this.rootURL}/get-current-recruitment/${Id}`, {
       headers: this.headers,

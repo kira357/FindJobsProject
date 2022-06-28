@@ -1,6 +1,15 @@
 .my-profile {
   margin: 30px auto;
   max-width: 1350px;
+  .my-profile-page {
+    border: 1px solid #d8d8d8;
+    background-color: white;
+    padding: 15px 0px;
+  }
+  .my-profile-page-info {
+    margin: 0 10px;
+    background: white;
+  }
 }
 :host::ng-deep .mat-expansion-panel {
   box-shadow: none;

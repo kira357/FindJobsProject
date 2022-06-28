@@ -71,10 +71,13 @@
             [matMenuTriggerFor]="userMenu"
             style="color: white"
           >
-            <span fxShow fxHide.xs>
-              {{ currentUser.fullName }}
-            </span>
-            <mat-icon>person</mat-icon>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+              <span fxShow fxHide.xs style="font-size: 1rem ;">
+                {{ currentUser.fullName }}
+              </span>
+              <!-- <mat-icon>person</mat-icon> -->
+              <img [src]="currentUser.urlAvatar" alt="avatar" class="avatar" />
+            </div>
           </button>
           <mat-menu
             #userMenu="matMenu"
@@ -85,6 +88,16 @@
             <a mat-menu-item [routerLink]="['/profile']">
               <mat-icon>person</mat-icon>
               <span>Account</span>
+            </a>
+
+            <a mat-menu-item [routerLink]="['/save-jobs']">
+              <mat-icon>favorite</mat-icon>
+              <span>Saved Jobs</span>
+            </a>
+
+            <a mat-menu-item [routerLink]="['/applied-jobs']">
+              <mat-icon>check_box</mat-icon>
+              <span>Applied Jobs</span>
             </a>
 
             <a mat-menu-item (click)="LogOut()">

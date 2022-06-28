@@ -217,15 +217,15 @@
     <div class=" container-xxl ">
       <div class="title">Recruitment Company</div>
       <div class="row">
-        <div *ngFor="let item of fakeData" class="col-xs-12 col-md-3 mt-4">
+        <div *ngFor="let item of listCompany" class="col-xs-12 col-md-3 mt-4">
           <a class="top-company active-border">
             <div class="top-company__logo text-center">
-              <img src="{{ item.logo }}" alt="logo" class="lazyloaded" />
+              <img src="{{ item.urlLogo }}" alt="logo" class="lazyloaded" />
             </div>
             <div class="top-company__name text-center">{{ item.nameCompany }}</div>
             <footer class="top-company__footer text-center">
               <span class="top-company__footer-jobs">
-                <span class="red link">{{ item.amountJobs }} jobs</span>
+                <span class="red link">{{ item.countJob }} jobs</span>
                 <!-- <span>&nbsp;-&nbsp;</span> -->
               </span>
             </footer>

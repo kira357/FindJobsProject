@@ -17,8 +17,8 @@ export class FavouriteService {
     'Content-Type': 'application/json',
   });
 
-  RequestGetAllListFavourite = (pagingParams: PagingParams) => {
-    return this.http.get(`${this.rootURL}/get-all-list-Favourite`, {
+  RequestGetAllListFavourite = (pagingParams: PagingParams, id: any) => {
+    return this.http.get(`${this.rootURL}/get-list-favourite/${id}`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,
@@ -27,7 +27,11 @@ export class FavouriteService {
     });
   };
 
-  RequestCreateFavourite= (favourite: any) => {
+  RequestCreateFavourite = (favourite: any) => {
+    return this.http.post(`${this.rootURL}/create-favourite`, favourite);
+  };
+
+  RequestRemoveFavourite = (favourite: any) => {
     return this.http.post(`${this.rootURL}/create-favourite`, favourite);
   };
 }
