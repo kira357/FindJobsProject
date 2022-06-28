@@ -40,6 +40,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'save-jobs',
+    loadChildren: () =>
+      import('./system/home/save-jobs/save-jobs.module').then(
+        (m) => m.SaveJobsModule
+      ),
+  },
+  {
     path: 'detail-job/:id',
     loadChildren: () =>
       import('./system/home/client/detail-page/detail-job.module').then(
