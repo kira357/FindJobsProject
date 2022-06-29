@@ -32,6 +32,12 @@ export class FavouriteService {
   };
 
   RequestRemoveFavourite = (favourite: any) => {
-    return this.http.post(`${this.rootURL}/create-favourite`, favourite);
+    return this.http.delete(`${this.rootURL}/remove-favourite`, {
+      headers: this.headers,
+      params: {
+        idJob: favourite.idJob,
+        idUser: favourite.idUser,
+      },
+    });
   };
 }

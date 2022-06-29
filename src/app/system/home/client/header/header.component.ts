@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
     public spinnerService: SpinnerService,
     private router: Router,
     private apiAuthenService: ApiAuthenService,
-    private userService: UserService,
     @Inject(WINDOW) private window: Window
   ) {}
   HostUrl: string;

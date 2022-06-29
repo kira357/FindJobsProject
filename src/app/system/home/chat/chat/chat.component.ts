@@ -73,9 +73,10 @@ export class ChatComponent implements OnInit {
       .getUserReceivedMessages(dataJson.data.id)
       .subscribe((item: any) => {
         if (item) {
-          this.messages = item.result;
+          console.log(item);
+          this.messages = item;
           this.messages.forEach((x: any) => {
-            x.type = x.receiver === dataJson.data.id ? 'recieved' : 'sent';
+            x.type = x.idReceiver === dataJson.data.id ? 'recieved' : 'sent';
           });
         }
       });
@@ -132,23 +133,6 @@ export class ChatComponent implements OnInit {
 
     // this.hubConnection.on("UserConnected", (connectionId) => this.UserConnectionID = connectionId);
 
-    this.hubConnection.on('BroadCastDeleteMessage', (connectionId, message) => {
-      let deletedMessage = this.messages.find((x) => x.id === message.id);
-      if (deletedMessage) {
-        deletedMessage.isReceiverDeleted = message.isReceiverDeleted;
-        deletedMessage.isSenderDeleted = message.isSenderDeleted;
-        if (
-          deletedMessage.isReceiverDeleted &&
-          deletedMessage.receiver === this.chatUser.id
-        ) {
-          this.displayMessages = this.messages.filter(
-            (x) =>
-              (x.type === 'sent' && x.idReceiver === this.chatUser.id) ||
-              (x.type === 'recieved' && x.idSender === this.chatUser.id)
-          );
-        }
-      }
-    });
 
     this.hubConnection.on('ReceiveDM', (connectionId, message) => {
       console.log("123 ReceiveDM",message);
@@ -198,36 +182,12 @@ export class ChatComponent implements OnInit {
   }
 
   openChat(user: any) {
-    console.log("openChat",user);
-    this.users.forEach((item: any) => {
+    this.users.forEach((item:any) => {
       item['isActive'] = false;
     });
     user['isActive'] = true;
     this.chatUser = user;
-    this.displayMessages = this.messages.filter(
-      (x) =>
-        (x.type === 'sent' && x.idReceiver === this.chatUser.id) ||
-        (x.type === 'recieved' && x.idSender === this.chatUser.id)
-    );
-    if(this.displayMessages.length == 0){
-    this.chatRecruitmentService.getAllMessage(this.pagingParams).subscribe((item:any) =>{
-      console.log("getAllMessage",item);
-      if (item.result.data.length > 0) {
-        console.log("getAllMessage",item.result.data);
-        this.messages = item.result.data;
-        this.messages.forEach((x: any) => {
-          x.type = x.idReceiver === this.dataJson.data.id ? 'recieved' : 'sent';
-        });
-        this.displayMessages = this.messages.filter(
-          (x) =>
-            (x.type === 'sent' && x.idReceiver === this.chatUser.id) ||
-            (x.type === 'recieved' && x.idSender === this.chatUser.id)
-        );
-      }
-    })
-    }
-    console.log("displayMessages",this.displayMessages);
-
+    this.displayMessages = this.messages.filter(x => (x.type === 'sent' && x.idReceiver === this.chatUser.id) || (x.type === 'recieved' && x.idSender === this.chatUser.id));;
   }
 
   makeItOnline() {

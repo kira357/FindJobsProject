@@ -1,3 +1,155 @@
-<p>
-  applied-jobs works!
-</p>
+<div style="background-color: #e9e9e9;">
+<app-header></app-header>
+  <div class="container">
+    <div class="saved-jobs-page">
+      <section
+        fxLayout="column"
+        class="saved-jobs"
+      >
+      
+        <div  *ngIf="_LIST_DATA.length < 0 ; else elseTemplate">
+          <div class="card m-0 saved-jobs saved-jobs--no-jobs" fxFlex="100">
+            <h1 class="saved-jobs__headline">You have 0 Saved Jobs</h1>
+            <h3 class="saved-jobs__sub-headline">
+              Ay da ! You haven't saved any jobs yet.
+            </h3>
+            <div class="saved-jobs__no-jobs-image">
+              <img
+                src="../../../../../assets/image/robby_with_heart.png"
+                alt="logo_save"
+              />
+            </div>
+            <h3 class="saved-jobs__sub-headline">
+              Click the heart to save jobs.
+            </h3>
+          </div>
+        </div>
+  
+        <ng-template #elseTemplate>
+          <div class="list-job saved-jobs">
+            <h1 class="saved-jobs__headline">You have {{_LIST_DATA.length}} Saved Jobs</h1>
+            <div class="saved-jobs__jobs">
+              <div class="job">
+                <div class="job_content">
+                  <div
+                    *ngFor="
+                      let item of _LIST_DATA
+                        | paginate
+                          : {
+                              itemsPerPage: 2,
+                              currentPage: _PagingParams.currentPage,
+                              totalItems: _PagingParams.totalRows
+                            }
+                    "
+                  >
+                    <article
+                      class="mb-2 card"
+                      tabindex="1"
+                      style="padding: 25px 0px"
+                    >
+                      <div fxLayout="row" >
+                        <div
+                          class="logo"
+                          fxFlex="20"
+                          fxLayoutAlign="center center"
+                          fxLayout="column"
+                          style="padding: 0px"
+                        >
+                          <img
+                            style="
+                              object-fit: cover;
+                              width: 65px;
+                              height: 65px;
+                              border-radius: 15px;
+                              border: 1px solid;
+                            "
+                            src="{{ item.jobImage }}"
+                          />
+                       
+                        </div>
+                        <!-- col.// -->
+                          <div class="info-main px-2" fxLayout="row" fxLayoutGap="15px" fxFlex="80">
+                            <div fxLayout="column" fxLayoutAlign="start start" fxFlex="75">
+                              <a
+                                [routerLink]="['/detail-job', item.idJob]"
+                                [queryParams]="{ debug: true }"
+                                class="h5 title"
+                                style="text-decoration: none"
+                              >
+                                {{ item.nameJob }}
+                              </a>
+                              <div class="description">
+                                <div class="mb-1">
+                                  <a href="#" style="text-decoration: none">{{
+                                    item.recruitmentName
+                                  }}</a>
+                                </div>
+                                <div class="mb-1">
+                                  <div>Major: {{ item.nameMajor }}</div>
+                                </div>
+                                <div class="mb-1">
+                                  <div>
+                                    Salary: {{ item.salaryMin }} -
+                                    {{ item.salaryMax }}
+                                  </div>
+                                </div>
+  
+                              </div>
+                            </div>
+                            <div
+                              fxLayout="column"
+                              fxLayoutAlign="space-between stretch"
+                              fxFlex="25"
+                            >
+                              <div class="mr-2 new-job">
+                                <span *ngIf="item.isActive">Is Applied </span>
+                              </div>
+                              <div>
+                                <div class="mb-1">
+                                  <span>
+                                    Amount:<span> {{ item.amount }} </span></span
+                                  >
+                                </div>
+  
+                                <div class="mb-1">
+                                  <span>
+                                    Experience:<span>
+                                      {{ item.experience }} năm
+                                    </span></span
+                                  >
+                                </div>
+                                <div class="mb-1">
+                                  <span>
+                                    Date expire:<span>
+                                      {{ item.dateExpire | date }}
+                                    </span></span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- info-main.// -->
+                      </div>
+                    </article>
+                  </div>
+                  <pagination-controls
+                    (pageChange)="onpageChange($event)"
+                  ></pagination-controls>
+                </div>
+                <ngx-spinner
+                  bdColor="rgba(51, 51, 51, 0.8)"
+                  size="default"
+                  type="ball-spin-clockwise"
+                >
+                  <p style="color: white">Please Wait.</p>
+                </ngx-spinner>
+              </div>
+            </div>
+          </div>
+          
+        </ng-template>
+      </section>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

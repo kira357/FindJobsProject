@@ -47,6 +47,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'applied-jobs',
+    loadChildren: () =>
+      import('./system/home/applied-jobs/applied-jobs.module').then(
+        (m) => m.AppliedJobsModule
+      ),
+  },
+  {
     path: 'detail-job/:id',
     loadChildren: () =>
       import('./system/home/client/detail-page/detail-job.module').then(

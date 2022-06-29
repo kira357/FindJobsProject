@@ -26,6 +26,15 @@ export class CandidateService {
       },
     });
   };
+  RequestGetItemApplyJobOfCandidate = (pagingParams: PagingParams, Id: any) => {
+    return this.http.get(`${this.rootURL}/get-jobs-applied/${Id}`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
   RequestGetListAllCandidate = (pagingParams: PagingParams) => {
     return this.http.get(`${this.rootURL}/get-alllist-apply`, {
       headers: this.headers,
