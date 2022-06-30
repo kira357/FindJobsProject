@@ -15,6 +15,9 @@ import { ResumeModule } from './system/home/resume/resume.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HeaderModule } from './system/home/client/header/header.module';
+import { AuthGuard } from './core/authen/auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/authen/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],

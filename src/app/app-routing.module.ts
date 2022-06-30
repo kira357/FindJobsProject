@@ -1,5 +1,8 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/authen/auth.guard';
+import { AuthInterceptor } from './core/authen/auth.interceptor';
 import { ClientComponent } from './system/home/client/client.component';
 import { ResumeComponent } from './system/home/resume/resume/resume.component';
 
@@ -12,7 +15,9 @@ const routes: Routes = [
   {
     path: 'all-jobs',
     loadChildren: () =>
-      import('./system/home/job-page/job-page.module').then((m) => m.JobPageModule),
+      import('./system/home/job-page/job-page.module').then(
+        (m) => m.JobPageModule
+      ),
   },
 
   {
@@ -70,6 +75,7 @@ const routes: Routes = [
 
   {
     path: 'admin',
+
     loadChildren: () =>
       import('./system/admin/admin-page-main.module').then(
         (m) => m.AdminPageMainModule
@@ -77,6 +83,7 @@ const routes: Routes = [
   },
   {
     path: 'recruitment',
+
     loadChildren: () =>
       import('./system/home/recruitment/recruitment.module').then(
         (m) => m.RecruitmentModule
@@ -102,9 +109,9 @@ const routes: Routes = [
       {
         path: 'recruitment-register',
         loadChildren: () =>
-          import('./system/recruitment-register/recruitment-register.module').then(
-            (m) => m.RecruitmentRegisterModule
-          ),
+          import(
+            './system/recruitment-register/recruitment-register.module'
+          ).then((m) => m.RecruitmentRegisterModule),
       },
     ],
   },
@@ -128,5 +135,6 @@ const routes: Routes = [
     }),
   ],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}
