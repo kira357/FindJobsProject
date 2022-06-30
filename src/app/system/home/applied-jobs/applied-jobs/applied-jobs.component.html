@@ -9,7 +9,7 @@
       
         <div  *ngIf="_LIST_DATA.length < 0 ; else elseTemplate">
           <div class="card m-0 saved-jobs saved-jobs--no-jobs" fxFlex="100">
-            <h1 class="saved-jobs__headline">You have 0 Saved Jobs</h1>
+            <h1 class="saved-jobs__headline">You have {{_LIST_DATA.length}} Applied Jobs</h1>
             <h3 class="saved-jobs__sub-headline">
               Ay da ! You haven't saved any jobs yet.
             </h3>

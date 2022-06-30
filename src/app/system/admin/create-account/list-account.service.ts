@@ -42,8 +42,9 @@ export class ListAccountService {
         label: 'Is active',
         property: 'isActive',
         type: 'checkbox',
-        visible: false,
+        visible: true,
         cssClasses: [],
+
       },
     ];
   };

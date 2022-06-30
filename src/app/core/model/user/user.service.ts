@@ -48,6 +48,11 @@ export class UserService {
       headers: this.headers,
     });
   };
+  RequestUpdateUserRole = (User: any) => {
+    return this.http.put(`${this.rootURL}/update-user-role`, User, {
+      headers: this.headers,
+    });
+  };
 
   RequestUpdateInfoUser = (User: FormData, Id: any) => {
     return this.http.put(`${this.rootURL}/update-information/${Id}`, User);

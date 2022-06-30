@@ -120,7 +120,7 @@
           <mat-label> Role </mat-label>
           <mat-select
             formControlName="roleName"
-            [(ngModel)]="_LIST_ITEM.roleName"
+            [(ngModel)]="_LIST_ITEM.roleId"
             (selectionChange)="select($event)"
           >
             <mat-option>
@@ -128,7 +128,7 @@
                 <mat-icon ngxMatSelectSearchClear>x</mat-icon>
               </ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let item of comboxRole" [value]="item.name">
+            <mat-option *ngFor="let item of comboxRole" [value]="item.id">
               {{ item.name }}</mat-option
             >
           </mat-select>
@@ -201,6 +201,7 @@
         <custom-table
           [columns]="columns"
           [rows]="_LIST_DATA"
+          [disable]="true"
           [selectedRow]="_LIST_ITEM"
           [pagingParams]="_PagingParams"
           (onRowClick)="onRowClick($event)"

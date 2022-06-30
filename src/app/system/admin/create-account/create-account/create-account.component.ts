@@ -144,9 +144,7 @@ export class CreateAccountComponent implements OnInit {
       this.userService
         .RequestUpdateUser(this.employeeCreated.value, this._LIST_ITEM.id)
         .subscribe((data: any) => {
-          if (data) {
-            this.getListData();
-          }
+          this.getListData();
         });
     } else {
       this.userService

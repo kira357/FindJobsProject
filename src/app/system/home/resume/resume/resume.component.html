@@ -8,13 +8,8 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <title>Cv Generator</title>
-    <!-- foundation styles -->
     <link rel="stylesheet" src="/src/css/vendor/foundation/foundation.css" />
-    <!-- parsley styles -->
     <link rel="stylesheet" src="/src/css/vendor/parsley/parsley.css" />
-    <!-- fontawesome styles -->
-    <!-- <link rel="stylesheet" src="/src/css/vendor/foundation/foundation.min.css" /> -->
-    <!-- main app styles -->
     <link rel="stylesheet" src="/src/css/main.css" />
   </head>
   <body>
@@ -23,8 +18,10 @@
       <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
         <div fxLayout="column" fxFlex="40" fxLayoutGap="10px">
 
-          <div *ngFor="let item of listColor">
-              <span class="change-coler" (click)="changeColor(item.value)" [ngStyle]="{ 'background-color': item.value}">
+          <div *ngFor="let item of listColor" class="row">
+              <span class="change-color " 
+              (click)="changeColor(item.value)" 
+              [ngStyle]="{ 'background-color': item.value , 'color': item.value}">
                 {{item.name}}
               </span>
           </div>

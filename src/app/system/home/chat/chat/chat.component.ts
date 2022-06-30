@@ -29,7 +29,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     private _signalRService: SignalrService,
     private chatRecruitmentService: ChatRecruitmentService,
     private userService: UserService,
-    public datepipe: DatePipe,
     private sharedService : SharedService,
     private _ngZone: NgZone
   ) {}
@@ -196,6 +195,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.displayMessages = this.messages.filter(x => 
       (x.type === 'sent' && x.idReceiver === this.chatUser.id && x.idSender === this.dataJson.data.id) 
    || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver ===this.dataJson.data.id));
+   console.log(this.displayMessages);
   }
 
 

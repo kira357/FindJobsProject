@@ -1,111 +1,3 @@
-<!-- <div>
-    <div class="row">
-        <div class="container-xxl">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="float-left">
-                        <i class="fa fa-comments"></i> SignalR Messaging
-                    </h3>
-                </div>
-                <div class="card-body p-0">
-                    <div class="messaging">
-                        <div class="inbox_msg" fxLayout="row" fxLayoutAlign="start end">
-                            <div class="inbox_people" fxLayout="column">
-                                <div class="headind_srch" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="20px">
-                                    <div class="srch_bar" fxLayoutAlign="start strech" fxFlex="100" style="width:100%;">
-                                        <div fxLayout="row" fxLayoutAlign="start center" style="width:100%;">
-                                            <input type="text" class="search-bar" placeholder="Search" style="width:100%;">
-                                            <span class="input-group-addon">
-                                                <button type="button"> <i class="fa fa-search" 
-                                                    aria-hidden="true"></i> </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="recent_heading">
-                                        <h5>Online Users</h5>
-                                    </div>
-                                </div>
-                                <div class="inbox_chat">
-                                    <div class="chat_list active_chat" *ngFor="let user of onlineUser">
-                                        <a href="javascript:void(0)" >
-                                            <div class="chat_people">
-                                                <div class="chat_ib">
-                                                    <h5>
-                                                        <i class="fa fa-comments"></i>
-                                                        {{user.userName}}
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mesgs" fxLayout="column" fxLayoutAlign="start strech">
-                                <div class="text-left">
-                                    <h3><i class="fa fa-comments"></i> {{currentUser.fullName}}</h3>
-                                    <hr />
-                                </div>
-                                <div class="msg_history" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="chatMessages.length>0">
-                                    <div *ngFor="let msg of chatMessages" style="margin-bottom:2px;">
-                                        <div class="incoming_msg" *ngIf="msg.type == 'received'">
-                                            <div class="received_msg">
-                                                <div class="received_withd_msg">
-                                                    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
-                                                        <div class="mb-1">
-                                                            <img class="imgUser" [src]="currentUser.urlAvatar" alt="profile.">
-                                                            <span class="time_date">
-                                                                {{msg.idSender}} | {{msg.timeSend | date :  "shortTime"}}
-                                                            </span>
-                                                        </div>
-                                                        <p>
-                                                            {{msg.messages}}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="outgoing_msg" *ngIf="msg.type == 'sent'">
-                                            <div class="sent_msg">
-                                                <div fxLayout="row" fxLayoutAlign="start end">
-                                                    <p>
-                                                        {{msg.messages}}
-                                                    </p>
-                                                    <img class="imgUser" [src]="currentUser.urlAvatar" alt="profile.">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="msg_history" *ngIf="chatMessages.length===0">
-                                    <p style="font-size:small; color:#dedede; text-align:center">
-                                        No Message Found..
-                                    </p>
-                                </div>
-                                <div class="type_msg mb-2">
-                                        <div class="input_msg_write">
-                                            <div style=" min-width: 0;">
-                                                <input type="text" style="margin-bottom: 0;" 
-                                                class="write_msg"
-                                                [value]="txtMessage"
-                                                (input)="txtMessage=$any($event.target).value" (keydown.enter)="SendMessage()"
-                                                       placeholder="Type a message" onfocus="this.placeholder=''"
-                                                    onblur="this.placeholder='Type a message'"
-                                                       />
-                                            </div>
-                                            <button class="msg_send_btn" type="submit" (click)="SendMessage();">
-                                                <i class="fa fa-paper-plane-o"></i>
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <app-header></app-header>
 <div class="container-fluid">
@@ -117,7 +9,7 @@
                         <li class="">
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                    <img [src]="currentUser?.urlAvatar ? currentUser?.urlAvatar : 'https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg' " class="rounded-circle user_img">
                                     <span class="online_icon"></span>
                                 </div>
                                 <div class="user_info">
@@ -150,7 +42,7 @@
                                     <span class="online_icon" [class.offline]="!item.isOnline"></span>
                                 </div>
                                 <div class="user_info">
-                                    <span>{{item.firstName}} {{item.lastName}}</span>
+                                    <span>{{item.userName}}</span>
                                 </div>
                             </div>
                         </li>
@@ -162,7 +54,6 @@
             <div class="card">
                 <div class="card-header msg_head ">
                     <div class="d-flex bd-highlight">
-                       
                         <div class="img_cont">
                             <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
                             <span class="online_icon"></span>
@@ -170,38 +61,31 @@
                         <div class="user_info">
                             <span>{{chatUser?.fullName}}</span>
                         </div>
-                        <div class="col"></div>
-                        <div class="col-xs-1 icons">                        
-                            <img src="../assets/kindpng_404965.png" class="rounded-circle user_img">                          
-                        </div>                       
-                        <div class="col-xs-1 icons">
-                        <!-- <button (click)="Call()">
-                            <img src="../assets/voice-call.png" class="rounded-circle user_img">
-                        </button> -->
-                        </div>
+                        <div class="col"></div>               
                     </div>
                 </div>
                 <div class="card-body msg_card_body" >
-                    <div *ngFor="let m of displayMessages">
+                    <div *ngFor="let m of displayMessages" >
                         <div class="messageItem">
                             <div class="d-flex justify-content-start mb-4" *ngIf="m.type==='recieved' ">
                                 <div class="img_cont_msg">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                    <img [src]="m.urlAvatar"class="rounded-circle user_img_msg" loading="lazy">
+                                    <span>{{chatUser?.fullName}}</span>
                                 </div>
-                                <div class="msg_cotainer" >
-                                    {{m.content}}
-                                    <span class="msg_time"> {{m.messageDate+ 'Z' | date : 'h:mm a'}} </span>
+                                <div class="msg_cotainer">
+                                    {{m.messages}}
+                                    <span class="msg_time"> {{m.timeSend | date : 'h:mm a'}} </span>
                                 </div>
                             </div>
                         </div>
                         <div class="messageItem">
                             <div class="d-flex justify-content-end mb-4" *ngIf="m.type==='sent' ">
-                                <div   >
-                                    {{m.content}}
-                                    <span class="msg_time_send">{{m.messageDate+ 'Z' | date : 'h:mm a'}}</span>
+                                <div class="msg_cotainer_send"  >
+                                    {{m.messages}}
+                                    <span class="msg_time_send">{{m.timeSend | date : 'h:mm a'}}</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                    <img [src]="m.urlAvatar" class="rounded-circle user_img_msg">
                                 </div>
                             </div>
                         </div>
