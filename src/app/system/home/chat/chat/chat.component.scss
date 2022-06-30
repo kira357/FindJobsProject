@@ -5,12 +5,15 @@
 .chat {
   margin-top: auto;
   margin-bottom: auto;
+  padding:0;
 }
 
 .card {
-  height: 500px;
+  height: 60em;
 }
-
+.icons{
+  padding:0 5px;
+}
 .contacts_body {
   padding: 0.75rem 0 !important;
   overflow-y: auto;
@@ -37,6 +40,7 @@
 
 .search {
   border-radius: 15px 0 0 15px !important;
+
 }
 
 .search:focus {
@@ -60,7 +64,6 @@
   border: 0 !important;
   color: white !important;
   cursor: pointer;
-  height: 100%;
 }
 
 .send_btn {
@@ -69,7 +72,6 @@
   border: 0 !important;
   color: white !important;
   cursor: pointer;
-  height: 100%;
 }
 
 .search_btn {
@@ -78,7 +80,6 @@
   border: 0 !important;
   color: white !important;
   cursor: pointer;
-  height: 100%;
 }
 
 .contacts {
@@ -101,15 +102,17 @@
 }
 
 .user_img {
-  height: 46px;
-  width: 46px;
+  height: 48px;
+  width: 48px;
   border: 1.5px solid #f9f9f9;
+
 }
 
 .user_img_msg {
   height: 40px;
   width: 40px;
   border: 1.5px solid #f9f9f9;
+
 }
 
 .img_cont {
@@ -168,8 +171,9 @@
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10px;
-  border-radius: 25px;
-  background-color: #c2f4ff;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color:white;
   padding: 10px;
   position: relative;
 }
@@ -178,8 +182,9 @@
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
-  border-radius: 25px;
-  background-color: #d0fad9;
+  border-radius: 10px;
+  background-color:rgba(0, 0, 0, 0.3);
+  color:white;
   padding: 10px;
   position: relative;
 }
@@ -205,7 +210,7 @@
 
 .msg_head {
   position: relative;
-  background-color: #f0f4f8;
+  /* background-color: #f0f4f8; */
 }
 
 #action_menu_btn {
@@ -243,6 +248,7 @@
 
 .action_menu ul li i {
   padding-right: 10px;
+
 }
 
 .action_menu ul li:hover {
@@ -251,13 +257,13 @@
 }
 
 .contacts_card {
-  background-color: #f0f4f8;
+  /* background-color: #f0f4f8; */
   color: #333;
 }
 
-@media (max-width: 576px) {
+@media(max-width: 576px) {
   .contacts_card {
-    margin-bottom: 15px !important;
+      margin-bottom: 15px !important;
   }
 }
 
@@ -265,6 +271,7 @@
   position: absolute;
   right: 20px;
   top: 25px;
+
 }
 
 .dropdownIcon i {
@@ -326,6 +333,31 @@
   top: 15px;
   max-width: 200px;
 }
-.mouseCursor {
+.mouseCursor{
   cursor: pointer;
+}
+.dark{
+  background-color: rgba(0,0,0,0.9);
+  color:gray;
+
+}
+.darkbody{
+  background-color: rgba(0,0,0);
+  color:gray;
+}
+:host ::ng-deep button {
+  margin-right: .5em;
+}
+.emojiContent{
+  font-size:5em;
+  background-color: transparent !important;
+}
+.emoji{
+  position:relative;
+  top: 8px;
+  right: 100px;
+  font-size:20px;
+  height:45px;
+  width:45px;
+  border-radius: 10px;
 }

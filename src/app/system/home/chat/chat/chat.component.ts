@@ -1,3 +1,4 @@
+import { OnDestroy } from '@angular/core';
 import { VMCreateChatRecruitment } from './../../../../core/model/chat/model/chat-recruitment';
 import { ChatRecruitment } from '../../../../core/model/chat/model/chat-recruitment';
 import { Component, NgZone, OnInit } from '@angular/core';
@@ -13,21 +14,32 @@ import { UserService } from 'src/app/core/model/user/User.service';
 import { PagingParams } from 'src/app/core/model/paging-params';
 import { environment } from 'src/environments/environment';
 import { Guid } from 'guid-typescript';
+import { DatePipe } from '@angular/common';
+import { SharedService } from 'src/app/core/model/chat/shared.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private apiAuthenService: ApiAuthenService,
     private _signalRService: SignalrService,
     private chatRecruitmentService: ChatRecruitmentService,
     private userService: UserService,
+    public datepipe: DatePipe,
+    private sharedService : SharedService,
     private _ngZone: NgZone
   ) {}
+  ngOnDestroy(): void {
+    this.hubConnection.invoke("RemoveOnlineUser", this.dataJson.data.id)
+      .then(() => {
+        this.messages.push('User Disconnected Successfully')
+      })
+      .catch(err => console.error(err));
+  }
   currentUser: VMGetCurrentUser = {
     id: '',
     fullName: '',
@@ -43,13 +55,12 @@ export class ChatComponent implements OnInit {
     email: '',
   };
 
-  hubConnection: HubConnection;
-
+  hubConnection!: HubConnection;
   users: any;
   chatUser: any;
   messages: any[] = [];
   displayMessages: any[] = [];
-  message: string;
+  message!: string;
   connectedUsers: any[] = [];
   pagingParams: PagingParams = new PagingParams();
   ngOnInit() {
@@ -73,7 +84,6 @@ export class ChatComponent implements OnInit {
       .getUserReceivedMessages(dataJson.data.id)
       .subscribe((item: any) => {
         if (item) {
-          console.log(item);
           this.messages = item;
           this.messages.forEach((x: any) => {
             x.type = x.idReceiver === dataJson.data.id ? 'recieved' : 'sent';
@@ -87,7 +97,7 @@ export class ChatComponent implements OnInit {
     this.userService.RequestGetAllListWithNoRole(this.pagingParams).subscribe(
       (user: any) => {
         if (user) {
-          this.users = user.data.filter((x: any) => x.id !== dataJson.data.id);
+          this.users = user.data.filter((x: any) => x.userName !== dataJson.data.name);
           this.users.forEach((item: any) => {
             item['isActive'] = false;
           });
@@ -112,7 +122,8 @@ export class ChatComponent implements OnInit {
           .invoke(
             'PublishUserOnConnect',
             dataJson.data.id,
-            dataJson.data.userName
+            dataJson.data.userName,
+            dataJson.data.name,
           )
           .then(() => console.log('User Sent Successfully'))
           .catch((err) => console.error(err));
@@ -133,24 +144,20 @@ export class ChatComponent implements OnInit {
 
     // this.hubConnection.on("UserConnected", (connectionId) => this.UserConnectionID = connectionId);
 
-
     this.hubConnection.on('ReceiveDM', (connectionId, message) => {
-      console.log("123 ReceiveDM",message);
       message.type = 'recieved';
       this.messages.push(message);
       let curentUser = this.users.find((x: any) => x.id === message.idSender);
       this.chatUser = curentUser;
-      this.users.forEach((item: any) => {
+      this.users.forEach((item: { [x: string]: boolean; }) => {
         item['isActive'] = false;
       });
-      var user = this.users.find((x: any) => x.id == this.chatUser.id);
+      var user = this.users.find((x: { id: any; }) => x.id == this.chatUser.id);
       user['isActive'] = true;
-      this.displayMessages = this.messages.filter(
-        (x) =>
-          (x.type === 'sent' && x.idReceiver === this.chatUser.id) ||
-          (x.type === 'recieved' && x.idSender === this.chatUser.id)
-      );
-    });
+      this.displayMessages = this.messages.filter(x => 
+        (x.type === 'sent' && x.idReceiver === this.chatUser.id && x.idSender === dataJson.data.id) 
+        || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver === dataJson.data.id));
+    })
   }
 
   SendDirectMessage() {
@@ -168,10 +175,9 @@ export class ChatComponent implements OnInit {
       this.messages.push(msg);
       let messString = JSON.stringify(msg);
       this.displayMessages = this.messages.filter(
-        (x) =>
-          (x.type === 'sent' && x.idReceiver === this.chatUser.id) ||
-          (x.type === 'recieved' && x.idSender === this.chatUser.id)
-      );
+        x => 
+        (x.type === 'sent' && x.idReceiver === this.chatUser.id && x.idSender === dataJson.data.id) 
+      || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver === dataJson.data.id));
 
       this.hubConnection
         .invoke('SendMessageToUser', messString)
@@ -181,23 +187,26 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  openChat(user: any) {
-    this.users.forEach((item:any) => {
+  openChat(user: { [x: string]: boolean; }) {
+    this.users.forEach((item: { [x: string]: boolean; }) => {
       item['isActive'] = false;
     });
     user['isActive'] = true;
     this.chatUser = user;
-    this.displayMessages = this.messages.filter(x => (x.type === 'sent' && x.idReceiver === this.chatUser.id) || (x.type === 'recieved' && x.idSender === this.chatUser.id));;
+    this.displayMessages = this.messages.filter(x => 
+      (x.type === 'sent' && x.idReceiver === this.chatUser.id && x.idSender === this.dataJson.data.id) 
+   || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver ===this.dataJson.data.id));
   }
+
 
   makeItOnline() {
     if (this.connectedUsers && this.users) {
-      this.connectedUsers.forEach((item) => {
-        var u = this.users.find((x: any) => x.fullName == item.fullName);
+      this.connectedUsers.forEach(item => {
+        var u = this.users.find((x: { userName: any; }) => x.userName == item.username);
         if (u) {
           u.isOnline = true;
         }
-      });
+      })
     }
   }
 }
