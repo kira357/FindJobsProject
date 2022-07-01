@@ -7,6 +7,7 @@ import { UserService } from 'src/app/core/model/user/User.service';
 import { ApiAuthenService } from 'src/app/services/api-authen.service';
 import { VMGetJobDto } from 'src/app/core/model/jobs/model/Jobs';
 import { PagingParams } from 'src/app/core/model/paging-params';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-information',
@@ -20,7 +21,31 @@ export class InformationComponent implements OnInit {
     private apiAuthenService: ApiAuthenService,
     private userService: UserService,
     private jobsService: JobsService,
-  ) {}
+  ) {
+    this.onSearch = new Subject();
+    this.onSearch.pipe(debounceTime(100)).subscribe((str) => {
+      console.log('onSearch', str);
+      let comboxfilter = this.comboxMajor.filter(
+        (x) => x.name.indexOf(str) > -1
+      );
+      console.log('comboxfilter', comboxfilter);
+      str ? (this.comboxMajor = comboxfilter) : this.getComboxMajor();
+    });
+
+  }
+  private _search: string;
+  set search(value: string) {
+    if (this._search != value) {
+      this._search = value;
+      if (this.onSearch) {
+        this.onSearch.next(value);
+      }
+    }
+  }
+  get search() {
+    return this._search;
+  }
+  onSearch: Subject<string>;
   defaultImageSrc = '/assets/image/default-image.png';
   updateUser = this.formBuilder.group({
     firstname: ['', Validators.required],
@@ -61,6 +86,7 @@ export class InformationComponent implements OnInit {
     address: '',
     email: '',
   };
+  comboxMajor: any[] = [];
   _PagingParams = new PagingParams();
   _LIST_DATA: VMGetJobDto[] = [];
   getCurrentUser() {
@@ -106,6 +132,7 @@ export class InformationComponent implements OnInit {
     this.formData.append('imageFile', this.files[0]);
     this.formData.append('firstName', this.updateUser.value.firstname);
     this.formData.append('lastName', this.updateUser.value.lastname);
+    this.formData.append('idMajor', this.updateUser.value.idMajor);
     this.formData.append('phoneNumber', this.updateUser.value.phonenumber);
     this.formData.append('address', this.updateUser.value.address);
     this.formData.append('experience', this.updateUser.value.experience);
@@ -120,6 +147,14 @@ export class InformationComponent implements OnInit {
         }
         );
         this.getCurrentUser();
+      });
+  }
+  getComboxMajor() {
+    this.majorService
+      .RequestGetListMajor(this._PagingParams)
+      .subscribe((data: any) => {
+        console.log('getlist major', data);
+        this.comboxMajor = data.data;
       });
   }
 }

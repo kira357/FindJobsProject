@@ -1,3 +1,4 @@
+import { RecruitmentComponent } from './system/home/recruitment/recruitment.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -70,6 +71,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./system/home/blog/detail-blog/detail-blog.module').then(
         (m) => m.DetailBlogModule
+      ),
+  },
+  {
+    path: 'show-detail-company/:id',
+    loadChildren: () =>
+      import('./system/home/recruitment/detail-recruitment/detail-recruitment.module').then(
+        (m) => m.DetailRecruitmentModule
       ),
   },
 

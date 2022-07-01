@@ -148,6 +148,38 @@
 
                             <div fxLayout="row">
                               <mat-form-field
+                              fxFlex="100"
+                              appearance="outline"
+                              floatLabel="always"
+                              style="width: 100%"
+                            >
+                              <mat-label> Major </mat-label>
+                              <mat-select
+                                formControlName="idMajor"
+                                [(ngModel)]="currentUser.idMajor"
+                              >
+                                <mat-option>
+                                  <ngx-mat-select-search
+                                    name="idMajor"
+                                    [(ngModel)]="search"
+                                    formControlName="search"
+                                    [placeholderLabel]="'Search'"
+                                    [noEntriesFoundLabel]="'NotFound'"
+                                  >
+                                    <mat-icon ngxMatSelectSearchClear>x</mat-icon>
+                                  </ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option
+                                  *ngFor="let item of comboxMajor"
+                                  [value]="item.idMajor"
+                                >
+                                  {{ item.name }}</mat-option
+                                >
+                              </mat-select>
+                            </mat-form-field>
+                            </div>
+                            <div fxLayout="row">
+                              <mat-form-field
                                 style="margin-left: 5px"
                                 fxFlex="33,33%"
                                 appearance="outline"

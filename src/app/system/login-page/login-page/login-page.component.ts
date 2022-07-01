@@ -62,6 +62,10 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate(['']);
             this._toastrService.success('Login Success', 'Success');
           }
+          else if (this.dataRespone.data.roleName === 'Student') {
+            this.router.navigate(['']);
+            this._toastrService.success('Login Success', 'Success');
+          }
         } else {
           this._toastrService.error(
             'Email or Password is incorrect',

@@ -86,6 +86,8 @@ export class DetailJobBodyComponent implements OnInit {
           console.log('getListData', data);
           data.data.dateExpire = moment().format('DD/MM/YYYY');
           this._LIST_DATA = [...data.data];
+          this._LIST_DATA = this._LIST_DATA.slice(0, 5);
+          this.shuffle(this._LIST_DATA);
           this._PagingParams.totalRows = data.totalCount;
         });
       this.candidateService
@@ -203,5 +205,23 @@ export class DetailJobBodyComponent implements OnInit {
           { icon: faUserGroup, name: this._DATA_FORMAT.amount }
         );
       });
+  }
+
+   shuffle(array :any[]) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
   }
 }

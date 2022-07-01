@@ -193,7 +193,7 @@
   grid-row-end: span 2;
   .jd-page__employer-overview-inner {
     position: sticky;
-    top: 0;  
+    top: 0;
     max-width: 400px;
     width: 370px;
     .employer-long-overview {
@@ -253,7 +253,7 @@
               flex-shrink: 0;
             }
           }
-          .svg-icon__text{
+          .svg-icon__text {
             margin-left: 10px;
           }
         }
@@ -299,4 +299,12 @@
       }
     }
   }
+}
+.new-job {
+  background-color: #009aee;
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 19.5px;
+  padding: 2px 10px;
+  text-align: center;
 }

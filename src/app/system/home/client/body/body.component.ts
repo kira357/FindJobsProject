@@ -1,4 +1,4 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
@@ -8,6 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject, debounceTime } from 'rxjs';
 import { MajorService } from 'src/app/core/model/major/major.service';
 import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
+import { ApiAuthenService } from 'src/app/services/api-authen.service';
+import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
 
 @Component({
   selector: 'app-body',
@@ -17,12 +19,15 @@ import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitmen
 export class BodyComponent implements OnInit {
   comboxMajor: any[] = [];
   onSearch: Subject<string>;
+
+  data = localStorage.getItem('data');
   constructor(
     private jobsService: JobsService,
     private formBuilder: FormBuilder,
     private router: Router,
     private SpinnerService: NgxSpinnerService,
     private majorService: MajorService,
+    private apiAuthenService: ApiAuthenService,
     private recruitmentService: RecruitmentService
   ) {
     this.onSearch = new Subject();
@@ -37,7 +42,20 @@ export class BodyComponent implements OnInit {
   _LIST_DATA: any = [];
   Amount: number;
   @Output() onClickPageChange = new EventEmitter<any>();
-
+  currentUser: VMGetCurrentUser = {
+    id: '',
+    fullName: '',
+    firstName: '',
+    lastName: '',
+    roleName: '',
+    experience: '',
+    nameMajor: '',
+    idMajor: 0,
+    urlAvatar: '',
+    phoneNumber: '',
+    address: '',
+    email: '',
+  };
   fakeBlog: any = [
     {
       idBlog: 1,
@@ -74,8 +92,10 @@ export class BodyComponent implements OnInit {
   ];
   newArray: any = [];
   searchJob = this.formBuilder.group({
-    idMajor: [''],
-    search: '',
+    idMajor: 0,
+    keySearch: '',
+    from: 0,
+    to: 0,
   });
 
   private _search: string;
@@ -96,10 +116,12 @@ export class BodyComponent implements OnInit {
     this.getListData();
     this.getAllCompany();
     this.getComboxMajor();
+    // if(this.data != null){
+    //   this.getCurrentUser();
+    // }
   }
 
   getListData() {
-    // this.SpinnerService.show();
     this.jobsService
       .RequestGetListJobActive(this._PagingParams)
       .subscribe((data: any) => {
@@ -107,11 +129,9 @@ export class BodyComponent implements OnInit {
         data.data.dateExpire = moment().format('DD/MM/YYYY');
         this._LIST_DATA = [...data.data];
         this.Amount = data.totalCount;
-        this._PagingParams.totalRows = data.totalCount;
-        setTimeout(() => {
-          /** spinner ends after 1 seconds */
-          this.SpinnerService.hide();
-        }, 1000);
+        this._LIST_DATA = this._LIST_DATA.slice(0, 5);
+        this.Amount = 5;
+        this._PagingParams.totalRows = 5;
       });
   }
   onpageChange(evt: any) {
@@ -133,7 +153,7 @@ export class BodyComponent implements OnInit {
         this.comboxMajor = data.data;
       });
   }
-  listCompany : any[]= [];
+  listCompany: any[] = [];
   getAllCompany() {
     this.recruitmentService
       .RequestGetListCompany(this._PagingParams)
@@ -141,5 +161,35 @@ export class BodyComponent implements OnInit {
         this.listCompany = data.data;
       });
   }
+  getCurrentUser() {
+    const dataJson = JSON.parse(this.data || '');
+    this.apiAuthenService
+      .RequestGetCurrentUser(dataJson.data.id)
+      .subscribe((data: any) => {
+        this.currentUser = data[0];
+        this.jobsService
+          .RequestGetJobFilterByMajor(
+            this._PagingParams,
+            this.currentUser.idMajor,
+            this.currentUser.experience
+          )
+          .subscribe((job: any) => {
+            console.log('job', job);
+            this._LIST_DATA = job.data;
+          });
+      });
+  }
   select() {}
+  newDataSearch: any[] = [];
+  searchJobByKeyWord() {
+    this.jobsService
+      .RequestGetJobFilter(this._PagingParams, this.searchJob.value)
+      .subscribe((data: any) => {
+        this.newDataSearch = [...data.data];
+        this._LIST_DATA = [...this.newDataSearch];
+        this.Amount = data.totalCount;
+        this._PagingParams.totalRows = data.totalCount;
+        this.searchJob.value.idMajor = 0;
+      });
+  }
 }

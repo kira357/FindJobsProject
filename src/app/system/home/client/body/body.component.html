@@ -14,6 +14,7 @@
                 class="search-form__keyword-input"
                 type="email"
                 placeholder="Keyword skill (Java, iOS...), Job Title, Company..."
+                formControlName="keySearch"
               />
             </div>
           </div>
@@ -50,7 +51,7 @@
             <button
               class="search-form__action rounded"
               type="submit"
-              [disabled]="!searchJob.valid"
+              (click)="searchJobByKeyWord()"
             >
               Search
             </button>
@@ -64,8 +65,11 @@
 <!--main page-->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<div style="background-color: #e9e9e9;">
-  <section class="section-content padding-y bg-gray p-1"  style="background-color: #e9e9e9;">
+<div style="background-color: #e9e9e9">
+  <section
+    class="section-content padding-y bg-gray p-1"
+    style="background-color: #e9e9e9"
+  >
     <div
       class="container container-xxl bg-white pt-2"
       fxLayout="row"
@@ -82,18 +86,8 @@
             </div>
           </header>
           <!-- sect-heading -->
-  
-          <div
-            *ngFor="
-              let item of _LIST_DATA
-                | paginate
-                  : {
-                      itemsPerPage: 4,
-                      currentPage: _PagingParams.currentPage,
-                      totalItems: _PagingParams.totalRows
-                    }
-            "
-          >
+
+          <div *ngFor="let item of _LIST_DATA">
             <article
               class="mb-2 card active-border"
               tabindex="1"
@@ -101,7 +95,11 @@
               (click)="onClickQuickDetail(item.idJob)"
             >
               <div fxLayout="row">
-                <div fxFlex="20" fxLayoutAlign="center top" style="padding: 0px">
+                <div
+                  fxFlex="20"
+                  fxLayoutAlign="center top"
+                  style="padding: 0px"
+                >
                   <img
                     style="
                       object-fit: cover;
@@ -120,7 +118,7 @@
                       <a
                         [routerLink]="['/detail-job', item.idJob]"
                         [queryParams]="{ debug: true }"
-                        class="h5 title"
+                        class="h5 title-label"
                         style="text-decoration: none"
                       >
                         {{ item.name }}
@@ -177,22 +175,10 @@
                   <!-- info-main.// -->
                 </div>
               </div>
-              <!-- <div style="width: 100%; text-align: right; padding-right: 10px">
-                <a
-                  [routerLink]="['/home/quick-detail', item.idJob]"
-                  [queryParams]="{ debug: true }"
-                  class="btn btn-primary mt-1"
-                  style="width: 200px"
-                >
-                  Quick detail
-                </a>
-              </div> -->
+
             </article>
             <!-- card-product .// -->
           </div>
-          <pagination-controls
-            (pageChange)="onpageChange($event)"
-          ></pagination-controls>
         </div>
       </main>
       <main class="col-md-9" fxFlex="50">
@@ -204,25 +190,31 @@
           </div>
         </header>
         <!-- sect-heading -->
-  
+
         <div class="content-container">
           <router-outlet></router-outlet>
         </div>
-  
+
         <nav aria-label="Page navigation sample"></nav>
       </main>
     </div>
   </section>
-  <section class="top-companies "  style="background-color: #e9e9e9;">
-    <div class=" container-xxl ">
+  <section class="top-companies" style="background-color: #e9e9e9">
+    <div class="container-xxl">
       <div class="title">Recruitment Company</div>
       <div class="row">
         <div *ngFor="let item of listCompany" class="col-xs-12 col-md-3 mt-4">
-          <a class="top-company active-border">
+          <a
+            class="top-company active-border"
+            [routerLink]="['/show-detail-company', item.idRecruitment]"
+            [queryParams]="{ debug: true }"
+          >
             <div class="top-company__logo text-center">
               <img src="{{ item.urlLogo }}" alt="logo" class="lazyloaded" />
             </div>
-            <div class="top-company__name text-center">{{ item.nameCompany }}</div>
+            <div class="top-company__name text-center">
+              {{ item.nameCompany }}
+            </div>
             <footer class="top-company__footer text-center">
               <span class="top-company__footer-jobs">
                 <span class="red link">{{ item.countJob }} jobs</span>
@@ -234,11 +226,14 @@
       </div>
     </div>
   </section>
-  
-  <section class="blog-list " style="background-color: #e9e9e9;"
+
+  <section
+    class="blog-list"
+    style="background-color: #e9e9e9"
     fxLayout="column"
-    fxLayoutAlign="start">
-    <div class=" container-xxl ">
+    fxLayoutAlign="start"
+  >
+    <div class="container-xxl">
       <div class="blog-list__header">
         <h3 class="blog-list__title text-center">New Posts</h3>
         <div class="blog-list__cta">
@@ -253,17 +248,27 @@
       </div>
       <div class="blog-list__content mt-3">
         <!-- loop -->
-        <div class="blog" fxLayout="row" fxFlex="50" *ngFor="let item of newArray">
-          <a href="#" class="blog__image-link text-center"fxFlex="50">
-            <img src="{{item.logo}}" alt="image-blog" class="lazyloaded" />
+        <div
+          class="blog"
+          fxLayout="row"
+          fxFlex="50"
+          *ngFor="let item of newArray"
+        >
+          <a href="#" class="blog__image-link text-center" fxFlex="50">
+            <img src="{{ item.logo }}" alt="image-blog" class="lazyloaded" />
           </a>
-          <div class="blog__description " fxLayout="column" fxLayoutAlign="space-between start" fxFlex="50">
-            <div >
+          <div
+            class="blog__description"
+            fxLayout="column"
+            fxLayoutAlign="space-between start"
+            fxFlex="50"
+          >
+            <div>
               <h4 class="blog__description-title config-word">
-                <a href="#">{{item.title}}</a>
+                <a href="#">{{ item.title }}</a>
               </h4>
               <div class="blog__description-content config-word">
-               {{item.content}}
+                {{ item.content }}
               </div>
             </div>
             <div class="blog__read-more">

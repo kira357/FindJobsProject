@@ -74,7 +74,7 @@ export class ApplyJobPopupComponent implements OnInit {
   }
 
   onClose(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close();
   }
   file: any;
   filename: string;
