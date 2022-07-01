@@ -205,36 +205,40 @@ export class ResumeComponent implements OnInit, AfterViewInit {
       logging: false,
     }).then((canvas) => {
       let pdf = new jsPDF('l', 'mm', 'a4');
-      const width = pdf.internal.pageSize.getWidth();
+      // const width = pdf.internal.pageSize.getWidth();
       let imgWidth = 300
       let pageHeight = pdf.internal.pageSize.height;
       let imgHeight = (canvas.height * imgWidth) / canvas.width;
       let heightLeft = imgHeight;
       let position = 0;
+      
+      var doc = new jsPDF("p", "mm", "A4");
 
-      pdf.addImage(
+      var width = doc.internal.pageSize.getWidth();
+      var height = doc.internal.pageSize.getHeight();
+      doc.addImage(
         canvas.toDataURL('image/jpeg'),
         'JPEG',
         0,
         0,
-        imgWidth,
-        imgHeight
+        width,
+        height
       );
-      heightLeft -= pageHeight;
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(
-          canvas.toDataURL('image/jpeg'),
-          'JPEG',
-          0,
-          position,
-          imgWidth,
-          imgHeight
-        );
-        heightLeft -= pageHeight;
-      }
-      pdf.save(filename);
+      // heightLeft -= pageHeight;
+      // while (heightLeft >= 0) {
+      //   position = heightLeft - imgHeight;
+      //   pdf.addPage();
+      //   pdf.addImage(
+      //     canvas.toDataURL('image/jpeg'),
+      //     'JPEG',
+      //     0,
+      //     position,
+      //     imgWidth,
+      //     imgHeight
+      //   );
+      //   heightLeft -= pageHeight;
+      // }
+      doc.save(filename);
       // window.open(pdf.output('bloburl'));
       // paperSide!.removeAttribute('style');
       // document.getElementById('paper')!.removeAttribute('style');

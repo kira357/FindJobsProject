@@ -3,56 +3,6 @@
   max-width: 1350px;
 }
 
-#ContentsLayout-Blog {
-  width: 1140px;
-  min-height: 400px;
-  margin: 20px auto 0 auto;
-}
-
-#Content-Blog-Menu {
-  max-width: 437px;
-  max-height: 350px;
-  height: auto;
-  background-color: white;
-  position: sticky;
-  top: 0;
-  .popular-posts {
-    background-color: #ffffff;
-    box-shadow: #000000 0px 0px 6px 0px;
-    color: #221f20;
-    letter-spacing: 0.3px;
-    line-height: 28.8px;
-    margin: 0px 0px 30px;
-    padding: 30px;
-    .title-popular-post {
-      color: #ea1e30;
-      font-family: "Roboto", Condensed;
-      font-size: 24px;
-      letter-spacing: 0.6px;
-      line-height: 38.4px;
-    }
-  }
-  .wwp-list {
-    color: #221f20;
-    display: inline;
-    font-family: Roboto;
-    letter-spacing: 0.3px;
-    line-height: 28.8px;
-    text-align: left;
-    li {
-      display: list-item;
-      margin: 0px 0px 16px;
-      text-align: left;
-    }
-  }
-}
-
-#Content-Blog {
-  width: 750px;
-  min-height: 400px;
-  float: left;
-  background-color: white;
-}
 
 .card-header img {
   width: 100%;
@@ -145,9 +95,7 @@
 .tag-purple {
   background-color: #5e76bf;
 }
-.tag-pink {
-  background-color: #cd5b9f;
-}
+
 .disable {
   pointer-events: none;
   background-color: transparent;
