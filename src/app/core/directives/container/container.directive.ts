@@ -17,7 +17,7 @@ export class ContainerDirective {
   ) {
     this.configService.config$
       .pipe(
-        map((config) => config.boxed),
+        map((config) => config?.boxed),
         distinctUntilChanged(),
         untilDestroyed(this)
       )

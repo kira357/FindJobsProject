@@ -14,7 +14,7 @@ import { PagingParams } from '../paging-params';
   providedIn: 'root',
 })
 export class BlogService {
-  readonly rootURL = `${environment.apis.default.url}/api/Blog`;
+  readonly rootURL = `${environment.url}/api/Blog`;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

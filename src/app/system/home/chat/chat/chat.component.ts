@@ -110,7 +110,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.message = '';
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(`${environment.apis.default.url}/${HubName.Chatting}`)
+      .withUrl(`${environment.url}/${HubName.Chatting}`)
       .withAutomaticReconnect()
       .build();
     const self = this;

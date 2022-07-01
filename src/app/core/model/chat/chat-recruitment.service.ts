@@ -10,7 +10,7 @@ import { MessageDto } from './model/messageDto';
   providedIn: 'root',
 })
 export class ChatRecruitmentService {
-  readonly rootURL = `${environment.apis.default.url}/api/Message`;
+  readonly rootURL = `${environment.url}/api/Message`;
   private receivedMessageObject: MessageDto = new MessageDto();
   private sharedObj = new Subject<MessageDto>();
 

@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class MajorService {
-  readonly rootURL = `${environment.apis.default.url}/api/Major`;
+  readonly rootURL = `${environment.url}/api/Major`;
 
   pagingParams: PagingParams = new PagingParams();
   constructor(private http: HttpClient, private cookieService: CookieService) {}

@@ -10,7 +10,7 @@ import { VMDeleteJobDto, VMJobDto, VMUpdateJobDto } from './model/Jobs';
   providedIn: 'root',
 })
 export class JobsService {
-  readonly rootURL = `${environment.apis.default.url}/api/Job`;
+  readonly rootURL = `${environment.url}/api/Job`;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
@@ -36,25 +36,29 @@ export class JobsService {
       },
     });
   };
-  RequestGetJobFilterByMajor = (pagingParams: PagingParams, IdMajor: any , Experience : any) => {
+  RequestGetJobFilterByMajor = (
+    pagingParams: PagingParams,
+    IdMajor: any,
+    Experience: any
+  ) => {
     return this.http.get(`${this.rootURL}/get-job-filter-major`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,
         PageSize: pagingParams.pageSize,
-        Experience : Experience,
-        IdMajor : IdMajor
+        Experience: Experience,
+        IdMajor: IdMajor,
       },
     });
   };
-  RequestGetJobFilter = (pagingParams: PagingParams, filter:any) => {
+  RequestGetJobFilter = (pagingParams: PagingParams, filter: any) => {
     return this.http.get(`${this.rootURL}/getlist-job-filter`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,
         PageSize: pagingParams.pageSize,
-        KeySearch : filter.keySearch,
-        IdMajor : filter.idMajor,
+        KeySearch: filter.keySearch,
+        IdMajor: filter.idMajor,
       },
     });
   };

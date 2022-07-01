@@ -9,7 +9,7 @@ import { PagingParams } from '../paging-params';
   providedIn: 'root',
 })
 export class CandidateService {
-  readonly rootURL = `${environment.apis.default.url}/api/CandidateJob`;
+  readonly rootURL = `${environment.url}/api/CandidateJob`;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

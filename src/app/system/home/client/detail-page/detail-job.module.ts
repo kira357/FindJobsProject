@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailJobComponent } from './detail-job.component';
 import { HeaderModule } from '../header/header.module';
-import { DetailJobHeaderModule } from './detail-job-header/detail-job-header.module';
 import { DetailJobBodyModule } from './detail-job-body/detail-job-body.module';
 import { DetailJobRoutingModule } from './detail-job-routing.module';
 
@@ -19,7 +18,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     DetailJobRoutingModule,
-    DetailJobHeaderModule,
     DetailJobBodyModule,
     HeaderModule,
     FooterModule,

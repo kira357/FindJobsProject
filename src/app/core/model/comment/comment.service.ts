@@ -9,7 +9,7 @@ import { PagingParams } from '../paging-params';
   providedIn: 'root',
 })
 export class CommentService {
-  readonly rootURL = `${environment.apis.default.url}/api/Comment`;
+  readonly rootURL = `${environment.url}/api/Comment`;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 

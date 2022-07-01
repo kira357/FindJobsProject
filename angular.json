@@ -24,17 +24,21 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/find-jobs-project",
+            "optimization": {
+              "scripts": true,
+              "fonts": { "inline": true },
+              "styles": { "minify": true, "inlineCritical": false }
+            },
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets","src/_redirects"],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./node_modules/quill-emoji/dist/quill-emoji.css",
               "src/styles.scss",
-              "src/css/vendor/parsley/parsley.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/ngx-toastr/toastr.css",
@@ -44,7 +48,6 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.js",
-              "src/js/vendor/jquery/jquery.js",
               "src/js/vendor/foundation/what-input.js",
               "src/js/vendor/foundation/foundation.min.js",
               "src/js/vendor/parsley/parsley.min.js",
@@ -65,8 +68,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
                 }
               ],
               "fileReplacements": [

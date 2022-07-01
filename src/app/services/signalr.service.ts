@@ -24,7 +24,7 @@ export class SignalrService {
   }
   private HubConnection = (hubName: string) => {
     return (this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apis.default.url}/${hubName}`, {
+      .withUrl(`${environment.url}/${hubName}`, {
         // headers: {
         //     'Authorization': `Bearer ${token}`,
         //     'Accept-Language': this.sessionState.getLanguage()

@@ -10,7 +10,7 @@ import { PagingParams } from '../paging-params';
   providedIn: 'root',
 })
 export class UserService {
-  readonly rootURL = `${environment.apis.default.url}/api/User`;
+  readonly rootURL = `${environment.url}/api/User`;
 
   pagingParams: PagingParams = new PagingParams();
   constructor(private http: HttpClient, private cookieService: CookieService) {}

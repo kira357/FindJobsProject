@@ -5,7 +5,6 @@ import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
 import { UserService } from 'src/app/core/model/user/User.service';
 import { ApiAuthenService } from 'src/app/services/api-authen.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { WINDOW } from 'src/app/window.providers';
 
 @Component({
   selector: 'app-header',
@@ -23,12 +22,10 @@ export class HeaderComponent implements OnInit {
     public spinnerService: SpinnerService,
     private router: Router,
     private apiAuthenService: ApiAuthenService,
-    @Inject(WINDOW) private window: Window
   ) {}
   HostUrl: string;
   ngOnInit() {
     this.getCurrentUser();
-    this.HostUrl = this.window.location.href + '/resume';
   }
 
   LogOut = () => {

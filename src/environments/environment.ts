@@ -4,12 +4,7 @@
 
 export const environment = {
   production: false,
-  apis: {
-    default: {
-      url: 'http://localhost:5000',
-      rootNamespace: 'FindJobsProject',
-    },
-  },
+  url: 'http://localhost:5000',
 };
 
 /*
