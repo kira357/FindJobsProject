@@ -91,12 +91,16 @@
           <mat-icon mat-list-icon>comment</mat-icon>
           <p mat-line>List comment</p>
         </a>
+        <a mat-list-item [routerLink]="['/recruitment/chat']">
+          <mat-icon mat-list-icon>chat</mat-icon>
+          <p mat-line>Chat</p>
+        </a>
 
         <mat-divider></mat-divider>
 
-        <h3 mat-subheader>Resources</h3>
+        <!-- <h3 mat-subheader>Resources</h3> -->
 
-        <a mat-list-item [routerLink]="['/icons']" routerLinkActive="active">
+        <!-- <a mat-list-item [routerLink]="['/icons']" routerLinkActive="active">
           <mat-icon mat-list-icon> toll </mat-icon>
           <p mat-line>Icons</p>
         </a>
@@ -112,7 +116,7 @@
         >
           <mat-icon mat-list-icon> link </mat-icon>
           <p mat-line>Material Components</p>
-        </a>
+        </a> -->
 
         <a id="push-bottom" mat-list-item [routerLink]="['/recruitment/information']">
           <mat-icon mat-list-icon> info </mat-icon>

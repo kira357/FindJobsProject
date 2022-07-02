@@ -94,6 +94,7 @@ export class BodyComponent implements OnInit {
   searchJob = this.formBuilder.group({
     idMajor: 0,
     keySearch: '',
+    search : '',
     from: 0,
     to: 0,
   });

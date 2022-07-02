@@ -55,7 +55,7 @@ export class QuickDetailComponent implements OnInit {
   isLike: boolean = false;
   getListData() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data || '');
+
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       console.log('params', params);
       this.id = params.get('id');
@@ -64,36 +64,44 @@ export class QuickDetailComponent implements OnInit {
         .subscribe((data: any) => {
           this._ITEM_DATA = data.data[0];
         });
-      this.candidateService
-        .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
-        .subscribe((data: any) => {
-          console.log('check like', data);
-          this.isActive = data.isActive;
-          this.isLike = data.islike;
-        });
+      if(data !== null || data !== undefined){
+        const dataJson = JSON.parse(data);
+        const id = dataJson?.data.id;
+        this.candidateService
+          .RequestCheckIsApplyAndFavourite(id, this.id)
+          .subscribe((data: any) => {
+            this.isActive = data.isActive;
+            this.isLike = data.islike;
+          });
+      }
     });
   }
   onApply() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data || '');
-    this.__dialog
-      .open(ApplyJobPopupComponent, {
-        width: '700px',
-        autoFocus: false,
-        data: {
-          idJob: this._ITEM_DATA.idJob,
-          idRecruitment: this._ITEM_DATA.idRecruitment,
-          idUser: dataJson.data.id,
-          name: this._ITEM_DATA.name,
-        } as any,
-      })
-      .afterClosed()
-      .subscribe((data: any) => {
-        if (data) {
-          console.log('save data successfully', data);
-          this.getListData();
-        }
-      });
+    console.log('data', data);
+    if(data !== null || data !== undefined){
+      const dataJson = JSON.parse(data || '');
+      const id = dataJson?.data.id;
+      this.__dialog
+        .open(ApplyJobPopupComponent, {
+          width: '700px',
+          autoFocus: false,
+          data: {
+            idJob: this._ITEM_DATA.idJob,
+            idRecruitment: this._ITEM_DATA.idRecruitment,
+            idUser: id,
+            name: this._ITEM_DATA.name,
+          } as any,
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data) {
+            console.log('save data successfully', data);
+            this.getListData();
+          }
+        });  
+    }
+    
   }
 
   onFavourite(idJob: any) {

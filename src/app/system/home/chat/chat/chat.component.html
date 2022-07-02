@@ -38,11 +38,16 @@
                         <li style="cursor: pointer;" [class.active]="item.isActive" *ngFor="let item of users" (click)="openChat(item)">
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                                    <img [src]="item.logo" class="rounded-circle user_img">
                                     <span class="online_icon" [class.offline]="!item.isOnline"></span>
                                 </div>
-                                <div class="user_info">
-                                    <span>{{item.userName}}</span>
+                                <div fxLayout="column" style="max-width: 340px; word-break: break-all;" >
+                                    <div class="company_info">
+                                        {{item.nameCompany}}
+                                    </div>
+                                    <div class="user_info">
+                                        <span>{{item.nameRecruitment}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </li>

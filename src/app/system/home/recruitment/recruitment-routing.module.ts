@@ -40,9 +40,7 @@ const routes: Routes = [
       {
         path: 'list-cv',
         loadChildren: () =>
-          import('./list-cv/list-cv.module').then(
-            (m) => m.ListCvModule
-          ),
+          import('./list-cv/list-cv.module').then((m) => m.ListCvModule),
       },
       {
         path: 'list-comment',
@@ -52,11 +50,18 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'chat',
+        loadChildren: () =>
+          import('./recruitment-chat/recruitment-chat.module').then(
+            (m) => m.RecruitmentChatModule
+          ),
+      },
+      {
         path: 'information',
         loadChildren: () =>
-          import('./recruitment-information/recruitment-information.module').then(
-            (m) => m.RecruitmentInformationModule
-          ),
+          import(
+            './recruitment-information/recruitment-information.module'
+          ).then((m) => m.RecruitmentInformationModule),
       },
     ],
   },

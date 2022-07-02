@@ -70,6 +70,7 @@ export class DetailRecruitmentComponent implements OnInit {
         .RequestGetAllJobsInCompany(this._PagingParams, this.id)
         .subscribe((data: any) => {
           this._LIST_DATA = [...data.data]
+          console.log('getListData', this._LIST_DATA);
         });
     });
   }

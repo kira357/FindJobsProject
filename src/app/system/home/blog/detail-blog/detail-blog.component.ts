@@ -29,6 +29,7 @@ export class DetailBlogComponent implements OnInit {
     private SpinnerService: NgxSpinnerService
   ) {}
 
+  data = localStorage.getItem('data');
   _PagingParams = new PagingParams();
   _ITEM_DATA: VMGetBlogDto = {
     idBlog: '',
@@ -51,15 +52,16 @@ export class DetailBlogComponent implements OnInit {
   getData: any;
   sub: any;
   id: any;
-
+  isComment: boolean = false;
   ngOnInit() {
     this.getListData();
+    if (this.data != null) {
+      this.isComment = true;
+    }
   }
   isActive: boolean = false;
   getListData() {
     this.SpinnerService.show();
-    const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data || '{}');
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       console.log('params', params);
       this.id = params.get('id');
@@ -68,16 +70,20 @@ export class DetailBlogComponent implements OnInit {
         .subscribe((data: any) => {
           console.log('data', data);
           this._ITEM_DATA = data.data[0];
+          setTimeout(() => {
+            /** spinner ends after 1 seconds */
+            this.SpinnerService.hide();
+          }, 1000);
         });
+    });
+    if (this.data !== null) {
+      const dataJson = JSON.parse(this.data || '{}');
+      const id = dataJson?.data.id;
       this.candidateService
-        .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
+        .RequestCheckIsApplyAndFavourite(id, this.id)
         .subscribe((data: any) => {
           this.isActive = data.isActive;
         });
-      setTimeout(() => {
-        /** spinner ends after 1 seconds */
-        this.SpinnerService.hide();
-      }, 1000);
-    });
+    }
   }
 }

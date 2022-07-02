@@ -111,10 +111,12 @@
                   </div>
                 </div>
               </div>
-              <custom-commentbox
-                [idPostion]="id"
-                [_ITEM_DATA]="_ITEM_DATA"
-              ></custom-commentbox>
+              <div *ngIf="isComment">
+                <custom-commentbox
+                  [idPostion]="id"
+                  [_ITEM_DATA]="_ITEM_DATA"
+                ></custom-commentbox>
+              </div>
             </div>
           </div>
           <section class="py-5" fxLayout="row" fxLayoutGap="25px">

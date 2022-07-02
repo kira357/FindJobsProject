@@ -28,8 +28,17 @@ export class UserService {
       },
     });
   };
-  RequestGetAllListWithNoRole = (pagingParams: PagingParams) => {
-    return this.http.get(this.rootURL + '/getAllListWithNoRole', {
+  RequestGetAllListWithNoRole = (pagingParams: PagingParams,id:any) => {
+    return this.http.get(`${this.rootURL}/getAllListWithNoRole/${id}`, {
+      headers: this.headers,
+      params: {
+        IndexPage: pagingParams.currentPage,
+        PageSize: pagingParams.pageSize,
+      },
+    });
+  };
+  RequestGetAllListCandidate = (pagingParams: PagingParams,id:any) => {
+    return this.http.get(`${this.rootURL}/get-all-candidate/${id}`, {
       headers: this.headers,
       params: {
         IndexPage: pagingParams.currentPage,

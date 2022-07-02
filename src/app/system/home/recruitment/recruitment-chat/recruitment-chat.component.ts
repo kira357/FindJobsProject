@@ -1,28 +1,23 @@
-import { OnDestroy } from '@angular/core';
-import { VMCreateChatRecruitment } from './../../../../core/model/chat/model/chat-recruitment';
-import { ChatRecruitment } from '../../../../core/model/chat/model/chat-recruitment';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import * as moment from 'moment';
-import { HubName, MethodName } from 'src/app/core/base/hub-methods.enum';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { Guid } from 'guid-typescript';
+import { HubName } from 'src/app/core/base/hub-methods.enum';
+import { ChatRecruitmentService } from 'src/app/core/model/chat/chat-recruitment.service';
+import { SharedService } from 'src/app/core/model/chat/shared.service';
+import { PagingParams } from 'src/app/core/model/paging-params';
 import { VMGetCurrentUser } from 'src/app/core/model/user/model/model';
+import { UserService } from 'src/app/core/model/user/User.service';
 import { ApiAuthenService } from 'src/app/services/api-authen.service';
 import { SignalrService } from 'src/app/services/signalr.service';
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { ChatRecruitmentService } from 'src/app/core/model/chat/chat-recruitment.service';
-import { UserService } from 'src/app/core/model/user/User.service';
-import { PagingParams } from 'src/app/core/model/paging-params';
 import { environment } from 'src/environments/environment';
-import { Guid } from 'guid-typescript';
-import { DatePipe } from '@angular/common';
-import { SharedService } from 'src/app/core/model/chat/shared.service';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
+  selector: 'app-recruitment-chat',
+  templateUrl: './recruitment-chat.component.html',
+  styleUrls: ['./recruitment-chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class RecruitmentChatComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apiAuthenService: ApiAuthenService,
@@ -93,7 +88,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.pagingParams.pageSize = 100;
     this.pagingParams.totalRows = 0;
 
-    this.userService.RequestGetAllListWithNoRole(this.pagingParams,dataJson.data.id).subscribe(
+    this.userService.RequestGetAllListCandidate(this.pagingParams,dataJson.data.id).subscribe(
       (user: any) => {
         if (user) {
           console.log(user);
@@ -196,7 +191,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.displayMessages = this.messages.filter(x => 
       (x.type === 'sent' && x.idReceiver === this.chatUser.id && x.idSender === this.dataJson.data.id) 
    || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver ===this.dataJson.data.id));
-   console.log(this.displayMessages);
+   console.log(this.displayMessages.map((x,index) => {
+    if(x.type === 'recieved'){
+        x['urlAvatar'] = this.chatUser.urlAvatar;
+    }
+   }));
   }
 
 

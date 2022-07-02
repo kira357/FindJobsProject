@@ -250,3 +250,7 @@
   padding: 2px 10px;
   text-align: center;
 }
+.disable {
+  pointer-events: none;
+  opacity: 0.5;
+}

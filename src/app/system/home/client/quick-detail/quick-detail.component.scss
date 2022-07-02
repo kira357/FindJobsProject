@@ -100,7 +100,10 @@ body {
 .tag-teal {
   background-color: #47bcd4;
 }
-
+.disable {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .card-body {
   p {
     font-size: 13px;

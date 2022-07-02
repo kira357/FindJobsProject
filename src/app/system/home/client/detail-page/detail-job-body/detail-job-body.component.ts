@@ -15,7 +15,11 @@ import { VMCreateFavourite } from 'src/app/core/model/favourite/model/favourite'
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RecruitmentService } from 'src/app/core/model/recruitmentJob/recruitment.service';
-import { faUserGroup ,faGear,faTimesCircle} from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserGroup,
+  faGear,
+  faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-detail-job-body',
   templateUrl: './detail-job-body.component.html',
@@ -33,7 +37,7 @@ export class DetailJobBodyComponent implements OnInit {
     private recruitmentService: RecruitmentService,
     private SpinnerService: NgxSpinnerService
   ) {}
-
+  data = localStorage.getItem('data');
   _PagingParams = new PagingParams();
   _LIST_DATA: any = [];
   _ITEM_DATA: VMGetJobDto = {
@@ -61,14 +65,18 @@ export class DetailJobBodyComponent implements OnInit {
   getData: any;
   sub: any;
   id: any;
-  ngOnInit() {
-    this.getListData();
-  }
+  isComment: boolean = false;
   isActive: boolean = false;
   isLike: boolean = false;
+  ngOnInit() {
+    this.getListData();
+    if (this.data !== null) {
+      this.isComment = true;
+    }
+  }
+
   getListData() {
     const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data || '');
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       this.SpinnerService.show(); // show the spinner
       console.log('params', params);
@@ -90,12 +98,16 @@ export class DetailJobBodyComponent implements OnInit {
           this.shuffle(this._LIST_DATA);
           this._PagingParams.totalRows = data.totalCount;
         });
-      this.candidateService
-        .RequestCheckIsApplyAndFavourite(dataJson.data.id, this.id)
-        .subscribe((data: any) => {
-          this.isActive = data.isActive;
-          this.isLike = data.islike;
-        });
+      if (data !== null || data !== undefined) {
+        const dataJson = JSON.parse(data);
+        const id = dataJson?.data.id;
+        this.candidateService
+          .RequestCheckIsApplyAndFavourite(id, this.id)
+          .subscribe((data: any) => {
+            this.isActive = data.isActive;
+            this.isLike = data.islike;
+          });
+      }
       this.getRecruitment(this.id);
       setTimeout(() => {
         /** spinner ends after 5 seconds */
@@ -104,26 +116,28 @@ export class DetailJobBodyComponent implements OnInit {
     });
   }
   onApply() {
-    const data = localStorage.getItem('data');
-    const dataJson = JSON.parse(data || '');
-    this.__dialog
-      .open(ApplyJobPopupComponent, {
-        width: '700px',
-        autoFocus: false,
-        data: {
-          idJob: this._ITEM_DATA.idJob,
-          idRecruitment: this._ITEM_DATA.idRecruitment,
-          idUser: dataJson.data.id,
-          name: this._ITEM_DATA.name,
-        } as any,
-      })
-      .afterClosed()
-      .subscribe((data: any) => {
-        if (data) {
-          console.log('save data successfully', data);
-          this.getListData();
-        }
-      });
+    if (this.data !== null) {
+      const dataJson = JSON.parse(this.data || '');
+      const id = dataJson?.data.id;
+      this.__dialog
+        .open(ApplyJobPopupComponent, {
+          width: '700px',
+          autoFocus: false,
+          data: {
+            idJob: this._ITEM_DATA.idJob,
+            idRecruitment: this._ITEM_DATA.idRecruitment,
+            idUser: id,
+            name: this._ITEM_DATA.name,
+          } as any,
+        })
+        .afterClosed()
+        .subscribe((data: any) => {
+          if (data) {
+            console.log('save data successfully', data);
+            this.getListData();
+          }
+        });
+    }
   }
   onFavourite(idJob: any) {
     let favourite: VMCreateFavourite;
@@ -207,21 +221,21 @@ export class DetailJobBodyComponent implements OnInit {
       });
   }
 
-   shuffle(array :any[]) {
-    let currentIndex = array.length,  randomIndex;
-  
+  shuffle(array: any[]) {
+    let currentIndex = array.length,
+      randomIndex;
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
-  
       // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-  
       // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
-  
+
     return array;
   }
 }
