@@ -140,13 +140,16 @@ export class InformationComponent implements OnInit {
     this.userService
       .RequestUpdateInfoUser(this.formData , this.currentUser.id)
       .subscribe((data: any) => {
-        console.log('data', data);
-        this.updateUser.reset();
+        this.jobsService.RequestGetJobFilterByMajor(this._PagingParams,this.currentUser.idMajor,this.currentUser.experience).subscribe((job: any) => {
+          this._LIST_DATA = job.data;
+        }
+        );
+        // this.updateUser.reset();
         this.formData.forEach((value, key) => {
           this.formData.delete(key);
         }
         );
-        this.getCurrentUser();
+        
       });
   }
   getComboxMajor() {

@@ -123,7 +123,9 @@
                       >
                         {{ item.name }}
                       </a>
-                      <div class="mr-2 new-job"><span>New for you</span></div>
+                      <div class="mr-2 new-job" >
+                        <span>New for you</span>
+                      </div>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="space-between stretch">
                       <div class="description">
@@ -175,7 +177,6 @@
                   <!-- info-main.// -->
                 </div>
               </div>
-
             </article>
             <!-- card-product .// -->
           </div>
@@ -239,7 +240,9 @@
         <div class="blog-list__cta">
           <a>
             <div class="svg-icon svg-icon--inline svg-icon--blue">
-              <div class="svg-icon__text">Show more</div>
+              <div class="svg-icon__text">
+                <a [routerLink]="['/blog']">Show more</a>
+              </div>
               <svg class="svg-icon__icon">
                 <use xlink:href="#caret-right-icon"></use>
               </svg></div
@@ -255,7 +258,13 @@
           *ngFor="let item of newArray"
         >
           <a href="#" class="blog__image-link text-center" fxFlex="50">
-            <img src="{{ item.logo }}" alt="image-blog" class="lazyloaded" />
+            <img
+              src="{{ item.image }}"
+              alt="image-blog"
+              class="lazyloaded"
+              [routerLink]="['/detail-blog', item.idBlog]"
+              [queryParams]="{ debug: true }"
+            />
           </a>
           <div
             class="blog__description"
@@ -265,16 +274,26 @@
           >
             <div>
               <h4 class="blog__description-title config-word">
-                <a href="#">{{ item.title }}</a>
+                <a
+                  [routerLink]="['/detail-blog', item.idBlog]"
+                  [queryParams]="{ debug: true }"
+                  >{{ item.title }}</a
+                >
               </h4>
               <div class="blog__description-content config-word">
-                {{ item.content }}
+                {{ item.summary }}
               </div>
             </div>
             <div class="blog__read-more">
               <a href="#">
                 <div class="svg-icon svg-icon--inline svg-icon--blue">
-                  <div class="">Read more</div>
+                  <div class="">
+                    <a
+                      [routerLink]="['/detail-blog', item.idBlog]"
+                      [queryParams]="{ debug: true }"
+                      >Read more
+                    </a>
+                  </div>
                   <svg class="svg-icon__icon">
                     <use xlink:href="#icon-arrow-right"></use>
                   </svg>

@@ -166,6 +166,7 @@ export class RecruitmentChatComponent implements OnInit {
         timeSend: new Date(),
         type: 'sent',
         messages: this.message,
+        photo : this.currentUser.urlAvatar
       };
       this.messages.push(msg);
       let messString = JSON.stringify(msg);
@@ -193,7 +194,7 @@ export class RecruitmentChatComponent implements OnInit {
    || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver ===this.dataJson.data.id));
    console.log(this.displayMessages.map((x,index) => {
     if(x.type === 'recieved'){
-        x['urlAvatar'] = this.chatUser.urlAvatar;
+        x['photo'] = this.chatUser.urlAvatar;
     }
    }));
   }

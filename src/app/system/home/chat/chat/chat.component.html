@@ -74,8 +74,8 @@
                         <div class="messageItem">
                             <div class="d-flex justify-content-start mb-4" *ngIf="m.type==='recieved' ">
                                 <div class="img_cont_msg">
-                                    <img [src]="m.urlAvatar"class="rounded-circle user_img_msg" loading="lazy">
-                                    <span>{{chatUser?.fullName}}</span>
+                                    <img [src]="m.logo"class="rounded-circle user_img_msg" loading="lazy">
+                                    <!-- <span>{{chatUser?.fullName}}</span> -->
                                 </div>
                                 <div class="msg_cotainer">
                                     {{m.messages}}
@@ -89,9 +89,9 @@
                                     {{m.messages}}
                                     <span class="msg_time_send">{{m.timeSend | date : 'h:mm a'}}</span>
                                 </div>
-                                <div class="img_cont_msg">
+                                <!-- <div class="img_cont_msg">
                                     <img [src]="m.urlAvatar" class="rounded-circle user_img_msg">
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

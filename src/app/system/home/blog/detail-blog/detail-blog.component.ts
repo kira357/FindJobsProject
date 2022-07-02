@@ -55,6 +55,7 @@ export class DetailBlogComponent implements OnInit {
   isComment: boolean = false;
   ngOnInit() {
     this.getListData();
+    this.getListBlog();
     if (this.data != null) {
       this.isComment = true;
     }
@@ -85,5 +86,16 @@ export class DetailBlogComponent implements OnInit {
           this.isActive = data.isActive;
         });
     }
+  }
+  _LIST_BLOG: any[] = [];
+  getListBlog() {
+    this.blogService
+      .RequestGetAllListPostActive(this._PagingParams)
+      .subscribe((data: any) => {
+        this._LIST_BLOG = [...data.data];
+        this._LIST_BLOG =  this._LIST_BLOG.slice(0, 5);
+        console.log('newArray', this._LIST_BLOG);
+        this._PagingParams.totalRows = data.totalCount;
+      });
   }
 }

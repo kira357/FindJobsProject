@@ -65,17 +65,16 @@
                 <span
                   class="mr-md-auto title-popular-post"
                   style="font-size: 24px; font-weight: 500"
-                  >Top bài viết có thể bạn cần
-                </span>
+                  >Top post you may need to read</span>
               </div>
             </header>
             <ul class="wpp-list pl-0">
-              <li>
+              <li *ngFor="let item of _LIST_BLOG">
                 <a class="wpp-post-title"
-                  >Bạn có biết QA là gì? QC là gì? [Cập nhật 2021]</a
+                  >{{item.title}}</a
                 >
               </li>
-              <li>
+              <!-- <li>
                 <a class="wpp-post-title"
                   >Python là gì? Lập trình Python với 20 tài liệu học Python cơ
                   bản đến nâng cao hay nhất</a
@@ -95,7 +94,7 @@
                 <a class="wpp-post-title"
                   >UI UX là gì? Tại sao mọi Developer cần học UI UX?</a
                 >
-              </li>
+              </li> -->
             </ul>
           </section>
         </div>

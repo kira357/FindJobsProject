@@ -171,6 +171,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         timeSend: new Date(),
         type: 'sent',
         messages: this.message,
+        photo : this.currentUser.urlAvatar
       };
       this.messages.push(msg);
       let messString = JSON.stringify(msg);
@@ -196,7 +197,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.displayMessages = this.messages.filter(x => 
       (x.type === 'sent' && x.idReceiver === this.chatUser.id && x.idSender === this.dataJson.data.id) 
    || (x.type === 'recieved' && x.idSender === this.chatUser.id && x.idReceiver ===this.dataJson.data.id));
-   console.log(this.displayMessages);
+    console.log(this.displayMessages.map((x,index) => {
+    if(x.type === 'recieved'){
+        x['logo'] = this.chatUser.logo;
+    }
+   }));
   }
 
 

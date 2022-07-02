@@ -54,6 +54,7 @@
         </li>
         <li class="nav-item">
           <a
+            *ngIf="data !== null"
             class="nav-link"
             id="navbarDropdown"
             [routerLink]="['/chat']"
@@ -71,8 +72,12 @@
             [matMenuTriggerFor]="userMenu"
             style="color: white"
           >
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-              <span fxShow fxHide.xs style="font-size: 1rem ;">
+            <div
+              fxLayout="row"
+              fxLayoutAlign="center center"
+              fxLayoutGap="10px"
+            >
+              <span fxShow fxHide.xs style="font-size: 1rem">
                 {{ currentUser.fullName }}
               </span>
               <!-- <mat-icon>person</mat-icon> -->

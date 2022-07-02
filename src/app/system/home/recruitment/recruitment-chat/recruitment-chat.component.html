@@ -116,11 +116,11 @@
               >
                 <div class="img_cont_msg">
                   <img
-                    [src]="m.urlAvatar"
+                    [src]="m.photo"
                     class="rounded-circle user_img_msg"
                     loading="lazy"
                   />
-                  <span>{{ chatUser?.fullName }}</span>
+                  <!-- <span>{{ chatUser?.fullName }}</span> -->
                 </div>
                 <div class="msg_cotainer">
                   {{ m.messages }}
@@ -141,12 +141,12 @@
                     m.timeSend | date: "h:mm a"
                   }}</span>
                 </div>
-                <div class="img_cont_msg">
+                <!-- <div class="img_cont_msg">
                   <img
                     [src]="m.urlAvatar"
                     class="rounded-circle user_img_msg"
                   />
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
